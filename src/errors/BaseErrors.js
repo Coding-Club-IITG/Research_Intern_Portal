@@ -9,4 +9,4 @@ class BaseError extends Error {
     console.log(this);
   }
 }
-module.exports = BaseError;
+export default BaseError;
