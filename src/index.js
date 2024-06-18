@@ -7,14 +7,17 @@ import connectToDb from "./config/db_config.js";
 import authRoutes from "./routes/auth.js";
 import { uploadFile } from "./upload/onedrive.upload.js";
 import recruiterRouter from "./routes/recruiter.js";
+import verifyJWT from "./middlewares/token-verify.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
+app.use(cookieParser());
 
 app.use('/', authRoutes);
-app.get('/upload', uploadFile);
+app.get('/upload',verifyJWT, uploadFile);
 app.use("/recruiters", recruiterRouter);
 
 // test route
