@@ -1,11 +1,15 @@
 import { DatePicker } from 'antd';
+import react from 'react'
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import Root from './components/Root';
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-6xl">App</h1>
-      <DatePicker />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path='/' element={<Root/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
