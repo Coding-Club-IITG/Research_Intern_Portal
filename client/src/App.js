@@ -1,7 +1,9 @@
+import Profile from "./pages/profile/profile.jsx";
+
 function App() {
   return (
     <div className="App">
-      <h1 className="text-6xl">App</h1>
+      <Profile></Profile>
     </div>
   );
 }
