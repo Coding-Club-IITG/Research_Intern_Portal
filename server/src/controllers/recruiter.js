@@ -38,7 +38,6 @@ const updateRecruiter = async (req,res) => {
     try{
         const { id } = req.params;
         const { data } = req.body;
-
         const recruiter = await Recruiter.findById(id);
 
     }catch(err){

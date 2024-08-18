@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-const Jobs = new mongoose.Schema({
-    prof_name:{
-type:String,
-required:true
+const Job = new mongoose.Schema({
+    prof_name: {
+        type: String,
+        required: true
     },
     title: {
         type: String,
@@ -12,7 +12,7 @@ required:true
         type: String,
         required: true,
     },
-   
+
     isActive: {
         type: Boolean,
         default: true,
@@ -25,33 +25,34 @@ required:true
         type: Date,
         default: Date.now,
     },
-    tags:[String],
-    type:{
-        type:String,
-        required:true,
+    tags: [String],
+    type: {
+        type: String,
+        required: true,
     }
     ,
-    stipend:{
-        type:Number,
-        required:true
+    stipend: {
+        type: Number,
+        required: true
     },
-    hours_required:{
-        type:Number,
-        required:true,
-
+    hours_required: {
+        type: Number,
+        required: true,
     },
-    total_applicants:{
-        type:Number,
+    total_applicants: {
+        type: Number,
+        default: 0,
     },
-    accepting:{
-        type:Boolean,
-        required:true,
+    accepting: {
+        type: Boolean,
+        required: true,
+        default: true
     },
-    last_date:{
-        type:Number,
-        required:true,
+    last_date: {
+        type: Date,
+        required: true,
     }
 
 });
 
-export default mongoose.model("Jobs", Jobs);
+export default mongoose.model("Job", Job);
