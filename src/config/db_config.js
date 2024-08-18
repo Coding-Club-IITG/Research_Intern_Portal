@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
-const { ATLAS_DB_URL, NODE_ENV } = require("./server_config");
+import mongoose from "mongoose";
+import data from "./server_config.js";
 async function connectToDb() {
   try {
     if (NODE_ENV == "development") {
-      await mongoose.connect(ATLAS_DB_URL);
+      await mongoose.connect(data.DB_URL);
     } else {
       console.log("we are not ready with the other url");
     }
@@ -11,4 +11,4 @@ async function connectToDb() {
     console.log("unable to connect to db", error);
   }
 }
-module.exports = connectToDb;
+export default connectToDb;

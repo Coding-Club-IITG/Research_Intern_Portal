@@ -1,8 +1,10 @@
-const dotenv = require("dotenv");
+import dotenv from 'dotenv';
 dotenv.config();
+
 const data = {
   PORT: process.env.PORT || 3000,
-  ATLAS_DB_URL: process.env.ATLAS_DB_URL,
-  NODE_ENV: process.env.NODE_ENV,
+  DB_URL: process.env.DB_URL,
+  NODE_ENV: process.env.NODE_ENV || "development",
 };
-module.exports = data;
+
+export default data;

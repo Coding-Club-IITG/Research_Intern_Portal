@@ -1,4 +1,4 @@
-const BaseError = require("../errors/BaseErrors");
+import BaseError from "../errors/BaseErrors.js";
 
 function errorHandler(err, req, res, next) {
   if (err instanceof BaseError) {
@@ -16,4 +16,5 @@ function errorHandler(err, req, res, next) {
     data: {},
   });
 }
-module.exports = errorHandler;
+
+export default errorHandler;
