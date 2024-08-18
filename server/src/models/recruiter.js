@@ -73,6 +73,10 @@ const Recruiter = new mongoose.Schema({
     },
     portfolio: {
         type: String,
+    },
+    department: {
+        type: String,
+        required: true,
     }
 
 })
