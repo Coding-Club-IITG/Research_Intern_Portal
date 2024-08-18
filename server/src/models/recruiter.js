@@ -5,6 +5,7 @@ const Recruiter = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
     },
     areaOfInterest: {
         type: [String],
@@ -16,6 +17,7 @@ const Recruiter = new mongoose.Schema({
         type: String,
         unqiue: true,
         required: true,
+        unique : true,
     },
     socialMedia: {
         linkedIn: {
