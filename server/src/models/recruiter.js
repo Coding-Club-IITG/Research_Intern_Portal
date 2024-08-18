@@ -14,7 +14,7 @@ const Recruiter = new mongoose.Schema({
     },
     email: {
         type: String,
-        unqiue: true,
+        unique: true,
         required: true,
     },
     socialMedia: {
@@ -60,11 +60,16 @@ const Recruiter = new mongoose.Schema({
             college: {
                 type: String,
             },
-            commnets: {
+            comments: {
                 type: String,
             }
         }],
-    }
+    },
+ department:{
+type:String,
+required:true
+ } , 
+
 })
 
 export default mongoose.model("Recruiter", Recruiter);
