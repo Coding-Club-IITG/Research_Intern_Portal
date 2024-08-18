@@ -64,7 +64,21 @@ const Recruiter = new mongoose.Schema({
                 type: String,
             }
         }],
+    },
+    posted: {
+        type: Number
+    },
+    hired: {
+        type: Number
+    },
+    portfolio: {
+        type: String,
+    },
+    department: {
+        type: String,
+        required: true,
     }
+
 })
 
 export default mongoose.model("Recruiter", Recruiter);
