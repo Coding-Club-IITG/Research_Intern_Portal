@@ -27,20 +27,20 @@ const Recruiter = new mongoose.Schema({
     },
     phoneNumber: {
         type: Number,
-        required: true
+        // required: true
     },
     isActive: {
         type: Boolean,
         default: true,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    updateAt: {
-        type: Date,
-        default: Date.now,
-    },
+    // createdAt: {
+    //     type: Date,
+    //     default: Date.now,
+    // },
+    // updateAt: {
+    //     type: Date,
+    //     default: Date.now,
+    // },
     rating: {
         type: Number,
         default: 5,
@@ -65,6 +65,6 @@ const Recruiter = new mongoose.Schema({
             }
         }],
     }
-})
+},{timestamps: true})
 
 export default mongoose.model("Recruiter", Recruiter);
