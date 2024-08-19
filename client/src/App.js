@@ -1,7 +1,8 @@
+import Overview from './pages/Profile/Overview'
 function App() {
   return (
     <div className="App">
-      <h1 className="text-6xl">App</h1>
+      <Overview ></Overview>
     </div>
   );
 }
