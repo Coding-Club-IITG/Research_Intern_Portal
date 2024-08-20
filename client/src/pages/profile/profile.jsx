@@ -1,3 +1,58 @@
+import About from "./About";
+
+import Social from "./Social";
+
+function Profile() {
+  const profile = {
+    name: "Aditya Samal",
+    img: null,
+    roll: 230123002,
+    courses: [
+      "BTech",
+      "MTech",
+      "BDes",
+      "MDes",
+      "MA",
+      "MSR",
+      "MSc",
+      "Phd",
+      "MBA",
+    ],
+    departments: [
+      "Chemistry",
+      "Chemical Enginerring",
+      "Computer Science",
+      "Design",
+      "Humanities and Social Science",
+      "Physics",
+      "Mathematics",
+      "Mehta School of Data Science",
+      "Mechanical Engineering",
+      "Electrical and Electronics Enginnering",
+      "Civil Engineering",
+      "Bioscience and Bioengineering",
+      "Energy Engineering",
+    ],
+    interests: ["software dev", "machine learning"],
+    social: {
+      website: "https://aditya-samal/Portfolio",
+      linkedin: "https://linkedin.com/in/",
+      github: "https://github.com/in/",
+    },
+  };
+
+  return (
+    <div className="flex flex-col space-y-4 min-h-screen">
+      <About profile={profile} />
+      <hr></hr>
+      <Social profile={profile} />
+      <hr></hr>
+    </div>
+  );
+}
+
+export default Profile;
+
 // const userSchema = new mongoose.Schema(
 //   {
 //     name: { type: String, required: true },
@@ -59,36 +114,3 @@
 //   url: { type: String, required: true },
 // });
 /* eslint-disable react/no-array-index-key */
-
-import React from "react";
-import { Flex, Radio } from "antd";
-
-const baseStyle = {
-  width: "25%",
-  height: 54,
-};
-const App = () => {
-  const [value, setValue] = React.useState("horizontal");
-  return (
-    <Flex gap="middle" vertical>
-      <Radio.Group value={value} onChange={(e) => setValue(e.target.value)}>
-        <Radio value="horizontal">horizontal</Radio>
-        <Radio value="vertical">vertical</Radio>
-      </Radio.Group>
-      <Flex vertical={value === "vertical"}>
-        {Array.from({
-          length: 4,
-        }).map((_, i) => (
-          <div
-            key={i}
-            style={{
-              ...baseStyle,
-              backgroundColor: i % 2 ? "#1677ff" : "#1677ffbf",
-            }}
-          />
-        ))}
-      </Flex>
-    </Flex>
-  );
-};
-export default App;
