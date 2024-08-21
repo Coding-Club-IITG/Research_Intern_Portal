@@ -6,9 +6,9 @@ const studentSchema = new mongoose.Schema({
     phoneNumber:{type:Number , required:true},
     rollNo:{type:Number , required:true},
     college:{type:String , default:'Indian Instituition of Technology, Guwahati'},
+    //keeping a default value unless we outsource it for other colleges
     password:{type:String , required:true},
     gender:{type:String},
-    //keeping a default value unless we outsource it for other colleges
     course:{type:String, required:true, enum:[
         'BTech',
         'MTech',
@@ -74,6 +74,9 @@ const studentSchema = new mongoose.Schema({
             start_date:{type:Date,required:true},
             end_date:{type:Date,required:true}
         }]
+    },
+    applications:{
+        type:[{type:mongoose.Schema.Types.ObjectId , ref:'Updates'}]
     },
     createdAt:{type:Date , required:true},
     updatedAt:{type:Date},
