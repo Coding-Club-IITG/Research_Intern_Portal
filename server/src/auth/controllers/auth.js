@@ -3,7 +3,7 @@ import querystring from 'querystring';
 import jwt from 'jsonwebtoken';
 dotenv.config();
 
-const onedriveLogin = async (req, res) => {
+export const onedriveLogin = async (req, res) => {
   try {
     const clientId = process.env.AZURE_CLIENT_ID;
     const clientSecret = process.env.AZURE_CLIENT_SECRET;
@@ -26,7 +26,7 @@ const onedriveLogin = async (req, res) => {
   }
 };
 
-const onedriveRedirect = async (req, res) => {
+export const onedriveRedirect = async (req, res) => {
   try {
     const code = req.query.code;
     const clientId = process.env.AZURE_CLIENT_ID;
@@ -74,4 +74,4 @@ const onedriveRedirect = async (req, res) => {
   }
 }
 
-export { onedriveLogin, onedriveRedirect };
+

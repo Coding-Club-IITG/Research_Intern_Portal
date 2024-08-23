@@ -1,9 +1,10 @@
 import Recruiter from "../../recruiter/models/recruiter";
 import Student from "../../student/models/student";
+import Jobs from "../../recruiter/models/jobs";
 
-const verifyRecruiter = async (req, res) => {
+export const verifyRecruiter = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.body;
         const recruiter = await Recruiter.findById(id);
 
         if (!recruiter) {
@@ -20,9 +21,9 @@ const verifyRecruiter = async (req, res) => {
     }
 }
 
-const removeRecruiter = async (req, res) => {
+export const removeRecruiter = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.body;
         const recruiter = await Recruiter.findById(id);
 
         if (!recruiter) {
@@ -38,9 +39,9 @@ const removeRecruiter = async (req, res) => {
     }
 }
 
-const removeStudent = async (req, res) => {
+export const removeStudent = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.body;
         const student = await Student.findById(id);
 
         await student.remove();
@@ -52,9 +53,9 @@ const removeStudent = async (req, res) => {
     }
 }
 
-const banRecruiter = async (req, res) => {
+export const banRecruiter = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.body;
         const recruiter = await Recruiter.findById(id);
 
         if (!recruiter) {
@@ -71,4 +72,16 @@ const banRecruiter = async (req, res) => {
     }
 }
 
-export { verifyRecruiter, removeRecruiter, removeStudent, banRecruiter };
+export const deleteJob = async (req, res) => {
+    try {
+        const { id } = req.body;
+        const job = await Jobs.findById(id);
+
+        await job.remove();
+
+        return res.status(200).json({ message: "Job removed" });
+    }catch(error){
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
