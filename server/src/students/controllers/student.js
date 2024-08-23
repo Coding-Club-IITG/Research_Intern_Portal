@@ -1,5 +1,5 @@
 import Student from '../models/student.js'
-import Updates from "../models/updates.js";
+import Updates from "../../admin/models/updates.js";
 
 const createStudent =  async(req, res)=>{
     try{
