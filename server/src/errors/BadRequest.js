@@ -1,5 +1,5 @@
-const BaseError = require("./BaseErrors");
-const { StatusCodes } = require("http-status-codes");
+import BaseError from "./BaseErrors.js";
+import { StatusCodes } from "http-status-codes";
 class BadRequest extends BaseError {
   constructor(properyName, details) {
     super(
@@ -10,5 +10,5 @@ class BadRequest extends BaseError {
     );
   }
 }
-module.exports = BadRequest;
+export default BadRequest;
 //Invalid structure for description provided as in our client side one uploads qs without description it is an bad request

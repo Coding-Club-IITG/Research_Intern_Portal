@@ -1,3 +1,4 @@
+import BadRequest from '../errors/BadRequest.js';
 import Recruiter from '../models/recruiter.js';
 import bcrypt from 'bcrypt';
 
@@ -37,9 +38,25 @@ const getRecruiterById = async (req,res) => {
 const updateRecruiter = async (req,res) => {
     try{
         const { id } = req.params;
-        const { data } = req.body;
+        const { name, areaOfInterest, university, email, socialMedia, phoneNumber, isActive, rating, updateAt, qualifications } = req.body;
 
-        const recruiter = await Recruiter.findById(id);
+        // const recruiter = await Recruiter.findById(id);
+
+        if(areaOfInterest == "" || university=="" || !phoneNumber || !qualifications){
+            throw new BadRequest("some fields are empty!!","an empty field is provided");
+        }
+
+        const recruiter = await Recruiter.findByIdAndUpdate(
+            { _id: id},
+            req.body,
+            { new: true, runValidators: true }
+          )
+
+          if (!recruiter) {
+            throw new NotFoundError(`No recruiter with id ${id}`)
+          }
+
+          res.status(200).json({ recruiter })
 
     }catch(err){
         console.log(err);

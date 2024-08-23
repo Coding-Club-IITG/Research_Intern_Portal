@@ -1,11 +1,19 @@
-import express from 'express'
-import { getRecruiterById, getRecruiters, updateRecruiter, deleteRecruiter } from '../controllers/recruiter.js'
+import express from "express";
+import {
+  getRecruiterById,
+  getRecruiters,
+  updateRecruiter,
+  deleteRecruiter,
+  createRecuiter,
+} from "../controllers/recruiter.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get('/:id', getRecruiterById);
-router.get('/', getRecruiters);
-router.put('/:id', updateRecruiter);
-router.delete('/:id', deleteRecruiter);
+router.route("/").get(getRecruiters).post(createRecuiter);
+router
+  .route("/:id")
+  .get(getRecruiterById)
+  .put(updateRecruiter)
+  .delete(deleteRecruiter);
 
 export default router;

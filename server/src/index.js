@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 app.use('/', authRoutes);
 app.get('/upload',verifyJWT, uploadFile);
-app.use("/recruiters", recruiterRouter);
+app.use("/api/v1/recruiters", recruiterRouter);
 
 // test route
 app.get("/ping", (req, res) => {
@@ -28,5 +28,6 @@ app.get("/ping", (req, res) => {
 //last middleware if any error comes
 app.use(errorHandler);
 app.listen(data.PORT, async () => {
+  await connectToDb();
   console.log(`Server is running on ${data.PORT}`);
 });
