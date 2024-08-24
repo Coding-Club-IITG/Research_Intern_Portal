@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import querystring from 'querystring';
 import jwt from 'jsonwebtoken';
+import { roles } from '../../utils/roles';
 dotenv.config();
 
 export const onedriveLogin = async (req, res) => {
@@ -56,6 +57,7 @@ export const onedriveRedirect = async (req, res) => {
     const jwtPayload = {
       access_token: tokenData.access_token,
       refresh_token: tokenData.refresh_token,
+      role: roles.STUDENT,
     };
 
     const jwtToken = jwt.sign(jwtPayload, 'fdgt4t93xzc3252523');

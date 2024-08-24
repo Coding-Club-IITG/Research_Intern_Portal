@@ -1,15 +1,33 @@
 import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
+
 const studentSchema = new mongoose.Schema({
-    name:{type:String , required:true},
-    email:{type:String , time:true ,required:true,unique:true},
-    phoneNumber:{type:Number , required:true},
-    rollNo:{type:Number , required:true},
-    college:{type:String , default:'Indian Instituition of Technology, Guwahati'},
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String, 
+        time: true,
+        required: true,
+        unique: true
+    },
+    phoneNumber: {
+        type: Number, 
+    },
+    rollNo: {
+        type: Number, 
+    },
+    college: {
+        type: String, 
+        default: 'Indian Instituition of Technology, Guwahati'
+    },
     //keeping a default value unless we outsource it for other colleges
-    password:{type:String , required:true},
-    gender:{type:String},
-    course:{type:String, required:true, enum:[
+    gender: {
+        type: String
+    },
+    course: {
+        type: String, 
+        enum:[
         'BTech',
         'MTech',
         'BDes',
@@ -20,7 +38,9 @@ const studentSchema = new mongoose.Schema({
         'Phd',
         'MBA'
     ]},
-    department:{type:String, required:true, enum:[
+    department:{
+        type:String,
+        enum:[
         'Chemistry',
         'Chemical Enginerring',
         'Computer Science',
@@ -35,16 +55,29 @@ const studentSchema = new mongoose.Schema({
         'Bioscience and Bioengineering',
         'Energy Engineering',
     ]},
-    cpi:{type:Number,required:true},
+    cpi: {
+        type: Number,
+    },
     social:{
         type:[{
-            platform:{type:String, required:true},
-            url:{type:String, required:true}
+            platform: {
+                type:String
+            },
+            url: {
+                type: String
+            }
         }]
     } , 
-    dob:{type:Date , trim:true},
-    yearOfGrad : {type:Number , required:true},
-    resume:{type:String , trim:true , default:''},
+    dob: { 
+        type: Date, 
+    },
+    yearOfGrad : {
+        type: Number, 
+    },
+    resume:{
+        type: String,
+        default: ''
+    },
     interest:{
         type:[{field:{type:String}}]
     },
@@ -65,45 +98,38 @@ const studentSchema = new mongoose.Schema({
             
         }]
     },
-    bio:{type:String},
+    bio: {
+        type: String
+    },
     prevExperience: {
         type: [{
-            role:{type:String,required:true},
-            company_college:{type:String,required:true},
-            description:{type:String,required:true},
-            start_date:{type:Date,required:true},
-            end_date:{type:Date,required:true}
+            role:{
+                type: String,
+            },
+            company_college: {
+                type: String, 
+            },
+            description: {
+                type: String,
+            },
+            start_date: {
+                type: Date,
+            },
+            end_date: {
+                type: Date,
+            }
         }]
     },
     applications:{
         type:[{type:mongoose.Schema.Types.ObjectId , ref:'Updates'}]
     },
-    createdAt:{type:Date , required:true},
-    updatedAt:{type:Date},
+    createdAt: {
+        type: Date, 
+        required: true
+    },
+    updatedAt: {
+        type: Date
+    },
 }) 
-
-
-studentSchema.pre("save", async function(next){
-    try{
-        if(!(this.isModified("password")))
-            return next();
-        this.password=await bcrypt.hash(this.password, 10);
-        next()
-    }
-    catch(error){
-        console.log("Errorr in hashing password\n" , error)
-        return false
-    }
-} )
-
-
-studentSchema.methods.isPasswordCorrect = async function(password){
-    try{
-     return await bcrypt.compare(password, this.password)
-    }catch(error){
-     console.log('Error in Comparing using bcrypt')
-     return false
-    }
- }
 
 export const Student  =  mongoose.model('Student' , studentSchema)

@@ -34,14 +34,14 @@ const Recruiter = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-    // createdAt: {
-    //     type: Date,
-    //     default: Date.now,
-    // },
-    // updateAt: {
-    //     type: Date,
-    //     default: Date.now,
-    // },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    },
+    updateAt: {
+        type: Date,
+        default: Date.now,
+    },
     rating: {
       type: Number,
       default: 5,
@@ -72,8 +72,12 @@ const Recruiter = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    jobs: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Jobs",
+      }],
   },
-  { timestamps: true }
+  
 );
 Recruiter.index({ email: 1 }, { unique: true });
 // serSchema.index({ username: 1, email: 1 }, { unique: true});
