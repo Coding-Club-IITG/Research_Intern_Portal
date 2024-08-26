@@ -1,5 +1,5 @@
-import Dp from "./Dp";
 import { Select } from "antd";
+import ProfilePic from "./ProfilePic";
 
 function About({ profile }) {
   return (
@@ -37,7 +37,7 @@ function About({ profile }) {
                 </div>
               </div>
               <div className="basis-32 px-8 py-2 justify-center items-center">
-                <Dp />
+                <ProfilePic />
               </div>
             </div>
 

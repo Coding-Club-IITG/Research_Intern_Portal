@@ -1,5 +1,7 @@
 import About from "./About";
-
+import Education from "./Education";
+import Experience from "./Experience";
+import Skills from "./Skills";
 import Social from "./Social";
 
 function Profile() {
@@ -47,6 +49,11 @@ function Profile() {
       <hr></hr>
       <Social profile={profile} />
       <hr></hr>
+      <Experience profile={profile} />
+      <hr></hr>
+      <Education profile={profile} />
+      <hr></hr>
+      <Skills />
     </div>
   );
 }
