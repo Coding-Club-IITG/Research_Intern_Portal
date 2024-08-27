@@ -41,11 +41,6 @@ const updateRecruiter = async (req,res) => {
         const { name, areaOfInterest, university, email, socialMedia, phoneNumber, isActive, rating, updateAt, qualifications } = req.body;
 
         // const recruiter = await Recruiter.findById(id);
-
-        if(areaOfInterest == "" || university=="" || !phoneNumber || !qualifications){
-            throw new BadRequest("some fields are empty!!","an empty field is provided");
-        }
-
         const recruiter = await Recruiter.findByIdAndUpdate(
             { _id: id},
             req.body,
