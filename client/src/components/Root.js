@@ -58,44 +58,48 @@ const Root= () => {
           }}
         >
 
-        <div style={{display:'inline',borderRadius:'9px',border: '2px solid blue',borderColor:'blue',}}>
-            <SearchOutlined style={{ margin: '5px' }}/>
-          </div>
+        
+            <SearchOutlined style={{ 
+              margin: '5px',
+              padding:"5px"
+              }}/>
           
+        
+          <BellOutlined style={{ 
+            margin: '5px',
+            padding:"5px"}}/>
+        
+
         <div style={{
           display:'inline',
-          borderRadius:'9px',
-          borderColor:'blue',
-          }}>
-        <div style={{
-          display:'inline',
-          borderRadius:'9px',
-          borderColor:'blue',
-          }}>
-          <BellOutlined style={{ margin: '5px' }}/>
-        </div>
+          borderRadius:'2px',
+          border:'solid',
+          borderColor:'grey',
+        }}>
           <CheckCircleOutlined style={{ margin: '5px' }}/>
           Open to offers
           <DownOutlined style={{ margin: '5px' }}/>
         </div>
 
+        <div style={{
+          display:'inline',
+        }}>
         <UserOutlined style={{ margin: '5px' }}/>
         <DownOutlined style={{ margin: '5px' }}/>
- 
+        </div>
+
         </Header>
         <Content
           style={{
             margin: '24px 16px 0',
-          }}
-        >
+          }}>
           <div
             style={{
               padding: 24,
               minHeight: 360,
               background: colorBgContainer,
               borderRadius: borderRadiusLG,
-            }}
-          >
+            }}>
             content
           </div>
         </Content>
