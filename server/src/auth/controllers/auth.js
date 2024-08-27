@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import querystring from 'querystring';
 import jwt from 'jsonwebtoken';
-import { roles } from '../../utils/roles';
+import { roles } from '../../utils/roles.js';
 dotenv.config();
 
 export const onedriveLogin = async (req, res) => {

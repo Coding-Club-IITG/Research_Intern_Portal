@@ -4,9 +4,9 @@ import BaseError from "./errors/BaseErrors.js";
 import data from "./config/server_config.js";
 import errorHandler from "./utils/errorHandler.js";
 import connectToDb from "./config/db_config.js";
-import authRoutes from "./routes/auth.js";
-import { uploadFile } from "./upload/onedrive.upload.js";
-import recruiterRouter from "./routes/recruiter.js";
+import authRoutes from "./auth/routes/auth.js";
+import { uploadFile } from "./students/upload/onedrive.upload.js";
+import recruiterRouter from "./recruiter/routes/recruiter.js";
 import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
 
