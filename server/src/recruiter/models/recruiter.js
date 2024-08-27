@@ -46,10 +46,6 @@ const Recruiter = new mongoose.Schema(
       type: Number,
       default: 5,
     },
-    password: {
-      type: String,
-      required: true,
-    },
     qualifications: {
       type: [
         {

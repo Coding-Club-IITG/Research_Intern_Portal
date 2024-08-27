@@ -9,37 +9,11 @@ import { uploadFile } from "./students/upload/onedrive.upload.js";
 import recruiterRouter from "./recruiter/routes/recruiter.js";
 import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
-
-import swaggerUI from "swagger-ui-express";
-import swaggerJsDoc from "swagger-jsdoc";
-
-const options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Research Intern Library",
-      version: "1.0.0",
-      description: "CC Research intern project",
-    },
-    servers: [
-      {
-        url: `http://localhost:${data.PORT}`,
-      },
-    ],
-  },
-  apis: [
-    "admin/routes/*.js",
-    "auth/routes/*.js",
-    "recruiter/routes/*.js",
-  ],
-};
-
-const specs = swaggerJsDoc(options);
+import { setupSwagger } from "./config/swagger_config.js";
 
 const app = express();
-console.log(JSON.stringify(specs, null, 2));
 
-app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(specs));
+setupSwagger(app);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -49,7 +23,7 @@ app.use(cookieParser());
 app.use('/', authRoutes);
 app.get('/upload',verifyJWT, uploadFile);
 app.use("/api/v1/recruiters", recruiterRouter);
-
+// app.use("/api/v1/admin",)
 // test route
 app.get("/ping", (req, res) => {
   return res.json({ message: "server is alive" });
