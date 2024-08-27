@@ -1,4 +1,4 @@
-import { roles } from '../utils/roles';
+import { roles } from '../utils/roles.js';
 import User from './model';
 import Student from '../students/models/student';
 import Recruiter from '../recruiter/models/jobs';
