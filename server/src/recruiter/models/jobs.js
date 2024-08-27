@@ -1,8 +1,9 @@
+import { application } from "express";
 import mongoose from "mongoose";
 const Jobs = new mongoose.Schema({
     prof_name:{
-type:String,
-required:true
+        type:String,
+        required:true
     },
     title: {
         type: String,
@@ -12,7 +13,6 @@ required:true
         type: String,
         required: true,
     },
-   
     isActive: {
         type: Boolean,
         default: true,
@@ -29,8 +29,7 @@ required:true
     type:{
         type:String,
         required:true,
-    }
-    ,
+    },
     stipend:{
         type:Number,
         required:true
@@ -50,8 +49,10 @@ required:true
     last_date:{
         type:Number,
         required:true,
-    }
-
+    },
+    applications:{
+        type:[{type:mongoose.Schema.Types.ObjectId , ref:'Student'}]
+    },
 });
 
 export default mongoose.model("Jobs", Jobs);

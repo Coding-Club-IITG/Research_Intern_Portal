@@ -1,4 +1,4 @@
-import BadRequest from '../errors/BadRequest.js';
+import BadRequest from '../../errors/BadRequest.js';
 import Recruiter from '../models/recruiter.js';
 import bcrypt from 'bcrypt';
 
