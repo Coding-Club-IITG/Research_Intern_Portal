@@ -28,6 +28,7 @@ app.get("/ping", (req, res) => {
 
 //last middleware if any error comes
 app.use(errorHandler);
+<<<<<<< HEAD
 
 const port = process.env.PORT || 5000;
 
@@ -43,3 +44,9 @@ const start = async () => {
 };
 
 start();
+=======
+app.listen(data.PORT, async () => {
+  await connectToDb();
+  console.log(`Server is running on ${data.PORT}`);
+});
+>>>>>>> master

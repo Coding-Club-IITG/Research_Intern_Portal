@@ -1,4 +1,4 @@
-// import BadRequest from '../errors/BadRequest.js';
+import BadRequest from '../../errors/BadRequest.js';
 import Recruiter from '../models/recruiter.js';
 import bcrypt from 'bcrypt';
 
@@ -54,9 +54,9 @@ const updateRecruiter = async (req,res) => {
 
         // const recruiter = await Recruiter.findById(id);
 
-        // if(areaOfInterest == "" || university== "" || !phoneNumber || !qualifications){
-        //     throw new BadRequest("some fields are empty!!")
-        // }
+        if(areaOfInterest == "" || university=="" || !phoneNumber || !qualifications){
+            throw new BadRequest("some fields are empty!!","an empty field is provided");
+        }
 
         const recruiter = await Recruiter.findByIdAndUpdate(
             { _id: id},

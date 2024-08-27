@@ -1,9 +1,10 @@
 import dotenv from 'dotenv';
 import querystring from 'querystring';
 import jwt from 'jsonwebtoken';
+import { roles } from '../../utils/roles';
 dotenv.config();
 
-const onedriveLogin = async (req, res) => {
+export const onedriveLogin = async (req, res) => {
   try {
     const clientId = process.env.AZURE_CLIENT_ID;
     const clientSecret = process.env.AZURE_CLIENT_SECRET;
@@ -26,7 +27,7 @@ const onedriveLogin = async (req, res) => {
   }
 };
 
-const onedriveRedirect = async (req, res) => {
+export const onedriveRedirect = async (req, res) => {
   try {
     const code = req.query.code;
     const clientId = process.env.AZURE_CLIENT_ID;
@@ -56,6 +57,7 @@ const onedriveRedirect = async (req, res) => {
     const jwtPayload = {
       access_token: tokenData.access_token,
       refresh_token: tokenData.refresh_token,
+      role: roles.STUDENT,
     };
 
     const jwtToken = jwt.sign(jwtPayload, 'fdgt4t93xzc3252523');
@@ -74,4 +76,4 @@ const onedriveRedirect = async (req, res) => {
   }
 }
 
-export { onedriveLogin, onedriveRedirect };
+
