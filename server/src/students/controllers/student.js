@@ -98,13 +98,13 @@ const getStudents =async (res,req)=>{
 const getStudentsByFilter = async (req, res)=>{
     try {
         const  {course , department , yearofGrad , rangeUpperCpi , rangeLowerCpi} = req.body
-        //making sure some numbers are sent from frontend for cpi, else puting the least and max poaaible value
+        //making sure some numbers are sent from frontend for cpi, else puting the least and max possible value
         if((!rangeLowerCpi) || (!rangeUpperCpi)){
             rangeLowerCpi = 0
             rangeUpperCpi = 100
         }
 
-        //using a array to store only such filters whoch are sent to the server. This removes any filter choice that might be null
+        //using a array to store only such filters which are sent to the server. This removes any filter choice that might be null
         let conditions = []
         if(course) conditions.push({'course':course})
         if(department) conditions.push({'department':department})

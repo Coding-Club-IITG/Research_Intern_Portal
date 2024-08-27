@@ -50,13 +50,11 @@ const getRecruiterById = async (req,res) => {
 const updateRecruiter = async (req,res) => {
     try{
         const { id } = req.params;
-        // const { name, areaOfInterest, university, email, socialMedia, phoneNumber, isActive, rating, updateAt, qualifications } = req.body;
+        const { name, areaOfInterest, university, email, socialMedia, phoneNumber, isActive, rating, updateAt, qualifications } = req.body;
 
-        // const recruiter = await Recruiter.findById(id);
-
-        if(areaOfInterest == "" || university=="" || !phoneNumber || !qualifications){
-            throw new BadRequest("some fields are empty!!","an empty field is provided");
-        }
+        // if(areaOfInterest == "" || university=="" || !phoneNumber || !qualifications){
+        //     throw new BadRequest("some fields are empty! an empty field is provided");
+        // }
 
         const recruiter = await Recruiter.findByIdAndUpdate(
             { _id: id},
@@ -87,12 +85,47 @@ const deleteRecruiter = async (req,res) => {
     }
 }
 
+const getRecruiterByFilter = async (req, res) => {
+  try {
+    const { searchText } = req.body;
+
+    if (!searchText) {
+      return res.status(400).json({ message: 'Search text is required' });
+    }
+
+    const regex = new RegExp(searchText.trim(), 'i');
+
+    // Define the search criteria to match the search text in multiple fields
+    const filter = {
+      $or: [
+        { name: regex },
+        { university: regex },
+        { areaOfInterest: { $elemMatch: regex } }, // Search in array of strings
+        { 'socialMedia.linkedIn': regex },
+        { 'socialMedia.twitter': regex },
+        { qualifications: { $elemMatch: { degree: regex } } }, 
+      ],
+    };
+
+    // Execute the query with projection to return specific fields
+    const recruiters = await Recruiter.find(filter).select('name university email areaOfInterest socialMedia phoneNumber isActive');
+
+    // Return the matched recruiters
+    res.status(200).json(recruiters);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching recruiters', error });
+  }
+};
+
+export default getRecruiterByFilter;
+
 export {
     createRecuiter,
     getRecruiters,
     getRecruiterById,
     updateRecruiter,
-    deleteRecruiter
+    deleteRecruiter,
+    getRecruiterByFilter,
 }
 
 

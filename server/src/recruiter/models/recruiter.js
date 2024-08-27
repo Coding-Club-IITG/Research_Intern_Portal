@@ -28,7 +28,6 @@ const Recruiter = new mongoose.Schema(
     },
     phoneNumber: {
       type: Number,
-      // required: true
     },
     isActive: {
       type: Boolean,

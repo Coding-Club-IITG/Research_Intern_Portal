@@ -9,6 +9,7 @@ import { uploadFile } from "./students/upload/onedrive.upload.js";
 import recruiterRouter from "./recruiter/routes/recruiter.js";
 import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
+// import studentRouter from "./students/routes/student.js"
 
 const app = express();
 app.use(bodyParser.json());
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use('/', authRoutes);
 app.get('/upload',verifyJWT, uploadFile);
 app.use("/api/v1/recruiters", recruiterRouter);
+// app.use("/api/v1/students", studentRouter);
 
 // test route
 app.get("/ping", (req, res) => {

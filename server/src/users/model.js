@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const  typeOfUser = {
+const typeOfUser = {
     STUDENT: 'student',
     RECRUITER: 'recruiter',
     ADMIN: 'admin'
