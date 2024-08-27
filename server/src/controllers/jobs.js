@@ -14,6 +14,7 @@
     return res.status(500).json({ message: "Server Error", error: error.message });
   }
  }
+ 
 
 // getting all job 
 const getJob = async (req, res) => {

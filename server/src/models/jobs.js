@@ -27,7 +27,7 @@ required:true
     },
     tags:[String],
     type:{
-        type:String,
+    type:String,
         required:true,
     }
     ,
@@ -42,24 +42,15 @@ required:true
     },
     total_applicants:{
         type:Number,
-<<<<<<< HEAD
         default:0
-=======
->>>>>>> 2959bc05554a4476772b313ad6d9889154832464
     },
     accepting:{
         type:Boolean,
         required:true,
-<<<<<<< HEAD
         default:true
     },
     last_date:{
         type:Date,
-=======
-    },
-    last_date:{
-        type:Number,
->>>>>>> 2959bc05554a4476772b313ad6d9889154832464
         required:true,
     }
 
