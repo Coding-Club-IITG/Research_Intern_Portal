@@ -1,8 +1,24 @@
 import mongoose from "mongoose";
-const Job = new mongoose.Schema({
+
+const requirementSchema = new mongoose.Schema({
+    cpi: {
+        type: Number,
+        required: true,
+    },
+    branch: {
+        type: String,
+        required: true,
+    },
+    study_year: {
+        type: Number,
+        required: true,
+    },
+});
+
+const JobSchema = new mongoose.Schema({
     prof_name: {
         type: String,
-        required: true
+        required: true,
     },
     title: {
         type: String,
@@ -12,7 +28,6 @@ const Job = new mongoose.Schema({
         type: String,
         required: true,
     },
-
     isActive: {
         type: Boolean,
         default: true,
@@ -29,30 +44,27 @@ const Job = new mongoose.Schema({
     type: {
         type: String,
         required: true,
-    }
-    ,
+    },
     stipend: {
         type: Number,
-        required: true
+        required: true,
     },
     hours_required: {
         type: Number,
         required: true,
     },
-    total_applicants: {
-        type: Number,
-        default: 0,
-    },
+    applicants: [String],
+    
+    requirements: requirementSchema,
     accepting: {
         type: Boolean,
         required: true,
-        default: true
+        default: true,
     },
     last_date: {
         type: Date,
         required: true,
     }
-
 });
 
-export default mongoose.model("Job", Job);
+export default mongoose.model("Job", JobSchema);
