@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt';
 
 const createRecuiter = async (req,res) => {
     try{
-        const { name, email, password } = req.body;
-        const hashpassword = await bcrypt.hash(password, 10);
-        const recruiter = await Recruiter.create({ name, email, password: hashpassword });
+        const { name, email } = req.body;
+        // const hashpassword = await bcrypt.hash(password, 10);
+        const recruiter = await Recruiter.create({ name, email});
         return res.status(201).json(recruiter);
     }catch(err){
         console.log(err);

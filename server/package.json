@@ -24,6 +24,8 @@
     "node-fetch": "^3.3.2",
     "querystring": "^0.2.1",
     "sanitize-html": "^2.13.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "turndown": "^7.1.3"
   }
 }
