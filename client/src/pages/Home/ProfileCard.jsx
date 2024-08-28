@@ -6,7 +6,7 @@ function ProfileCard(){
         <div className='ProfileCard' style={{
             display:"block",
             position:"relative",
-            borderRadius:"5px",
+            borderRadius:"8px",
             padding:"20px",
             margin:"5vh",
             backgroundColor:"#f8fcff",
@@ -46,8 +46,8 @@ function ProfileCard(){
                 top:"1vw",
                 right:"1.2vw",
             }}>
-                <a href="" style={{paddingRight:"15px"}}>View your public profile </a>
-                <a href="">Edit</a>
+                <a href="" style={{paddingRight:"15px",color:'#7A288A'}}>View your public profile </a>
+                <a href="" style={{color:'#7A288A'}}>Edit</a>
             </span>
         </div>
     );

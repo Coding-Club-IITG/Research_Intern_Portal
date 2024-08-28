@@ -1,12 +1,13 @@
 import React from 'react'
 import Jobs from "./Jobs"
+import { Button } from "antd";
 
 const RecommendedJobs=()=>{
     return(
         <div className='RecommendedJobs' style={{
             display:"block",
             position:"relative",
-            borderRadius:"5px",
+            borderRadius:"8px",
             padding:"20px",
             margin:"5vh",
             backgroundColor:"#f8fcff",
@@ -20,6 +21,7 @@ const RecommendedJobs=()=>{
                 position:'absolute',
                 top:"1vw",
                 right:"1.2vw",
+                color:'#7A288A',
             }}>Change Job preferences</a>
 
             <Jobs/>
@@ -30,7 +32,9 @@ const RecommendedJobs=()=>{
                 margin:"5px",
             }}>
 
-            <a href="" >See more Jobs</a>
+            <div style={{display:'block',textAlign:'center'}}>
+                <Button type='primary' size='middle' shape='round' icon='See more jobs' style={{backgroundColor:'black',color:'white',fontWeight:'450'}}/>
+            </div>
             </p>
         
         </div>
