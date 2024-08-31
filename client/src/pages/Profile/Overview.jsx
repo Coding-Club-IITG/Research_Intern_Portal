@@ -1,15 +1,45 @@
 import React, { useEffect, useState } from 'react';
 
-const Overview = () => {
-  const [profileData, setProfileData] = useState(null);
 
-  useEffect(() => {
+const Overview = () => {
+  const profileData = {
+    name: "Mahak ",
+    activityStatus: "Active today",
+    location: "Kota, India",
+    timezone: "0.5 hours behind",
+    lookingFor: "Eager to learn.",
+    education: {
+      degree: "Bachelor's, Civil engineering",
+      institution: "Indian Institute of Technology - Guwahati",
+      graduationYear: "2027"
+    },
+    idealNextOpportunity: {
+      desiredSalary: "Flexible",
+      desiredRole: "Software Engineer",
+      remoteWork: "Onsite Or Remote",
+      desiredLocation: "Kota (current)",
+      desiredTechStack: ["Node.js", "React", "Express.js", "C++"],
+      wants: [
+        "To solve technical problems",
+        "Progression to management",
+        "Company with clear roles",
+        "Team members to learn from",
+        "Challenging problems to work on"
+      ]
+    }
+  };
+
+
+// const Overview = () => {
+//   const [profileData, setProfileData] = useState(null);
+
+//   useEffect(() => {
    
-    fetch('url of api')
-      .then(response => response.json())
-      .then(data => setProfileData(data))
-      .catch(error => console.error('Error fetching profile data:', error));
-  }, []);
+//     fetch('url of api')
+//       .then(response => response.json())
+//       .then(data => setProfileData(data))
+//       .catch(error => console.error('Error fetching profile data:', error));
+//   }, []);
 
   if (!profileData) {
     return <div>Loading...</div>;
@@ -54,11 +84,11 @@ const Overview = () => {
       <div className="bg-white p-2 rounded-lg mb-2">
         <h3 className="text-lg font-semibold text-gray-800 mb-2">Ideal Next Opportunity</h3>
         <h2 className= "text-gray-500 mb-2">Desired Salary</h2>
-        <p className="text-gray-600 bg-gray-100 inline-block p-1 rounded-md"> {profileData.idealNextOpportunity.desiredSalary}</p>
+        <p className="text-gray-600 bg-gray-100 inline-block p-1 mb-2 rounded-md"> {profileData.idealNextOpportunity.desiredSalary}</p>
         <h2 className="text-gray-500 mb-2">Desired role</h2>
-        <p className="text-gray-600 bg-gray-100 inline-block p-1 rounded-md"> {profileData.idealNextOpportunity.desiredRole}</p>
+        <p className="text-gray-600 bg-gray-100 inline-block p-1 mb-2 rounded-md"> {profileData.idealNextOpportunity.desiredRole}</p>
         <h2 className="text-gray-500 mb-2">Remote Work</h2>
-        <p className="text-gray-600 bg-gray-100 inline-block p-1 rounded-md"> {profileData.idealNextOpportunity.remoteWork}</p>
+        <p className="text-gray-600 bg-gray-100 inline-block p-1 mb-2 rounded-md"> {profileData.idealNextOpportunity.remoteWork}</p>
         <h2 className="text-gray-500 mb-2">Desired Location</h2>
         <p className="text-gray-600 bg-gray-100 inline-block p-1 rounded-md"> {profileData.idealNextOpportunity.desiredLocation}</p>
       </div>
