@@ -1,9 +1,14 @@
-import Cv from "./pages/profile/Cv";
+// import Cv from "./pages/profile/Cv";
 
+import ClientRoutes from "./routes";
+
+// import StudentLayout from "./student/layout";
 function App() {
   return (
     <div className="App">
-      <Cv />
+      {/* <Cv />
+      <StudentLayout /> */}
+      <ClientRoutes />
     </div>
   );
 }
