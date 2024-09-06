@@ -10,13 +10,13 @@ const items =  [
   {
     key: '1',
     icon: <HomeOutlined/>,
-    label: 'Home',
-    link: <Link to='/home'>Home</Link>
+    label:<Link to="/home">Home</Link>,
+    
   },
   {
     key: '2',
     icon: <UserOutlined/>,
-    label: 'Profile',
+    label:<Link to="/profile/edit/overview">Profile</Link>,
   },
   {
     key: '3',
@@ -26,7 +26,7 @@ const items =  [
   {
     key: '4',
     icon: <CheckSquareOutlined/> ,
-    label:'Applied',
+    label:<Link to="/applied">Applied</Link>,
   },
   {
     key: '5',
@@ -42,6 +42,7 @@ const Root= () => {
   } = theme.useToken();
   return (
     <Layout style={{ minHeight: '100vh' }}>
+      
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
@@ -53,6 +54,7 @@ const Root= () => {
         }}>
 
         <div className="demo-logo-vertical" />
+        
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']} items={items}>
         {(item) => (
             <Menu.Item key={item.key}>
@@ -62,6 +64,7 @@ const Root= () => {
         </Menu>
 
       </Sider>
+
       <Layout style={{ minHeight: '100vh' }}>
         <Header
           style={{
