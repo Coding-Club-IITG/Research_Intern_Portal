@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
-const  typeOfUser = {
+const typeOfUser = {
     STUDENT: 'student',
     RECRUITER: 'recruiter',
     ADMIN: 'admin'
 }
 
-const User = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -39,4 +39,4 @@ const User = new mongoose.Schema({
     }
 });
 
-export default mongoose.model("User", User);
+export const User = mongoose.model('User', UserSchema);

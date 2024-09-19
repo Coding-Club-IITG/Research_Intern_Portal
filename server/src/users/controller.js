@@ -1,8 +1,7 @@
-import { roles } from '../utils/roles';
-import User from './model';
-import Student from '../students/models/student';
-import Recruiter from '../recruiter/models/jobs';
-import Admin from '../admin/models/admin';
+import { User } from './model.js';
+import Recruiter from '../recruiter/models/jobs.js';
+import { roles } from '../utils/roles.js';
+import { Student } from '../students/models/student.js';
 
 export const createUser = async (data) => {
     try {
