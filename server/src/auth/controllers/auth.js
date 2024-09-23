@@ -21,7 +21,7 @@ export const onedriveLogin = async (req, res) => {
         redirect_uri: redirectUri,
         response_mode: "query",
         scope: "https://graph.microsoft.com/Files.ReadWrite offline_access",
-        state: roles.STUDENT // we have to change this 
+        state: req.body.role // we have to change this 
       });
     res.redirect(authUrl);
   } catch (err) {
@@ -56,7 +56,6 @@ export const onedriveRedirect = async (req, res) => {
     });
 
     const tokenData = await tokenResponse.json();
-  //  console.log(tokenData);
 
     const jwtPayload = {
       access_token: tokenData.access_token,
@@ -73,22 +72,33 @@ export const onedriveRedirect = async (req, res) => {
         maxAge: 1000 * 60 * 1 // 1 hour
       }
     )
+
+    const findUser = await User.findOne({email: 'email'});
+
+    if(findUser){
+      const typeOfUser = findUser.typeOfUser;
+
+      switch(typeOfUser){
+        case roles.STUDENT:
+          res.redirect('http://localhost:3000/student/');
+          return;
+        case roles.RECRUITER:
+          res.redirect('http://localhost:3000/recruiter/');
+          return;
+        case roles.ADMIN:
+          res.redirect('http://localhost:3000/admin/');
+          return;
+      }
+    }
     
 
     switch (state) {
       case roles.STUDENT:
         try {
-          const findUser = await User.findOne({ email: 'email' });
-
-          if (findUser) {
-            res.redirect('http://localhost:3000/student/');
-            return;
-          }
-
           const user = await createUser({
             name: 'name',
             email: 'email',
-            role: roles.STUDENT
+            typeOfUser: roles.STUDENT
           })
           console.log(user);
         } catch (error) {
@@ -100,17 +110,10 @@ export const onedriveRedirect = async (req, res) => {
 
       case roles.RECRUITER:
         try {
-          const findUser = await User.findOne({ email: 'email' });
-
-          if (findUser) {
-            res.redirect('http://localhost:3000/recruiter/');
-            return;
-          }
-
           const user = await createUser({
             name: 'name',
             email: 'email',
-            role: roles.RECRUITER
+            typeOfUser: roles.RECRUITER
           })
           console.log(user);
         } catch (error) {
@@ -122,17 +125,10 @@ export const onedriveRedirect = async (req, res) => {
 
       case roles.ADMIN:
         try {
-          const findUser = await User.findOne({ email: 'email' });
-
-          if (findUser) {
-            res.redirect('http://localhost:3000/admin/');
-            return;
-          }
-
           const user = await createUser({
             name: 'name',
             email: 'email',
-            role: roles.ADMIN
+            typeOfUser: roles.ADMIN
           })
           console.log(user);
         } catch (error) {

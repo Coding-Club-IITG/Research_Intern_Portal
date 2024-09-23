@@ -5,37 +5,41 @@ import { Student } from '../students/models/student.js';
 
 export const createUser = async (data) => {
     try {
-        const { name, email, role } = data;
+        const { name, email, typeOfUser } = data;
 
-        const user = await User.create({
-            name,
-            email,
-            role,
-        });
+        let user;
 
-        if(role === roles.STUDENT){
-            const student = await Student.create({
+        if (typeOfUser === roles.STUDENT) {
+            user = await Student.create({
                 name,
                 email,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             });
-        }else if(role === roles.RECRUITER){
-            const recruiter = await Recruiter.create({
+        }else if(typeOfUser === roles.RECRUITER){
+            user = await Recruiter.create({
                 name,
                 email,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             });
-        }else if(role === roles.ADMIN){
-            const admin = await Admin.create({
+        }else if(typeOfUser === roles.ADMIN){
+            user = await Admin.create({
                 name,
                 email,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             });
         }
-        return user;
+
+        const appUser = await User.create({
+            name,
+            email,
+            typeOfUser,
+            connection_id: user._id,
+        })
+
+        return appUser;
     } catch (error) {
         throw error;
     }
