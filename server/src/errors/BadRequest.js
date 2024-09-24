@@ -6,7 +6,7 @@ class BadRequest extends BaseError {
       "BadRequest",
       StatusCodes.BAD_REQUEST,
       `Invalid structure for ${properyName} provided`,
-      details
+      details,
     );
   }
 }

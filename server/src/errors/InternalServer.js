@@ -6,7 +6,7 @@ class InternalServerError extends BaseError {
       "Internal Server Error",
       StatusCodes.INTERNAL_SERVER_ERROR,
       "something went wrong!!",
-      details
+      details,
     );
   }
 }
