@@ -2,9 +2,12 @@ import jwt from "jsonwebtoken";
 
 const verifyJWT = (req, res, next) => {
   const token = req.cookies.jwt;
-  // console.log(token);
   if (!token) {
+<<<<<<< HEAD
     return res.status(403).json({ message: "Forbidden: No token provided" });
+=======
+    return res.status(403).json({ status: "error", message: "Forbidden: No token provided", data: null });
+>>>>>>> Dhruv
   }
 
   try {
@@ -13,7 +16,11 @@ const verifyJWT = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (err) {
+<<<<<<< HEAD
     res.status(401).json({ message: "Unauthorized: Invalid token" });
+=======
+    res.status(401).json({ status: "error", message: "Unauthorized: Invalid token", data: null });
+>>>>>>> Dhruv
   }
 };
 

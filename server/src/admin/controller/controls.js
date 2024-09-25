@@ -8,16 +8,28 @@ export const verifyRecruiter = async (req, res) => {
     const recruiter = await Recruiter.findById(id);
 
     if (!recruiter) {
-      return res.status(404).json({ message: "Recruiter not found" });
+      return res.status(404).json({
+        status: "error",
+        message: "Recruiter not found",
+        data: null,
+      });
     }
 
     recruiter.isVerified = true;
     await recruiter.save();
 
-    return res.status(200).json(recruiter);
+    return res.status(200).json({
+      status: "success",
+      message: "Recruiter verified successfully",
+      data: recruiter,
+    });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: null,
+    });    
   }
 };
 
@@ -27,17 +39,30 @@ export const removeRecruiter = async (req, res) => {
     const recruiter = await Recruiter.findById(id);
 
     if (!recruiter) {
-      return res.status(404).json({ message: "Recruiter not found" });
+      return res.status(404).json({
+        status: "error",
+        message: "Recruiter not found",
+        data: null,
+      });
     }
 
     await recruiter.remove();
 
-    return res.status(200).json({ message: "Recruiter removed" });
+    return res.status(200).json({
+      status: "success",
+      message: "Recruiter removed successfully",
+      data: null,
+    });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: null,
+    });
   }
 };
+
 
 export const removeStudent = async (req, res) => {
   try {
@@ -46,10 +71,18 @@ export const removeStudent = async (req, res) => {
 
     await student.remove();
 
-    return res.status(200).json({ message: "Student removed" });
+    return res.status(200).json({
+      status: "success",
+      message: "Student removed successfully",
+      data: null,
+    });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: null,
+    });
   }
 };
 
@@ -59,18 +92,31 @@ export const banRecruiter = async (req, res) => {
     const recruiter = await Recruiter.findById(id);
 
     if (!recruiter) {
-      return res.status(404).json({ message: "Recruiter not found" });
+      return res.status(404).json({
+        status: "error",
+        message: "Recruiter not found",
+        data: null,
+      });
     }
 
     recruiter.isActive = false;
     await recruiter.save();
 
-    return res.status(200).json(recruiter);
+    return res.status(200).json({
+      status: "success",
+      message: "Recruiter banned successfully",
+      data: recruiter,
+    });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: null,
+    });
   }
 };
+
 
 export const deleteJob = async (req, res) => {
   try {
@@ -79,9 +125,17 @@ export const deleteJob = async (req, res) => {
 
     await job.remove();
 
-    return res.status(200).json({ message: "Job removed" });
+    return res.status(200).json({
+      status: "success",
+      message: "Job removed successfully",
+      data: null,
+    });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: null,
+    });
   }
 };
