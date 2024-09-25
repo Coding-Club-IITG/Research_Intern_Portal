@@ -13,6 +13,7 @@ import StudentCv from "./pages/profile/StudentCv";
 import StudentInternships from "./pages/internships/Internships";
 import StudentApplied from "./pages/applied/applied";
 import InternshipDetail from "./pages/internships/InternshipDetail";
+import NotFoundPage from "../errors/NotFoundPage";
 
 const StudentRoutes = () => {
   return (
@@ -36,6 +37,7 @@ const StudentRoutes = () => {
 
         <Route path="applied" element={<StudentApplied />} />
       </Route>
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

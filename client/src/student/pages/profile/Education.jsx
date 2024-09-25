@@ -16,13 +16,13 @@ function Education({ profile }) {
 
   return (
     <>
-      <div className="flex w-full space-x-4 flex-wrap">
+      <div className="flex w-full flex-wrap">
         <div className="basis-full md:basis-1/3 p-4">
           <div className="font-bold">Education</div>
           <div>Which school have you studied at?</div>
         </div>
 
-        <div className="flex-col grow shrink ">
+        <div className="flex-col pl-4 md:basis-2/3 grow shrink ">
           {educations.map((edu, index) => (
             <EducationCard key={index} education={edu} />
           ))}

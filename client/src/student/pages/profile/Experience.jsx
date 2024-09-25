@@ -16,13 +16,13 @@ function Experience({ profile }) {
 
   return (
     <>
-      <div className="flex w-full space-x-4 flex-wrap">
+      <div className="flex w-full flex-wrap items-start">
         <div className="basis-full md:basis-1/3 p-4">
           <div className="font-bold">Experience</div>
           <div>What all have you done?</div>
         </div>
 
-        <div className="flex-col grow shrink">
+        <div className="basis-full md:basis-2/3 flex flex-col items-start pl-4">
           {experiences.map((exp, index) => (
             <ExperienceCard key={index} experience={exp} />
           ))}

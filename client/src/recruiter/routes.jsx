@@ -7,6 +7,7 @@ import RecruiterHome from "./pages/home/home";
 import RecruiterProfile from "./pages/profile/profile";
 import RecruiterDrives from "./pages/drives/drives";
 import RecruiterNewDrive from "./pages/newdrive/newDrive";
+import NotFoundPage from "../errors/NotFoundPage";
 
 const RecuriterRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const RecuriterRoutes = () => {
         <Route path="drives" element={<RecruiterDrives />} />
         <Route path="newdrive" element={<RecruiterNewDrive />} />
       </Route>
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };
