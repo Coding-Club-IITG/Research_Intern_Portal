@@ -65,12 +65,12 @@ const Recruiter = new mongoose.Schema({
             }
         }],
     },
-<<<<<<< HEAD
+
  department:{
 type:String,
 required:true
  } , 
-=======
+
     posted: {
         type: Number
     },
@@ -84,7 +84,7 @@ required:true
         type: String,
         required: true,
     }
->>>>>>> 2959bc05554a4476772b313ad6d9889154832464
+
 
 })
 

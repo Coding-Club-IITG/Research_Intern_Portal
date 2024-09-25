@@ -11,8 +11,14 @@ import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
 import jobRouter from "./routes/jobs.js";
 import mongoose from "mongoose";
-mongoose.connect("mongodb+srv://krish12252005:UwIun5sfWpiQs9jr@krish-cluster.vn4ka9f.mongodb.net/student-database")
+mongoose.connect("mongodb+srv://krish12252005:UwIun5sfWpiQs9jr@krish-cluster.vn4ka9f.mongodb.net/student-database"
+  )
+  .then(()=>console.log('mongoose is connected'))
+  .catch(err=>console.log(err))
 
+
+
+const PORT =8000;
 
 
 const app = express();
@@ -33,6 +39,6 @@ app.get("/ping", (req, res) => {
 
 //last middleware if any error comes
 app.use(errorHandler);
-app.listen(data.PORT, async () => {
-  console.log(`Server is running on ${data.PORT}`);
+app.listen(PORT, async () => {
+  console.log(`Server is running on ${PORT}`);
 });

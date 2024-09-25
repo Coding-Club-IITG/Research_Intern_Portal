@@ -1,6 +1,7 @@
 import Recruiter from '../models/recruiter.js';
 import bcrypt from 'bcrypt';
 
+
 const createRecuiter = async (req,res) => {
     try{
         const { name, email, password } = req.body;
@@ -12,6 +13,7 @@ const createRecuiter = async (req,res) => {
         res.status(500).json({message: "Internal server error"});
     }
 }
+
 
 const getRecruiters = async (req,res) => {
     try{
@@ -33,6 +35,8 @@ const getRecruiterById = async (req,res) => {
         res.status(500).json({message: "Internal server error"});
     }
 }
+
+
 
 const updateRecruiter = async (req,res) => {
     try{
@@ -57,6 +61,8 @@ const deleteRecruiter = async (req,res) => {
         res.status(500).json({message: "Internal server error"});
     }
 }
+
+
 
 export {
     createRecuiter,
