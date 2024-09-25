@@ -2,6 +2,7 @@ import BadRequest from "../../errors/BadRequest.js";
 import Recruiter from "../models/recruiter.js";
 import bcrypt from "bcrypt";
 import NotFound from "../../errors/Notfound.js"
+import logger from "../../utils/logger.js";
 
 const createRecuiter = async (req, res) => {
   try {
@@ -10,7 +11,8 @@ const createRecuiter = async (req, res) => {
     const recruiter = await Recruiter.create({ name, email });
     return res.status(201).json(recruiter);
   } catch (err) {
-    console.log(err);
+    logger.error(err);
+    // console.log(err);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -20,7 +22,8 @@ const getRecruiters = async (req, res) => {
     const recruiters = await Recruiter.find();
     return res.status(200).json(recruiters);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    logger.error(err);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -31,7 +34,8 @@ const getRecruiterById = async (req, res) => {
     const recruiter = await Recruiter.findById(id);
     return res.status(200).json(recruiter);
   } catch (err) {
-    console.log(err);
+    logger.error(err);
+    // console.log(err);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -64,7 +68,8 @@ const updateRecruiter = async (req, res) => {
 
     res.status(200).json({ recruiter });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    logger.error(err);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -75,7 +80,8 @@ const deleteRecruiter = async (req, res) => {
     await Recruiter.findByIdAndDelete(id);
     return res.status(200).json({ message: "Recruiter deleted successfully" });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    logger.error(err);
     res.status(500).json({ message: "Internal server error" });
   }
 };

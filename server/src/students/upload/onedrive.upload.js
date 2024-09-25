@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import fetch from "node-fetch";
+import logger from "../../utils/logger.js";
 
 const uploadFile = async (req, res) => {
   try {
@@ -23,10 +24,12 @@ const uploadFile = async (req, res) => {
     });
 
     const uploadData = await uploadResponse.json();
-    console.log(uploadData.webUrl);
+    // console.log(uploadData.webUrl);
+    logger.info(uploadData.webUrl);
     res.json({ message: "File uploaded successfully" });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    logger.err(err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };

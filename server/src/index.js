@@ -11,7 +11,7 @@ import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
 import { setupSwagger } from "./config/swagger_config.js";
 import cors from "cors";
-
+import logger from "./utils/logger.js";
 const app = express();
 
 setupSwagger(app);
@@ -40,5 +40,6 @@ app.get("/ping", (req, res) => {
 app.use(errorHandler);
 app.listen(data.PORT, async () => {
   await connectToDb();
-  console.log(`Server is running on ${data.PORT}`);
+  logger.info(`Server is running on ${data.PORT}`);
+  // console.log(`Server is running on ${data.PORT}`);
 });

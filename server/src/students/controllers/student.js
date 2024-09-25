@@ -1,6 +1,6 @@
 import Student from "../models/student.js";
 import Updates from "../../admin/models/updates.js";
-
+import logger from "../../utils/logger.js"
 const createStudent = async (req, res) => {
   try {
     const {
@@ -53,7 +53,8 @@ const createStudent = async (req, res) => {
       .status(200)
       .json({ error: false, message: "Student Created succesfully" });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    logger.error(error);
     res.status(500).json({ error: true, message: "Internal server error" });
   }
 };

@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { roles } from "../../utils/roles.js";
 import { createUser } from "../../users/controller.js";
 import { User } from "../../users/model.js";
+import logger from "../../utils/logger.js";
 dotenv.config();
 
 export const onedriveLogin = async (req, res) => {
@@ -25,7 +26,8 @@ export const onedriveLogin = async (req, res) => {
       });
     res.redirect(authUrl);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    logger.err(err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
@@ -98,9 +100,11 @@ export const onedriveRedirect = async (req, res) => {
             email: "email",
             typeOfUser: roles.STUDENT,
           });
-          console.log(user);
+          // console.log(user);
+          logger.info(user);
         } catch (error) {
-          console.log(error);
+          // console.log(error);
+          logger.error(error);
           res.status(500).json({ message: "Internal Server Error" });
         }
         res.redirect("http://localhost:3000/student/");
@@ -113,9 +117,11 @@ export const onedriveRedirect = async (req, res) => {
             email: "email",
             typeOfUser: roles.RECRUITER,
           });
-          console.log(user);
+          // console.log(user);
+          logger.info(user);
         } catch (error) {
-          console.log(error);
+          // console.log(error);
+          logger.error(error);
           res.status(500).json({ message: "Internal Server Error" });
         }
         res.redirect("http://localhost:3000/recruiter/");
@@ -128,9 +134,11 @@ export const onedriveRedirect = async (req, res) => {
             email: "email",
             typeOfUser: roles.ADMIN,
           });
-          console.log(user);
+          // console.log(user);
+          logger.info(user);
         } catch (error) {
-          console.log(error);
+          // console.log(error);
+          logger.error(error);
           res.status(500).json({ message: "Internal Server Error" });
         }
         res.redirect("http://localhost:3000/admin/");
@@ -141,7 +149,8 @@ export const onedriveRedirect = async (req, res) => {
         break;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    logger.error(err);
     res.status(500).json({ message: "Internal Server Error" });
   }
 };

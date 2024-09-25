@@ -3,6 +3,7 @@ import fetch from "node-fetch";
 import fs from "fs";
 import path from "path";
 import querystring from "querystring";
+import logger from "../../utils/logger.js";
 
 const clientId = "694b6b04-c401-4e85-9a81-fe78f223dede"; // Replace with your client ID
 const clientSecret = "RzQ8Q~g1wc8noN9nWb.esrXc~A_aEG1hJUYEdcm~"; // Replace with your client secret
@@ -82,7 +83,8 @@ app.get("/upload", async (req, res) => {
 
   if (uploadResponse.ok) {
     const fileLink = uploadData.webUrl;
-    console.log(fileLink);
+    // console.log(fileLink);
+    logger.info(fileLink);
     res.send(`File uploaded successfully: ${JSON.stringify(uploadData)}`);
   } else {
     res.send(`Error uploading file: ${uploadData.error.message}`);
@@ -90,5 +92,6 @@ app.get("/upload", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`);
+  logger.info(`App listening at http://localhost:${port}`);
+  // console.log(`App listening at http://localhost:${port}`);
 });

@@ -1,6 +1,7 @@
 import Recruiter from "../../recruiter/models/recruiter";
 import Student from "../../student/models/student";
 import Jobs from "../../recruiter/models/jobs";
+import logger from "../../utils/logger.js";
 
 export const verifyRecruiter = async (req, res) => {
   try {
@@ -16,7 +17,8 @@ export const verifyRecruiter = async (req, res) => {
 
     return res.status(200).json(recruiter);
   } catch (error) {
-    console.log(error);
+    logger.error(error);
+    // console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -34,7 +36,8 @@ export const removeRecruiter = async (req, res) => {
 
     return res.status(200).json({ message: "Recruiter removed" });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
+    // console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -48,7 +51,8 @@ export const removeStudent = async (req, res) => {
 
     return res.status(200).json({ message: "Student removed" });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
+    // console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -67,7 +71,8 @@ export const banRecruiter = async (req, res) => {
 
     return res.status(200).json(recruiter);
   } catch (error) {
-    console.log(error);
+    logger.error(error);
+    // console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -81,7 +86,8 @@ export const deleteJob = async (req, res) => {
 
     return res.status(200).json({ message: "Job removed" });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
+    // console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 };
