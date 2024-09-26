@@ -1,10 +1,14 @@
-import { DatePicker } from 'antd';
+// import Cv from "./pages/profile/Cv";
 
+import ClientRoutes from "./routes";
+
+// import StudentLayout from "./student/layout";
 function App() {
   return (
     <div className="App">
-      <h1 className="text-6xl">App</h1>
-      <DatePicker />
+      {/* <Cv />
+      <StudentLayout /> */}
+      <ClientRoutes />
     </div>
   );
 }
