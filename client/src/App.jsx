@@ -30,12 +30,11 @@ function App() {
           </Route>
 
 
-
+{/* 
           <Route exact path="/admin" element={<Admin />}></Route>
           <Route path="/admin/professor" element={<Prof />}></Route>
           <Route path="/admin/student" element={<Student />}></Route>
-          <Route path="/admin/jobs" element={<Student />}></Route>
-
+          <Route path="/admin/jobs" element={<Student />}></Route> */}
         </Routes>
       </BrowserRouter>
     </div>
