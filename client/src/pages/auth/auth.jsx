@@ -1,41 +1,40 @@
-import React from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { z } from "zod";
 import authUrl from "../../auth.url";
 
-const LoginPage = () => {
-  function loginStudent() {
-    const url = authUrl("student")
-    window.location.href = url;
-  }
+const loginSchema = z.object({
+  role: z.enum(["student", "admin", "recruiter"]),
+});
 
-  function loginAdmin() {
-    const url = authUrl("admin")
-    window.location.href = url;
-  }
-  
-  function loginRecruiter() {
-    const url = authUrl("recruiter")
-    window.location.href = url;
+const LoginPage = () => {
+  const [error, setError] = useState("");
+
+  function handleLogin(role) {
+    try {
+      loginSchema.parse({ role });
+      const url = authUrl(role);
+      window.location.href = url;
+    } catch (e) {
+      setError(e.errors[0].message);
+    }
   }
 
   return (
     <div className="flex gap-4">
-        <div className="flex flex-col gap-2">
-            <h2>Login as admin</h2>
-            <button onClick={loginAdmin} className="py-1 px-4 bg-blue-500 rounded-md text-white">Login</button>
+      {error && <p className="text-red-500">{error}</p>}
+      {["admin", "student", "recruiter"].map((role) => (
+        <div key={role} className="flex flex-col gap-2">
+          <h2>Login as {role}</h2>
+          <button
+            onClick={() => handleLogin(role)}
+            className="py-1 px-4 bg-blue-500 rounded-md text-white"
+          >
+            Login
+          </button>
         </div>
-
-        <div className="flex flex-col gap-2">
-            <h2>Login as Student</h2>
-            <button onClick={loginStudent} className="py-1 px-4 bg-blue-500 rounded-md text-white">Login</button>
-        </div>
-
-        <div className="flex flex-col gap-2">
-            <h2>Login as recruiter</h2>
-            <button onClick={loginRecruiter} className="py-1 px-4 bg-blue-500 rounded-md text-white">Login</button>
-        </div>
+      ))}
     </div>
-  )
+  );
 };
 
 export default LoginPage;
