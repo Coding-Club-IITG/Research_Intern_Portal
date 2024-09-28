@@ -1,14 +1,11 @@
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-
 import RecruiterLayout from "./layout";
-
 import RecruiterHome from "./pages/home/home";
 import RecruiterProfile from "./pages/profile/profile";
 import RecruiterDrives from "./pages/drives/drives";
 import RecruiterNewDrive from "./pages/newdrive/newDrive";
 import NotFoundPage from "../errors/NotFoundPage";
-import { Route, Routes } from "react-router-dom";
 import RecuriterHome from "./pages/home/home";
 
 const RecuriterRoutes = () => {
