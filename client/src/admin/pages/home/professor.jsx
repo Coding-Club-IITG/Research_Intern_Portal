@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Tabs } from "antd";
 import { Link, useParams, Outlet } from "react-router-dom";
+
 import Dashboard from "./components/Dashboard.jsx";
 import Jobscontent from "./components/Jobscontent.jsx";
 import Professorcontent from "./components/Professorcontent.jsx";
@@ -9,6 +10,7 @@ import Studentcontent from "./components/Studentcontent.jsx";
 const onChange = (key) => {
   console.log(key);
 };
+
 const items = [
   {
     key: "0",
@@ -31,8 +33,7 @@ const items = [
     children: <Jobscontent />
   }
 ];
-
-const home = () => (
-  <Tabs style={{ marginLeft: "30px" }} defaultActiveKey="0" items={items} onChange={onChange} />
+const Prof = () => (
+  <Tabs style={{ marginLeft: "30px" }} defaultActiveKey="1" items={items} onChange={onChange} />
 );
-export default home;
+export default Prof;

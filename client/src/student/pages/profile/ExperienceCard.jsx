@@ -20,16 +20,14 @@ function ExperienceCard() {
         <div>
           <div className="flex items-start justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-gray-900">
-                Web Developer
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900">Web Developer</h3>
               <p className="text-gray-600">Coding Club </p>
               <p>May 2024 - Present</p>
             </div>
           </div>
           <p className="text-gray-800 mt-3">
-            I have designed a MERN course for students. Created a Research
-            Intern Portal for Indian Institute of Technology.
+            I have designed a MERN course for students. Created a Research Intern Portal for Indian
+            Institute of Technology.
           </p>
         </div>
         <button className="text-blue-500 hover:underline">Edit</button>

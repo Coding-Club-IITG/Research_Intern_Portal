@@ -7,7 +7,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
     role: profile.role || "",
     description: profile.description || "",
     startDate: profile.startDate || "",
-    endDate: profile.endDate || "",
+    endDate: profile.endDate || ""
   });
 
   const onChange = (e) => {
@@ -31,9 +31,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
   return (
     <form className="bg-gray-50 p-4">
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
-          Name Of Institute
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Name Of Institute</label>
         <input
           type="text"
           name="name"
@@ -45,9 +43,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
 
       <div className="flex space-between gap-4 flex-wrap">
         <div className="mb-4 grow shrink basis-32">
-          <label className="block text-sm font-medium text-gray-700">
-            Degree (Field Of Study)
-          </label>
+          <label className="block text-sm font-medium text-gray-700">Degree (Field Of Study)</label>
           <input
             type="text"
             name="role"
@@ -60,11 +56,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
           <label className="block w-full text-sm font-medium text-gray-700 pb-2">
             Passing Year
           </label>
-          <DatePicker
-            className="grow shrink"
-            onChange={onChange}
-            picker="year"
-          />
+          <DatePicker className="grow shrink" onChange={onChange} picker="year" />
         </div>
       </div>
       <div className="w-1/2">
@@ -80,9 +72,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
         />
       </div>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
-          Description
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Description</label>
         <textarea
           name="description"
           value={formData.description}
@@ -94,11 +84,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
       </div>
       <div className="flex gap-4">
         <Button onClick={handleCancel}>Cancel</Button>
-        <Button
-          type="primary"
-          className="bg-blue-600 text-white"
-          onClick={handleSubmit}
-        >
+        <Button type="primary" className="bg-blue-600 text-white" onClick={handleSubmit}>
           Save
         </Button>
       </div>

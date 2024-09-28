@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Tabs } from "antd";
 import { Link, useParams, Outlet } from "react-router-dom";
+
 import Dashboard from "./components/Dashboard.jsx";
 import Jobscontent from "./components/Jobscontent.jsx";
 import Professorcontent from "./components/Professorcontent.jsx";
@@ -31,8 +32,7 @@ const items = [
     children: <Jobscontent />
   }
 ];
-
-const home = () => (
-  <Tabs style={{ marginLeft: "30px" }} defaultActiveKey="0" items={items} onChange={onChange} />
+const Student = () => (
+  <Tabs style={{ marginLeft: "30px" }} defaultActiveKey="2" items={items} onChange={onChange} />
 );
-export default home;
+export default Student;

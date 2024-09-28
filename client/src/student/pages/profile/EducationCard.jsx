@@ -28,9 +28,7 @@ function EducationCard() {
             </div>
           </div>
         </div>
-        <button className="text-blue-500 hover:underline self-start">
-          Edit
-        </button>
+        <button className="text-blue-500 hover:underline self-start">Edit</button>
       </div>
     </div>
   );

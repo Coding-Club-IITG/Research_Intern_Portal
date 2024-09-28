@@ -1,11 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {
-  HomeIcon,
-  UserIcon,
-  BriefcaseIcon,
-  PlusIcon,
-} from "@heroicons/react/24/outline";
+import { HomeIcon, UserIcon, BriefcaseIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 const LeftNav = () => {
   return (
@@ -16,9 +11,7 @@ const LeftNav = () => {
           <NavLink
             to="home"
             className={({ isActive }) =>
-              isActive
-                ? "text-blue-700 border-b-2 pb-2 border-blue-700 mt-1"
-                : "text-gray-600 mt-1"
+              isActive ? "text-blue-700 border-b-2 pb-2 border-blue-700 mt-1" : "text-gray-600 mt-1"
             }
             exact
           >
@@ -30,9 +23,7 @@ const LeftNav = () => {
           <NavLink
             to="profile"
             className={({ isActive }) =>
-              isActive
-                ? "text-blue-700 border-b-2 pb-2 border-blue-700 mt-1"
-                : "text-gray-600 mt-1"
+              isActive ? "text-blue-700 border-b-2 pb-2 border-blue-700 mt-1" : "text-gray-600 mt-1"
             }
             exact
           >
@@ -44,9 +35,7 @@ const LeftNav = () => {
           <NavLink
             to="drives"
             className={({ isActive }) =>
-              isActive
-                ? "text-blue-700 border-b-2 pb-2 border-blue-700 mt-1"
-                : "text-gray-600 mt-1"
+              isActive ? "text-blue-700 border-b-2 pb-2 border-blue-700 mt-1" : "text-gray-600 mt-1"
             }
             exact
           >

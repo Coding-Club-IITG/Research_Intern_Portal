@@ -11,7 +11,7 @@ function Filter({ onSearch }) {
       onSearch({
         searchTerm: updatedSearchTerm ?? searchTerm,
         department: updatedDepartment ?? department,
-        role: updatedRole ?? role,
+        role: updatedRole ?? role
       });
     }
   };

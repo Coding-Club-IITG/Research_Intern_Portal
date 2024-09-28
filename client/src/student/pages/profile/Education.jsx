@@ -28,16 +28,9 @@ function Education({ profile }) {
           ))}
 
           {addEdu ? (
-            <EducationForm
-              profile={profile}
-              setAddEdu={setAddEdu}
-              updateProfile={updateProfile}
-            />
+            <EducationForm profile={profile} setAddEdu={setAddEdu} updateProfile={updateProfile} />
           ) : (
-            <span
-              className="text-blue-700 hover:underline cursor-pointer"
-              onClick={handleAddEdu}
-            >
+            <span className="text-blue-700 hover:underline cursor-pointer" onClick={handleAddEdu}>
               + Add Education
             </span>
           )}

@@ -6,7 +6,7 @@ function Internships() {
   const [filters, setFilters] = useState({
     searchTerm: "",
     department: "",
-    role: "",
+    role: ""
   });
 
   
@@ -22,9 +22,7 @@ function Internships() {
     const matchesDepartment = internship.department
       .toLowerCase()
       .includes(filters.department.toLowerCase());
-    const matchesRole = internship.role
-      .toLowerCase()
-      .includes(filters.role.toLowerCase());
+    const matchesRole = internship.role.toLowerCase().includes(filters.role.toLowerCase());
     return matchesRole && matchesSearchTerm && matchesDepartment;
   });
 

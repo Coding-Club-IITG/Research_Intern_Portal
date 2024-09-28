@@ -13,11 +13,7 @@ function InternshipCard({ arr, index }) {
     <div key={index} className="bg-white border border-gray-300 shadow-md mb-6">
       <div className="flex p-4 gap-4">
         <div className="w-40 flex-shrink-0">
-          <img
-            src={arr.image}
-            alt={`${arr.proffName} Logo`}
-            className="h-full"
-          />
+          <img src={arr.image} alt={`${arr.proffName} Logo`} className="h-full" />
         </div>
 
         <div className="flex-1">
@@ -29,10 +25,7 @@ function InternshipCard({ arr, index }) {
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 {arr.tags.map((tag, tagIndex) => (
-                  <span
-                    key={tagIndex}
-                    className="bg-gray-100 text-sm px-3 py-1 rounded-full"
-                  >
+                  <span key={tagIndex} className="bg-gray-100 text-sm px-3 py-1 rounded-full">
                     {tag}
                   </span>
                 ))}
@@ -54,13 +47,8 @@ function InternshipCard({ arr, index }) {
       </div>
 
       <div className="border-t border-gray-200 flex justify-between items-center p-4">
-        <div className="text-sm text-gray-500">
-          Applications: {arr.applications}
-        </div>
-        <button
-          onClick={handleLearnMore}
-          className="text-blue-600 font-semibold hover:underline"
-        >
+        <div className="text-sm text-gray-500">Applications: {arr.applications}</div>
+        <button onClick={handleLearnMore} className="text-blue-600 font-semibold hover:underline">
           Learn more
         </button>
       </div>
