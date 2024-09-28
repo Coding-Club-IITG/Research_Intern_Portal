@@ -1,13 +1,10 @@
-// import Cv from "./pages/profile/Cv";
-
+import ThemeToggle from "./pages/ThemeToggle";
 import ClientRoutes from "./routes";
 
-// import StudentLayout from "./student/layout";
 function App() {
   return (
     <div className="App">
-      {/* <Cv />
-      <StudentLayout /> */}
+      <ThemeToggle />
       <ClientRoutes />
     </div>
   );
