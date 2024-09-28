@@ -10,18 +10,25 @@ import recruiterRouter from "./recruiter/routes/recruiter.js";
 import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
 import { setupSwagger } from "./config/swagger_config.js";
+import cors from "cors";
 
 const app = express();
 
 setupSwagger(app);
 
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  }),
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(cookieParser());
 
-app.use('/', authRoutes);
-app.get('/upload',verifyJWT, uploadFile);
+app.use("/", authRoutes);
+app.get("/upload", verifyJWT, uploadFile);
 app.use("/api/v1/recruiters", recruiterRouter);
 // app.use("/api/v1/admin",)
 // test route

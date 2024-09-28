@@ -1,5 +1,10 @@
 import express from "express";
-import { getUpdateById, getUpdates, editUpdate, deleteUpdate} from "../controllers/updates.js"
+import {
+  getUpdateById,
+  getUpdates,
+  editUpdate,
+  deleteUpdate,
+} from "../controllers/updates.js";
 
 const router = express.Router();
 
@@ -9,4 +14,3 @@ router.put("/:id", editUpdate);
 router.delete("/:id", deleteUpdate);
 
 export default router;
-

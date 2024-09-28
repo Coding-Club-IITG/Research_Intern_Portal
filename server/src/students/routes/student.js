@@ -1,7 +1,17 @@
-import express from 'expresss'
-import { getStudentByID, getStudentByInterests , getStudents , getStudentsByFilter , deleteStudent , updateStudent , createStudent , getStudentsApplicationById , addStudentsApplications } from '../controllers/student';
+import express from "expresss";
+import {
+  getStudentByID,
+  getStudentByInterests,
+  getStudents,
+  getStudentsByFilter,
+  deleteStudent,
+  updateStudent,
+  createStudent,
+  getStudentsApplicationById,
+  addStudentsApplications,
+} from "../controllers/student";
 
-const router = express.Router()
+const router = express.Router();
 
 // router.post('/create' , createStudent)
 // router.get('/', getStudents);
@@ -199,7 +209,7 @@ const router = express.Router()
  *       400:
  *         description: Bad request
  */
-router.post('/create', createStudent);
+router.post("/create", createStudent);
 
 /**
  * @swagger
@@ -217,7 +227,7 @@ router.post('/create', createStudent);
  *               items:
  *                 $ref: '#/components/schemas/Student'
  */
-router.get('/', getStudents);
+router.get("/", getStudents);
 
 /**
  * @swagger
@@ -242,7 +252,7 @@ router.get('/', getStudents);
  *       404:
  *         description: Student not found
  */
-router.get('/:id', getStudentByID);
+router.get("/:id", getStudentByID);
 
 /**
  * @swagger
@@ -267,7 +277,7 @@ router.get('/:id', getStudentByID);
  *               items:
  *                 $ref: '#/components/schemas/Student'
  */
-router.get('/search-filter', getStudentsByFilter);
+router.get("/search-filter", getStudentsByFilter);
 
 /**
  * @swagger
@@ -291,7 +301,7 @@ router.get('/search-filter', getStudentsByFilter);
  *               items:
  *                 $ref: '#/components/schemas/Student'
  */
-router.get('/search-interest', getStudentByInterests);
+router.get("/search-interest", getStudentByInterests);
 
 /**
  * @swagger
@@ -323,7 +333,7 @@ router.get('/search-interest', getStudentByInterests);
  *       404:
  *         description: Student not found
  */
-router.get('/:id/intern-applied', getStudentsApplicationById);
+router.get("/:id/intern-applied", getStudentsApplicationById);
 
 /**
  * @swagger
@@ -352,7 +362,7 @@ router.get('/:id/intern-applied', getStudentsApplicationById);
  *       404:
  *         description: Student or internship not found
  */
-router.post('/:id/intern-apply/:internId', addStudentsApplications);
+router.post("/:id/intern-apply/:internId", addStudentsApplications);
 
 /**
  * @swagger
@@ -385,7 +395,7 @@ router.post('/:id/intern-apply/:internId', addStudentsApplications);
  *       404:
  *         description: Student not found
  */
-router.put('/:id', updateStudent);
+router.put("/:id", updateStudent);
 
 /**
  * @swagger
@@ -406,6 +416,6 @@ router.put('/:id', updateStudent);
  *       404:
  *         description: Student not found
  */
-router.delete('/:id', deleteStudent);
+router.delete("/:id", deleteStudent);
 
 export default router;
