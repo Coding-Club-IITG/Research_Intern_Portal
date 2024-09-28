@@ -11,6 +11,10 @@ import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
 import { setupSwagger } from "./config/swagger_config.js";
 import cors from "cors";
+import jobRouter from "./recruiter/routes/Jobs.js";
+
+
+
 
 const app = express();
 
@@ -30,6 +34,8 @@ app.use(cookieParser());
 app.use("/", authRoutes);
 app.get("/upload", verifyJWT, uploadFile);
 app.use("/api/v1/recruiters", recruiterRouter);
+app.use('/job',jobRouter)
+
 // app.use("/api/v1/admin",)
 // test route
 app.get("/ping", (req, res) => {
@@ -42,3 +48,5 @@ app.listen(data.PORT, async () => {
   await connectToDb();
   console.log(`Server is running on ${data.PORT}`);
 });
+
+
