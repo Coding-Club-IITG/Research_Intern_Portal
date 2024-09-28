@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import InternshipCard from "./InternshipCard";
 import Filter from "./Filter";
-
+import { internships } from "./Data.js";
 function Internships() {
   const [filters, setFilters] = useState({
     searchTerm: "",
@@ -9,40 +9,7 @@ function Internships() {
     role: "",
   });
 
-  const internships = [
-    {
-      proffName: "PSM",
-      department: "Mathematics",
-      image: "https://via.placeholder.com/100",
-      description:
-        "Personalised entrepreneurship learning and guidance. Made as simple as texting.",
-      tags: [
-        "Top 1% of responders",
-        "Responds within a day",
-        "Early Stage",
-        "Growing fast",
-      ],
-      role: "Flutter Intern",
-      stipend: "1000",
-      applications: "35",
-    },
-    {
-      proffName: "John Jose",
-      department: "CSE",
-      image: "https://via.placeholder.com/100",
-      description:
-        "Personalised entrepreneurship learning and guidance. Made as simple as texting.",
-      tags: [
-        "Top 1% of responders",
-        "Responds within a day",
-        "Early Stage",
-        "Growing fast",
-      ],
-      role: "Flutter Intern",
-      stipend: "2000",
-      applications: "75",
-    },
-  ];
+  
 
   const handleSearch = ({ searchTerm, department, role }) => {
     setFilters({ searchTerm, department, role });
