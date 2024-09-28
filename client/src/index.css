@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  @apply bg-white text-black; /* Light mode styles */
+}
+
+html.dark body {
+  @apply invert; /* Dark mode styles */
+}

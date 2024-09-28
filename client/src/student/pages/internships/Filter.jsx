@@ -1,14 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 function Filter({ onSearch }) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [department, setDepartment] = useState("");
-  const [role, setRole] = useState("");
+  const [searchTerm, setSearchTerm] = useLocalStorage("searchTerm", "");
+  const [department, setDepartment] = useLocalStorage("department", "");
+  const [role, setRole] = useLocalStorage("role", "");
 
-  const handleSearch = () => {
+  const handleSearch = (updatedSearchTerm, updatedDepartment, updatedRole) => {
     if (onSearch) {
-      onSearch({ searchTerm, department, role });
+      onSearch({
+        searchTerm: updatedSearchTerm ?? searchTerm,
+        department: updatedDepartment ?? department,
+        role: updatedRole ?? role,
+      });
     }
+  };
+
+  useEffect(() => {
+    handleSearch(searchTerm, department, role);
+  }, [searchTerm, department, role]);
+
+  const handleSearchTermChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    handleSearch(value, department, role);
+  };
+
+  const handleDepartmentChange = (e) => {
+    const value = e.target.value;
+    setDepartment(value);
+    handleSearch(searchTerm, value, role);
+  };
+
+  const handleRoleChange = (e) => {
+    const value = e.target.value;
+    setRole(value);
+    handleSearch(searchTerm, department, value);
   };
 
   return (
@@ -18,28 +45,22 @@ function Filter({ onSearch }) {
         placeholder="Search for a job title..."
         className="border border-gray-300 rounded-md px-4 py-2 w-full"
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={handleSearchTermChange}
       />
       <input
         type="text"
         placeholder="Department"
         className="border border-gray-300 rounded-md px-4 py-2 w-full"
         value={department}
-        onChange={(e) => setDepartment(e.target.value)}
+        onChange={handleDepartmentChange}
       />
       <input
         type="text"
         placeholder="Role"
         className="border border-gray-300 rounded-md px-4 py-2 w-full"
         value={role}
-        onChange={(e) => setRole(e.target.value)}
+        onChange={handleRoleChange}
       />
-      <button
-        onClick={handleSearch}
-        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-      >
-        Apply
-      </button>
     </div>
   );
 }
