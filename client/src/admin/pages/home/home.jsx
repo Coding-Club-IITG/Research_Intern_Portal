@@ -29,7 +29,7 @@ const items = [
   },
   {
     key: '3',
-    label: <Link to='/student/jobs'>Job Details</Link>,
+    label: <Link to='/admin/jobs'>Job Details</Link>,
     children: <Jobscontent/>,
   },
 
