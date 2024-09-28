@@ -14,9 +14,7 @@ function About({ profile }) {
             <div className="flex w-full justify-between items-center flex-wrap">
               <div className="flex-col basis-80 grow shrink">
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Your Name
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700">Your Name</label>
                   <input
                     type="text"
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -25,9 +23,7 @@ function About({ profile }) {
                 </div>
 
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Roll Number
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700">Roll Number</label>
                   <input
                     type="text"
                     className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -42,35 +38,31 @@ function About({ profile }) {
 
             <div className="flex justify-between gap-4 flex-wrap">
               <div className="basis-32 grow shrink">
-                <label className="block text-sm font-medium text-gray-700">
-                  Course Type
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Course Type</label>
                 <Select
                   defaultValue="Select"
                   style={{
-                    width: "100%",
+                    width: "100%"
                   }}
                   options={profile.courses.map((course) => {
                     return {
                       value: course,
-                      label: course,
+                      label: course
                     };
                   })}
                 />
               </div>
               <div className="mb-4 basis-72 grow shrink">
-                <label className="block text-sm font-medium text-gray-700">
-                  Department
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Department</label>
                 <Select
                   defaultValue="Select"
                   style={{
-                    width: "100%",
+                    width: "100%"
                   }}
                   options={profile.departments.map((course) => {
                     return {
                       value: course,
-                      label: course,
+                      label: course
                     };
                   })}
                 />
@@ -78,9 +70,7 @@ function About({ profile }) {
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Fields of Interest
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Fields of Interest</label>
               <div className="flex gap-2 flex-wrap py-2">
                 {profile.interests.map((interest) => {
                   return (
@@ -108,9 +98,7 @@ function About({ profile }) {
               </div>
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Your bio
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Your bio</label>
               <textarea
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 rows="4"

@@ -11,9 +11,7 @@ function Social({ profile }) {
           <form>
             <div className="flex-col basis-80 grow shrink">
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Website
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Website</label>
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -21,9 +19,7 @@ function Social({ profile }) {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Linkedin
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Linkedin</label>
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -31,9 +27,7 @@ function Social({ profile }) {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Github
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Github</label>
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"

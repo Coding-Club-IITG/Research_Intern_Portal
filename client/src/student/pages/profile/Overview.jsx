@@ -10,7 +10,7 @@ const Overview = () => {
     education: {
       degree: "Bachelor's, Civil engineering",
       institution: "Indian Institute of Technology - Guwahati",
-      graduationYear: "2027",
+      graduationYear: "2027"
     },
     idealNextOpportunity: {
       desiredSalary: "Flexible",
@@ -23,9 +23,9 @@ const Overview = () => {
         "Progression to management",
         "Company with clear roles",
         "Team members to learn from",
-        "Challenging problems to work on",
-      ],
-    },
+        "Challenging problems to work on"
+      ]
+    }
   };
 
   // const Overview = () => {
@@ -58,9 +58,7 @@ const Overview = () => {
             />
           </div>
           <div>
-            <h1 className="text-3xl font-semibold text-gray-800">
-              {profileData.name}
-            </h1>
+            <h1 className="text-3xl font-semibold text-gray-800">{profileData.name}</h1>
             <p className="text-gray-600 mt-1 inline-block p-1 rounded-md">
               {profileData.activityStatus}
             </p>{" "}
@@ -107,15 +105,12 @@ const Overview = () => {
           <h3 className="text-gray-500 mb-2">Education</h3>
           <p className="black semi-bold">{profileData.education.degree}</p>
           <p className="text-gray-600">
-            {profileData.education.institution} •{" "}
-            {profileData.education.graduationYear}
+            {profileData.education.institution} • {profileData.education.graduationYear}
           </p>
         </div>
 
         <div className="p-2 rounded-lg mb-2">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">
-            Ideal Next Opportunity
-          </h3>
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">Ideal Next Opportunity</h3>
           <h2 className="text-gray-500 mb-2">Desired Salary</h2>
           <p className="text-gray-600 inline-block p-1 mb-2 rounded-md">
             {" "}
@@ -141,16 +136,11 @@ const Overview = () => {
         <div className="p-2 rounded-lg mb-2">
           <h4 className="text-gray-500 mb-2">Desired Tech Stack</h4>
           <div className="flex flex-wrap gap-4">
-            {profileData.idealNextOpportunity.desiredTechStack.map(
-              (tech, index) => (
-                <div
-                  key={index}
-                  className="p-1 rounded-md shadow-sm"
-                >
-                  <p className="text-gray-600">{tech}</p>
-                </div>
-              )
-            )}
+            {profileData.idealNextOpportunity.desiredTechStack.map((tech, index) => (
+              <div key={index} className="p-1 rounded-md shadow-sm">
+                <p className="text-gray-600">{tech}</p>
+              </div>
+            ))}
           </div>
         </div>
 

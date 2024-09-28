@@ -3,7 +3,7 @@ import { Spin } from "antd";
 
 const contentStyle = {
   padding: 50,
-  borderRadius: 4,
+  borderRadius: 4
 };
 
 const content = <div style={contentStyle} />;

@@ -6,7 +6,7 @@ function Internships() {
   const [filters, setFilters] = useState({
     searchTerm: "",
     department: "",
-    role: "",
+    role: ""
   });
 
   const internships = [
@@ -16,15 +16,10 @@ function Internships() {
       image: "https://via.placeholder.com/100",
       description:
         "Personalised entrepreneurship learning and guidance. Made as simple as texting.",
-      tags: [
-        "Top 1% of responders",
-        "Responds within a day",
-        "Early Stage",
-        "Growing fast",
-      ],
+      tags: ["Top 1% of responders", "Responds within a day", "Early Stage", "Growing fast"],
       role: "Flutter Intern",
       stipend: "1000",
-      applications: "35",
+      applications: "35"
     },
     {
       proffName: "John Jose",
@@ -32,16 +27,11 @@ function Internships() {
       image: "https://via.placeholder.com/100",
       description:
         "Personalised entrepreneurship learning and guidance. Made as simple as texting.",
-      tags: [
-        "Top 1% of responders",
-        "Responds within a day",
-        "Early Stage",
-        "Growing fast",
-      ],
+      tags: ["Top 1% of responders", "Responds within a day", "Early Stage", "Growing fast"],
       role: "Flutter Intern",
       stipend: "2000",
-      applications: "75",
-    },
+      applications: "75"
+    }
   ];
 
   const handleSearch = ({ searchTerm, department, role }) => {
@@ -55,9 +45,7 @@ function Internships() {
     const matchesDepartment = internship.department
       .toLowerCase()
       .includes(filters.department.toLowerCase());
-    const matchesRole = internship.role
-      .toLowerCase()
-      .includes(filters.role.toLowerCase());
+    const matchesRole = internship.role.toLowerCase().includes(filters.role.toLowerCase());
     return matchesRole && matchesSearchTerm && matchesDepartment;
   });
 

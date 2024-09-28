@@ -10,17 +10,7 @@ function Profile() {
     name: "Aditya Samal",
     img: null,
     roll: 230123002,
-    courses: [
-      "BTech",
-      "MTech",
-      "BDes",
-      "MDes",
-      "MA",
-      "MSR",
-      "MSc",
-      "Phd",
-      "MBA",
-    ],
+    courses: ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"],
     departments: [
       "Chemistry",
       "Chemical Enginerring",
@@ -34,15 +24,15 @@ function Profile() {
       "Electrical and Electronics Enginnering",
       "Civil Engineering",
       "Bioscience and Bioengineering",
-      "Energy Engineering",
+      "Energy Engineering"
     ],
     interests: ["software dev", "machine learning"],
     skills: ["React", "Node", "MongoDB"],
     social: {
       website: "https://aditya-samal/Portfolio",
       linkedin: "https://linkedin.com/in/",
-      github: "https://github.com/in/",
-    },
+      github: "https://github.com/in/"
+    }
   };
 
   return (

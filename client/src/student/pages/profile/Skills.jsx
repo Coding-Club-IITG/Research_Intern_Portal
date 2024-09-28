@@ -8,10 +8,7 @@ function Skills({ profile }) {
       <div className="flex-col grow shrink ml-4">
         <div className="flex gap-2 flex-wrap py-2 mb-4">
           {profile.skills.map((skill, index) => (
-            <span
-              key={index}
-              className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md"
-            >
+            <span key={index} className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md">
               {skill}
             </span>
           ))}

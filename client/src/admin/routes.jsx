@@ -6,12 +6,10 @@ import Prof from "./pages/home/professor.jsx";
 import Student from "./pages/home/student.jsx";
 import Job from "./pages/home/jobs.jsx";
 
-
-
 const AdminRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<AdminHome />} ></Route>
+      <Route path="/" element={<AdminHome />}></Route>
       <Route path="/professor" element={<Prof />}></Route>
       <Route path="/student" element={<Student />}></Route>
       <Route path="/jobs" element={<Job />}></Route>

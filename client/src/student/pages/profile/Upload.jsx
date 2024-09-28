@@ -6,7 +6,7 @@ import { z } from "zod";
 const fileSchema = z.object({
   name: z.string().nonempty(),
   size: z.number().max(5 * 1024 * 1024, "File size should be less than 5MB"), // Limit to 5MB
-  type: z.enum(["image/jpeg", "image/png", "application/pdf"]), // Only allow these types
+  type: z.enum(["image/jpeg", "image/png", "application/pdf"]) // Only allow these types
 });
 
 const { Dragger } = Upload;
@@ -15,11 +15,11 @@ const props = {
   name: "file",
   multiple: true,
   action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
-  
+
   onChange(info) {
     const { status, file } = info;
     try {
-      fileSchema.parse(file); 
+      fileSchema.parse(file);
     } catch (error) {
       message.error(`Validation failed: ${error.errors[0].message}`);
       return;
@@ -37,7 +37,7 @@ const props = {
 
   onDrop(e) {
     console.log("Dropped files", e.dataTransfer.files);
-  },
+  }
 };
 
 const App = () => (
@@ -47,8 +47,8 @@ const App = () => (
     </p>
     <p className="ant-upload-text">Click or drag file to this area to upload</p>
     <p className="ant-upload-hint">
-      Support for a single or bulk upload. Strictly prohibited from uploading
-      company data or other banned files.
+      Support for a single or bulk upload. Strictly prohibited from uploading company data or other
+      banned files.
     </p>
   </Dragger>
 );

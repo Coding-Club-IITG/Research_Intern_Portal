@@ -29,10 +29,7 @@ const StudentRoutes = () => {
         </Route>
         <Route path="internships">
           <Route index element={<StudentInternships />} />
-          <Route
-            path="internship/:internshipID"
-            element={<InternshipDetail />}
-          />
+          <Route path="internship/:internshipID" element={<InternshipDetail />} />
         </Route>
 
         <Route path="applied" element={<StudentApplied />} />

@@ -28,16 +28,9 @@ function Experience({ profile }) {
           ))}
 
           {addExp ? (
-            <ExperienceForm
-              profile={profile}
-              setAddExp={setAddExp}
-              updateProfile={updateProfile}
-            />
+            <ExperienceForm profile={profile} setAddExp={setAddExp} updateProfile={updateProfile} />
           ) : (
-            <span
-              className="text-blue-700 hover:underline cursor-pointer"
-              onClick={handleAddExp}
-            >
+            <span className="text-blue-700 hover:underline cursor-pointer" onClick={handleAddExp}>
               + Add Experience
             </span>
           )}

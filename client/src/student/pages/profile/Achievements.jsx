@@ -3,9 +3,7 @@ function Achievements() {
     <div className="flex w-full space-x-4 flex-wrap">
       <div className="basis-full md:basis-1/3 p-4">
         <div className="font-bold">Achievements</div>
-        <div>
-          Sharing more details about yourself will help you stand out more.
-        </div>
+        <div>Sharing more details about yourself will help you stand out more.</div>
       </div>
       <div className="flex-col grow shrink">
         <textarea
