@@ -26,11 +26,7 @@ export const onedriveLogin = async (req, res) => {
     res.redirect(authUrl);
   } catch (err) {
     console.log(err);
-<<<<<<< HEAD
-    res.status(500).json({ message: "Internal Server Error" });
-=======
     res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
->>>>>>> Dhruv
   }
 };
 
@@ -105,12 +101,8 @@ export const onedriveRedirect = async (req, res) => {
           console.log(user);
         } catch (error) {
           console.log(error);
-<<<<<<< HEAD
-          res.status(500).json({ message: "Internal Server Error" });
-=======
           res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
           
->>>>>>> Dhruv
         }
         res.redirect("http://localhost:3000/student/");
         break;
@@ -125,12 +117,8 @@ export const onedriveRedirect = async (req, res) => {
           console.log(user);
         } catch (error) {
           console.log(error);
-<<<<<<< HEAD
-          res.status(500).json({ message: "Internal Server Error" });
-=======
           res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
           
->>>>>>> Dhruv
         }
         res.redirect("http://localhost:3000/recruiter/");
         break;
@@ -145,29 +133,17 @@ export const onedriveRedirect = async (req, res) => {
           console.log(user);
         } catch (error) {
           console.log(error);
-<<<<<<< HEAD
-          res.status(500).json({ message: "Internal Server Error" });
-=======
           res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
->>>>>>> Dhruv
         }
         res.redirect("http://localhost:3000/admin/");
         break;
 
       default:
-<<<<<<< HEAD
-        res.status(500).json({ message: "Internal Server Error" });
-=======
         res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
->>>>>>> Dhruv
         break;
     }
   } catch (err) {
     console.log(err);
-<<<<<<< HEAD
-    res.status(500).json({ message: "Internal Server Error" });
-=======
     res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
->>>>>>> Dhruv
   }
 };

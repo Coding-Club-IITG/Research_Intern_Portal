@@ -22,36 +22,19 @@ const createStudent = async (req, res) => {
         },
       )
     ) {
-<<<<<<< HEAD
-      return res
-        .status(400)
-        .json({ error: true, message: "All fields are necesary" });
-    }
-    const checkEmail = await Student.find({ email: email });
-    if (checkEmail)
-      return res
-        .status(400)
-        .json({
-          error: true,
-          message: "Student with same email already exists",
-        });
-=======
       return res.status(400).json({
-        error: true,
         status: "error",
         message: "All fields are necessary",
-        data: {},
+        data: null,
       });
     }
     const checkEmail = await Student.find({ email: email });
     if (checkEmail)
       return res.status(400).json({
-        error: true,
         status: "error",
         message: "Student with same email already exists",
-        data: {},
+        data: null,
       });
->>>>>>> Dhruv
     const newStudent = await Student.create({
       name,
       email,
@@ -66,23 +49,13 @@ const createStudent = async (req, res) => {
     if (!newStudent)
       return res
         .status(500)
-<<<<<<< HEAD
-        .json({ error: true, message: "Student could not be created" });
-    return res
-      .status(200)
-      .json({ error: false, message: "Student Created succesfully" });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: true, message: "Internal server error" });
-=======
-        .json({ error: true, status: "error", message: "Student could not be created", data: {} ,});
+        .json({ status: "error", message: "Student could not be created", data: null ,});
       return res
         .status(200) 
-        .json({ error: false, status: "success", message: "Student Created successfully", data: {newStudent} ,});
+        .json({ status: "success", message: "Student Created successfully", data: newStudent });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: "error", message: "Internal server error", data: {} });
->>>>>>> Dhruv
+    res.status(500).json({ status: "error", message: "Internal server error", data: null });
   }
 };
 
@@ -93,17 +66,11 @@ const updateStudent = async (req, res) => {
 
     const student = await Student.findById(id);
     if (!student)
-<<<<<<< HEAD
-      return res
-        .status(400)
-        .json({ error: true, message: "No such Student found" });
-=======
       return res.status(400).json({
         status: "error",
         message: "No such Student found",
-        data: {},
+        data: null,
       });
->>>>>>> Dhruv
 
     student.cpi = data.cpi;
     student.interest = data.interest;
@@ -121,19 +88,11 @@ const updateStudent = async (req, res) => {
 
     return res
       .status(200)
-<<<<<<< HEAD
-      .json({ error: false, message: "Account Updated Successfully" });
+      .json({ status: "success", message: "Account Updated Successfully", data: student, });
   } catch (error) {
     return res
       .status(500)
-      .json({ error: true, message: "Some Internal Server error occured" });
-=======
-      .json({ error: false, status: "success", message: "Account Updated Successfully", data: student, });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: true, status: "error" , message: "Some Internal Server error occured" , data: {}, });
->>>>>>> Dhruv
+      .json({ status: "error" , message: "Some Internal Server error occured" , data: null, });
   }
 };
 
@@ -145,69 +104,41 @@ const deleteStudent = async (req, res) => {
     const student = await Student.findById(id);
 
     if (!student)
-<<<<<<< HEAD
-      return res
-        .status(400)
-        .json({ error: true, message: "Student does not exist" });
-
-    if (!student.isPasswordCorrect(password))
-      return res
-        .status(401)
-        .json({
-          error: true,
-          message: "password not correct, unauthorised user",
-        });
-=======
       return res.status(400).json({
         status: "error",
         message: "Student does not exist",
-        data: {},
+        data: null,
       });
 
     if (!student.isPasswordCorrect(password))
       return res.status(401).json({
         status: "error",
         message: "Password not correct, unauthorized user",
-        data: {},
+        data: null,
       });      
->>>>>>> Dhruv
 
     const deletedStudent = await Student.findByIdAndDelete(id);
 
     if (!deletedStudent)
-<<<<<<< HEAD
-      return res
-        .status(500)
-        .json({ error: true, message: " account not deleted" });
-
-    return res
-      .status(201)
-      .json({ error: false, message: "deleted successfully" });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: true, message: "Some Internal Server error occured" });
-=======
       return res.status(500).json({
         status: "error",
         message: "Account not deleted",
-        data: {},
+        data: null,
       });      
 
       return res.status(201).json({
         status: "success",
         message: "Deleted successfully",
-        data: {},
+        data: null,
       });
       
   } catch (error) {
     return res.status(500).json({
       status: "error",
       message: "Some Internal Server error occurred",
-      data: {},
+      data: null,
     });
     
->>>>>>> Dhruv
   }
 };
 
@@ -216,23 +147,10 @@ const getStudentByID = async (req, res) => {
     const id = req.param.id;
     const student = await Student.findById(id).select("-password");
     if (!student)
-<<<<<<< HEAD
-      return res
-        .status(400)
-        .json({ error: true, message: "Student does not exist" });
-
-    return res
-      .status(201)
-      .json({ error: false, message: "student found", data: student });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: true, message: "Some Internal Server error occured" });
-=======
       return res.status(400).json({
         status: "error",
         message: "Student does not exist",
-        data: {},
+        data: null,
       });      
 
       return res.status(201).json({
@@ -245,39 +163,28 @@ const getStudentByID = async (req, res) => {
     return res.status(500).json({
       status: "error",
       message: "Some Internal Server error occurred",
-      data: {},
+      data: null,
     });
     
->>>>>>> Dhruv
   }
 };
 
 const getStudents = async (res, req) => {
   try {
     const student = await Student.find().select("-password").exec();
-<<<<<<< HEAD
-    return res
-      .status(201)
-      .json({ error: false, message: "student found", data: student || [] });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: true, message: "Some Internal Server error occured" });
-=======
     return res.status(201).json({
       status: "success",
       message: "Student found",
-      data: student || [],
+      data: student,
     });
     
   } catch (error) {
     return res.status(500).json({
       status: "error",
       message: "Some Internal Server error occurred",
-      data: {},
+      data: null,
     });
     
->>>>>>> Dhruv
   }
 };
 
@@ -290,40 +197,6 @@ const getStudentsByFilter = async (req, res) => {
       rangeLowerCpi = 0;
       rangeUpperCpi = 100;
     }
-<<<<<<< HEAD
-
-    //using a array to store only such filters whoch are sent to the server. This removes any filter choice that might be null
-    let conditions = [];
-    if (course) conditions.push({ course: course });
-    if (department) conditions.push({ department: department });
-    if (yearofGrad) conditions.push({ yearofGrad: yearofGrad });
-
-    //db query to filter out the students
-    const students = await Student.find({
-      $and: [
-        ...(conditions.length === 0 ? [] : [{ $or: conditions }]),
-        { cpi: { $gte: rangeUpperCpi, $lte: rangeLowerCpi } },
-      ],
-    })
-      .select("-password")
-      .exec();
-
-    return res
-      .status(200)
-      .json({ error: false, message: "Search success", data: students || [] });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: true, message: "Internal Server Error Occured" });
-  }
-};
-
-const getStudentByInterests = async (req, res) => {
-  try {
-    const { reqInterests } = req.body;
-    const students = await Student.find().select("-password").exec();
-
-=======
 
     //using a array to store only such filters whoch are sent to the server. This removes any filter choice that might be null
     let conditions = [];
@@ -362,7 +235,6 @@ const getStudentByInterests = async (req, res) => {
     const { reqInterests } = req.body;
     const students = await Student.find().select("-password").exec();
 
->>>>>>> Dhruv
     let filteredStudents = [];
     students.forEach((student) => {
       const interests = student.interest;
@@ -374,21 +246,7 @@ const getStudentByInterests = async (req, res) => {
       //storing such a stident to the filtered stidents array
       if (interestCheck.length > 0) filteredStudents.push({ student });
     });
-<<<<<<< HEAD
-    return res
-      .status(200)
-      .json({
-        error: false,
-        message: "Search Succesfful",
-        data: filteredStudents || [],
-      });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: true, message: "Internal Server Error Occured" });
-=======
     return res.status(200).json({
-      error: false,
       status: "success",
       message: "Search Successful",
       data: filteredStudents || [],
@@ -401,7 +259,6 @@ const getStudentByInterests = async (req, res) => {
       data: null,
     });
     
->>>>>>> Dhruv
   }
 };
 
@@ -410,46 +267,26 @@ const getStudentsApplicationById = async (req, res) => {
     const id = req.params.id;
     const student = await Student.findById(id).populate("applications").exec();
     if (!student)
-<<<<<<< HEAD
-      return res
-        .status(400)
-        .json({ error: true, message: "Invalid Id", applicationsList: [] });
-    const studentApplicationList = student.applications;
-    return res
-      .status(200)
-      .json({
-        error: false,
-        message: "Success",
-        applicationsList: studentApplicationList || [],
-      });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: true, message: "Some Internal Error Occured" });
-=======
       return res.status(400).json({
-        error: false,
         status: "error",
         message: "Invalid Id",
-        applicationsList: [] ,
+        data: [] ,
       });
       
     const studentApplicationList = student.applications;
     return res.status(200).json({
-      error: false,
       status: "success",
       message: "Success",
-      applicationsList: studentApplicationList || [] ,
+      data: studentApplicationList || [] ,
     });
     
   } catch (error) {
     return res.status(500).json({
       status: "error",
       message: "Some Internal Error Occurred",
-      data: {},
+      data: null,
     });
     
->>>>>>> Dhruv
   }
 };
 
@@ -463,34 +300,11 @@ const addStudentsApplications = async (req, res) => {
       Student.findById(id),
       Updates.findById(internId),
     ]);
-<<<<<<< HEAD
-    if (!student)
-      return res
-        .status(401)
-        .json({ error: true, message: "Invalid Student Id" });
-    if (!intern)
-      return res
-        .status(401)
-        .json({ error: true, message: "Invalid Intern Id" });
-
-    //checking if the student had already applied ti this intern
-    const applicationsList = student.applications;
-    if (applicationsList.includes(internId))
-      return res.status(400).json({ error: true, message: "Already applied" });
-
-    student.applications.push(intern._id);
-    await student.save({ validateBeforeSave: false });
-    return res.status(200).json({ error: false, message: "Intern Applied" });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ error: true, message: "Internal Server Error Occured" });
-=======
     if (!student) {
       return res.status(401).json({
         status: "error",
         message: "Invalid Student Id",
-        data: {},
+        data: null,
       });
     }
     
@@ -498,7 +312,7 @@ const addStudentsApplications = async (req, res) => {
       return res.status(401).json({
         status: "error",
         message: "Invalid Intern Id",
-        data: {},
+        data: null,
       });
     }
 
@@ -506,29 +320,26 @@ const addStudentsApplications = async (req, res) => {
     const applicationsList = student.applications;
     if (applicationsList.includes(internId)) {
       return res.status(400).json({
-        error: true,
         status: "error",
         message: "Already applied",
-        data: {},
+        data: null,
       });
     }
 
     student.applications.push(intern._id);
     await student.save({ validateBeforeSave: false });
     return res.status(200).json({
-      error: false,
       status: "success",
       message: "Intern Applied",
-      data: {},
+      data: null,
     });
   } catch (error) {
     return res.status(500).json({
       status: "error",
       message: "Internal Server Error Occurred",
-      data: {},
+      data: null,
     });
     
->>>>>>> Dhruv
   }
 };
 
