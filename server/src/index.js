@@ -11,7 +11,7 @@ import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
 import { setupSwagger } from "./config/swagger_config.js";
 import cors from "cors";
-import jobRouter from "./recruiter/routes/Jobs.js";
+import jobRouter from "./recruiter/routes/jobs.js";
 import logger from "./utils/logger.js";
 
 

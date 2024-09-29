@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     refPath: "typeOfUser",
   },
+  savedJobs: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Jobs", // Assuming you have a 'Job' model
+  }],
 });
 
 export const User = mongoose.model("User", UserSchema);
