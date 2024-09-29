@@ -1,5 +1,5 @@
 import React from "react";
-import TopNav from "./components/TopNav";
+import TopNav from "../root-components/TopNav";
 import LeftNav from "./components/LeftNav";
 import { Outlet } from "react-router-dom";
 

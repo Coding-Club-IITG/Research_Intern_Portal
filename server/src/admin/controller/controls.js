@@ -8,7 +8,6 @@ export const verifyRecruiter = async (req, res) => {
   const { id } = req.body;
   try {
     const recruiter = await Recruiter.findById(id);
-
     if (!recruiter) {
         logger.warn(`Attempt to verify recruiter with ID ${id} failed: Recruiter not found`);
       return res.status(404).json({

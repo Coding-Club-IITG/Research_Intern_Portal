@@ -23,7 +23,11 @@
 const getJob = async (req, res) => {
   try {
     const getAllJobs = await Jobs.find();
-    return res.status(200).json(getAllJobs);
+    return res.status(200).json({
+      status: "success",
+      message: "Recruiters retrieved successfully",
+      data: getAllJobs,
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Server Error", error: error.message });

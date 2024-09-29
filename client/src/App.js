@@ -4,8 +4,7 @@ import ClientRoutes from "./routes";
 function App() {
   return (
     <div className="App">
-      <ThemeToggle />
-      <ClientRoutes />
+        <ClientRoutes />
     </div>
   );
 }

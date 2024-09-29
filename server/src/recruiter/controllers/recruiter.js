@@ -7,7 +7,6 @@ import logger from "../../utils/logger.js";
 const createRecuiter = async (req, res) => {
   try {
     const { name, email } = req.body;
-    // const hashpassword = await bcrypt.hash(password, 10);
     const recruiter = await Recruiter.create({ name, email });
     logger.info(`Recruiter created successfully with ID ${recruiter?._id}`);
     return res.status(201).json({ status: "success", message: "Recruiter created successfully", data: recruiter });
