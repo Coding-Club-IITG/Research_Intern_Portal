@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { roles } from "../../utils/roles.js";
 import { createUser, getUserFromToken } from "../../users/controller.js";
 import { User } from "../../users/model.js";
+import logger from "../../utils/logger.js";
 dotenv.config();
 
 export const onedriveLogin = async (req, res) => {
@@ -23,11 +24,14 @@ export const onedriveLogin = async (req, res) => {
         scope: "https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/User.Read offline_access",
         state: req.body.role, // we have to change this
       });
-      console.log(authUrl)
+      // console.log(authUrl)
+      logger.info(`${authUrl}`);
     res.redirect(authUrl);
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
+    logger.err(err);
+    res
+      .status(500)
+      .json({ status: "error", message: "Internal Server Error", data: null });
   }
 };
 
@@ -128,11 +132,17 @@ export const onedriveRedirect = async (req, res) => {
         break;
 
       default:
-        res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
+        res
+          .status(500)
+          .json({
+            status: "error",
+            message: "Internal Server Error",
+            data: null,
+          });
         break;
     }
   } catch (err) {
-    console.error("Error:", err);
+    logger.error(err);
     res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
   }
 };

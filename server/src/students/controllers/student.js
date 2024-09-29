@@ -1,6 +1,6 @@
 import Student from "../models/student.js";
 import Updates from "../../admin/models/updates.js";
-
+import logger from "../../utils/logger.js";
 const createStudent = async (req, res) => {
   try {
     const {
@@ -19,7 +19,7 @@ const createStudent = async (req, res) => {
       [name, email, password, rollNo, course, department, cpi, yearOfGrad].some(
         (field) => {
           field !== null && field !== "";
-        },
+        }
       )
     ) {
       return res.status(400).json({
@@ -49,13 +49,24 @@ const createStudent = async (req, res) => {
     if (!newStudent)
       return res
         .status(500)
-        .json({ status: "error", message: "Student could not be created", data: null ,});
-      return res
-        .status(200) 
-        .json({ status: "success", message: "Student Created successfully", data: newStudent });
+        .json({
+          status: "error",
+          message: "Student could not be created",
+          data: null,
+        });
+    logger.info(`student created successfully with id ${newStudent.id}`);
+    return res
+      .status(200)
+      .json({
+        status: "success",
+        message: "Student Created successfully",
+        data: newStudent,
+      });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ status: "error", message: "Internal server error", data: null });
+    logger.error(error);
+    res
+      .status(500)
+      .json({ status: "error", message: "Internal server error", data: null });
   }
 };
 
@@ -85,14 +96,22 @@ const updateStudent = async (req, res) => {
     student.updatedAt = Date.now();
 
     await student.save({ validateBeforeSave: false });
-
+    logger.info(`Student updated successfully with ID ${id}`);
     return res
       .status(200)
-      .json({ status: "success", message: "Account Updated Successfully", data: student, });
+      .json({
+        status: "success",
+        message: "Account Updated Successfully",
+        data: student,
+      });
   } catch (error) {
     return res
       .status(500)
-      .json({ status: "error" , message: "Some Internal Server error occured" , data: null, });
+      .json({
+        status: "error",
+        message: "Some Internal Server error occured",
+        data: null,
+      });
   }
 };
 
@@ -115,7 +134,7 @@ const deleteStudent = async (req, res) => {
         status: "error",
         message: "Password not correct, unauthorized user",
         data: null,
-      });      
+      });
 
     const deletedStudent = await Student.findByIdAndDelete(id);
 
@@ -124,67 +143,62 @@ const deleteStudent = async (req, res) => {
         status: "error",
         message: "Account not deleted",
         data: null,
-      });      
-
-      return res.status(201).json({
-        status: "success",
-        message: "Deleted successfully",
-        data: null,
       });
-      
+    logger.info(`Student deleted successfully with ID ${id}`);
+    return res.status(201).json({
+      status: "success",
+      message: "Deleted successfully",
+      data: null,
+    });
   } catch (error) {
     return res.status(500).json({
       status: "error",
       message: "Some Internal Server error occurred",
       data: null,
     });
-    
   }
 };
 
 const getStudentByID = async (req, res) => {
   try {
-    const id = req.param.id;
+    const id = req.params.id;
     const student = await Student.findById(id).select("-password");
     if (!student)
       return res.status(400).json({
         status: "error",
         message: "Student does not exist",
         data: null,
-      });      
-
-      return res.status(201).json({
-        status: "success",
-        message: "Student found",
-        data: student,
       });
-      
+    logger.info(`Student found with ID ${id}`);
+    return res.status(201).json({
+      status: "success",
+      message: "Student found",
+      data: student,
+    });
   } catch (error) {
     return res.status(500).json({
       status: "error",
       message: "Some Internal Server error occurred",
       data: null,
     });
-    
   }
 };
 
 const getStudents = async (res, req) => {
   try {
     const student = await Student.find().select("-password").exec();
+    logger.info(`Retrieved ${student.length} students from the database`);
     return res.status(201).json({
       status: "success",
       message: "Student found",
       data: student,
     });
-    
   } catch (error) {
     return res.status(500).json({
       status: "error",
       message: "Some Internal Server error occurred",
       data: null,
     });
-    
   }
 };
 
@@ -213,20 +227,18 @@ const getStudentsByFilter = async (req, res) => {
     })
       .select("-password")
       .exec();
-
-      return res.status(200).json({
-        status: "success",
-        message: "Search success",
-        data: students || [],
-      });
-      
+    logger.info(`Filtered students retrieved`);
+    return res.status(200).json({
+      status: "success",
+      message: "Search success",
+      data: students || [],
+    });
   } catch (error) {
     return res.status(500).json({
       status: "error",
       message: "Internal Server Error Occurred",
       data: null,
     });
-    
   }
 };
 
@@ -251,14 +263,13 @@ const getStudentByInterests = async (req, res) => {
       message: "Search Successful",
       data: filteredStudents || [],
     });
-      
   } catch (error) {
+    logger.error(error);
     return res.status(500).json({
       status: "error",
       message: "Internal Server Error Occurred",
       data: null,
     });
-    
   }
 };
 
@@ -270,23 +281,22 @@ const getStudentsApplicationById = async (req, res) => {
       return res.status(400).json({
         status: "error",
         message: "Invalid Id",
-        data: [] ,
+        data: [],
       });
-      
+
     const studentApplicationList = student.applications;
     return res.status(200).json({
       status: "success",
       message: "Success",
-      data: studentApplicationList || [] ,
+      data: studentApplicationList || [],
     });
-    
   } catch (error) {
+    logger.error(error);
     return res.status(500).json({
       status: "error",
       message: "Some Internal Error Occurred",
       data: null,
     });
-    
   }
 };
 
@@ -307,7 +317,7 @@ const addStudentsApplications = async (req, res) => {
         data: null,
       });
     }
-    
+
     if (!intern) {
       return res.status(401).json({
         status: "error",
@@ -334,12 +344,12 @@ const addStudentsApplications = async (req, res) => {
       data: null,
     });
   } catch (error) {
+    logger.error(error);
     return res.status(500).json({
       status: "error",
       message: "Internal Server Error Occurred",
       data: null,
     });
-    
   }
 };
 

@@ -12,7 +12,7 @@ import cookieParser from "cookie-parser";
 import { setupSwagger } from "./config/swagger_config.js";
 import cors from "cors";
 import jobRouter from "./recruiter/routes/Jobs.js";
-
+import logger from "./utils/logger.js";
 
 
 
@@ -46,7 +46,8 @@ app.get("/ping", (req, res) => {
 app.use(errorHandler);
 app.listen(data.PORT, async () => {
   await connectToDb();
-  console.log(`Server is running on ${data.PORT}`);
+  logger.info(`Server is running on ${data.PORT}`);
+  // console.log(`Server is running on ${data.PORT}`);
 });
 
 

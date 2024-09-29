@@ -2,8 +2,12 @@ import { User } from "./model.js";
 import Recruiter from "../recruiter/models/jobs.js";
 import { roles } from "../utils/roles.js";
 import { Student } from "../students/models/student.js";
+
+import logger from "../utils/logger.js";
+import Admin from "../admin/models/updates.js"
 import axios from "axios";
 // import Admin from "../admin/models/updates.js"
+
 
 export const createUser = async (data) => {
   try {
@@ -40,7 +44,7 @@ export const createUser = async (data) => {
       typeOfUser,
       connection_id: user._id,
     });
-
+    logger.info(`an app user of type ${typeOfUser} is created succesfully`)
     return appUser;
   } catch (error) {
     throw error;
@@ -68,7 +72,8 @@ export const getUserFromToken = async function (accessToken) {
 
     return userData;
   } catch (error) {
-    console.error("Error fetching user information:", error);
+    logger.error(`Error fetching user information: ${error}`);
+    // console.error("Error fetching user information:", error);
     return null;
   }
 };
