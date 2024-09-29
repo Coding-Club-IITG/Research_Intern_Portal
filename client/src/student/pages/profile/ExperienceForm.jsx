@@ -2,19 +2,21 @@ import { Button, Checkbox } from "antd";
 import ExperienceDate from "./ExperienceDate";
 import { useState } from "react";
 
-function ExperienceForm({ profile, setAddExp, updateProfile }) {
+function ExperienceForm({ setAddExp, updateProfileExperience }) {
   const [isWorking, setIsWorking] = useState(false);
   const [formData, setFormData] = useState({
-    name: profile.name || "",
-    role: profile.role || "",
-    description: profile.description || "",
-    startDate: profile.startDate || "",
-    endDate: profile.endDate || "",
+    name: "",
+    role: "",
+    description: "",
+    startDate: "",
+    endDate: "",
   });
 
   const onChange = (e) => {
     setIsWorking(e.target.checked);
     if (e.target.checked) {
+      setFormData({ ...formData, endDate: "Present" });
+    } else {
       setFormData({ ...formData, endDate: "" });
     }
   };
@@ -29,12 +31,33 @@ function ExperienceForm({ profile, setAddExp, updateProfile }) {
   };
 
   const handleSubmit = () => {
-    updateProfile(formData);
+    if (!formData.name) {
+      alert("Please enter the name of the organisation.");
+      return;
+    }
+    if (!formData.role) {
+      alert("Please enter your role.");
+      return;
+    }
+    if (!formData.startDate) {
+      alert("Please select a start date.");
+      return;
+    }
+    if (!formData.description) {
+      alert("Please enter a description.");
+      return;
+    }
+    if (!isWorking && !formData.endDate) {
+      alert("Please select an end date.");
+      return;
+    }
+
+    updateProfileExperience(formData);
     setAddExp(false);
   };
 
   return (
-    <form className="bg-gray-50 w-full p-4">
+    <div className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-300 w-full">
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">
           Name Of Organisation
@@ -45,6 +68,7 @@ function ExperienceForm({ profile, setAddExp, updateProfile }) {
           value={formData.name}
           onChange={handleInputChange}
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="Enter the name of the organisation"
         />
       </div>
       <div className="mb-4">
@@ -55,6 +79,7 @@ function ExperienceForm({ profile, setAddExp, updateProfile }) {
           value={formData.role}
           onChange={handleInputChange}
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder="e.g. Software Engineer"
         />
       </div>
       <div className="flex space-between gap-4 flex-wrap">
@@ -65,6 +90,7 @@ function ExperienceForm({ profile, setAddExp, updateProfile }) {
           <ExperienceDate
             date={formData.startDate}
             onChange={(date) => setFormData({ ...formData, startDate: date })}
+            placeholder="Select start date"
           />
         </div>
         {!isWorking && (
@@ -75,6 +101,7 @@ function ExperienceForm({ profile, setAddExp, updateProfile }) {
             <ExperienceDate
               date={formData.endDate}
               onChange={(date) => setFormData({ ...formData, endDate: date })}
+              placeholder="Select end date"
             />
           </div>
         )}
@@ -92,7 +119,7 @@ function ExperienceForm({ profile, setAddExp, updateProfile }) {
           onChange={handleInputChange}
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           rows="8"
-          placeholder="Write your bio here"
+          placeholder="Write a brief description of your role and responsibilities"
         />
       </div>
       <div className="flex gap-4">
@@ -105,7 +132,7 @@ function ExperienceForm({ profile, setAddExp, updateProfile }) {
           Save
         </Button>
       </div>
-    </form>
+    </div>
   );
 }
 
