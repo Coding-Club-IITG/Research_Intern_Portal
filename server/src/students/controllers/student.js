@@ -49,6 +49,7 @@ const createStudent = async (req, res) => {
       return res
         .status(500)
         .json({ error: true, message: "Student could not be created" });
+        logger.info(`student created successfully with id ${newStudent.id}`)
     return res
       .status(200)
       .json({ error: false, message: "Student Created succesfully" });
@@ -83,7 +84,7 @@ const updateStudent = async (req, res) => {
     student.updatedAt = Date.now();
 
     await student.save({ validateBeforeSave: false });
-
+    logger.info(`Student updated successfully with ID ${id}`);
     return res
       .status(200)
       .json({ error: false, message: "Account Updated Successfully" });
@@ -121,6 +122,8 @@ const deleteStudent = async (req, res) => {
         .status(500)
         .json({ error: true, message: " account not deleted" });
 
+        logger.info(`Student deleted successfully with ID ${id}`);
+
     return res
       .status(201)
       .json({ error: false, message: "deleted successfully" });
@@ -133,12 +136,14 @@ const deleteStudent = async (req, res) => {
 
 const getStudentByID = async (req, res) => {
   try {
-    const id = req.param.id;
+    const id = req.params.id;
     const student = await Student.findById(id).select("-password");
     if (!student)
       return res
         .status(400)
         .json({ error: true, message: "Student does not exist" });
+
+        logger.info(`Student found with ID ${id}`);
 
     return res
       .status(201)
@@ -153,6 +158,9 @@ const getStudentByID = async (req, res) => {
 const getStudents = async (res, req) => {
   try {
     const student = await Student.find().select("-password").exec();
+
+    logger.info(`Retrieved ${student.length} students from the database`);
+
     return res
       .status(201)
       .json({ error: false, message: "student found", data: student || [] });
@@ -188,7 +196,7 @@ const getStudentsByFilter = async (req, res) => {
     })
       .select("-password")
       .exec();
-
+      logger.info(`Filtered students retrieved`);
     return res
       .status(200)
       .json({ error: false, message: "Search success", data: students || [] });
@@ -223,6 +231,7 @@ const getStudentByInterests = async (req, res) => {
         data: filteredStudents || [],
       });
   } catch (error) {
+    logger.error(error);
     return res
       .status(500)
       .json({ error: true, message: "Internal Server Error Occured" });
@@ -246,6 +255,7 @@ const getStudentsApplicationById = async (req, res) => {
         applicationsList: studentApplicationList || [],
       });
   } catch (error) {
+    logger.error(error);
     return res
       .status(500)
       .json({ error: true, message: "Some Internal Error Occured" });
@@ -280,6 +290,7 @@ const addStudentsApplications = async (req, res) => {
     await student.save({ validateBeforeSave: false });
     return res.status(200).json({ error: false, message: "Intern Applied" });
   } catch (error) {
+    logger.error(error);
     return res
       .status(500)
       .json({ error: true, message: "Internal Server Error Occured" });

@@ -6,9 +6,9 @@ import logger from "../../utils/logger.js";
 export const getAllStudents = async (req, res) => {
   try {
     const students = await Student.find();
+    logger.info(`Fetched all students. Total students: ${students.length}`);
     res.status(200).json(students);
   } catch (error) {
-    // console.log(error);
     logger.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
@@ -17,9 +17,9 @@ export const getAllStudents = async (req, res) => {
 export const getAllRecruiters = async (req, res) => {
   try {
     const recruiters = await Recruiter.find();
+    logger.info(`Fetched all recruiters. Total recruiters: ${recruiters.length}`);
     res.status(200).json(recruiters);
   } catch (error) {
-    // console.log(error);
     logger.error(error);
     res.status(500).json({ message: "Internal server error" });
   }
@@ -35,9 +35,10 @@ export const allStudentsAppliedForJobs = async (req, res) => {
         students.push(allJobs[i].applicants[j]);
       }
     }
+
+    logger.info(`Fetched all students who applied for jobs. Total students: ${students.length}`);
     res.status(200).json(students);
   } catch (error) {
-    // console.log(error);
     logger.error(error);
     res.status(500).json({ message: "Internal server error" });
   }

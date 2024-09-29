@@ -3,7 +3,8 @@ import Recruiter from "../recruiter/models/jobs.js";
 import { roles } from "../utils/roles.js";
 import { Student } from "../students/models/student.js";
 import logger from "../utils/logger.js";
-// import Admin from "../admin/models/updates.js"
+import Admin from "../admin/models/updates.js"
+import axios from 'axios';
 
 export const createUser = async (data) => {
   try {
@@ -40,7 +41,7 @@ export const createUser = async (data) => {
       typeOfUser,
       connection_id: user._id,
     });
-
+    logger.info(`an app user of type ${typeOfUser} is created succesfully`)
     return appUser;
   } catch (error) {
     throw error;

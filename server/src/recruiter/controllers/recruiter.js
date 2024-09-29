@@ -9,9 +9,10 @@ const createRecuiter = async (req, res) => {
     const { name, email } = req.body;
     // const hashpassword = await bcrypt.hash(password, 10);
     const recruiter = await Recruiter.create({ name, email });
+    logger.info(`Recruiter created successfully with ID ${recruiter?._id}`);
     return res.status(201).json(recruiter);
   } catch (err) {
-    logger.error(err);
+    logger.error(`error creating recruiter ${err}`);
     // console.log(err);
     res.status(500).json({ message: "Internal server error" });
   }
@@ -20,10 +21,11 @@ const createRecuiter = async (req, res) => {
 const getRecruiters = async (req, res) => {
   try {
     const recruiters = await Recruiter.find();
+    logger.info(`Retrieved ${recruiters.length} recruiters from the database`);
     return res.status(200).json(recruiters);
   } catch (err) {
     // console.log(err);
-    logger.error(err);
+    logger.error(`error retrieving recruiters ${err}`);
     res.status(500).json({ message: "Internal server error" });
   }
 };
@@ -32,6 +34,7 @@ const getRecruiterById = async (req, res) => {
   try {
     const { id } = req.params;
     const recruiter = await Recruiter.findById(id);
+    logger.info(`Recruiter found with ID ${id}`);
     return res.status(200).json(recruiter);
   } catch (err) {
     logger.error(err);
@@ -65,7 +68,7 @@ const updateRecruiter = async (req, res) => {
     if (!recruiter) {
       throw new NotFound(`No recruiter with id ${id}`);
     }
-
+    logger.info(`Recruiter updated successfully with ID ${id}`);
     res.status(200).json({ recruiter });
   } catch (err) {
     // console.log(err);
@@ -78,6 +81,7 @@ const deleteRecruiter = async (req, res) => {
   try {
     const { id } = req.params;
     await Recruiter.findByIdAndDelete(id);
+    logger.info(`Recruiter deleted successfully with ID ${id}`);
     return res.status(200).json({ message: "Recruiter deleted successfully" });
   } catch (err) {
     // console.log(err);
