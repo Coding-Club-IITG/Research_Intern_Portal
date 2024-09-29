@@ -6,7 +6,6 @@ import NotFound from "../../errors/Notfound.js"
 const createRecuiter = async (req, res) => {
   try {
     const { name, email } = req.body;
-    // const hashpassword = await bcrypt.hash(password, 10);
     const recruiter = await Recruiter.create({ name, email });
     return res.status(201).json({ status: "success", message: "Recruiter created successfully", data: recruiter });
   } catch (err) {

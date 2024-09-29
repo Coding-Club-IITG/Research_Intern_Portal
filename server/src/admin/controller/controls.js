@@ -6,7 +6,6 @@ export const verifyRecruiter = async (req, res) => {
   try {
     const { id } = req.body;
     const recruiter = await Recruiter.findById(id);
-
     if (!recruiter) {
       return res.status(404).json({
         status: "error",

@@ -1,4 +1,6 @@
 import React from "react";
+import ThemeToggle from "../pages/ThemeToggle";
+import NotificationBell from "../pages/Notifications";
 
 const TopNav = () => {
   return (
@@ -6,9 +8,13 @@ const TopNav = () => {
       <div className="text-xl font-bold">Research Intern Portal IIT Guwahati</div>
       <div className="flex space-x-6">
         <div className="cursor-pointer">Home</div>
-        <div className="cursor-pointer">Profile</div>
-        <div className="cursor-pointer">Drives</div>
-        <div className="cursor-pointer">Applied</div>
+        <div className="cursor-pointer">Logout</div>
+        <div className="cursor-pointer">
+            <ThemeToggle/>
+        </div>
+        <div className="cursor-pointer">
+            <NotificationBell/>
+        </div>
       </div>
     </div>
   );
