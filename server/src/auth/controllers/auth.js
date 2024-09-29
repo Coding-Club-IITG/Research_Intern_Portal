@@ -26,9 +26,10 @@ export const onedriveLogin = async (req, res) => {
       });
     res.redirect(authUrl);
   } catch (err) {
-    // console.log(err);
     logger.err(err);
-    res.status(500).json({ message: "Internal Server Error" });
+    res
+      .status(500)
+      .json({ status: "error", message: "Internal Server Error", data: null });
   }
 };
 
@@ -101,11 +102,16 @@ export const onedriveRedirect = async (req, res) => {
             typeOfUser: roles.STUDENT,
           });
           // console.log(user);
-          logger.info(user);
+          logger.info(user.name);
         } catch (error) {
-          // console.log(error);
           logger.error(error);
-          res.status(500).json({ message: "Internal Server Error" });
+          res
+            .status(500)
+            .json({
+              status: "error",
+              message: "Internal Server Error",
+              data: null,
+            });
         }
         res.redirect("http://localhost:3000/student/");
         break;
@@ -118,11 +124,16 @@ export const onedriveRedirect = async (req, res) => {
             typeOfUser: roles.RECRUITER,
           });
           // console.log(user);
-          logger.info(user);
+          logger.info(user.name);
         } catch (error) {
-          // console.log(error);
           logger.error(error);
-          res.status(500).json({ message: "Internal Server Error" });
+          res
+            .status(500)
+            .json({
+              status: "error",
+              message: "Internal Server Error",
+              data: null,
+            });
         }
         res.redirect("http://localhost:3000/recruiter/");
         break;
@@ -135,22 +146,34 @@ export const onedriveRedirect = async (req, res) => {
             typeOfUser: roles.ADMIN,
           });
           // console.log(user);
-          logger.info(user);
+          logger.info(user.name);
         } catch (error) {
-          // console.log(error);
           logger.error(error);
-          res.status(500).json({ message: "Internal Server Error" });
+          res
+            .status(500)
+            .json({
+              status: "error",
+              message: "Internal Server Error",
+              data: null,
+            });
         }
         res.redirect("http://localhost:3000/admin/");
         break;
 
       default:
-        res.status(500).json({ message: "Internal Server Error" });
+        res
+          .status(500)
+          .json({
+            status: "error",
+            message: "Internal Server Error",
+            data: null,
+          });
         break;
     }
   } catch (err) {
-    // console.log(err);
     logger.error(err);
-    res.status(500).json({ message: "Internal Server Error" });
+    res
+      .status(500)
+      .json({ status: "error", message: "Internal Server Error", data: null });
   }
 };

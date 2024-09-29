@@ -7,21 +7,39 @@ export const getAllStudents = async (req, res) => {
   try {
     const students = await Student.find();
     logger.info(`Fetched all students. Total students: ${students.length}`);
-    res.status(200).json(students);
+    res.status(200).json({
+      status: "success",
+      message: "Students retrieved successfully",
+      data: students,
+    });
   } catch (error) {
     logger.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: null,
+    });
   }
 };
 
 export const getAllRecruiters = async (req, res) => {
   try {
     const recruiters = await Recruiter.find();
-    logger.info(`Fetched all recruiters. Total recruiters: ${recruiters.length}`);
-    res.status(200).json(recruiters);
+    logger.info(
+      `Fetched all recruiters. Total recruiters: ${recruiters.length}`
+    );
+    res.status(200).json({
+      status: "success",
+      message: "Recruiters retrieved successfully",
+      data: recruiters,
+    });
   } catch (error) {
     logger.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: null,
+    });
   }
 };
 
@@ -35,11 +53,20 @@ export const allStudentsAppliedForJobs = async (req, res) => {
         students.push(allJobs[i].applicants[j]);
       }
     }
-
-    logger.info(`Fetched all students who applied for jobs. Total students: ${students.length}`);
-    res.status(200).json(students);
+    logger.info(
+      `Fetched all students who applied for jobs. Total students: ${students.length}`
+    );
+    res.status(200).json({
+      status: "success",
+      message: "Students who applied for jobs retrieved successfully",
+      data: students,
+    });
   } catch (error) {
     logger.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({
+      status: "error",
+      message: "Internal server error",
+      data: null,
+    });
   }
 };

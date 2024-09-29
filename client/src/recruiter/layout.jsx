@@ -1,12 +1,20 @@
 import React from "react";
-const ProfessorLayout = ({ children }) => {
+import TopNav from "./components/TopNav";
+import LeftNav from "./components/LeftNav";
+import { Outlet } from "react-router-dom";
+
+const AppLayout = () => {
   return (
-    <div className="professor-layout">
-      <header>Professor Header</header>
-      <main>{children}</main>
-      <footer>Professor Footer</footer>
+    <div className="flex flex-col h-screen">
+      <TopNav />
+      <div className="flex flex-grow gap-1">
+        <LeftNav />
+        <div className="flex-1 pl-4 pr-4">
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ProfessorLayout;
+export default AppLayout;
