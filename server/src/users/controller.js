@@ -77,3 +77,29 @@ export const getUserFromToken = async function (accessToken) {
     return null;
   }
 };
+
+/**
+ * @param {String} userId
+ * @returns {Array} savedJobs ids
+ */
+export const getSavedJobs = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    // Find the user by ID and populate the saved jobs
+    const user = await User.findById(userId).populate("savedJobs");
+
+    if (!user) {
+      logger.error(`User with ID ${userId} not found`);
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Return the populated saved jobs
+    logger.info(`Saved jobs fetched successfully for user ${userId} and returned a total of ${user.savedJobs.length} saved jobs`);
+    return res.status(200).json({ savedJobs: user.savedJobs });
+  } catch (error) {
+    logger.error(`Error fetching saved jobs: ${error}`);
+    // console.error("Error fetching saved jobs:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
