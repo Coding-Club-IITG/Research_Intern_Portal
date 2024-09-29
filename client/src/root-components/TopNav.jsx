@@ -4,7 +4,7 @@ import NotificationBell from "../pages/Notifications";
 
 const TopNav = () => {
   return (
-    <div className="flex items-center justify-between bg-white border p-4">
+    <div className="flex items-center justify-between bg-white border p-4 h-full">
       <div className="text-xl font-bold">Research Intern Portal IIT Guwahati</div>
       <div className="flex space-x-6">
         <div className="cursor-pointer">Home</div>
