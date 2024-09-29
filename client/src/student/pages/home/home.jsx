@@ -1,8 +1,17 @@
 import { Button } from "antd";
+import { useFetch } from "../../../hooks/useFetch";
+import Skeleton from "./skeleton";
+import InternalServerErrorPage from "../../../errors/InternalServerErrorPage";
 
 export default function StudentHome() {
   const recommendedJobs = [];
   const appliedJobs = [];
+
+  const { data, loading, error } = useFetch("https://jsonplaceholder.typicode.com/todos/1");
+
+  if (loading) return <Skeleton />
+  console.log(data);
+
   return (
     <div className="w-full min-h-screen flex flex-col gap-4 items-center py-8">
       <div className="w-[80%] p-8 h-fit rounded-lg border border-gray-400">

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Loading from "../pages/Loading";
 import { useNavigate } from "react-router-dom";
 
 export function useFetch(url) {
@@ -17,21 +16,12 @@ export function useFetch(url) {
         setData(response.data);
       } catch (err) {
         setError(err);
+        navigate("/500");
       } finally {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [url, navigate]);
 
-  if (error) {
-    navigate("/500");
-    return null;
-  }
-
-  return (
-    <>
-      {loading && <Loading />}
-      {data && <div>{JSON.stringify(data)}</div>}
-    </>
-  );
+  return { data, loading, error };
 }
