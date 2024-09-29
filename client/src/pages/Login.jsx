@@ -41,7 +41,7 @@ const LoginPage = () => {
           <p className="text-slate-800 text-sm">Admin Login</p>
           <p className="text-blue-600 text-sm">Facebook</p>
           <p className="text-blue-600 text-sm">Instagram</p>
-          <p className="text-blue-600 text-sm">Home</p>
+          <p className="text-blue-600 text-sm">Coding Club</p>
         </div>
       </div>
       <div className="w-[50%] p-16 h-full bg-slate-100 md:flex items-center justify-center relative hidden ">
