@@ -4,7 +4,7 @@ function ExperienceCard({ experience, onDelete }) {
     name = "Organization not specified",
     startDate = "Start date not specified",
     endDate = "End date not specified",
-    description = "Description not specified",
+    description = "Description not specified"
   } = experience;
 
   return (
@@ -16,8 +16,7 @@ function ExperienceCard({ experience, onDelete }) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="size-10 border-2 border-gray-500 mt-2 mr-4 p-1 w-10 h-10"
-        >
+          className="size-10 border-2 border-gray-500 mt-2 mr-4 p-1 w-10 h-10">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -39,8 +38,7 @@ function ExperienceCard({ experience, onDelete }) {
         <button
           className="text-red-500 hover:underline ml-4"
           onClick={onDelete}
-          aria-label={`Delete experience at ${name}`}
-        >
+          aria-label={`Delete experience at ${name}`}>
           Delete
         </button>
       </div>

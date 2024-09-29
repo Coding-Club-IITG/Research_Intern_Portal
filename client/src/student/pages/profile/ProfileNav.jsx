@@ -10,9 +10,7 @@ const App = () => {
             <NavLink
               to="overview"
               className={({ isActive }) =>
-                isActive
-                  ? "text-blue-700 border-b-2 pb-2 border-blue-700"
-                  : "text-gray-600"
+                isActive ? "text-blue-700 border-b-2 pb-2 border-blue-700" : "text-gray-600"
               }
               exact
             >
@@ -23,9 +21,7 @@ const App = () => {
             <NavLink
               to={`edit`}
               className={({ isActive }) =>
-                isActive
-                  ? "text-blue-700 border-b-2 pb-2 border-blue-700"
-                  : "text-gray-600"
+                isActive ? "text-blue-700 border-b-2 pb-2 border-blue-700" : "text-gray-600"
               }
             >
               Edit Profile
@@ -35,9 +31,7 @@ const App = () => {
             <NavLink
               to={`resume`}
               className={({ isActive }) =>
-                isActive
-                  ? "text-blue-700 border-b-2 pb-2 border-blue-700"
-                  : "text-gray-600"
+                isActive ? "text-blue-700 border-b-2 pb-2 border-blue-700" : "text-gray-600"
               }
             >
               Resume/CV

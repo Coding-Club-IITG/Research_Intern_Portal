@@ -5,10 +5,7 @@ const ThemeToggle = () => {
   const [theme, toggleTheme] = useTheme();
 
   return (
-    <div
-      onClick={toggleTheme}
-      className="cursor-pointer fixed bottom-4 right-4"
-    >
+    <div onClick={toggleTheme} className="cursor-pointer fixed bottom-4 right-4">
       {theme === "light" ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"

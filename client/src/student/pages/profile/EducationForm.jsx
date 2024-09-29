@@ -8,7 +8,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
     description: "",
     startDate: null,
     endDate: null,
-    grade: "",
+    grade: ""
   });
 
   const handleInputChange = (e) => {
@@ -32,9 +32,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
   return (
     <form className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-300">
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
-          Name Of Institute
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Name Of Institute</label>
         <input
           type="text"
           name="name"
@@ -47,9 +45,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
 
       <div className="flex space-between gap-4 flex-wrap">
         <div className="mb-4 grow shrink basis-32">
-          <label className="block text-sm font-medium text-gray-700">
-            Degree (Field Of Study)
-          </label>
+          <label className="block text-sm font-medium text-gray-700">Degree (Field Of Study)</label>
           <input
             type="text"
             name="role"
@@ -60,9 +56,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
           />
         </div>
         <div className="mb-4 grow shrink basis-32">
-          <label className="block text-sm font-medium text-gray-700 pb-2">
-            Start Year
-          </label>
+          <label className="block text-sm font-medium text-gray-700 pb-2">Start Year</label>
           <DatePicker
             className="grow shrink w-full"
             picker="year"
@@ -71,9 +65,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
           />
         </div>
         <div className="mb-4 grow shrink basis-32">
-          <label className="block text-sm font-medium text-gray-700 pb-2">
-            End Year
-          </label>
+          <label className="block text-sm font-medium text-gray-700 pb-2">End Year</label>
           <DatePicker
             className="grow shrink w-full"
             picker="year"
@@ -84,9 +76,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
-          Percentage / CGPA
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Percentage / CGPA</label>
         <input
           type="text"
           name="grade"
@@ -98,9 +88,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
-          Description
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Description</label>
         <textarea
           name="description"
           value={formData.description}
@@ -113,11 +101,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
 
       <div className="flex gap-4">
         <Button onClick={handleCancel}>Cancel</Button>
-        <Button
-          type="primary"
-          className="bg-blue-600 text-white"
-          onClick={handleSubmit}
-        >
+        <Button type="primary" className="bg-blue-600 text-white" onClick={handleSubmit}>
           Save
         </Button>
       </div>

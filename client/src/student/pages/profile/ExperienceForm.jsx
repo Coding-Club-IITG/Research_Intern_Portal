@@ -9,7 +9,7 @@ function ExperienceForm({ setAddExp, updateProfileExperience }) {
     role: "",
     description: "",
     startDate: "",
-    endDate: "",
+    endDate: ""
   });
 
   const onChange = (e) => {
@@ -59,9 +59,7 @@ function ExperienceForm({ setAddExp, updateProfileExperience }) {
   return (
     <div className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-300 w-full">
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
-          Name Of Organisation
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Name Of Organisation</label>
         <input
           type="text"
           name="name"
@@ -84,9 +82,7 @@ function ExperienceForm({ setAddExp, updateProfileExperience }) {
       </div>
       <div className="flex space-between gap-4 flex-wrap">
         <div className="mb-4 grow shrink basis-32">
-          <label className="block w-full text-sm font-medium text-gray-700 pb-2">
-            Start Date
-          </label>
+          <label className="block w-full text-sm font-medium text-gray-700 pb-2">Start Date</label>
           <ExperienceDate
             date={formData.startDate}
             onChange={(date) => setFormData({ ...formData, startDate: date })}
@@ -95,9 +91,7 @@ function ExperienceForm({ setAddExp, updateProfileExperience }) {
         </div>
         {!isWorking && (
           <div className="mb-4 grow shrink basis-32">
-            <label className="block w-full text-sm font-medium text-gray-700 pb-2">
-              End Date
-            </label>
+            <label className="block w-full text-sm font-medium text-gray-700 pb-2">End Date</label>
             <ExperienceDate
               date={formData.endDate}
               onChange={(date) => setFormData({ ...formData, endDate: date })}
@@ -110,9 +104,7 @@ function ExperienceForm({ setAddExp, updateProfileExperience }) {
         I am currently working here.
       </Checkbox>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">
-          Description
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Description</label>
         <textarea
           name="description"
           value={formData.description}
@@ -124,11 +116,7 @@ function ExperienceForm({ setAddExp, updateProfileExperience }) {
       </div>
       <div className="flex gap-4">
         <Button onClick={handleCancel}>Cancel</Button>
-        <Button
-          type="primary"
-          className="bg-blue-600 text-white"
-          onClick={handleSubmit}
-        >
+        <Button type="primary" className="bg-blue-600 text-white" onClick={handleSubmit}>
           Save
         </Button>
       </div>

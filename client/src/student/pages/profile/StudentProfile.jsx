@@ -11,17 +11,7 @@ function Profile() {
     name: "Aditya Samal",
     img: null,
     roll: 230123002,
-    courses: [
-      "BTech",
-      "MTech",
-      "BDes",
-      "MDes",
-      "MA",
-      "MSR",
-      "MSc",
-      "Phd",
-      "MBA",
-    ],
+    courses: ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"],
     departments: [
       "Chemistry",
       "Chemical Engineering",
@@ -35,30 +25,26 @@ function Profile() {
       "Electrical and Electronics Engineering",
       "Civil Engineering",
       "Bioscience and Bioengineering",
-      "Energy Engineering",
+      "Energy Engineering"
     ],
     interests: ["software dev", "machine learning"],
     skills: ["React", "Node", "MongoDB"],
     social: {
       website: "https://aditya-samal/Portfolio",
       linkedin: "https://linkedin.com/in/",
-      github: "https://github.com/in/",
+      github: "https://github.com/in/"
     },
     educations: [],
     experiences: [],
     department: "",
-    course: "",
+    course: ""
   };
 
   // Profile Information
   const [name, setName] = useState(profile.name || "");
   const [roll, setRoll] = useState(profile.roll || "");
-  const [selectedCourse, setSelectedCourse] = useState(
-    profile.course || "Select"
-  );
-  const [selectedDepartment, setSelectedDepartment] = useState(
-    profile.department || "Select"
-  );
+  const [selectedCourse, setSelectedCourse] = useState(profile.course || "Select");
+  const [selectedDepartment, setSelectedDepartment] = useState(profile.department || "Select");
   const [interests, setInterests] = useState(profile.interests || []);
   const [newInterest, setNewInterest] = useState("");
 
@@ -127,11 +113,11 @@ function Profile() {
       social: {
         website,
         linkedin,
-        github,
+        github
       },
       educations,
       experiences,
-      achievements,
+      achievements
     };
   };
 
@@ -148,9 +134,7 @@ function Profile() {
           <div className="flex w-full justify-between items-center flex-wrap">
             <div className="flex-col basis-80 grow shrink">
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Your Name
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Your Name</label>
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -160,9 +144,7 @@ function Profile() {
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
-                  Roll Number
-                </label>
+                <label className="block text-sm font-medium text-gray-700">Roll Number</label>
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -178,52 +160,43 @@ function Profile() {
 
           <div className="flex justify-between gap-4 flex-wrap">
             <div className="basis-32 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">
-                Course Type
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Course Type</label>
               <Select
                 value={selectedCourse}
                 onChange={(option) => setSelectedCourse(option)}
                 style={{
-                  width: "100%",
+                  width: "100%"
                 }}
                 options={profile.courses.map((course) => {
                   return {
                     value: course,
-                    label: course,
+                    label: course
                   };
                 })}
               />
             </div>
             <div className="mb-4 basis-72 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">
-                Department
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Department</label>
               <Select
                 value={selectedDepartment}
                 onChange={(option) => setSelectedDepartment(option)}
                 style={{
-                  width: "100%",
+                  width: "100%"
                 }}
                 options={profile.departments.map((department) => {
                   return {
                     value: department,
-                    label: department,
+                    label: department
                   };
                 })}
               />
             </div>
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Fields of Interest
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Fields of Interest</label>
             <div className="flex gap-2 flex-wrap py-2">
               {interests.map((interest) => (
-                <span
-                  className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md"
-                  key={interest}
-                >
+                <span className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md" key={interest}>
                   {interest}
                 </span>
               ))}
@@ -238,17 +211,14 @@ function Profile() {
               />
               <button
                 className="basis-28 p-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
-                onClick={AddInterest}
-              >
+                onClick={AddInterest}>
                 Add
               </button>
             </div>
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Your bio
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Your bio</label>
             <textarea
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               rows="4"
@@ -268,9 +238,7 @@ function Profile() {
         <div className="flex-col grow shrink">
           <div className="flex-col basis-80 grow shrink">
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Website
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Website</label>
               <input
                 type="text"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -279,9 +247,7 @@ function Profile() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Linkedin
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Linkedin</label>
               <input
                 type="text"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -290,9 +256,7 @@ function Profile() {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Github
-              </label>
+              <label className="block text-sm font-medium text-gray-700">Github</label>
               <input
                 type="text"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -313,11 +277,7 @@ function Profile() {
         </div>
         <div className="basis-full md:basis-2/3 flex flex-col items-start pl-4">
           {experiences.map((exp, index) => (
-            <ExperienceCard
-              key={index}
-              experience={exp}
-              onDelete={() => deleteExperience(index)}
-            />
+            <ExperienceCard key={index} experience={exp} onDelete={() => deleteExperience(index)} />
           ))}
           {addExp ? (
             <ExperienceForm
@@ -327,8 +287,7 @@ function Profile() {
           ) : (
             <span
               className="text-blue-700 hover:underline cursor-pointer"
-              onClick={() => setAddExp(true)}
-            >
+              onClick={() => setAddExp(true)}>
               + Add Experience
             </span>
           )}
@@ -344,11 +303,7 @@ function Profile() {
         </div>
         <div className="flex-col pl-4 md:basis-2/3 grow shrink">
           {educations.map((edu, index) => (
-            <EducationCard
-              key={index}
-              education={edu}
-              onDelete={() => deleteEducation(index)}
-            />
+            <EducationCard key={index} education={edu} onDelete={() => deleteEducation(index)} />
           ))}
           {addEdu ? (
             <EducationForm
@@ -359,8 +314,7 @@ function Profile() {
           ) : (
             <span
               className="text-blue-700 hover:underline cursor-pointer"
-              onClick={() => setAddEdu(true)}
-            >
+              onClick={() => setAddEdu(true)}>
               + Add Education
             </span>
           )}
@@ -377,10 +331,7 @@ function Profile() {
         <div className="flex-col grow shrink ml-4">
           <div className="flex gap-2 flex-wrap py-2 mb-4">
             {skills.map((skill, index) => (
-              <span
-                key={index}
-                className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md"
-              >
+              <span key={index} className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md">
                 {skill}
               </span>
             ))}
@@ -395,8 +346,7 @@ function Profile() {
             />
             <button
               className="p-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
-              onClick={AddSkill}
-            >
+              onClick={AddSkill}>
               Add
             </button>
           </div>
@@ -408,9 +358,7 @@ function Profile() {
       <div className="flex w-full space-x-4 flex-wrap">
         <div className="basis-full md:basis-1/3 p-4">
           <div className="font-bold">Achievements</div>
-          <div>
-            Sharing more details about yourself will help you stand out more.
-          </div>
+          <div>Sharing more details about yourself will help you stand out more.</div>
         </div>
         <div className="flex-col grow shrink">
           <textarea
@@ -428,8 +376,7 @@ function Profile() {
         <button
           type="primary"
           className="p-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
-          onClick={handleSaveProfile}
-        >
+          onClick={handleSaveProfile}>
           Save Profile
         </button>
       </div>

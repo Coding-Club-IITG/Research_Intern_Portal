@@ -37,14 +37,14 @@ const App = () => {
     <button
       style={{
         border: 0,
-        background: "none",
+        background: "none"
       }}
       type="button"
     >
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
       <div
         style={{
-          marginTop: 8,
+          marginTop: 8
         }}
       >
         Profile Pic
@@ -66,7 +66,7 @@ const App = () => {
           src={imageUrl}
           alt="avatar"
           style={{
-            width: "100%",
+            width: "100%"
           }}
         />
       ) : (

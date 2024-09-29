@@ -4,9 +4,7 @@ function Cv() {
   return (
     <div className="flex flex-row border border-gray-300 m-4 flex-wrap">
       <div className="basis-1/4 grow m-6 shrink">
-        <p className="font-semibold text-lg ">
-          Upload your recent resume or CV
-        </p>
+        <p className="font-semibold text-lg ">Upload your recent resume or CV</p>
 
         <p className=" opacity-80">Upload your most up-to-date resume</p>
 

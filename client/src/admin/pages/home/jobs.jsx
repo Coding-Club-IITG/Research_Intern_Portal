@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Tabs } from "antd";
 import { Link, useParams, Outlet } from "react-router-dom";
+
 import Dashboard from "./components/Dashboard.jsx";
 import Jobscontent from "./components/Jobscontent.jsx";
 import Professorcontent from "./components/Professorcontent.jsx";
@@ -32,7 +33,7 @@ const items = [
   }
 ];
 
-const home = () => (
-  <Tabs style={{ marginLeft: "30px" }} defaultActiveKey="0" items={items} onChange={onChange} />
+const Job = () => (
+  <Tabs style={{ marginLeft: "30px" }} defaultActiveKey="3" items={items} onChange={onChange} />
 );
-export default home;
+export default Job;
