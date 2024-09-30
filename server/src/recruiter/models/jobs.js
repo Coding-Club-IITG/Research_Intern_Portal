@@ -1,4 +1,3 @@
-import { application } from "express";
 
 import mongoose from "mongoose";
 
@@ -6,11 +5,29 @@ const requirementSchema = new mongoose.Schema({
     cpi: {
         type: Number,
         required: true,
+        default: 0
     },
-    branch: {
+    department:[ {
         type: String,
-        required: true,
-    },
+        enum: [
+          "Chemistry",
+          "Chemical Enginerring",
+          "Computer Science",
+          "Design",
+          "Humanities and Social Science",
+          "Physics",
+          "Mathematics",
+          "Mehta School of Data Science",
+          "Mechanical Engineering",
+          "Electrical and Electronics Enginnering",
+          "Civil Engineering",
+          "Bioscience and Bioengineering",
+          "Energy Engineering",
+          "Open"
+        ],
+      }],
+      //making it an array of deptpartments as there might be multiple diciples eligible for the intern
+      //it will also allow the intern to be open to all
     study_year: {
         type: Number,
         required: true,
@@ -68,7 +85,9 @@ const JobSchema = new mongoose.Schema({
     last_date: {
         type: Date,
         required: true,
-    }
+    },
+    skills : [{type:String}],
+    whoCanApply : [{type:String}]
 });
 
 export default mongoose.model("Jobs", JobSchema);

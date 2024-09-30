@@ -8,7 +8,7 @@ import {
   updateStudent,
   createStudent,
   getStudentsApplicationById,
-  addStudentsApplications,
+  // addStudentsApplications,
 } from "../controllers/student";
 
 const router = express.Router();
@@ -362,7 +362,7 @@ router.get("/:id/intern-applied", getStudentsApplicationById);
  *       404:
  *         description: Student or internship not found
  */
-router.post("/:id/intern-apply/:internId", addStudentsApplications);
+// router.post("/:id/intern-apply/:internId", addStudentsApplications);
 
 /**
  * @swagger

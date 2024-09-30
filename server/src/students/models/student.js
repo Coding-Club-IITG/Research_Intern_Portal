@@ -118,7 +118,7 @@ const studentSchema = new mongoose.Schema({
     ],
   },
   applications: {
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Updates" }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Jobs" }],
   },
   createdAt: {
     type: Date,

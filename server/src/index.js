@@ -11,8 +11,9 @@ import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
 import { setupSwagger } from "./config/swagger_config.js";
 import cors from "cors";
-import jobRouter from "./recruiter/routes/Jobs.js";
-
+import jobRouter from "./recruiter/routes/jobs.js";
+import { rateLimit } from 'express-rate-limit'
+import MongoStore from "rate-limit-mongo/lib/mongoStore.js";
 
 
 
@@ -26,6 +27,23 @@ app.use(
     credentials: true,
   }),
 );
+
+const rateLimitingMiddleware = rateLimit({
+  windowMs : 60*1000,
+  max:500,
+  standardHeaders:"draft-7",
+  legacyHeaders:false,
+  message:'You have exceeded the request limit of 500 per minute.\nWait for a minute before making another request',
+  statusCode:429,
+  store: new MongoStore({
+    uri:data.DB_URL,
+    expireTimeMs:60*1000,
+    errorHandler:console.error.bind(null, 'Maximum limit of request per minutes reached')
+  })
+})
+
+app.use(rateLimitingMiddleware)
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
