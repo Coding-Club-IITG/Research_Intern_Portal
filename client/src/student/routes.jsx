@@ -7,7 +7,7 @@ import StudentHome from "./pages/home/home";
 
 import StudentProfilePage from "./pages/profile/StudentProfilePage";
 import StudentProfile from "./pages/profile/StudentProfile";
-import StudentOverview from "./pages/profile/Overview";
+import StudentOverview from "./pages/profile/StudentOverview";
 import StudentCv from "./pages/profile/StudentCv";
 
 import StudentInternships from "./pages/internships/Internships";

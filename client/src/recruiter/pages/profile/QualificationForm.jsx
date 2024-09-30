@@ -1,14 +1,13 @@
 import { Button, DatePicker } from "antd";
 import { useState } from "react";
 
-function EducationForm({ profile, setAddEdu, updateProfile }) {
+function QualificationForm({ profile, setAddEdu, updateProfile }) {
   const [formData, setFormData] = useState({
     name: "",
     role: "",
     description: "",
     startDate: null,
     endDate: null,
-    grade: ""
   });
 
   const handleInputChange = (e) => {
@@ -52,7 +51,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
             value={formData.role}
             onChange={handleInputChange}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            placeholder="e.g. B.Tech (Computer Science)"
+            placeholder="e.g. Computer Science"
           />
         </div>
         <div className="mb-4 grow shrink basis-32">
@@ -76,18 +75,6 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Percentage / CGPA</label>
-        <input
-          type="text"
-          name="grade"
-          value={formData.grade}
-          onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-          placeholder="e.g. 85% or 9.0 CGPA"
-        />
-      </div>
-
-      <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Description</label>
         <textarea
           name="description"
@@ -95,7 +82,7 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
           onChange={handleInputChange}
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           rows="4"
-          placeholder="Write a brief description of your education"
+          placeholder="Write a brief description of your qualification"
         />
       </div>
 
@@ -109,4 +96,4 @@ function EducationForm({ profile, setAddEdu, updateProfile }) {
   );
 }
 
-export default EducationForm;
+export default QualificationForm;
