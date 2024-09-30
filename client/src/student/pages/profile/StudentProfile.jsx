@@ -4,8 +4,8 @@ import moment from "moment";
 import ProfilePic from "../../../root-components/ProfilePic";
 import EducationCard from "./EducationCard";
 import EducationForm from "./EducationForm";
-import ExperienceCard from "./ExperienceCard";
-import ExperienceForm from "./ExperienceForm";
+import ExperienceCard from "../../../root-components/ExperienceCard";
+import ExperienceForm from "../../../root-components/ExperienceForm";
 
 function Profile() {
   const profile = {
