@@ -9,8 +9,6 @@ function Internships() {
     role: ""
   });
 
-  
-
   const handleSearch = ({ searchTerm, department, role }) => {
     setFilters({ searchTerm, department, role });
   };
