@@ -2,8 +2,8 @@ import { useState } from "react";
 import { DatePicker, Select } from "antd";
 import moment from "moment";
 import ProfilePic from "../../../root-components/ProfilePic";
-import EducationCard from "./EducationCard";
-import EducationForm from "./EducationForm";
+import QualificationCard from "./QualificationCard";
+import QualificationForm from "./QualificationForm";
 import ExperienceCard from "../../../root-components/ExperienceCard";
 import ExperienceForm from "../../../root-components/ExperienceForm";
 
@@ -11,8 +11,6 @@ function Profile() {
   const profile = {
     name: "Aditya Samal",
     img: null,
-    roll: 230123002,
-    courses: ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"],
     departments: [
       "Chemistry",
       "Chemical Engineering",
@@ -29,38 +27,24 @@ function Profile() {
       "Energy Engineering"
     ],
     interests: ["software dev", "machine learning"],
-    skills: ["React", "Node", "MongoDB"],
     social: {
       website: "https://aditya-samal/Portfolio",
       linkedin: "https://linkedin.com/in/",
-      github: "https://github.com/in/"
     },
-    educations: [],
+    qualifications: [],
     experiences: [],
     department: "",
-    course: "",
     number:"",
     gender:"",
-    CGPA: "",
-    yearOfGrad: "",
     DOB: "",
     email:"",
     achievements:"",
-    bio:""
+    bio:"",
   };
 
   // Profile Information
   const [name, setName] = useState(profile.name || "");
-  const [roll, setRoll] = useState(profile.roll || "");
-  const [selectedCourse, setSelectedCourse] = useState(profile.course || "Select");
   const [selectedDepartment, setSelectedDepartment] = useState(profile.department || "Select");
-  const [CGPA,setCGPA]= useState(profile.CGPA || "")
-
-  const [yearOfGrad, setYearOfGrad] = useState(profile?.yearOfGrad ? moment(profile.yearOfGrad, "YYYY") : null);
-  const handleYearOfGrad = (value) => {
-    setYearOfGrad(value ? value.format("YYYY") : null);
-  };
-
   const [DOB, setDOB] = useState(profile?.DOB ? moment(profile.DOB) : null);
   const handleDOB = (value) => {
     setDOB(value ? value.format("YYYY-MM-DD") : null);
@@ -83,9 +67,8 @@ function Profile() {
   // Social Profiles
   const [website, setWebsite] = useState(profile.social.website || "");
   const [linkedin, setLinkedin] = useState(profile.social.linkedin || "");
-  const [github, setGithub] = useState(profile.social.github || "");
 
-  //Education & Experience
+  //qualification & Experience
   const [addExp, setAddExp] = useState(false);
   const [experiences, setExperiences] = useState(profile.experiences);
 
@@ -99,26 +82,15 @@ function Profile() {
   };
 
   const [addEdu, setAddEdu] = useState(false);
-  const [educations, setEducations] = useState(profile.educations);
+  const [qualifications, setQualifications] = useState(profile.qualifications);
 
-  const updateProfileEducation = (newEducation) => {
-    setEducations([...educations, newEducation]);
+  const updateProfileQualification = (newQualification) => {
+    setQualifications([...qualifications, newQualification]);
   };
 
-  const deleteEducation = (index) => {
-    const updatedEducations = educations.filter((_, i) => i !== index);
-    setEducations(updatedEducations);
-  };
-
-  //Skills
-  const [skills, setSkills] = useState(profile.skills || []);
-  const [newSkill, setNewSkill] = useState("");
-
-  const AddSkill = (e) => {
-    if (newSkill.trim()) {
-      setSkills([...skills, newSkill.trim()]);
-      setNewSkill("");
-    }
+  const deleteQualification = (index) => {
+    const updatedQualifications = qualifications.filter((_, i) => i !== index);
+    setQualifications(updatedQualifications);
   };
 
   //Achievements
@@ -128,18 +100,14 @@ function Profile() {
     const updatedProfile = {
       ...profile,
       name,
-      roll,
-      course: selectedCourse,
       department: selectedDepartment,
       interests,
-      skills,
       bio,
       social: {
         website,
         linkedin,
-        github
       },
-      educations,
+      qualifications,
       experiences,
       achievements
     };
@@ -166,41 +134,28 @@ function Profile() {
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
-
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">Roll Number</label>
-                <input
-                  type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={roll}
-                  onChange={(e) => setRoll(e.target.value)}
-                />
-              </div>
+                        <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="text"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Eg. abc@gmail.com"
+              />
+          </div>
+              
             </div>
             <div className="basis-32 px-8 py-2 justify-center items-center">
               <ProfilePic />
             </div>
           </div>
+
           <div className="flex justify-between gap-4 flex-wrap">
-            <div className="basis-32 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">Course Type</label>
-              <Select
-                value={selectedCourse}
-                onChange={(option) => setSelectedCourse(option)}
-                style={{
-                  width: "100%"
-                }}
-                options={profile.courses.map((course) => {
-                  return {
-                    value: course,
-                    label: course
-                  };
-                })}
-              />
-            </div>
             <div className="mb-4 basis-72 grow shrink">
               <label className="block text-sm font-medium text-gray-700">Department</label>
               <Select
+                className="mt-1"
                 value={selectedDepartment}
                 onChange={(option) => setSelectedDepartment(option)}
                 style={{
@@ -214,27 +169,6 @@ function Profile() {
                 })}
               />
             </div>
-          </div>
-          <div className="flex justify-between gap-4 flex-wrap pb-2">
-            <div className="basis-32 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">CGPA</label>
-              <input
-                  type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={CGPA}
-                  onChange={(e) => setCGPA(e.target.value)}
-                  placeholder="Current Grade"
-                />
-            </div>
-            <div className="basis-32 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">Year Of Grad</label>
-              <DatePicker
-                className="grow shrink w-full pb-2 mt-1"
-                picker="year"
-                onChange={(value) => handleYearOfGrad(value)}
-                placeholder="Year of Graduation"
-              />
-            </div>
             <div className="basis-32 grow shrink">
               <label className="block text-sm font-medium text-gray-700">DOB</label>
               <DatePicker
@@ -246,16 +180,7 @@ function Profile() {
               />
             </div>
           </div>
-          <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Email</label>
-              <input
-                type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Eg. abc@gmail.com"
-              />
-          </div>
+
           <div className="flex justify-between gap-4 flex-wrap">
             <div className="basis-32 grow shrink">
               <label className="block text-sm font-medium text-gray-700">Gender</label>
@@ -342,15 +267,6 @@ function Profile() {
                 onChange={(e) => setLinkedin(e.target.value)}
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Github</label>
-              <input
-                type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={github}
-                onChange={(e) => setGithub(e.target.value)}
-              />
-            </div>
           </div>
         </div>
       </div>
@@ -382,61 +298,29 @@ function Profile() {
       </div>
       <hr />
 
-      {/* Education Section */}
+      {/* Qualification Section */}
       <div className="flex w-full flex-wrap">
         <div className="basis-full md:basis-1/3 p-4">
-          <div className="font-bold">Education</div>
+          <div className="font-bold">Qualification</div>
           <div>Which school have you studied at?</div>
         </div>
         <div className="flex-col pl-4 md:basis-2/3 grow shrink">
-          {educations.map((edu, index) => (
-            <EducationCard key={index} education={edu} onDelete={() => deleteEducation(index)} />
+          {qualifications.map((edu, index) => (
+            <QualificationCard key={index} qualification={edu} onDelete={() => deleteQualification(index)} />
           ))}
           {addEdu ? (
-            <EducationForm
+            <QualificationForm
               profile={profile}
               setAddEdu={setAddEdu}
-              updateProfile={updateProfileEducation}
+              updateProfile={updateProfileQualification}
             />
           ) : (
             <span
               className="text-blue-700 hover:underline cursor-pointer"
               onClick={() => setAddEdu(true)}>
-              + Add Education
+              + Add Qualification
             </span>
           )}
-        </div>
-      </div>
-      <hr />
-
-      {/* Skills Section */}
-      <div className="flex flex-col md:flex-row w-full space-y-4 md:space-y-0 md:space-x-4">
-        <div className="md:basis-1/3 p-4 pb-0">
-          <div className="font-bold">Skills</div>
-          <div>What are you skilled at?</div>
-        </div>
-        <div className="flex-col grow shrink ml-4">
-          <div className="flex gap-2 flex-wrap py-2 mb-4">
-            {skills.map((skill, index) => (
-              <span key={index} className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md">
-                {skill}
-              </span>
-            ))}
-          </div>
-          <div className="flex gap-2 flex-wrap">
-            <input
-              type="text"
-              className="flex-1 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Add Interest"
-              value={newSkill}
-              onChange={(e) => setNewSkill(e.target.value)}
-            />
-            <button
-              className="p-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
-              onClick={AddSkill}>
-              Add
-            </button>
-          </div>
         </div>
       </div>
       <hr />
