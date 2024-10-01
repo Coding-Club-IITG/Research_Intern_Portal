@@ -1,7 +1,6 @@
 import React from "react";
 import ThemeToggle from "../pages/ThemeToggle";
 import NotificationBell from "../pages/Notifications";
-import CommonUI from "../pages/CommonUI";
 
 const TopNav = () => {
   return (

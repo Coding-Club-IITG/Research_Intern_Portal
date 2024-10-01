@@ -15,7 +15,7 @@ import StudentApplied from "./pages/applied/applied";
 import InternshipDetail from "./pages/internships/InternshipDetail";
 import NotFoundPage from "../errors/NotFoundPage";
 
-import BugReport from "../pages/CommonUI";
+import BugReport from "../pages/BugReport";
 
 const StudentRoutes = () => {
   return (
