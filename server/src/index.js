@@ -13,8 +13,7 @@ import { setupSwagger } from "./config/swagger_config.js";
 import cors from "cors";
 import jobRouter from "./recruiter/routes/jobs.js";
 import logger from "./utils/logger.js";
-
-
+import bugRoutes from "./admin/routes/bug.js";
 
 const app = express();
 
@@ -24,7 +23,7 @@ app.use(
   cors({
     origin: "*",
     credentials: true,
-  }),
+  })
 );
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -34,20 +33,17 @@ app.use(cookieParser());
 app.use("/", authRoutes);
 app.get("/upload", verifyJWT, uploadFile);
 app.use("/api/v1/recruiters", recruiterRouter);
-app.use('/job',jobRouter)
+app.use("/job", jobRouter);
+app.use("/api/v1/admin", bugRoutes);
 
-// app.use("/api/v1/admin",)
 // test route
 app.get("/ping", (req, res) => {
   return res.json({ message: "server is alive" });
 });
 
-//last middleware if any error comes
+// Last middleware if any error comes
 app.use(errorHandler);
 app.listen(data.PORT, async () => {
   await connectToDb();
   logger.info(`Server is running on ${data.PORT}`);
-  // console.log(`Server is running on ${data.PORT}`);
 });
-
-
