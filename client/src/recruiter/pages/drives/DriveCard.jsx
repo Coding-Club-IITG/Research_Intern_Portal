@@ -1,6 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function DriveCard({ drive }) {
+function DriveCard({ drive, index }) {
+  const navigate = useNavigate();
+
+  const handleView = () => {
+    navigate(`/recruiter/drive/${index}`);
+  };
+
+  const handleEdit = () => {
+    navigate(`/recruiter/edit-drive/${index}`);
+  };
+
+  const handleApplied = () => {
+    navigate(`/recruiter/student-list/${index}`);
+  };
+
   return (
     <div className="border p-4 flex justify-between items-center mb-4">
       <div>
@@ -13,9 +28,16 @@ function DriveCard({ drive }) {
       </div>
 
       <div className="flex flex-col space-y-2">
-        <button className="bg-yellow-500 text-white px-4 py-2 rounded">View</button>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
-        <button className="bg-red-500 text-white px-4 py-2 rounded">
+        <button className="bg-yellow-500 text-white px-4 py-2 rounded" onClick={handleView}>
+          View
+        </button>
+        {/* Conditionally render the Edit button based on drive status */}
+        {drive.accepting && (
+          <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleEdit}>
+            Edit
+          </button>
+        )}
+        <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={handleApplied}>
           Applied Students: {drive.applicants.length}
         </button>
       </div>
