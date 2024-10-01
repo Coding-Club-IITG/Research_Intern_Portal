@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Select } from "antd";
+import { useParams } from "react-router-dom";
+import my_drives from "./my_drives";
 
-const NewDrive = () => {
+const EditDrive = () => {
+  const { driveIndex } = useParams();
   const [formData, setFormData] = useState({
     prof_name: "",
     title: "",
@@ -21,6 +24,13 @@ const NewDrive = () => {
     last_date: ""
   });
 
+  useEffect(() => {
+    const drive = my_drives[driveIndex];
+    if (drive) {
+      setFormData(drive);
+    }
+  }, [driveIndex]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -38,7 +48,7 @@ const NewDrive = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add form submission logic here
+    // Add form submission logic here (e.g., updating the drive)
   };
 
   const branchOptions = [
@@ -54,9 +64,9 @@ const NewDrive = () => {
 
   return (
     <form onSubmit={handleSubmit} className="py-4 px-8 bg-white shadow-lg rounded-lg space-y-4">
-      <h2 className="text-2xl font-bold text-center">Create New Internship Opportunity</h2>
+      <h2 className="text-2xl font-bold text-center">Edit Internship Opportunity</h2>
 
-      {/* internship Details Section */}
+      {/* Internship Details Section */}
       <div className="border-b pb-2">
         <h3 className="text-xl font-semibold mb-2">Internship Details</h3>
 
@@ -226,12 +236,10 @@ const NewDrive = () => {
       </div>
 
       <div className="flex justify-center">
-        <button className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800">
-          Create internship Listing
-        </button>
+        <button className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800">Save</button>
       </div>
     </form>
   );
 };
 
-export default NewDrive;
+export default EditDrive;

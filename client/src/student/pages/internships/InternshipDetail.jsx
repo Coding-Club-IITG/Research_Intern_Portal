@@ -1,11 +1,12 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { internships } from './Data.js';
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { internships } from "./Data.js";
 
-const JobDetails = () => {
+const InternshipDetails = () => {
   const { internshipID } = useParams();
-  const jobId = parseInt(internshipID, 10); // Convert id to a number
-  const job = internships.find(job => job.id === jobId);
+  const jobId = parseInt(internshipID, 10);
+  const job = internships.find((job) => job.id === jobId);
+  const Navigate = useNavigate();
 
   if (!job) {
     return <div className="max-w-4xl mx-auto p-8">Job not found</div>;
@@ -19,17 +20,14 @@ const JobDetails = () => {
           <div className="flex-1">
             <h3 className="text-2xl font-bold text-gray-800">{job.proffName}</h3>
             <p className="text-sm text-gray-600 mt-1">{job.department}</p>
-            <p className="text-sm text-gray-700 mt-2 leading-relaxed">
-              {job.description}
-            </p>
+            <p className="text-sm text-gray-700 mt-2 leading-relaxed">{job.description}</p>
 
             {/* Job Tags */}
             <div className="mt-3 flex flex-wrap gap-2">
               {job.tags.map((tag, tagIndex) => (
                 <span
                   key={tagIndex}
-                  className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full"
-                >
+                  className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">
                   {tag}
                 </span>
               ))}
@@ -57,9 +55,7 @@ const JobDetails = () => {
         {/* About the Work */}
         <section className="mb-6">
           <h2 className="text-xl font-semibold mb-4 text-gray-800">About the Work</h2>
-          <p className="text-gray-700 leading-relaxed text-base">
-            {job.description}
-          </p>
+          <p className="text-gray-700 leading-relaxed text-base">{job.description}</p>
         </section>
 
         {/* Skills Required */}
@@ -82,8 +78,15 @@ const JobDetails = () => {
           </ul>
         </section>
 
-        {/* Apply Button */}
-        <div className="flex justify-center">
+        {/* Button Section */}
+        <div className="flex justify-between mt-6">
+          <button
+            className="bg-yellow-400 text-gray-800 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-300 transition duration-300"
+            onClick={() => Navigate(-1)}>
+            Back
+          </button>
+
+          {/* Apply Button */}
           <button className="bg-gradient-to-r from-black to-black text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:from-black-600 hover:to-black-600 focus:ring-4 focus:ring-black-300 focus:outline-none transition duration-300 ease-in-out transform hover:scale-105">
             Apply Now
           </button>
@@ -91,6 +94,6 @@ const JobDetails = () => {
       </div>
     </>
   );
-}
+};
 
-export default JobDetails;
+export default InternshipDetails;

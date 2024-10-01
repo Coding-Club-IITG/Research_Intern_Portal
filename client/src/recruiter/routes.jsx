@@ -6,10 +6,13 @@ import RecruiterHome from "./pages/home/home";
 import ProfilePageLayout from "./pages/profile/RecruiterProfilePage";
 import RecruiterProfile from "./pages/profile/RecruiterProfile";
 import RecruiterOverview from "./pages/profile/Overview";
-import RecruiterDrives from "./pages/drives/drives"
+import RecruiterDrives from "./pages/drives/drives";
 import RecruiterNewDrive from "./pages/newdrive/newDrive";
 
 import NotFoundPage from "../errors/NotFoundPage";
+import DriveDetail from "./pages/drives/DriveDetails";
+import EditDrive from "./pages/drives/EditDrive";
+import DriveStudentList from "./pages/drives/DriveStudentList";
 
 const RecuriterRoutes = () => {
   return (
@@ -25,6 +28,9 @@ const RecuriterRoutes = () => {
         <Route path="drives" element={<RecruiterDrives />} />
         <Route path="newdrive" element={<RecruiterNewDrive />} />
       </Route>
+      <Route path="drive/:driveIndex" element={<DriveDetail />} />
+      <Route path="edit-drive/:driveIndex" element={<EditDrive />} />
+      <Route path="student-list/:driveIndex" element={<DriveStudentList />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
