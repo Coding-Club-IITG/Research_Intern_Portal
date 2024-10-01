@@ -6,8 +6,7 @@ import RecruiterHome from "./pages/home/home";
 import ProfilePageLayout from "./pages/profile/RecruiterProfilePage";
 import RecruiterProfile from "./pages/profile/RecruiterProfile";
 import RecruiterOverview from "./pages/profile/Overview";
-
-import RecruiterDrives from "./pages/drives/drives";
+import RecruiterDrives from "./pages/drives/drives"
 import RecruiterNewDrive from "./pages/newdrive/newDrive";
 
 import NotFoundPage from "../errors/NotFoundPage";
