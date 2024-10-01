@@ -15,6 +15,8 @@ import StudentApplied from "./pages/applied/applied";
 import InternshipDetail from "./pages/internships/InternshipDetail";
 import NotFoundPage from "../errors/NotFoundPage";
 
+import BugReport from "../pages/CommonUI";
+
 const StudentRoutes = () => {
   return (
     <Routes>
@@ -33,6 +35,7 @@ const StudentRoutes = () => {
         </Route>
 
         <Route path="applied" element={<StudentApplied />} />
+        <Route path="bugReport" element={<BugReport/>}/>
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

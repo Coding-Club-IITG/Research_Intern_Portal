@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { HomeIcon, UserIcon, BriefcaseIcon, CheckIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, UserIcon, BriefcaseIcon, CheckIcon, BugAntIcon } from "@heroicons/react/24/outline";
 
 const LeftNav = () => {
   return (
@@ -52,6 +52,18 @@ const LeftNav = () => {
             exact
           >
             Applied
+          </NavLink>
+        </div>
+        <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
+          <BugAntIcon className="h-6 w-6 text-gray-700" />
+          <NavLink
+            to="bugReport"
+            className={({ isActive }) =>
+              isActive ? "text-blue-700 border-b-2 pb-2 border-blue-700 mt-1" : "text-gray-600 mt-1"
+            }
+            exact
+          >
+            Report a bug
           </NavLink>
         </div>
       </div>
