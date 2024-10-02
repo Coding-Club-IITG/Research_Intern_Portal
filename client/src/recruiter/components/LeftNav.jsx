@@ -6,8 +6,6 @@ const LeftNav = () => {
   return (
     <div className="w-28 h-full shadow-md">
       <div className="space-y-4 mt-4">
-        <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
-          <HomeIcon className="h-6 w-6 text-gray-700" />
           <NavLink
             to="home"
             className={({ isActive }) =>
@@ -15,11 +13,13 @@ const LeftNav = () => {
             }
             exact
           >
-            Home
-          </NavLink>
-        </div>
         <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
-          <UserIcon className="h-6 w-6 text-gray-700" />
+          <HomeIcon className="h-6 w-6 text-gray-700" />
+            Home
+        </div>
+          </NavLink>
+
+
           <NavLink
             to="profile"
             className={({ isActive }) =>
@@ -27,11 +27,12 @@ const LeftNav = () => {
             }
             exact
           >
-            Profile
-          </NavLink>
-        </div>
         <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
-          <BriefcaseIcon className="h-6 w-6 text-gray-700" />
+          <UserIcon className="h-6 w-6 text-gray-700" />
+            Profile
+        </div>
+          </NavLink>
+
           <NavLink
             to="drives"
             className={({ isActive }) =>
@@ -39,11 +40,12 @@ const LeftNav = () => {
             }
             exact
           >
-            Drives
-          </NavLink>
-        </div>
         <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
-          <PlusIcon className="h-6 w-6 text-gray-700" />
+          <BriefcaseIcon className="h-6 w-6 text-gray-700" />
+            Drives
+        </div>
+          </NavLink>
+          
           <NavLink
             to="newdrive"
             className={({ isActive }) =>
@@ -53,9 +55,11 @@ const LeftNav = () => {
             }
             exact
           >
+        <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
+          <PlusIcon className="h-6 w-6 text-gray-700" />
             New Drive
-          </NavLink>
         </div>
+          </NavLink>
       </div>
     </div>
   );
