@@ -10,10 +10,12 @@ function DriveStudentList() {
 
   const navigate = useNavigate(); // Initialize the navigation hook
 
+  function handleView(roll) {
+    navigate(`/recruiter/profile/student/${roll}`);
+  }
+
   return (
     <div className="w-full p-6">
-      
-
       <h1 className="text-2xl font-bold text-center mb-6">Applicants List</h1>
 
       {/* If no applicants are available, show a message */}
@@ -36,11 +38,15 @@ function DriveStudentList() {
               <tr key={idx} className="text-center odd:bg-gray-50 even:bg-white">
                 <td className="p-4 border border-gray-300">{idx + 1}</td> {/* Serial Number */}
                 <td className="p-4 border border-gray-300">{applicant.name}</td>
-                <td className="p-4 border border-gray-300">{applicant.roll}</td>
+                <td className="p-4 border border-gray-300">{applicant.rollNo}</td>
                 <td className="p-4 border border-gray-300">{applicant.course}</td>
                 <td className="p-4 border border-gray-300">{applicant.department}</td>
                 <td className="p-4 border border-gray-300 space-x-2">
-                  <button className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition-all">
+                  <button
+                    className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition-all"
+                    onClick={() => {
+                      handleView(applicant.rollNo);
+                    }}>
                     View Profile
                   </button>
                   <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all">
@@ -60,7 +66,7 @@ function DriveStudentList() {
         onClick={() => navigate(-1)} // This navigates to the previous page
       >
         &larr; Back
-      </button> 
+      </button>
     </div>
   );
 }
