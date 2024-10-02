@@ -10,6 +10,11 @@ const LoginPage = () => {
     window.location.href = targetUrl;
   }
 
+  function handleAdminLogin(){
+    const targetUrl = authUrl('admin');
+    window.location.href = targetUrl;
+  }
+
   return (
     <div className="w-screen h-screen flex flex-1">
       <div className="p-16 flex flex-col justify-between w-full md:w-[50%] h-full">
@@ -38,7 +43,7 @@ const LoginPage = () => {
           </Button>
         </div>
         <div className="w-full flex gap-4 items-center">
-          <p className="text-slate-800 text-sm">Admin Login</p>
+          <p className="text-slate-800 text-sm hover:cursor-pointer hover:text-blue-600" onClick={handleAdminLogin}>Admin Login</p>
           <p className="text-blue-600 text-sm">Facebook</p>
           <p className="text-blue-600 text-sm">Instagram</p>
           <p className="text-blue-600 text-sm">Coding Club</p>
