@@ -4,10 +4,12 @@ import {
   getUpdates,
   editUpdate,
   deleteUpdate,
+  createUpdate,
 } from "../controllers/updates.js";
 
 const router = express.Router();
 
+router.post("/", createUpdate);
 router.get("/", getUpdates);
 router.get("/:id", getUpdateById);
 router.put("/:id", editUpdate);

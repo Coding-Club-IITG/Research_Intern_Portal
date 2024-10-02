@@ -14,6 +14,10 @@ import cors from "cors";
 import jobRouter from "./recruiter/routes/jobs.js";
 import logger from "./utils/logger.js";
 import bugRoutes from "./admin/routes/bug.js";
+import adminControlRoutes from "./admin/routes/controls.js";
+import { adminGuard } from "./middlewares/role-guard.js";
+import adminUpdateRoutes from "./admin/routes/updates.js";
+import adminJobRoutes from "./admin/routes/jobs.js"; 
 
 const app = express();
 
@@ -21,17 +25,26 @@ setupSwagger(app);
 
 app.use(
   cors({
-    origin: "*",
+    origin: "*", // change this to the frontend url
     credentials: true,
   })
 );
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(cookieParser());
 
 app.use("/", authRoutes);
-app.get("/upload", verifyJWT, uploadFile);
+//app.get("/upload", verifyJWT, uploadFile);
+
+// admin routes 
+app.use("/api/v1/admin/controls", verifyJWT, adminGuard, adminControlRoutes);
+app.use("/api/v1/admin/updates", verifyJWT, adminGuard, adminUpdateRoutes);
+app.use("/api/v1/admin/jobs", verifyJWT, adminGuard, adminJobRoutes);
+
+
+
 app.use("/api/v1/recruiters", recruiterRouter);
 app.use("/job", jobRouter);
 app.use("/api/v1/admin", bugRoutes);

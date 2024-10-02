@@ -14,3 +14,5 @@ router.post("/remove-recruiter", removeRecruiter);
 router.post("/remove-student", removeStudent);
 router.post("/ban-recruiter", banRecruiter);
 router.post("/delete-job", deleteJob);
+
+export default router;
