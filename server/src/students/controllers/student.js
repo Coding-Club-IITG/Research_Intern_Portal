@@ -1,6 +1,8 @@
 import Student from "../models/student.js";
 import Updates from "../../admin/models/updates.js";
 import logger from "../../utils/logger.js";
+
+
 const createStudent = async (req, res) => {
   try {
     const {
@@ -76,12 +78,14 @@ const updateStudent = async (req, res) => {
     const id = req.params.id;
 
     const student = await Student.findById(id);
-    if (!student)
+    if (!student){
+      logger.error(`Updating student is not succesfull because student with ${id} does not exisits in database`);
       return res.status(400).json({
         status: "error",
-        message: "No such Student found",
+        message: "Student does not exist",
         data: null,
       });
+    }
 
     student.cpi = data.cpi;
     student.interest = data.interest;
@@ -115,60 +119,64 @@ const updateStudent = async (req, res) => {
   }
 };
 
-const deleteStudent = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const password = req.body.password;
-    //taking the password so that their is some authentication before deleting the account
-    const student = await Student.findById(id);
+// const deleteStudent = async (req, res) => {
+//   try {
+//     const id = req.params.id;
+//     const password = req.body.password;
+//     //taking the password so that their is some authentication before deleting the account
+//     const student = await Student.findById(id);
 
-    if (!student)
-      return res.status(400).json({
-        status: "error",
-        message: "Student does not exist",
-        data: null,
-      });
+//     if (!student)
+//       return res.status(400).json({
+//         status: "error",
+//         message: "Student does not exist",
+//         data: null,
+//       });
 
-    if (!student.isPasswordCorrect(password))
-      return res.status(401).json({
-        status: "error",
-        message: "Password not correct, unauthorized user",
-        data: null,
-      });
+//     if (!student.isPasswordCorrect(password))
+//       return res.status(401).json({
+//         status: "error",
+//         message: "Password not correct, unauthorized user",
+//         data: null,
+//       });
 
-    const deletedStudent = await Student.findByIdAndDelete(id);
+//     const deletedStudent = await Student.findByIdAndDelete(id);
 
-    if (!deletedStudent)
-      return res.status(500).json({
-        status: "error",
-        message: "Account not deleted",
-        data: null,
-      });
-    logger.info(`Student deleted successfully with ID ${id}`);
-    return res.status(201).json({
-      status: "success",
-      message: "Deleted successfully",
-      data: null,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      status: "error",
-      message: "Some Internal Server error occurred",
-      data: null,
-    });
-  }
-};
+//     if (!deletedStudent)
+//       return res.status(500).json({
+//         status: "error",
+//         message: "Account not deleted",
+//         data: null,
+//       });
+//     logger.info(`Student deleted successfully with ID ${id}`);
+//     return res.status(201).json({
+//       status: "success",
+//       message: "Deleted successfully",
+//       data: null,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       status: "error",
+//       message: "Some Internal Server error occurred",
+//       data: null,
+//     });
+//   }
+// };
 
 const getStudentByID = async (req, res) => {
   try {
     const id = req.params.id;
-    const student = await Student.findById(id).select("-password");
-    if (!student)
+    const student = await Student.findById(id);
+
+    if (!student){
+      logger.error(`Student not found with ID ${id}`);
       return res.status(400).json({
         status: "error",
         message: "Student does not exist",
         data: null,
       });
+    }
+
     logger.info(`Student found with ID ${id}`);
     return res.status(201).json({
       status: "success",
@@ -184,14 +192,16 @@ const getStudentByID = async (req, res) => {
   }
 };
 
-const getStudents = async (res, req) => {
+const getStudents = async (req, res) => {
   try {
-    const student = await Student.find().select("-password").exec();
-    logger.info(`Retrieved ${student.length} students from the database`);
-    return res.status(201).json({
+    const students = await Student.find();
+
+    logger.info(`Retrieved ${students.length} students from the database`);
+    
+    return res.status(200).json({
       status: "success",
-      message: "Student found",
-      data: student,
+      message: "Students found", 
+      data: students,   
     });
   } catch (error) {
     return res.status(500).json({
@@ -201,6 +211,7 @@ const getStudents = async (res, req) => {
     });
   }
 };
+
 
 const getStudentsByFilter = async (req, res) => {
   try {

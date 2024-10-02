@@ -16,7 +16,7 @@ const router = express.Router();
 
 // router.post('/create' , createStudent)
 router.get('/', getStudents);
-router.get('/:id', getStudentByID);
+router.get('/:id', getStudentByID); 
 router.get('/search-filter' , getStudentsByFilter)
 router.get('/search-interest' , getStudentByInterests)
 router.get('/:id/intern-applied' , getStudentsApplicationById)
