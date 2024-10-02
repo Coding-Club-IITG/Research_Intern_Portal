@@ -5,7 +5,7 @@ import {
   getStudentByInterests,
   getStudents,
   getStudentsByFilter,
-  deleteStudent,
+ // deleteStudent,
   updateStudent,
   createStudent,
   getStudentsApplicationById,
@@ -22,6 +22,6 @@ router.get('/search-interest' , getStudentByInterests)
 router.get('/:id/intern-applied' , getStudentsApplicationById)
 router.post('/:id/intern-apply/:internId' , addStudentsApplications)
 router.put('/:id', updateStudent);
-router.delete('/:id', deleteStudent);
+//router.delete('/:id', deleteStudent);
 
 export default router;

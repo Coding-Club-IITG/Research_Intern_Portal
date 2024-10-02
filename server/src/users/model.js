@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     refPath: "typeOfUser",
   },
+  isBanned: {
+    type: Boolean,
+    default: false,
+  },
   savedJobs: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Jobs", // Assuming you have a 'Job' model

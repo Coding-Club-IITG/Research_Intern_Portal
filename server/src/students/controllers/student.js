@@ -368,7 +368,7 @@ export {
   getStudentByID,
   getStudents,
   createStudent,
-  deleteStudent,
+  //deleteStudent,
   updateStudent,
   getStudentByInterests,
   getStudentsByFilter,

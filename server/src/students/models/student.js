@@ -25,27 +25,17 @@ const studentSchema = new mongoose.Schema({
   gender: {
     type: String,
   },
+  // course: {
+  //   type: String,
+  //   enum: ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"],
+  // },
   course: {
-    type: String,
-    enum: ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course",
   },
   department: {
-    type: String,
-    enum: [
-      "Chemistry",
-      "Chemical Enginerring",
-      "Computer Science",
-      "Design",
-      "Humanities and Social Science",
-      "Physics",
-      "Mathematics",
-      "Mehta School of Data Science",
-      "Mechanical Engineering",
-      "Electrical and Electronics Enginnering",
-      "Civil Engineering",
-      "Bioscience and Bioengineering",
-      "Energy Engineering",
-    ],
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Branch",
   },
   cpi: {
     type: Number,
