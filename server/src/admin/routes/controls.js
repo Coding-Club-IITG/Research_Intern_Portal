@@ -5,7 +5,7 @@ import {
   removeRecruiter,
   removeStudent,
   verifyRecruiter,
-} from "../controller/controls";
+} from "../controller/controls.js";
 
 const router = Router();
 

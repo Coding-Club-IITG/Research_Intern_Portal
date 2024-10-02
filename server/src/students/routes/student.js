@@ -1,4 +1,4 @@
-import express from "expresss";
+import express from "express";
 
 import {
   getStudentByID,
@@ -10,7 +10,7 @@ import {
   createStudent,
   getStudentsApplicationById,
   addStudentsApplications,
-} from "../controllers/student";
+} from "../controllers/student.js";
 
 const router = express.Router();
 

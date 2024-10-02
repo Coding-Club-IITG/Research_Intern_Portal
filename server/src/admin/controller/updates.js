@@ -1,5 +1,5 @@
 import logger from "../../utils/logger.js";
-import Updates from "../models/updates";
+import Updates from "../models/updates.js";
 
 const createUpdate = async (req, res) => {
   try {

@@ -1,7 +1,7 @@
 import { User } from "./model.js";
 import Recruiter from "../recruiter/models/jobs.js";
 import { roles } from "../utils/roles.js";
-import { Student } from "../students/models/student.js";
+import Student from "../students/models/student.js";
 
 import logger from "../utils/logger.js";
 import Admin from "../admin/models/updates.js"

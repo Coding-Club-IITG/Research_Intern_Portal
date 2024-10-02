@@ -1,6 +1,6 @@
-import Recruiter from "../../recruiter/models/recruiter";
-import Student from "../../student/models/student";
-import Jobs from "../../recruiter/models/jobs";
+import Recruiter from "../../recruiter/models/recruiter.js";
+import Student from "../../students/models/student.js";
+import Jobs from "../../recruiter/models/jobs.js";
 import logger from "../../utils/logger.js";
 
 // Verify a recruiter

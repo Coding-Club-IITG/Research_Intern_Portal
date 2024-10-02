@@ -5,7 +5,7 @@ import {
   editUpdate,
   deleteUpdate,
   createUpdate,
-} from "../controllers/updates.js";
+} from "../controller/updates.js";
 
 const router = express.Router();
 
