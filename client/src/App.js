@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import ThemeToggle from "./pages/ThemeToggle";
 import ClientRoutes from "./routes";
 import useAuthStore from "./store/authStore";
 
@@ -7,12 +6,12 @@ function App() {
   const { checkAuth } = useAuthStore();
 
   useEffect(() => {
-    checkAuth(); 
+    checkAuth();
   }, [checkAuth]);
 
   return (
     <div className="App">
-        <ClientRoutes />
+      <ClientRoutes />
     </div>
   );
 }
