@@ -14,6 +14,8 @@ import DriveDetail from "./pages/drives/DriveDetails";
 import EditDrive from "./pages/drives/EditDrive";
 import DriveStudentList from "./pages/drives/DriveStudentList";
 
+import BugReport from "../pages/BugReport";
+
 const RecuriterRoutes = () => {
   return (
     <Routes>
@@ -27,10 +29,12 @@ const RecuriterRoutes = () => {
         </Route>
         <Route path="drives" element={<RecruiterDrives />} />
         <Route path="newdrive" element={<RecruiterNewDrive />} />
-      </Route>
-      <Route path="drive/:driveIndex" element={<DriveDetail />} />
+        <Route path="drive/:driveIndex" element={<DriveDetail />} />
       <Route path="edit-drive/:driveIndex" element={<EditDrive />} />
       <Route path="student-list/:driveIndex" element={<DriveStudentList />} />
+      <Route path="bugReport" element={<BugReport/>}/>
+      </Route>
+     
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

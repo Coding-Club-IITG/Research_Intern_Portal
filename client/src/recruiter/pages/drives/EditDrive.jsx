@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Select } from "antd";
 import { useParams } from "react-router-dom";
 import my_drives from "./my_drives";
+import { useNavigate } from "react-router-dom";
+
+
 
 const EditDrive = () => {
   const { driveIndex } = useParams();
@@ -23,6 +26,8 @@ const EditDrive = () => {
     accepting: true,
     last_date: ""
   });
+  
+  const navigate=useNavigate();
 
   useEffect(() => {
     const drive = my_drives[driveIndex];
@@ -234,9 +239,15 @@ const EditDrive = () => {
           />
         </div>
       </div>
-
-      <div className="flex justify-center">
-        <button className="bg-black text-white py-2 px-4 rounded hover:bg-gray-800">Save</button>
+      
+      <div className="flex justify-between">
+      <button
+        className="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-all mt-4"
+        onClick={() => navigate(-1)} // This navigates to the previous page
+      >
+        &larr; Back
+      </button> 
+        <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-gray-800 mb-4 mt-4">Save</button>
       </div>
     </form>
   );

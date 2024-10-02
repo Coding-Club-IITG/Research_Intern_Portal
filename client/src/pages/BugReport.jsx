@@ -16,7 +16,18 @@ function Form() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    
     console.log('Form submitted:', formData);
+
+   
+    alert('Form successfully submitted!');
+
+    
+    setFormData({
+      title: '',
+      description: ''
+    });
   };
 
   return (

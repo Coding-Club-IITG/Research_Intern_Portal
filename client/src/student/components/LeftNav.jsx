@@ -63,7 +63,7 @@ const LeftNav = () => {
             }
             exact
           >
-            Report a bug
+            Bug Report
           </NavLink>
         </div>
       </div>
