@@ -6,18 +6,18 @@ import errorHandler from "./utils/errorHandler.js";
 import connectToDb from "./config/db_config.js";
 import authRoutes from "./auth/routes/auth.js";
 import { uploadFile } from "./students/upload/onedrive.upload.js";
-import recruiterRouter from "./recruiter/routes/recruiter.js";
 import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
 import { setupSwagger } from "./config/swagger_config.js";
 import cors from "cors";
-import jobRouter from "./recruiter/routes/jobs.js";
 import logger from "./utils/logger.js";
 import bugRoutes from "./admin/routes/bug.js";
 import adminControlRoutes from "./admin/routes/controls.js";
-import { adminGuard } from "./middlewares/role-guard.js";
+import { adminGuard, recruiterGuard } from "./middlewares/role-guard.js";
 import adminUpdateRoutes from "./admin/routes/updates.js";
-import adminJobRoutes from "./admin/routes/jobs.js"; 
+import studentRoutes from "./students/routes/student.js";
+import jobRoutes from "./recruiter/routes/jobs.js";
+import recruiterRoutes from "./recruiter/routes/recruiter.js";
 
 const app = express();
 
@@ -41,13 +41,14 @@ app.use("/", authRoutes);
 // admin routes 
 app.use("/api/v1/admin/controls", verifyJWT, adminGuard, adminControlRoutes);
 app.use("/api/v1/admin/updates", verifyJWT, adminGuard, adminUpdateRoutes);
-app.use("/api/v1/admin/jobs", verifyJWT, adminGuard, adminJobRoutes);
 
+// student routes
+app.use("/api/v1/students", verifyJWT, studentRoutes);
 
+app.use("/api/v1/recruiters", verifyJWT, recruiterGuard, recruiterRoutes);
+app.use("/api/v1/job", verifyJWT, recruiterGuard, jobRoutes);
 
-app.use("/api/v1/recruiters", recruiterRouter);
-app.use("/job", jobRouter);
-app.use("/api/v1/admin", bugRoutes);
+// app.use("/api/v1/admin", bugRoutes);
 
 // test route
 app.get("/ping", (req, res) => {
