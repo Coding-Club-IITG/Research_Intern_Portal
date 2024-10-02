@@ -54,7 +54,6 @@ export const onedriveRedirect = async (req, res) => {
       client_secret: clientSecret,
     });
 
-    // Fetch the access token from the OAuth token endpoint
     const tokenResponse = await fetch(tokenUrl, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -67,7 +66,6 @@ export const onedriveRedirect = async (req, res) => {
 
     const tokenData = await tokenResponse.json();
 
-    // Create a JWT token using the access and refresh tokens
     const jwtPayload = {
       access_token: tokenData.access_token,
       refresh_token: tokenData.refresh_token,
@@ -76,74 +74,78 @@ export const onedriveRedirect = async (req, res) => {
 
     const jwtToken = jwt.sign(jwtPayload, "fdgt4t93xzc3252523");
 
-    // Set the token in cookies
     res.cookie("jwt", jwtToken, {
       httpOnly: false,
       secure: false,
-      maxAge: 1000 * 60 * 60, // 1 hour
+      maxAge: 1000 * 60 * 60 * 24, 
     });
 
     const userDataFromGraphApi = await getUserFromToken(tokenData.access_token);
     const findUser = await User.findOne({ email: userDataFromGraphApi.email });
 
     if (findUser) {
-      const typeOfUser = findUser.typeOfUser;
+      const userCookie = {
+        name: findUser.name,
+        user_id: findUser._id,
+        connection_id: findUser.connection_id,
+        typeOfUser: findUser.typeOfUser
+      }
 
-      switch (typeOfUser) {
+      const stringify = JSON.stringify(userCookie);
+
+      res.cookie("user", stringify, {
+        httpOnly: false,
+        secure: false, 
+        maxAge: 1000 * 60 * 60 * 24,
+      });
+
+      switch (findUser.typeOfUser) {
         case roles.STUDENT:
-          res.redirect("http://localhost:3000/student/");
-          return;
+          return res.redirect("http://localhost:3000/student/");
         case roles.RECRUITER:
-          res.redirect("http://localhost:3000/recruiter/");
-          return;
+          return res.redirect("http://localhost:3000/recruiter/");
         case roles.ADMIN:
-          res.redirect("http://localhost:3000/admin/");
-          return;
+          return res.redirect("http://localhost:3000/admin/");
+        default:
+          throw new Error("User type not recognized");
       }
     }
 
-    // If user is not found, create a new user based on the state
+    const createdUser = await createUser({
+      name: userDataFromGraphApi.name,
+      email: userDataFromGraphApi.email,
+      typeOfUser: state
+    });
+
+    const newUserCookie = {
+      name: createdUser.name,
+      user_id: createdUser._id,
+      connection_id: createdUser.connection_id,
+      typeOfUser: createdUser.typeOfUser
+    };
+
+    const stringify = JSON.stringify(newUserCookie);
+
+    res.cookie("user", stringify, {
+      httpOnly: false,
+      secure: false, 
+      maxAge: 1000 * 60 * 60 * 24,
+    });
+
     switch (state) {
       case roles.STUDENT:
-        await createUser({
-          name: userDataFromGraphApi.name,
-          email: userDataFromGraphApi.email,
-          typeOfUser: roles.STUDENT,
-        });
-        res.redirect("http://localhost:3000/student/");
-        break;
-
+        return res.redirect("http://localhost:3000/student/");
       case roles.RECRUITER:
-        await createUser({
-          name: userDataFromGraphApi.name,
-          email: userDataFromGraphApi.email,
-          typeOfUser: roles.RECRUITER,
-        });
-        res.redirect("http://localhost:3000/recruiter/");
-        break;
-
+        return res.redirect("http://localhost:3000/recruiter/");
       case roles.ADMIN:
-        await createUser({
-          name: userDataFromGraphApi.name,
-          email: userDataFromGraphApi.email,
-          typeOfUser: roles.ADMIN,
-        });
-        res.redirect("http://localhost:3000/admin/");
-        break;
-
+        return res.redirect("http://localhost:3000/admin/");
       default:
-        res
-          .status(500)
-          .json({
-            status: "error",
-            message: "Internal Server Error",
-            data: null,
-          });
-        break;
+        return res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
     }
+
   } catch (err) {
     logger.error(err);
-    res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
+    return res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
   }
 };
 
