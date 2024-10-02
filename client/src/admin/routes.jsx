@@ -5,6 +5,8 @@ import NotFoundPage from "../errors/NotFoundPage";
 import Prof from "./pages/home/professor.jsx";
 import Student from "./pages/home/student.jsx";
 import Job from "./pages/home/jobs.jsx";
+// import BranchManager from "./pages/home/components/BranchManager.jsx";
+import Branch from "./pages/home/branch.jsx";
 
 const AdminRoutes = () => {
   return (
@@ -13,6 +15,7 @@ const AdminRoutes = () => {
       <Route path="/professor" element={<Prof />}></Route>
       <Route path="/student" element={<Student />}></Route>
       <Route path="/jobs" element={<Job />}></Route>
+      <Route path="/branch" element={<Branch />}></Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

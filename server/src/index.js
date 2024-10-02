@@ -13,6 +13,7 @@ import cors from "cors";
 import logger from "./utils/logger.js";
 // import bugRoutes from "./admin/routes/bug.js";
 import adminControlRouter from "./admin/routes/controls.js";
+import adminBranchNameChangeRouter from "./admin/routes/course-branches.js";
 import { adminGuard, recruiterGuard } from "./middlewares/role-guard.js";
 import adminUpdateRoutes from "./admin/routes/updates.js";
 import studentRoutes from "./students/routes/student.js";
@@ -38,9 +39,14 @@ app.use(cookieParser());
 app.use("/", authRoutes);
 //app.get("/upload", verifyJWT, uploadFile);
 
-// admin routes 
+// admin routes
 app.use("/api/v1/admin/controls", verifyJWT, adminGuard, adminControlRouter);
 app.use("/api/v1/admin/updates", verifyJWT, adminGuard, adminUpdateRoutes);
+app.use(
+  "/api/v1/admin/branches",
+
+  adminBranchNameChangeRouter
+);
 
 // student routes
 app.use("/api/v1/students", verifyJWT, studentRoutes);

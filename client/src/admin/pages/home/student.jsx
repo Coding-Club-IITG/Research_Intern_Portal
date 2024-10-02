@@ -6,6 +6,7 @@ import Dashboard from "./components/Dashboard.jsx";
 import Jobscontent from "./components/Jobscontent.jsx";
 import Professorcontent from "./components/Professorcontent.jsx";
 import Studentcontent from "./components/Studentcontent.jsx";
+import BranchManager from "./components/BranchManager.jsx";
 
 const onChange = (key) => {
   console.log(key);
@@ -30,6 +31,11 @@ const items = [
     key: "3",
     label: <Link to="/admin/jobs">Job Details</Link>,
     children: <Jobscontent />
+  },
+  {
+    key: "4",
+    label: <Link to="/admin/branch">Branch Details</Link>,
+    children: <BranchManager />
   }
 ];
 const Student = () => (

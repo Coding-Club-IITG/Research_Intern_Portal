@@ -11,7 +11,6 @@ import BranchManager from "./components/BranchManager.jsx";
 const onChange = (key) => {
   console.log(key);
 };
-
 const items = [
   {
     key: "0",
@@ -39,7 +38,8 @@ const items = [
     children: <BranchManager />
   }
 ];
-const Prof = () => (
-  <Tabs style={{ marginLeft: "30px" }} defaultActiveKey="1" items={items} onChange={onChange} />
+
+const Branch = () => (
+  <Tabs style={{ marginLeft: "30px" }} defaultActiveKey="4" items={items} onChange={onChange} />
 );
-export default Prof;
+export default Branch;
