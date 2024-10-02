@@ -9,6 +9,7 @@ import RecuriterRoutes from "./recruiter/routes.jsx";
 import MainLandingPage from "./pages/Main.jsx";
 import LoginPage from "./pages/Login.jsx";
 import ProtectedRoute from "./utils/protectedRoutes.jsx";
+import AccessDeniedPage from "./errors/AccessDeniedPage.jsx";
 
 const ClientRoutes = () => {
   return (
@@ -16,10 +17,10 @@ const ClientRoutes = () => {
       <Routes>
         <Route index element={<MainLandingPage />} />
         <Route path="/login" element={<LoginPage />} />
-        {/* <Route path="/admin/*" element={<AdminRoutes />} /> */}
-        {/* <Route path="/student/*" element={<StudentRoutes />} /> */}
-        {/* <Route path="/recruiter/*" element={<RecruiterRoutes />} /> */}
-        <Route
+        <Route path="/admin/*" element={<AdminRoutes />} />
+        <Route path="/student/*" element={<StudentRoutes />} />
+        <Route path="/recruiter/*" element={<RecruiterRoutes />} />
+        {/* <Route
           path="/admin/*"
           element={<ProtectedRoute element={<AdminRoutes />} allowedRoles={['admin']} />}
         />
@@ -30,8 +31,9 @@ const ClientRoutes = () => {
         <Route
           path="/recruiter/*"
           element={<ProtectedRoute element={<RecruiterRoutes />} allowedRoles={['recruiter']} />}
-        />
+        /> */}
         <Route path="/500" element={<InternalServerErrorPage />} />
+        <Route path="/403" element={<AccessDeniedPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
