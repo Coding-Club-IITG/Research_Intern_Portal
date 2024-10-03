@@ -1,71 +1,76 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { HomeIcon, UserIcon, BriefcaseIcon, CheckIcon, BugAntIcon } from "@heroicons/react/24/outline";
+import {
+  HomeIcon,
+  UserIcon,
+  BriefcaseIcon,
+  CheckIcon,
+  BugAntIcon
+} from "@heroicons/react/24/outline";
 
 const LeftNav = () => {
   return (
-    <div className="w-full md:w-20 lg:w-28 h-18 md:h-full shadow-md">
-      <div className="md:space-y-4 md:mt-4 flex md:flex-col md:px-0 px-2 md:gap-2 gap-6 max-sm:items-center max-sm:justify-center overscroll-x-scroll">
-        <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
+    <div className="w-28 h-full shadow-md">
+      <div className="space-y-4 mt-4">
+        <NavLink
+          to="home"
+          className={({ isActive }) =>
+            isActive
+              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2 text-blue-700 border-b-2 pb-2 border-blue-700"
+              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2 text-gray-600"
+          }
+          exact>
           <HomeIcon className="h-6 w-6 text-gray-700" />
-          <NavLink
-            to="home"
-            className={({ isActive }) =>
-              isActive ? "text-blue-700 text-xs md:text-base border-b-2 pb-2 border-blue-700 mt-1" : "text-gray-600 mt-1"
-            }
-            exact
-          >
-            Home
-          </NavLink>
-        </div>
-        <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
+          <span className="mt-1">Home</span>
+        </NavLink>
+
+        <NavLink
+          to="profile"
+          className={({ isActive }) =>
+            isActive
+              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2 text-blue-700 border-b-2 pb-2 border-blue-700"
+              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2 text-gray-600"
+          }
+          exact>
           <UserIcon className="h-6 w-6 text-gray-700" />
-          <NavLink
-            to="profile"
-            className={({ isActive }) =>
-              isActive ? "text-blue-700 text-xs md:text-base border-b-2 pb-2 border-blue-700 mt-1" : "text-gray-600 text-xs md:text-base mt-1"
-            }
-            exact
-          >
-            Profile
-          </NavLink>
-        </div>
-        <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
+          <span className="mt-1">Profile</span>
+        </NavLink>
+
+        <NavLink
+          to="internships"
+          className={({ isActive }) =>
+            isActive
+              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2 text-blue-700 border-b-2 pb-2 border-blue-700"
+              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2 text-gray-600"
+          }
+          exact>
           <BriefcaseIcon className="h-6 w-6 text-gray-700" />
-          <NavLink
-            to="internships"
-            className={({ isActive }) =>
-              isActive ? "text-blue-700 text-xs md:text-base border-b-2 pb-2 border-blue-700 mt-1" : "text-gray-600 text-xs md:text-base mt-1"
-            }
-            exact
-          >
-            Internships
-          </NavLink>
-        </div>
-        <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
+          <span className="mt-1">Internships</span>
+        </NavLink>
+
+        <NavLink
+          to="applied"
+          className={({ isActive }) =>
+            isActive
+              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2 text-blue-700 border-b-2 pb-2 border-blue-700"
+              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2 text-gray-600"
+          }
+          exact>
           <CheckIcon className="h-6 w-6 text-gray-700" />
-          <NavLink
-            to="applied"
-            className={({ isActive }) =>
-              isActive ? "text-blue-700 text-xs md:text-base border-b-2 pb-2 border-blue-700 mt-1" : "text-gray-600 text-xs md:text-base mt-1"
-            }
-            exact
-          >
-            Applied
-          </NavLink>
-        </div>
-        <div className="flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2">
+          <span className="mt-1">Applied</span>
+        </NavLink>
+
+        <NavLink
+          to="bugReport"
+          className={({ isActive }) =>
+            isActive
+              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2 text-blue-700 border-b-2 pb-2 border-blue-700"
+              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 rounded py-2 text-gray-600"
+          }
+          exact>
           <BugAntIcon className="h-6 w-6 text-gray-700" />
-          <NavLink
-            to="bugReport"
-            className={({ isActive }) =>
-              isActive ? "text-blue-700 text-xs md:text-base border-b-2 pb-2 border-blue-700 mt-1" : "text-gray-600 text-xs md:text-base mt-1"
-            }
-            exact
-          >
-            Bug Report
-          </NavLink>
-        </div>
+          <span className="mt-1">Bug Report</span>
+        </NavLink>
       </div>
     </div>
   );

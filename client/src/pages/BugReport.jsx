@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function Form() {
   const [formData, setFormData] = useState({
-    title: '',
-    description: ''
+    title: "",
+    description: ""
   });
 
   const handleChange = (e) => {
@@ -17,25 +17,26 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
-    console.log('Form submitted:', formData);
+    console.log("Form submitted:", formData);
 
-   
-    alert('Form successfully submitted!');
+    alert("Form successfully submitted!");
 
-    
     setFormData({
-      title: '',
-      description: ''
+      title: "",
+      description: ""
     });
   };
 
   return (
     <div className="max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Submit a Title and Description</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+        Submit a Title and Description
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-5">
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">Title:</label>
+          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+            Title:
+          </label>
           <input
             type="text"
             id="title"
@@ -48,7 +49,9 @@ function Form() {
         </div>
 
         <div className="mb-5">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">Description:</label>
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+            Description:
+          </label>
           <textarea
             id="description"
             name="description"
@@ -62,8 +65,7 @@ function Form() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-        >
+          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
           Submit
         </button>
       </form>
