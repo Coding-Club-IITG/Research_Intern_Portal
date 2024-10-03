@@ -10,8 +10,8 @@ function InternshipCard({ arr, index }) {
   };
 
   return (
-    <div key={index} className="bg-white border border-gray-300 shadow-md mb-6">
-      <div className="flex p-4 gap-4">
+    <div key={index} className="bg-white border border-gray-300 mb-6 rounded-md">
+      <div className="flex p-4 gap-4 max-sm:flex-col">
         <div className="w-40 flex-shrink-0">
           <img src={arr.image} alt={`${arr.proffName} Logo`} className="h-full" />
         </div>

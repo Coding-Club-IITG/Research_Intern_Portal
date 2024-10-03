@@ -48,8 +48,8 @@ const Overview = () => {
       <div className="py-4">
         <div className="font-semibold">What recruiters will see</div>
       </div>
-      <div className="max-w-4xl mx-auto p-6 rounded-lg mt-6 border border-gray-300">
-        <div className="flex items-center mb-4">
+      <div className="max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300">
+        <div className="max-sm:flex-col max-sm:items-start flex items-center mb-4">
           <div className="w-32 h-32 rounded-full overflow-hiddenflex items-center justify-center mr-6">
             <img
               src={profileData.profilePicUrl}
@@ -68,7 +68,7 @@ const Overview = () => {
             </p>{" "}
             {/* Location and Timezone */}
           </div>
-          <div className="ml-auto flex space-x-4">
+          <div className="max-sm:ml-0 max-sm:space-x-2 max-sm:py-2 ml-auto flex space-x-4 w-fit">
             <a
               href={profileData.linkedinUrl}
               target="_blank"

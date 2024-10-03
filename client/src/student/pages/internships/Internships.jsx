@@ -25,7 +25,7 @@ function Internships() {
   });
 
   return (
-    <div className="p-6">
+    <div>
       <div className="text-2xl font-bold mb-4">Search For Internships</div>
       <Filter onSearch={handleSearch} />
       <div>

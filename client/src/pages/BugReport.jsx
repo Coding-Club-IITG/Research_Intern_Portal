@@ -28,7 +28,7 @@ function Form() {
   };
 
   return (
-    <div className="max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
+    <div className="max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-10 p-6 bg-white border rounded-lg">
       <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
         Submit a Title and Description
       </h2>
@@ -57,7 +57,7 @@ function Form() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="w-full h-80 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             rows="4"
             required
           />
