@@ -1,72 +1,111 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import my_drives from "./my_drives"; // Assuming my_drives is in the same directory
+import { Table, Space, Typography } from "antd";
+import my_drives from "./my_drives";
+
+const { Title } = Typography;
 
 function DriveStudentList() {
-  const { driveIndex } = useParams(); // Extracting the index from the route parameter
-  const index = parseInt(driveIndex, 10); // Parsing the index as an integer
-  const drive = my_drives[index]; // Getting the selected drive from the drives list
-  const applicants = drive.applicants; // Extracting applicants for the drive
+  const { driveIndex } = useParams();
+  const index = parseInt(driveIndex, 10);
+  const drive = my_drives[index];
+  const applicants = drive.applicants;
 
-  const navigate = useNavigate(); // Initialize the navigation hook
+  const navigate = useNavigate();
 
   function handleView(roll) {
     navigate(`/recruiter/profile/student/${roll}`);
   }
 
-  return (
-    <div className="w-full p-6">
-      <h1 className="text-2xl font-bold text-center mb-6">Applicants List</h1>
+  const columns = [
+    {
+      title: "Serial No.",
+      dataIndex: "serialNo",
+      key: "serialNo",
+      render: (text, record, index) => index + 1,
+      width: "5%",
+      align: "center",
+      responsive: ["md"]
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      width: "20%",
+      align: "center"
+    },
+    {
+      title: "Roll No",
+      dataIndex: "rollNo",
+      key: "rollNo",
+      width: "10%",
+      align: "center"
+    },
+    {
+      title: "Course",
+      dataIndex: "course",
+      key: "course",
+      width: "15%",
+      align: "center",
+      responsive: ["md"]
+    },
+    {
+      title: "Department",
+      dataIndex: "department",
+      key: "department",
+      width: "20%",
+      align: "center",
+      responsive: ["md"]
+    },
+    {
+      title: "Actions",
+      key: "actions",
+      width: "40%",
+      align: "center",
+      render: (text, record) => (
+        <Space size="middle" className="flex flex-wrap justify-center gap-2 lg:gap-4">
+          <button
+            className="px-2 py-1 md:px-4 md:py-2 rounded bg-yellow-400 text-black border border-yellow-400 hover:bg-yellow-500 transition-all"
+            onClick={() => handleView(record.rollNo)}>
+            View Profile
+          </button>
+          <button className="px-2 py-1 md:px-4 md:py-2 rounded bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 transition-all">
+            Accept
+          </button>
+          <button className="px-2 py-1 md:px-4 md:py-2 rounded bg-red-600 text-white border border-red-600 hover:bg-red-700 transition-all">
+            Reject
+          </button>
+        </Space>
+      )
+    }
+  ];
 
-      {/* If no applicants are available, show a message */}
+  return (
+    <div className="w-full p-4 md:p-6 flex flex-col items-center">
+      <Title level={2} className="text-center mb-4 md:mb-6">
+        Applicants List
+      </Title>
+
       {applicants.length === 0 ? (
         <div className="text-center text-gray-600">No applicants available.</div>
       ) : (
-        <table className="table-auto w-full border-collapse border border-gray-200">
-          <thead>
-            <tr className="bg-gray-500 text-white">
-              <th className="p-4 border border-gray-300">Serial No.</th>
-              <th className="p-4 border border-gray-300">Name</th>
-              <th className="p-4 border border-gray-300">Roll No</th>
-              <th className="p-4 border border-gray-300">Course</th>
-              <th className="p-4 border border-gray-300">Department</th>
-              <th className="p-4 border border-gray-300">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {applicants.map((applicant, idx) => (
-              <tr key={idx} className="text-center odd:bg-gray-50 even:bg-white">
-                <td className="p-4 border border-gray-300">{idx + 1}</td> {/* Serial Number */}
-                <td className="p-4 border border-gray-300">{applicant.name}</td>
-                <td className="p-4 border border-gray-300">{applicant.rollNo}</td>
-                <td className="p-4 border border-gray-300">{applicant.course}</td>
-                <td className="p-4 border border-gray-300">{applicant.department}</td>
-                <td className="p-4 border border-gray-300 space-x-2">
-                  <button
-                    className="bg-yellow-400 text-black px-4 py-2 rounded hover:bg-yellow-500 transition-all"
-                    onClick={() => {
-                      handleView(applicant.rollNo);
-                    }}>
-                    View Profile
-                  </button>
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all">
-                    Accept
-                  </button>
-                  <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-all">
-                    Reject
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <Table
+          dataSource={applicants}
+          columns={columns}
+          rowKey="rollNo"
+          pagination={{ pageSize: 5 }}
+          bordered
+          className="shadow-md w-full overflow-x-auto"
+        />
       )}
-      <button
-        className="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-all mt-4"
-        onClick={() => navigate(-1)} // This navigates to the previous page
-      >
-        &larr; Back
-      </button>
+
+      <div className="text-center mt-4 md:mt-6">
+        <button
+          className="px-4 py-2 rounded bg-gray-600 text-white border border-gray-600 hover:bg-gray-700 transition-all"
+          onClick={() => navigate(-1)}>
+          &larr; Back
+        </button>
+      </div>
     </div>
   );
 }
