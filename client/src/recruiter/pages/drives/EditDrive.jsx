@@ -68,7 +68,7 @@ const EditDrive = () => {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="py-4 px-8 bg-white shadow-lg rounded-lg space-y-4">
+    <form onSubmit={handleSubmit} className="py-4 px-8 bg-white rounded-lg space-y-4">
       <h2 className="text-2xl font-bold text-center">Edit Internship Opportunity</h2>
 
       {/* Internship Details Section */}
