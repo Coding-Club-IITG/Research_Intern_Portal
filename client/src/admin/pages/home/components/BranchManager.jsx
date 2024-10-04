@@ -50,7 +50,7 @@ const BranchManager = () => {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-lg">
+    <div className="p-6 bg-white rounded-lg">
       <Row gutter={16}>
         <Col span={24}>
           <Card bordered={true} title="Branch Manager">
