@@ -96,45 +96,7 @@ const router = express.Router();
  *             description: ObjectId references to jobs associated with the recruiter
  *           description: List of jobs posted by the recruiter
  */
-/**
- * @swagger
- * /api/v1/recruiters:
- *   get:
- *     summary: Retrieve a list of recruiters
- *     tags: [Recruiters]
- *     responses:
- *       200:
- *         description: A list of recruiters
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Recruiter'
- *       500:
- *         description: Internal server error
- *   post:
- *     summary: Create a new recruiter
- *     tags: [Recruiters]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *                 description: The name of the recruiter
- *               email:
- *                 type: string
- *                 description: The email of the recruiter
- *     responses:
- *       201:
- *         description: Recruiter created successfully
- *       500:
- *         description: Bad request/Internal Server Error
- */
+
 router.route("/").get(getRecruiters).post(createRecuiter);
 
 /**
@@ -209,3 +171,159 @@ router
   .delete(deleteRecruiter);
 
 export default router;
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: Recruiters
+ *   description: API endpoints for managing recruiters
+ */
+
+/**
+ * @swagger
+ * /recruiters:
+ *   post:
+ *     tags: [Recruiters]
+ *     summary: Create a new recruiter
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: The name of the recruiter
+ *               email:
+ *                 type: string
+ *                 description: The email address of the recruiter
+ *     responses:
+ *       201:
+ *         description: Recruiter created successfully
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /recruiters:
+ *   get:
+ *     tags: [Recruiters]
+ *     summary: Retrieve all recruiters
+ *     responses:
+ *       200:
+ *         description: List of recruiters retrieved successfully
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /recruiters/{id}:
+ *   get:
+ *     tags: [Recruiters]
+ *     summary: Retrieve a recruiter by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the recruiter to retrieve
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Recruiter retrieved successfully
+ *       404:
+ *         description: No recruiter found with the provided ID
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /recruiters/{id}:
+ *   put:
+ *     tags: [Recruiters]
+ *     summary: Update a recruiter by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the recruiter to update
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               areaOfInterest:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *               university:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               socialMedia:
+ *                 type: object
+ *                 properties:
+ *                   linkedIn:
+ *                     type: string
+ *                   twitter:
+ *                     type: string
+ *               phoneNumber:
+ *                 type: number
+ *               isActive:
+ *                 type: boolean
+ *               rating:
+ *                 type: number
+ *               qualifications:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     degree:
+ *                       type: string
+ *                     year:
+ *                       type: number
+ *                     college:
+ *                       type: string
+ *                     comments:
+ *                       type: string
+ *     responses:
+ *       200:
+ *         description: Recruiter updated successfully
+ *       404:
+ *         description: No recruiter found with the provided ID
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /recruiters/{id}:
+ *   delete:
+ *     tags: [Recruiters]
+ *     summary: Delete a recruiter by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the recruiter to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Recruiter deleted successfully
+ *       404:
+ *         description: No recruiter found with the provided ID
+ *       500:
+ *         description: Internal server error
+ */
