@@ -61,5 +61,5 @@ app.get("/ping", (req, res) => {
 app.use(errorHandler);
 app.listen(data.PORT, async () => {
   await connectToDb();
-  logger.info(`Server is running on ${data.PORT}`);
+  //logger.info(`Server is running on ${data.PORT}`);
 });
