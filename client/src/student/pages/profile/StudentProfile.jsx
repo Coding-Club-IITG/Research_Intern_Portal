@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DatePicker, Select } from "antd";
+import { DatePicker, Select, message } from "antd";
 import moment from "moment";
 import ProfilePic from "../../../root-components/ProfilePic";
 import EducationCard from "./EducationCard";
@@ -39,14 +39,14 @@ function Profile() {
     experiences: [],
     department: "",
     course: "",
-    number:"",
-    gender:"",
+    number: "",
+    gender: "",
     CGPA: "",
     yearOfGrad: "",
     DOB: "",
-    email:"",
-    achievements:"",
-    bio:""
+    email: "",
+    achievements: "",
+    bio: ""
   };
 
   // Profile Information
@@ -54,19 +54,21 @@ function Profile() {
   const [roll, setRoll] = useState(profile.roll || "");
   const [selectedCourse, setSelectedCourse] = useState(profile.course || "Select");
   const [selectedDepartment, setSelectedDepartment] = useState(profile.department || "Select");
-  const [CGPA,setCGPA]= useState(profile.CGPA || "")
+  const [CGPA, setCGPA] = useState(profile.CGPA || "");
 
-  const [yearOfGrad, setYearOfGrad] = useState(profile?.yearOfGrad ? moment(profile.yearOfGrad, "YYYY") : null);
+  const [yearOfGrad, setYearOfGrad] = useState(
+    profile?.yearOfGrad ? moment(profile.yearOfGrad, "YYYY") : null
+  );
   const handleYearOfGrad = (value) => {
-    setYearOfGrad(value ? value.format("YYYY") : null);
+    setYearOfGrad(value);
   };
 
   const [DOB, setDOB] = useState(profile?.DOB ? moment(profile.DOB) : null);
   const handleDOB = (value) => {
-    setDOB(value ? value.format("YYYY-MM-DD") : null);
+    setDOB(value);
   };
 
-  const [email,setEmail] = useState(profile.email || "")
+  const [email, setEmail] = useState(profile.email || "");
   const [gender, setGender] = useState(profile.gender || "");
   const [number, setNumber] = useState(profile.number || "");
   const [interests, setInterests] = useState(profile.interests || []);
@@ -125,13 +127,34 @@ function Profile() {
   const [achievements, setAchievements] = useState(profile.achievements || "");
 
   const handleSaveProfile = () => {
+    if (
+      !name.trim() ||
+      !roll ||
+      selectedCourse === "Select" ||
+      selectedDepartment === "Select" ||
+      !email.trim() ||
+      !number ||
+      !CGPA ||
+      !yearOfGrad ||
+      !gender.trim()
+    ) {
+      message.error("Please fill in all required fields.");
+      return;
+    }
+
     const updatedProfile = {
       ...profile,
       name,
       roll,
+      CGPA,
+      DOB,
       course: selectedCourse,
       department: selectedDepartment,
+      gender,
       interests,
+      email,
+      number,
+      yearOfGrad,
       skills,
       bio,
       social: {
@@ -143,6 +166,9 @@ function Profile() {
       experiences,
       achievements
     };
+
+    message.success("Profile updated successfully!");
+    console.log(updatedProfile);
   };
 
   return (
@@ -158,7 +184,9 @@ function Profile() {
           <div className="flex w-full justify-between items-center flex-wrap">
             <div className="flex-col basis-80 grow shrink">
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">Your Name</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Your Name <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -168,7 +196,9 @@ function Profile() {
               </div>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">Roll Number</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Roll Number <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -183,58 +213,65 @@ function Profile() {
           </div>
           <div className="flex justify-between gap-4 flex-wrap">
             <div className="basis-32 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">Course Type</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Course Type <span className="text-red-500">*</span>
+              </label>
               <Select
                 value={selectedCourse}
                 onChange={(option) => setSelectedCourse(option)}
                 style={{
                   width: "100%"
                 }}
-                options={profile.courses.map((course) => {
-                  return {
-                    value: course,
-                    label: course
-                  };
-                })}
+                options={profile.courses.map((course) => ({
+                  value: course,
+                  label: course
+                }))}
               />
             </div>
             <div className="mb-4 basis-72 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">Department</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Department <span className="text-red-500">*</span>
+              </label>
               <Select
                 value={selectedDepartment}
                 onChange={(option) => setSelectedDepartment(option)}
                 style={{
                   width: "100%"
                 }}
-                options={profile.departments.map((department) => {
-                  return {
-                    value: department,
-                    label: department
-                  };
-                })}
+                options={profile.departments.map((department) => ({
+                  value: department,
+                  label: department
+                }))}
               />
             </div>
           </div>
+
           <div className="flex justify-between gap-4 flex-wrap pb-2">
             <div className="basis-32 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">CGPA</label>
+              <label className="block text-sm font-medium text-gray-700">
+                CGPA <span className="text-red-500">*</span>
+              </label>
               <input
-                  type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={CGPA}
-                  onChange={(e) => setCGPA(e.target.value)}
-                  placeholder="Current Grade"
-                />
+                type="text"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={CGPA}
+                onChange={(e) => setCGPA(e.target.value)}
+                placeholder="Current Grade"
+              />
             </div>
             <div className="basis-32 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">Year Of Grad</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Year Of Grad <span className="text-red-500">*</span>
+              </label>
               <DatePicker
                 className="grow shrink w-full pb-2 mt-1"
                 picker="year"
+                selected={yearOfGrad} // Changed from value to selected
                 onChange={(value) => handleYearOfGrad(value)}
-                placeholder="Year of Graduation"
+                placeholderText="Year of Graduation"
               />
             </div>
+
             <div className="basis-32 grow shrink">
               <label className="block text-sm font-medium text-gray-700">DOB</label>
               <DatePicker
@@ -247,37 +284,45 @@ function Profile() {
             </div>
           </div>
           <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Email <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Eg. abc@gmail.com"
+            />
+          </div>
+
+          <div className="flex justify-between gap-4 flex-wrap">
+            <div className="basis-32 grow shrink">
+              <label className="block text-sm font-medium text-gray-700">
+                Gender <span className="text-red-500">*</span>
+              </label>
               <input
                 type="text"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Eg. abc@gmail.com"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                placeholder="Your Gender"
               />
-          </div>
-          <div className="flex justify-between gap-4 flex-wrap">
-            <div className="basis-32 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">Gender</label>
-              <input
-                  type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  placeholder="Your Gender"
-                />
             </div>
             <div className="mb-4 basis-72 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">Contact Number</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Contact Number <span className="text-red-500">*</span>
+              </label>
               <input
-                  type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={number}
-                  onChange={(e) => setNumber(e.target.value)}
-                  placeholder="Mobile Number"
-                />
+                type="text"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+                placeholder="Mobile Number"
+              />
             </div>
           </div>
+
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700">Fields of Interest</label>
             <div className="flex gap-2 flex-wrap py-2">
