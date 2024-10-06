@@ -42,11 +42,7 @@ app.use("/", authRoutes);
 // admin routes
 app.use("/api/v1/admin/controls", verifyJWT, adminGuard, adminControlRouter);
 app.use("/api/v1/admin/updates", verifyJWT, adminGuard, adminUpdateRoutes);
-app.use(
-  "/api/v1/admin/branches",
-
-  adminBranchNameChangeRouter
-);
+app.use("/api/v1/admin/branches", adminBranchNameChangeRouter);
 
 // student routes
 app.use("/api/v1/students", verifyJWT, studentRoutes);

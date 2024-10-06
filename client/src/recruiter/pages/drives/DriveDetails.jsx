@@ -28,7 +28,7 @@ const DriveDetail = () => {
     <>
       {/* Drive Header Section */}
       <div className="max-w-4xl mt-8 mx-auto p-6 bg-white shadow-md rounded-lg mb-8">
-        <div className="flex justify-between items-start">
+        <div className="flex justify-between items-start max-sm:flex-col max-sm:gap-4">
           <div className="flex-1">
             <h3 className="text-2xl font-bold text-gray-800">{drive.title}</h3>
             <p className="text-sm text-gray-600 mt-1">{drive.prof_name}</p>
@@ -68,12 +68,12 @@ const DriveDetail = () => {
 
       {/* Drive Details Section */}
       <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8">
-        <h1 className="text-3xl font-bold mb-6 text-gray-800">Drive Overview</h1>
+        <h1 className="max-sm:text-xl text-3xl font-bold mb-6 text-gray-800">Drive Overview</h1>
 
         {/* Combined Section */}
         <section className="mb-6">
-          <h2 className="text-xl font-semibold mb-4 text-gray-800">About the Drive</h2>
-          <p className="text-gray-700 leading-relaxed text-base mb-4">{drive.description}</p>
+          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">About the Drive</h2>
+          <p className="max-sm:text-sx text-gray-700 leading-relaxed text-base mb-4">{drive.description}</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-gray-100 p-4 rounded-lg">

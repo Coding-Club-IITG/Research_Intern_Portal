@@ -12,7 +12,7 @@ const AppLayout = () => {
       </div>
       <div className="flex-col-reverse flex md:flex-row custom-layout-height overflow-hidden">
         <LeftNav />
-        <div className="flex-1 pl-4 pr-4 h-full w-full overflow-y-scroll">
+        <div className="flex-1 p-8 max-sm:p-4 h-full w-full overflow-y-scroll">
           <Outlet />
         </div>
       </div>

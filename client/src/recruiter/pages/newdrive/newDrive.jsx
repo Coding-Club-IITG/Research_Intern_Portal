@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import { Select } from "antd";
 
 const NewDrive = () => {
@@ -52,6 +54,7 @@ const NewDrive = () => {
     { value: "Other", label: "Other" }
   ];
 
+
   return (
     <form onSubmit={handleSubmit} className="py-4 px-8 bg-white shadow-lg rounded-lg space-y-4">
       <h2 className="text-2xl font-bold text-center">Create New Internship Opportunity</h2>
@@ -93,13 +96,23 @@ const NewDrive = () => {
             <label className="font-semibold">
               Internship Description <span className="text-red-500">*</span>
             </label>
-            <textarea
+            {/* <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
-              className="border border-gray-300 rounded p-2 mt-1 ml-0 w-full"
+              className="border border-gray-300 rounded p-2 mt-1 ml-0 w-full h-80"
               required
-            />
+            /> */}
+            <div className="my-4 h-80">
+              <ReactQuill
+                name="description"
+                required
+                theme="snow"
+                value={formData.description}
+                onChange={(value) => setFormData({ ...formData, description: value })} 
+                className="h-[90%] rounded-sm"
+              />
+            </div>
           </div>
         </div>
 

@@ -10,8 +10,8 @@ import {
 
 const LeftNav = () => {
   return (
-    <div className="w-28 h-full shadow-md">
-      <div className="space-y-4 mt-4">
+    <div className="w-full md:w-20 lg:w-28 h-18 md:h-full shadow-md">
+      <div className="md:space-y-4 md:mt-4 flex md:flex-col md:px-0 px-2 md:gap-2 gap-6 max-sm:items-center max-sm:justify-center overscroll-x-scroll">
         <NavLink
           to="home"
           className={({ isActive }) =>
@@ -21,7 +21,7 @@ const LeftNav = () => {
           }
           exact>
           <HomeIcon className="h-6 w-6 text-gray-700" />
-          <span className="mt-1">Home</span>
+          <span className="mt-1 max-sm:text-xs">Home</span>
         </NavLink>
 
         <NavLink
@@ -33,7 +33,7 @@ const LeftNav = () => {
           }
           exact>
           <UserIcon className="h-6 w-6 text-gray-700" />
-          <span className="mt-1">Profile</span>
+          <span className="mt-1 max-sm:text-xs">Profile</span>
         </NavLink>
 
         <NavLink
@@ -45,7 +45,7 @@ const LeftNav = () => {
           }
           exact>
           <BriefcaseIcon className="h-6 w-6 text-gray-700" />
-          <span className="mt-1">Drives</span>
+          <span className="mt-1 max-sm:text-xs">Drives</span>
         </NavLink>
 
         <NavLink
@@ -57,7 +57,7 @@ const LeftNav = () => {
           }
           exact>
           <PlusIcon className="h-6 w-6 text-gray-700" />
-          <span className="mt-1">New Drive</span>
+          <span className="mt-1 max-sm:text-xs">New Drive</span>
         </NavLink>
 
         <NavLink
@@ -69,7 +69,7 @@ const LeftNav = () => {
           }
           exact>
           <BugAntIcon className="h-6 w-6 text-gray-700" />
-          <span className="mt-1">Bug Report</span>
+          <span className="mt-1 max-sm:text-xs">Bug Report</span>
         </NavLink>
       </div>
     </div>

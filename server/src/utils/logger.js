@@ -1,20 +1,17 @@
 import { createLogger, format, transports } from 'winston';
-const { combine, timestamp, printf, colorize } = format;
+const { combine, timestamp, colorize, prettyPrint, json, label } = format;
+
 //for format
-const myFormat = printf(({ level, message, timestamp }) => {
-  return `${timestamp} [${level}]: ${message}`;
-});
+// const myFormat = printf(({ level, message, timestamp }) => {
+//   return `${timestamp} [${level}]: ${message}`;
+// });
 
 const logger = createLogger({
   level: 'info', // Set the minimum log level (info, error, warn, etc.)
-  format: combine(
-    timestamp(),
-    colorize(),
-    myFormat
-  ),
+  format: combine( timestamp(), json(), colorize(), label({ label: 'server log' }),), 
   transports: [
-    new transports.Console(), // Output to console
-    // new transports.File({ filename: 'combined.log' }) // Output to a log file
+    new transports.File({ filename: 'error.log', level: 'error' }),
+    new transports.File({ filename: 'combined.log' }),
   ],
 });
 
