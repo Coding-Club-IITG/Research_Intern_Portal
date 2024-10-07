@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { message } from "antd";
 
 function Form() {
   const [formData, setFormData] = useState({
@@ -17,9 +18,14 @@ function Form() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!formData.title || !formData.description) {
+      message.error("Please fill in all required fields.");
+      return;
+    }
+
     console.log("Form submitted:", formData);
 
-    alert("Form successfully submitted!");
+    message.success("Form successfully submitted!");
 
     setFormData({
       title: "",
@@ -35,7 +41,7 @@ function Form() {
       <form onSubmit={handleSubmit}>
         <div className="mb-5">
           <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
-            Title:
+            Title <span className="text-red-500">*</span>:
           </label>
           <input
             type="text"
@@ -50,7 +56,7 @@ function Form() {
 
         <div className="mb-5">
           <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-            Description:
+            Description <span className="text-red-500">*</span>:
           </label>
           <textarea
             id="description"

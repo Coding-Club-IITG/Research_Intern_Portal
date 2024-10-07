@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DatePicker, Select } from "antd";
+import { message, DatePicker, Select } from "antd";
 import moment from "moment";
 import ProfilePic from "../../../root-components/ProfilePic";
 import QualificationCard from "./QualificationCard";
@@ -29,28 +29,29 @@ function Profile() {
     interests: ["software dev", "machine learning"],
     social: {
       website: "https://aditya-samal/Portfolio",
-      linkedin: "https://linkedin.com/in/",
+      linkedin: "https://linkedin.com/in/"
     },
     qualifications: [],
     experiences: [],
     department: "",
-    number:"",
-    gender:"",
+    number: "",
+    gender: "",
     DOB: "",
-    email:"",
-    achievements:"",
-    bio:"",
+    email: "",
+    achievements: "",
+    bio: ""
   };
 
   // Profile Information
   const [name, setName] = useState(profile.name || "");
   const [selectedDepartment, setSelectedDepartment] = useState(profile.department || "Select");
+
   const [DOB, setDOB] = useState(profile?.DOB ? moment(profile.DOB) : null);
   const handleDOB = (value) => {
-    setDOB(value ? value.format("YYYY-MM-DD") : null);
+    setDOB(value);
   };
 
-  const [email,setEmail] = useState(profile.email || "")
+  const [email, setEmail] = useState(profile.email || "");
   const [gender, setGender] = useState(profile.gender || "");
   const [number, setNumber] = useState(profile.number || "");
   const [interests, setInterests] = useState(profile.interests || []);
@@ -97,20 +98,38 @@ function Profile() {
   const [achievements, setAchievements] = useState(profile.achievements || "");
 
   const handleSaveProfile = () => {
+    if (
+      !name.trim() ||
+      !email.trim() ||
+      selectedDepartment === "Select" ||
+      !number ||
+      !gender.trim()
+    ) {
+      message.error("Please fill in all required fields.");
+      return;
+    }
+
     const updatedProfile = {
       ...profile,
       name,
       department: selectedDepartment,
+      gender,
+      email,
+      number,
+      DOB,
       interests,
       bio,
       social: {
         website,
-        linkedin,
+        linkedin
       },
       qualifications,
       experiences,
       achievements
     };
+
+    message.success("Profile updated successfully!");
+    console.log(updatedProfile);
   };
 
   return (
@@ -126,7 +145,9 @@ function Profile() {
           <div className="flex w-full justify-between items-center flex-wrap">
             <div className="flex-col basis-80 grow shrink">
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">Your Name</label>
+                <label className="block text-sm font-medium text-gray-700">
+                  Your Name <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -134,17 +155,18 @@ function Profile() {
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
-                        <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Email</label>
-              <input
-                type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Eg. abc@gmail.com"
-              />
-          </div>
-              
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Eg. abc@gmail.com"
+                />
+              </div>
             </div>
             <div className="basis-32 px-8 py-2 justify-center items-center">
               <ProfilePic />
@@ -153,7 +175,9 @@ function Profile() {
 
           <div className="flex justify-between gap-4 flex-wrap">
             <div className="mb-4 basis-72 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">Department</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Department <span className="text-red-500">*</span>
+              </label>
               <Select
                 className="mt-1"
                 value={selectedDepartment}
@@ -169,6 +193,7 @@ function Profile() {
                 })}
               />
             </div>
+
             <div className="basis-32 grow shrink">
               <label className="block text-sm font-medium text-gray-700">DOB</label>
               <DatePicker
@@ -183,24 +208,29 @@ function Profile() {
 
           <div className="flex justify-between gap-4 flex-wrap">
             <div className="basis-32 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">Gender</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Gender <span className="text-red-500">*</span>
+              </label>
               <input
-                  type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  placeholder="Your Gender"
-                />
+                type="text"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+                placeholder="Your Gender"
+              />
             </div>
+
             <div className="mb-4 basis-72 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">Contact Number</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Contact Number <span className="text-red-500">*</span>
+              </label>
               <input
-                  type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={number}
-                  onChange={(e) => setNumber(e.target.value)}
-                  placeholder="Mobile Number"
-                />
+                type="text"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+                placeholder="Mobile Number"
+              />
             </div>
           </div>
           <div className="mb-4">
@@ -306,7 +336,11 @@ function Profile() {
         </div>
         <div className="flex-col pl-4 md:basis-2/3 grow shrink">
           {qualifications.map((edu, index) => (
-            <QualificationCard key={index} qualification={edu} onDelete={() => deleteQualification(index)} />
+            <QualificationCard
+              key={index}
+              qualification={edu}
+              onDelete={() => deleteQualification(index)}
+            />
           ))}
           {addEdu ? (
             <QualificationForm
