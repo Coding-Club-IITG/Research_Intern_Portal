@@ -1,7 +1,4 @@
-
-
-
- import Jobs from "../models/jobs.js";
+import Jobs from "../models/jobs.js";
 
 
  //creating the job 

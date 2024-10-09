@@ -14,88 +14,7 @@ const router = express.Router();
  *   name: Recruiters
  *   description: API for managing recruiters
  */
-/**
- * @swagger
- * components:
- *   schemas:
- *     Recruiter:
- *       type: object
- *       required:
- *         - name
- *         - email
- *       properties:
- *         name:
- *           type: string
- *           description: The recruiter's name
- *         areaOfInterest:
- *           type: array
- *           items:
- *             type: string
- *           description: Areas of interest of the recruiter
- *         university:
- *           type: string
- *           description: The university the recruiter is associated with
- *         email:
- *           type: string
- *           description: The recruiter's email address
- *         socialMedia:
- *           type: object
- *           properties:
- *             linkedIn:
- *               type: string
- *               description: LinkedIn profile of the recruiter
- *             twitter:
- *               type: string
- *               description: Twitter handle of the recruiter
- *           description: Social media profiles of the recruiter
- *         phoneNumber:
- *           type: number
- *           description: The recruiter's phone number
- *         isActive:
- *           type: boolean
- *           default: true
- *           description: Whether the recruiter is active
- *         createdAt:
- *           type: string
- *           format: date-time
- *           description: When the recruiter was created
- *         updateAt:
- *           type: string
- *           format: date-time
- *           description: When the recruiter was last updated
- *         rating:
- *           type: number
- *           default: 5
- *           description: The recruiter's rating
- *         qualifications:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               degree:
- *                 type: string
- *                 description: The degree obtained by the recruiter
- *               year:
- *                 type: number
- *                 description: The year the degree was obtained
- *               college:
- *                 type: string
- *                 description: The college where the degree was obtained
- *               comments:
- *                 type: string
- *                 description: Additional comments about the qualification
- *           description: The recruiter's qualifications
- *         isVerified:
- *           type: boolean
- *           default: false
- *           description: Whether the recruiter is verified
- *         jobs:
- *           type: array
- *           items:
- *             type: string
- *             description: ObjectId references to jobs associated with the recruiter
- *           description: List of jobs posted by the recruiter
- */
+
 
 router.route("/").get(getRecruiters).post(createRecuiter);
 
@@ -172,7 +91,6 @@ router
 
 export default router;
 
-
 /**
  * @swagger
  * tags:
@@ -182,7 +100,7 @@ export default router;
 
 /**
  * @swagger
- * /recruiters:
+ * /api/v1/recruiters:
  *   post:
  *     tags: [Recruiters]
  *     summary: Create a new recruiter
@@ -208,7 +126,7 @@ export default router;
 
 /**
  * @swagger
- * /recruiters:
+ * /api/v1/recruiters:
  *   get:
  *     tags: [Recruiters]
  *     summary: Retrieve all recruiters
@@ -221,7 +139,7 @@ export default router;
 
 /**
  * @swagger
- * /recruiters/{id}:
+ * /api/v1/recruiters/{id}:
  *   get:
  *     tags: [Recruiters]
  *     summary: Retrieve a recruiter by ID
@@ -243,7 +161,7 @@ export default router;
 
 /**
  * @swagger
- * /recruiters/{id}:
+ * /api/v1/recruiters/{id}:
  *   put:
  *     tags: [Recruiters]
  *     summary: Update a recruiter by ID
@@ -308,7 +226,7 @@ export default router;
 
 /**
  * @swagger
- * /recruiters/{id}:
+ * /api/v1/recruiters/{id}:
  *   delete:
  *     tags: [Recruiters]
  *     summary: Delete a recruiter by ID

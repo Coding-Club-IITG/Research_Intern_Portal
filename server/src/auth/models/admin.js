@@ -20,4 +20,35 @@ const admin = new mongoose.Schema({
   },
 });
 
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Admin:
+ *       type: object
+ *       required:
+ *         - name
+ *         - email
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the admin.
+ *           example: John Doe
+ *         email:
+ *           type: string
+ *           description: The email of the admin, must be unique.
+ *           example: admin@example.com
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date and time when the admin account was created.
+ *           example: 2024-10-09T14:48:00.000Z
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date and time when the admin account was last updated.
+ *           example: 2024-10-09T14:48:00.000Z
+ */
+
 export default mongoose.model("Admin", admin);

@@ -23,115 +23,11 @@ const router = express.Router();
 
 // router.post('/create' , createStudent)
 
-/**
- * @swagger
- * components:
- *   schemas:
- *     Student:
- *       type: object
- *       properties:
- *         id:
- *           type: string
- *           description: The student ID
- *         name:
- *           type: string
- *           description: The name of the student
- *         email:
- *           type: string
- *           description: The email address of the student
- *         phoneNumber:
- *           type: number
- *           description: The phone number of the student
- *         rollNo:
- *           type: number
- *           description: The roll number of the student
- *         college:
- *           type: string
- *           description: The college of the student
- *         gender:
- *           type: string
- *           description: The gender of the student
- *         course:
- *           type: string
- *           description: The course of the student
- *         department:
- *           type: string
- *           description: The department of the student
- *         cpi:
- *           type: number
- *           description: The CPI of the student
- *         dob:
- *           type: string
- *           format: date
- *           description: The date of birth of the student
- *         yearOfGrad:
- *           type: number
- *           description: The year of graduation of the student
- *         resume:
- *           type: string
- *           description: The URL of the student's resume
- *         interest:
- *           type: array
- *           items:
- *             type: string
- *           description: The interests of the student
- *         prevEducation:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               degree:
- *                 type: string
- *               year:
- *                 type: number
- *               college:
- *                 type: string
- *               grade:
- *                 type: string
- *         applications:
- *           type: array
- *           items:
- *             $ref: '#/components/schemas/Update' # Reference to another schema
- *         previousExperience:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               role:
- *                 type: string
- *                 description: The role or position held at the company or college.
- *               company_college:
- *                 type: string
- *                 description: The name of the company or college.
- *               description:
- *                 type: string
- *                 description: A brief description of the responsibilities or achievements in that role.
- *               start_date:
- *                 type: string
- *                 format: date
- *                 description: The start date of the experience (YYYY-MM-DD).
- *               end_date:
- *                 type: string
- *                 format: date
- *                 description: The end date of the experience (YYYY-MM-DD).
- *         bio:
- *           type: string
- *           description: A short biography of the student
- *         social:
- *           type: array
- *           items:
- *             type: object
- *             properties:
- *               platform:
- *                 type: string
- *               url:
- *                 type: string
- */
 
 
 /**
  * @swagger
- * /students:
+ *  /api/v1/students:
  *   get:
  *     summary: Retrieve a list of students
  *     tags: [Students]
@@ -160,7 +56,7 @@ router.get("/", getStudents);
 
 /**
  * @swagger
- * /students/{id}:
+ * /api/v1/students/{id}:
  *   get:
  *     summary: Retrieve a student by ID
  *     tags: [Students]
@@ -196,7 +92,7 @@ router.get("/:id", getStudentByID);
 
 /**
  * @swagger
- * /students/search-filter:
+ * /api/v1/students/search-filter:
  *   get:
  *     summary: Retrieve students based on filter criteria
  *     tags: [Students]
@@ -242,7 +138,7 @@ router.get("/search-filter", getStudentsByFilter);
 
 /**
  * @swagger
- * /students/search-interest:
+ * /api/v1/students/search-interest:
  *   get:
  *     summary: Retrieve students based on interests
  *     tags: [Students]
@@ -285,7 +181,7 @@ router.get("/search-interest", getStudentByInterests);
 
 /**
  * @swagger
- * /students/{id}/intern-applied:
+ * /api/v1/students/{id}/intern-applied:
  *   get:
  *     summary: Retrieve applications of a student
  *     tags: [Students]
@@ -323,7 +219,7 @@ router.get("/:id/intern-applied", getStudentsApplicationById);
 
 /**
  * @swagger
- * /students/{id}/intern-apply/{internId}:
+ * /api/v1/students/{id}/intern-apply/{internId}:
  *   post:
  *     summary: Apply for an internship
  *     tags: [Students]
@@ -364,7 +260,7 @@ router.post("/:id/intern-apply/:internId", addStudentsApplications);
 
 /**
  * @swagger
- * /students/{id}:
+ * /api/v1/students/{id}:
  *   put:
  *     summary: Update a student
  *     tags: [Students]

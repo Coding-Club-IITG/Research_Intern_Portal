@@ -50,7 +50,7 @@ app.use("/api/v1/students", verifyJWT, studentRoutes);
 app.use("/api/v1/recruiters", verifyJWT, recruiterGuard, recruiterRoutes);
 app.use("/api/v1/job", verifyJWT, recruiterGuard, jobRoutes);
 
-// app.use("/api/v1/admin", bugRoutes);
+// app.use("/api/v1/admin/bugs", bugRoutes);
 
 // test route
 app.get("/ping", (req, res) => {
