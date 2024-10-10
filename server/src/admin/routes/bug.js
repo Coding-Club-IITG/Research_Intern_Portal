@@ -1,15 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Bug = require("../models/bug");
+const { createBugReport, getAllBugReports } = require("../controller/bug");
 
-router.get("/bugs", async (req, res) => {
-  try {
-    const bugs = await Bug.find().populate("userId", "name email"); // Populate user details
-    res.status(200).json(bugs);
-  } catch (error) {
-    console.error("Error fetching bugs:", error);
-    res.status(500).json({ error: "Failed to fetch bugs" });
-  }
-});
+router.post("/", createBugReport); // Create a new bug report
+router.get("/", getAllBugReports); // Retrieve all bug reports
+
+
+// it is not working properly if i add swagger of this bug route
 
 module.exports = router;
