@@ -6,6 +6,9 @@ const Recruiter = new mongoose.Schema({
     type: String,
     required: true,
   },
+  gender: {
+    type: String,
+  },
   areaOfInterest: {
     type: [String],
   },
@@ -17,6 +20,9 @@ const Recruiter = new mongoose.Schema({
     unqiue: true,
     required: true,
   },
+  department: {
+    type: String,
+  },
   socialMedia: {
     linkedIn: {
       type: String,
@@ -24,6 +30,9 @@ const Recruiter = new mongoose.Schema({
     twitter: {
       type: String,
     },
+    website: {
+      type: String
+    }
   },
   phoneNumber: {
     type: Number,
@@ -51,13 +60,16 @@ const Recruiter = new mongoose.Schema({
         degree: {
           type: String,
         },
-        year: {
+        startYear: {
+          type: Number,
+        },
+        endYear: {
           type: Number,
         },
         college: {
           type: String,
         },
-        commnets: {
+        description: {
           type: String,
         },
       },
@@ -74,11 +86,6 @@ const Recruiter = new mongoose.Schema({
     },
   ],
 });
-Recruiter.index({ email: 1 }, { unique: true });
-// serSchema.index({ username: 1, email: 1 }, { unique: true});
-
-
-
 
 
 /**

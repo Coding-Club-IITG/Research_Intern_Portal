@@ -1,13 +1,13 @@
 import { Button, DatePicker } from "antd";
 import { useState } from "react";
 
-function QualificationForm({ profile, setAddEdu, updateProfile }) {
+function QualificationForm({ setAddEdu, updateProfile }) {
   const [formData, setFormData] = useState({
-    name: "",
-    role: "",
+    college: "",
+    degree: "",
     description: "",
-    startDate: null,
-    endDate: null,
+    startYear: null,
+    endYear: null,
   });
 
   const handleInputChange = (e) => {
@@ -34,8 +34,8 @@ function QualificationForm({ profile, setAddEdu, updateProfile }) {
         <label className="block text-sm font-medium text-gray-700">Name Of Institute</label>
         <input
           type="text"
-          name="name"
-          value={formData.name}
+          name="college"
+          value={formData.college}
           onChange={handleInputChange}
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           placeholder="Enter the name of the institute"
@@ -47,8 +47,8 @@ function QualificationForm({ profile, setAddEdu, updateProfile }) {
           <label className="block text-sm font-medium text-gray-700">Degree (Field Of Study)</label>
           <input
             type="text"
-            name="role"
-            value={formData.role}
+            name="degree"
+            value={formData.degree}
             onChange={handleInputChange}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             placeholder="e.g. Computer Science"
@@ -59,7 +59,7 @@ function QualificationForm({ profile, setAddEdu, updateProfile }) {
           <DatePicker
             className="grow shrink w-full"
             picker="year"
-            onChange={(value) => handleDateChange("startDate", value)}
+            onChange={(value) => handleDateChange("startYear", value)}
             placeholder="Select start year"
           />
         </div>
@@ -68,7 +68,7 @@ function QualificationForm({ profile, setAddEdu, updateProfile }) {
           <DatePicker
             className="grow shrink w-full"
             picker="year"
-            onChange={(value) => handleDateChange("endDate", value)}
+            onChange={(value) => handleDateChange("endYear", value)}
             placeholder="Select end year"
           />
         </div>

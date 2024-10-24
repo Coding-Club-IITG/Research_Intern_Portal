@@ -1,5 +1,5 @@
 import { User } from "./model.js";
-import Recruiter from "../recruiter/models/jobs.js";
+import Recruiter from "../recruiter/models/recruiter.js";
 import { roles } from "../utils/roles.js";
 import Student from "../students/models/student.js";
 
@@ -23,12 +23,12 @@ export const createUser = async (data) => {
         updatedAt: new Date(),
       });
     } else if (typeOfUser === roles.RECRUITER) {
-      user = await Recruiter.create({
-        name,
-        email,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
+        user = await Recruiter.create({
+          name,
+          email,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
     } else if (typeOfUser === roles.ADMIN) {
       user = await Admin.create({
         name,
