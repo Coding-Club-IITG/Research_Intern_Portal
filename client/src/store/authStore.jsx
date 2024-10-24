@@ -19,6 +19,11 @@ const useAuthStore = create((set) => ({
         set({ isAuthenticated: false, token: null, role: null, loading: false });
     }
   },
+
+  getUser: () => {
+    const user = Cookies.get('user');
+    return JSON.parse(user);
+  },
   
   logout: () => {
     Cookies.remove('jwt');

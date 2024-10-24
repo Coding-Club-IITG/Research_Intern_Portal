@@ -1,5 +1,3 @@
-import { application } from "express";
-
 import mongoose from "mongoose";
 
 const requirementSchema = new mongoose.Schema({
@@ -8,7 +6,7 @@ const requirementSchema = new mongoose.Schema({
         required: true,
     },
     branch: {
-        type: String,
+        type: [String],
         required: true,
     },
     study_year: {
@@ -56,17 +54,24 @@ const JobSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    applicants: [String],
+    applicants: [{
+        applicant: String,
+        enum: ["pending", "accepted", "rejected"],
+    }],
     
     requirements: requirementSchema,
+
     accepting: {
         type: Boolean,
-         default: true,
-        required: true,
-        
+        default: true,
+        required: true, 
     },
     last_date: {
         type: Date,
+        required: true,
+    },
+    recruiter: {
+        type: String,
         required: true,
     }
 });

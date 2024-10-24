@@ -53,7 +53,7 @@ export const onedriveRedirect = async (req, res) => {
       grant_type: "authorization_code",
       client_secret: clientSecret,
     });
-    console.log("I am here 1");
+
     const tokenResponse = await fetch(tokenUrl, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -73,7 +73,7 @@ export const onedriveRedirect = async (req, res) => {
     };
 
     const jwtToken = jwt.sign(jwtPayload, "fdgt4t93xzc3252523");
-    console.log("I am here 2");
+  
     res.cookie("jwt", jwtToken, {
       httpOnly: false,
       secure: false,

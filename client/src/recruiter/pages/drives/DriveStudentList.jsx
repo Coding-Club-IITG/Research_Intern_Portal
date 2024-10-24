@@ -1,21 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Table, Space, Typography } from "antd";
-import my_drives from "./my_drives";
-
-const { Title } = Typography;
+import { Table, Space, Typography, message } from "antd";
+import { getAllStudentsOfJob } from "../../../apis/recruiter";
 
 function DriveStudentList() {
   const { driveIndex } = useParams();
-  const index = parseInt(driveIndex, 10);
-  const drive = my_drives[index];
-  const applicants = drive.applicants;
-
+  const [applicants, setApplicants] = useState([]);
   const navigate = useNavigate();
 
   function handleView(roll) {
     navigate(`/recruiter/profile/student/${roll}`);
   }
+
+  useEffect(() => {
+    async function fetchApplicants() {
+      message.loading({ content: "Loading...", key: "loading" });
+      const res = await getAllStudentsOfJob(driveIndex);
+      if (res.status === "success") {
+        message.destroy("loading");
+        setApplicants(res.data);
+      }
+    }
+
+    fetchApplicants();  
+  }, [])
+
+  console.log(applicants);
 
   const columns = [
     {
@@ -82,9 +92,9 @@ function DriveStudentList() {
 
   return (
     <div className="w-full p-4 md:p-6 flex flex-col items-center">
-      <Title level={2} className="text-center mb-4 md:mb-6">
+      <h1 className="text-center mb-4 md:mb-6">
         Applicants List
-      </Title>
+      </h1>
 
       {applicants.length === 0 ? (
         <div className="text-center text-gray-600">No applicants available.</div>

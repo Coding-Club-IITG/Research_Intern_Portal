@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { message, DatePicker, Select } from "antd";
-import moment from "moment";
 import ProfilePic from "../../../root-components/ProfilePic";
 import QualificationCard from "./QualificationCard";
 import QualificationForm from "./QualificationForm";
-import ExperienceCard from "../../../root-components/ExperienceCard";
-import ExperienceForm from "../../../root-components/ExperienceForm";
 import { getRecruiter, updateRecruiter } from "../../../apis/recruiter";
+import useAuthStore from "../../../store/authStore";
 
 function Profile() {
+  const { getUser } = useAuthStore();
+  const user = getUser();
 
   useEffect(() => {
     async function getUser(){
-        const res = await getRecruiter('671a4d6c09e816ee2fe4e03d');
+        const res = await getRecruiter(user.connection_id);
         setName(res.data?.name || "");
         setEmail(res.data?.email || "");
         setSelectedDepartment(res.data?.department || "Select");
@@ -91,7 +91,7 @@ function Profile() {
     };
     console.log(qualifications);
 
-    const res = await updateRecruiter('671a4d6c09e816ee2fe4e03d',updatedProfile);
+    const res = await updateRecruiter(user.connection_id,updatedProfile);
 
     if(res.status === "success"){
       message.destroy("saveProfile");

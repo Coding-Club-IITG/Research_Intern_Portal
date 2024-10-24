@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Select } from "antd";
+import { Select, message } from "antd";
 import { useParams } from "react-router-dom";
-import my_drives from "./my_drives";
 import { useNavigate } from "react-router-dom";
-
-
+import { getJobById, updateJob } from "../../../apis/recruiter";
 
 const EditDrive = () => {
   const { driveIndex } = useParams();
@@ -30,10 +28,16 @@ const EditDrive = () => {
   const navigate=useNavigate();
 
   useEffect(() => {
-    const drive = my_drives[driveIndex];
-    if (drive) {
-      setFormData(drive);
+    async function fetchDrive() {
+      message.loading({ content: "Loading...", key: "loading" });
+      const res = await getJobById(driveIndex);
+      if(res.status === "success"){
+        message.destroy("loading");
+        setFormData(res.data);
+      }
     }
+
+    fetchDrive();
   }, [driveIndex]);
 
   const handleChange = (e) => {
@@ -51,9 +55,19 @@ const EditDrive = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    message.loading({ content: "Updating...", key: "updating" });
     e.preventDefault();
-    // Add form submission logic here (e.g., updating the drive)
+    
+    const res = await updateJob(driveIndex, formData);
+    if(res.status === "success"){
+      message.destroy("updating");
+      message.success("Drive updated successfully");
+      navigate(-1);
+    }else{
+      message.destroy("updating");
+      message.error("Failed to update drive");
+    }
   };
 
   const branchOptions = [

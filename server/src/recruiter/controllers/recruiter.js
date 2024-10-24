@@ -31,12 +31,13 @@ const getRecruiterById = async (req, res) => {
   try {
     const { id } = req.params;
     const recruiter = await Recruiter.findById(id);
-    console.log(recruiter)
+
     if (!recruiter) {
-      res.status(404).json({ status: "error", message: "No recruiter found with the provided ID", data: {} });
+      logger.error(`Recruiter not found with ID ${id}`);
+      return res.status(404).json({ status: "error", message: "Recruiter not found", data: {} });
     }
 
-    logger.info(`Recruiter found with ID ${id}`);
+    logger.info(`Recruiter retrieved successfully with ID ${id}`);
     return res.status(200).json({ status: "success", message: "Recruiter retrieved successfully", data: recruiter });
   } catch (err) {
     logger.error(err);

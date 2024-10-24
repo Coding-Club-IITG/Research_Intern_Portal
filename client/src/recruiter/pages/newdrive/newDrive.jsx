@@ -2,25 +2,29 @@ import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Select } from "antd";
+import { createJob } from "../../../apis/recruiter";
+import { message } from "antd";
+import useAuthStore from "../../../store/authStore";
 
-const NewDrive = () => {
+export default function NewDrive() {
+  const { getUser } = useAuthStore();
+  const user = getUser();
+
   const [formData, setFormData] = useState({
-    prof_name: "",
+    prof_name: user.name,
     title: "",
     description: "",
-    isActive: true,
     tags: "",
     type: "",
     stipend: "",
     hours_required: "",
-    applicants: [],
     requirements: {
       cpi: "",
       branch: [],
       study_year: ""
     },
-    accepting: true,
-    last_date: ""
+    last_date: "",
+    recruiter: user.connection_id,
   });
 
   const handleChange = (e) => {
@@ -38,9 +42,18 @@ const NewDrive = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    message.loading({ content: "Creating job listing...", key: "create-job" });
     e.preventDefault();
-    // Add form submission logic here
+    
+    const res = await createJob(formData);
+    if(res.status === "success"){
+      message.destroy("create-job");
+      message.success("Job listing created successfully");
+    }else{
+      message.destroy("create-job");
+      message.error("Failed to create job listing");
+    }
   };
 
   const branchOptions = [
@@ -73,7 +86,7 @@ const NewDrive = () => {
               name="prof_name"
               value={formData.prof_name}
               onChange={handleChange}
-              className="border border-gray-300 rounded p-2 mt-1 w-full"
+              className="border lowercase border-gray-300 rounded p-2 mt-1 w-full"
               required
             />
           </div>
@@ -246,5 +259,3 @@ const NewDrive = () => {
     </form>
   );
 };
-
-export default NewDrive;

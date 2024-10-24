@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import { getRecruiter } from "../../../apis/recruiter";
 import { message } from "antd";
+import useAuthStore from "../../../store/authStore";
 
 export default function Overview() {
     const [profileData, setProfileData] = useState({});
+    const { getUser } = useAuthStore();
+
+    const user = getUser();
   
     useEffect(() => {
       async function getUser(){
           message.loading({ content: "Fetching Profile...", key: "fetchProfile" });
 
-          const res = await getRecruiter('671a4d6c09e816ee2fe4e03d');
+          const res = await getRecruiter(user.connection_id);
           if(res.status === "success"){
             setProfileData(res?.data);
             message.destroy("fetchProfile");
