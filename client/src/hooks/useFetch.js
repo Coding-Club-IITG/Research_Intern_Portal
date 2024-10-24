@@ -6,6 +6,7 @@ export function useFetch(url) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [message, setMessage] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,8 +15,10 @@ export function useFetch(url) {
         setLoading(true);
         const response = await axios.get(url);
         setData(response.data);
+        setMessage(response.data.message);
       } catch (err) {
         setError(err);
+        setMessage(err.message);
         navigate("/500");
       } finally {
         setLoading(false);
@@ -23,5 +26,5 @@ export function useFetch(url) {
     })();
   }, [url, navigate]);
 
-  return { data, loading, error };
+  return { data, loading, error, message };
 }
