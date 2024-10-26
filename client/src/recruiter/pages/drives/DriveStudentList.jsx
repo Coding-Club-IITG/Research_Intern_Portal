@@ -15,7 +15,7 @@ function DriveStudentList() {
   useEffect(() => {
     async function fetchApplicants() {
       message.loading({ content: "Loading...", key: "loading" });
-      const res = await getAllStudentsOfJob(driveIndex);
+      const res = await getAllStudentsOfJob(driveIndex, navigate);
       if (res.status === "success") {
         message.destroy("loading");
         setApplicants(res.data);

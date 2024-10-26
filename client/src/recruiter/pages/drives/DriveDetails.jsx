@@ -7,11 +7,12 @@ import { message } from "antd";
 export default function DriveDetail() {
   const { driveIndex } = useParams();  
   const [drive, setDrive] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     message.loading({ content: "Loading...", key: "loading"});
     async function fetchDrive() {
-      const res = await getJobById(driveIndex);
+      const res = await getJobById(driveIndex, navigate);
       if(res.status === "success"){
         message.destroy("loading");
         setDrive(res.data); 
@@ -21,7 +22,7 @@ export default function DriveDetail() {
     fetchDrive();
   }, [])
 
-  const navigate = useNavigate();
+  
 
   const handleEdit = () => {
     navigate(`/recruiter/edit-drive/${driveIndex}`);

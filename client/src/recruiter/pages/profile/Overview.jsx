@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { getRecruiter } from "../../../apis/recruiter";
 import { message } from "antd";
 import useAuthStore from "../../../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 export default function Overview() {
     const [profileData, setProfileData] = useState({});
     const { getUser } = useAuthStore();
+    const navagate = useNavigate();
 
     const user = getUser();
   
@@ -13,7 +15,7 @@ export default function Overview() {
       async function getUser(){
           message.loading({ content: "Fetching Profile...", key: "fetchProfile" });
 
-          const res = await getRecruiter(user.connection_id);
+          const res = await getRecruiter(user.connection_id, navagate);
           if(res.status === "success"){
             setProfileData(res?.data);
             message.destroy("fetchProfile");
@@ -76,7 +78,13 @@ export default function Overview() {
   
           <div className="p-2 rounded-lg mb-2">
             <h2 className="text-blue-500 mb-2">Area of Intrests</h2>
-            <p className="black">{profileData?.areaOfInterest && profileData?.areaOfInterest.map(intrest=> intrest+ " ")}</p>
+            <div className="flex gap-2">
+              {profileData?.areaOfInterest && profileData?.areaOfInterest.map((intrest, index) => (
+                <span key={index} className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">
+                  {intrest}
+                </span>
+              ))}
+            </div>
           </div>
   
           <div className="bg-white p-2 rounded-lg mb-2">

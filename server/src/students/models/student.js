@@ -7,7 +7,6 @@ const studentSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    time: true,
     required: true,
     unique: true,
   },
@@ -112,10 +111,11 @@ const studentSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
+    default: Date.now,
   },
 });
 

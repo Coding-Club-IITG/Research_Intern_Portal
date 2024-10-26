@@ -3,16 +3,18 @@ import DriveCard from "./DriveCard";
 import { getJobsOfRecruiter } from "../../../apis/recruiter";
 import useAuthStore from "../../../store/authStore";
 import { message } from "antd";
+import { useNavigate } from "react-router-dom";
 
 function Drives() {
   const [jobs, setJobs] = useState([]);
   const { getUser } = useAuthStore();
   const user = getUser();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchJobs = async () => {
       message.loading({ content: "Loading...", key: "loading" });
-      const res = await getJobsOfRecruiter(user.connection_id);
+      const res = await getJobsOfRecruiter(user.connection_id, navigate);
       if(res.status === "success"){
         message.destroy("loading");
         setJobs(res.data);

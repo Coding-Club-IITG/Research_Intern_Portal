@@ -5,14 +5,16 @@ import QualificationCard from "./QualificationCard";
 import QualificationForm from "./QualificationForm";
 import { getRecruiter, updateRecruiter } from "../../../apis/recruiter";
 import useAuthStore from "../../../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const { getUser } = useAuthStore();
   const user = getUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getUser(){
-        const res = await getRecruiter(user.connection_id);
+        const res = await getRecruiter(user.connection_id, navigate);
         setName(res.data?.name || "");
         setEmail(res.data?.email || "");
         setSelectedDepartment(res.data?.department || "Select");

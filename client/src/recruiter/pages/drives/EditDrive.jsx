@@ -30,7 +30,7 @@ const EditDrive = () => {
   useEffect(() => {
     async function fetchDrive() {
       message.loading({ content: "Loading...", key: "loading" });
-      const res = await getJobById(driveIndex);
+      const res = await getJobById(driveIndex, navigate);
       if(res.status === "success"){
         message.destroy("loading");
         setFormData(res.data);
