@@ -14,7 +14,7 @@ jobRouter.get('stop/:id',stopAcceptingApplications);
 jobRouter.post('/',createJob );
 jobRouter.post('/apply', applyForJob);
 jobRouter.post('/filter',getJobByfilter );
-jobRouter.get('/open-jobs', getAllAcceptingJobs);
+jobRouter.get('/internship/accepting', getAllAcceptingJobs);
 
 
 

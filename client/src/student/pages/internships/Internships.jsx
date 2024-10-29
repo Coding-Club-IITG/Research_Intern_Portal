@@ -35,7 +35,10 @@ function Internships() {
         <div>Search For internships</div>
         <div>
         <button className="bg-gray-100 text-gray-700 px-4 py-2 text-sm rounded-lg hover:bg-gray-200"
-        onClick={()=>{getAllAcceptingJobs(navigate)}}>
+        onClick={async ()=>{
+          const acceptingJobs = await getAllAcceptingJobs(navigate)
+          console.log(acceptingJobs)
+          }}>
                 Get All Open Jobs
         </button>
         </div>
