@@ -21,11 +21,12 @@ export const onedriveLogin = async (req, res) => {
         response_type: "code",
         redirect_uri: redirectUri,
         response_mode: "query",
-        scope: "https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/User.Read offline_access",
+        scope:
+          "https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/User.Read offline_access",
         state: req.body.role, // we have to change this
       });
-      // console.log(authUrl)
-      logger.info(`${authUrl}`);
+    // console.log(authUrl)
+    logger.info(`${authUrl}`);
     res.redirect(authUrl);
   } catch (err) {
     logger.err(err);
@@ -47,7 +48,8 @@ export const onedriveRedirect = async (req, res) => {
     const tokenUrl = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
     const body = new URLSearchParams({
       client_id: clientId,
-      scope: "https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/User.Read offline_access",
+      scope:
+        "https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/User.Read offline_access",
       code: code,
       redirect_uri: redirectUri,
       grant_type: "authorization_code",
@@ -73,11 +75,11 @@ export const onedriveRedirect = async (req, res) => {
     };
 
     const jwtToken = jwt.sign(jwtPayload, "fdgt4t93xzc3252523");
-  
+
     res.cookie("jwt", jwtToken, {
       httpOnly: false,
       secure: false,
-      maxAge: 1000 * 60 * 60 * 24, 
+      maxAge: 1000 * 60 * 60 * 24,
     });
 
     const userDataFromGraphApi = await getUserFromToken(tokenData.access_token);
@@ -88,14 +90,14 @@ export const onedriveRedirect = async (req, res) => {
         name: findUser.name,
         user_id: findUser._id,
         connection_id: findUser.connection_id,
-        typeOfUser: findUser.typeOfUser
-      }
+        typeOfUser: findUser.typeOfUser,
+      };
 
       const stringify = JSON.stringify(userCookie);
 
       res.cookie("user", stringify, {
         httpOnly: false,
-        secure: false, 
+        secure: false,
         maxAge: 1000 * 60 * 60 * 24,
       });
 
@@ -103,7 +105,7 @@ export const onedriveRedirect = async (req, res) => {
         case roles.STUDENT:
           return res.redirect("http://localhost:3000/student/");
         case roles.RECRUITER:
-          console.log("i am here 4")
+          console.log("i am here 4");
           return res.redirect("http://localhost:3000/recruiter/");
         case roles.ADMIN:
           return res.redirect("http://localhost:3000/admin/");
@@ -115,23 +117,21 @@ export const onedriveRedirect = async (req, res) => {
     const createdUser = await createUser({
       name: userDataFromGraphApi.name,
       email: userDataFromGraphApi.email,
-      typeOfUser: state
+      typeOfUser: state,
     });
-
-
 
     const newUserCookie = {
       name: createdUser.name,
       user_id: createdUser._id,
       connection_id: createdUser.connection_id,
-      typeOfUser: createdUser.typeOfUser
+      typeOfUser: createdUser.typeOfUser,
     };
 
     const stringify = JSON.stringify(newUserCookie);
 
     res.cookie("user", stringify, {
       httpOnly: false,
-      secure: false, 
+      secure: false,
       maxAge: 1000 * 60 * 60 * 24,
     });
 
@@ -143,12 +143,16 @@ export const onedriveRedirect = async (req, res) => {
       case roles.ADMIN:
         return res.redirect("http://localhost:3000/admin/");
       default:
-        return res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
+        return res.status(500).json({
+          status: "error",
+          message: "Internal Server Error",
+          data: null,
+        });
     }
-
   } catch (err) {
     logger.error(err);
-    return res.status(500).json({ status: "error", message: "Internal Server Error", data: null });
+    return res
+      .status(500)
+      .json({ status: "error", message: "Internal Server Error", data: null });
   }
 };
-

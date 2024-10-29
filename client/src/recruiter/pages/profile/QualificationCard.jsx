@@ -1,10 +1,15 @@
+import useAuthStore from "../../../store/authStore";
+
 function QualificationCard({ qualification, onDelete }) {
+  const { getUser } = useAuthStore();
+  const user = getUser();
+  // console.log(qualification);
   const {
-    name = "Institution not specified",
-    role = "Degree not specified",
-    startDate = "Start date not specified",
-    endDate = "End date not specified",
-    description = "Description not specified",
+    college = "Institution not specified",
+    degree = "Degree not specified",
+    startYear = "Start date not specified",
+    endYear = "End date not specified",
+    description = "Description not specified"
   } = qualification;
 
   return (
@@ -27,9 +32,9 @@ function QualificationCard({ qualification, onDelete }) {
 
           <div>
             <div className="flex-col items-start justify-between">
-              <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
-              <p className="text-gray-600">{role}</p>
-              <p className="text-gray-500">{`${startDate} - ${endDate}`}</p>
+              <h3 className="text-lg font-semibold text-gray-900">{college}</h3>
+              <p className="text-gray-600">{degree}</p>
+              <p className="text-gray-500">{`${startYear} - ${endYear}`}</p>
             </div>
             <p className="text-gray-800 mt-3">{description}</p>
           </div>
@@ -37,7 +42,7 @@ function QualificationCard({ qualification, onDelete }) {
         <button
           className="text-red-500 hover:underline self-start ml-4"
           onClick={onDelete}
-          aria-label={`Delete qualification at ${name}`}>
+          aria-label={`Delete qualification at ${college}}`}>
           Delete
         </button>
       </div>

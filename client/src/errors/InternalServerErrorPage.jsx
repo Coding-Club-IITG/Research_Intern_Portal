@@ -2,8 +2,7 @@ import React from "react";
 
 const InternalServerErrorPage = () => {
   return (
-    <div
-      className="relative flex items-center justify-center h-screen w-screen bg-cover bg-center">
+    <div className="relative flex items-center justify-center h-screen w-screen bg-cover bg-center">
       <div className="relative z-10 text-center  p-8 max-w-2xl">
         <img src="/500.png" alt="500" className="w-96 mx-auto mb-8" />
         <h1 className="text-6xl md:text-8xl font-extrabold mb-6">500</h1>
