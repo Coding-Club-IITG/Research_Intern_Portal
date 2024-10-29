@@ -17,21 +17,21 @@ const ClientRoutes = () => {
       <Routes>
         <Route index element={<MainLandingPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/admin/*" element={<AdminRoutes />} />
+        {/* <Route path="/admin/*" element={<AdminRoutes />} />
         <Route path="/student/*" element={<StudentRoutes />} />
-        <Route path="/recruiter/*" element={<RecruiterRoutes />} />
-        {/* <Route
+        <Route path="/recruiter/*" element={<RecruiterRoutes />} /> */}
+        <Route
           path="/admin/*"
-          element={<ProtectedRoute element={<AdminRoutes />} allowedRoles={['admin']} />}
+          element={<ProtectedRoute element={<AdminRoutes />} allowedRoles={["admin"]} />}
         />
         <Route
           path="/student/*"
-          element={<ProtectedRoute element={<StudentRoutes />} allowedRoles={['student']} />}
+          element={<ProtectedRoute element={<StudentRoutes />} allowedRoles={["student"]} />}
         />
         <Route
           path="/recruiter/*"
-          element={<ProtectedRoute element={<RecruiterRoutes />} allowedRoles={['recruiter']} />}
-        /> */}
+          element={<ProtectedRoute element={<RecruiterRoutes />} allowedRoles={["recruiter"]} />}
+        />
         <Route path="/500" element={<InternalServerErrorPage />} />
         <Route path="/403" element={<AccessDeniedPage />} />
         <Route path="*" element={<NotFoundPage />} />
