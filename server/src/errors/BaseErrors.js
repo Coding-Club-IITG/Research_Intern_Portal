@@ -1,4 +1,4 @@
-import logger from "../utils/logger";
+import logger from "../utils/logger.js";
 
 class BaseError extends Error {
   constructor(name, statusCode, description, details) {
