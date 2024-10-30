@@ -38,6 +38,89 @@
 {"level":"error","message":"Recruiter not found with ID 671a4d6c09e816ee2fe4e03d","timestamp":"2024-10-24T17:03:00.376Z"}
 {"level":"error","message":"Recruiter not found with ID 671a4d6c09e816ee2fe4e03d","timestamp":"2024-10-24T17:03:28.985Z"}
 {"level":"error","message":"Recruiter not found with ID 671a4d6c09e816ee2fe4e03d","timestamp":"2024-10-24T17:04:07.111Z"}
+{"level":"error","timestamp":"2024-10-30T12:18:05.864Z"}{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T09:45:57.935Z"}
+{"level":"error","timestamp":"2024-10-29T09:46:41.421Z"}
+{"level":"error","timestamp":"2024-10-29T09:47:06.287Z"}
+{"level":"error","timestamp":"2024-10-29T09:49:30.169Z"}
+{"level":"error","timestamp":"2024-10-29T09:49:44.156Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T09:52:42.304Z"}
+{"level":"error","timestamp":"2024-10-29T09:58:06.520Z"}
+{"level":"error","timestamp":"2024-10-29T09:58:33.020Z"}
+{"level":"error","timestamp":"2024-10-29T09:59:43.822Z"}
+{"level":"error","timestamp":"2024-10-29T10:04:17.592Z"}
+{"level":"error","timestamp":"2024-10-29T10:04:47.341Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:07:14.744Z"}
+{"level":"error","timestamp":"2024-10-29T10:08:58.915Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:09:13.285Z"}
+{"level":"error","message":"Token fetch failed with status: Bad Request","timestamp":"2024-10-29T10:12:09.366Z"}
+{"level":"error","message":"Error in onedriveRedirect: Failed to fetch token: Bad Request","stack":"Error: Failed to fetch token: Bad Request\n    at onedriveRedirect (file:///Users/adityasamal/Documents/Research_Intern_Portal/server/src/auth/controllers/auth.js:71:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2024-10-29T10:12:09.367Z"}
+{"level":"error","message":"Error in onedriveRedirect: Operation `users.findOne()` buffering timed out after 10000ms","stack":"MongooseError: Operation `users.findOne()` buffering timed out after 10000ms\n    at Timeout.<anonymous> (/Users/adityasamal/Documents/Research_Intern_Portal/server/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:185:23)\n    at listOnTimeout (node:internal/timers:573:17)\n    at process.processTimers (node:internal/timers:514:7)","timestamp":"2024-10-29T10:12:23.282Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:12:33.110Z"}
+{"level":"error","timestamp":"2024-10-29T10:13:05.919Z"}
+{"level":"error","timestamp":"2024-10-29T10:13:19.808Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:13:32.698Z"}
+{"level":"error","timestamp":"2024-10-29T10:13:38.826Z"}
+{"level":"error","timestamp":"2024-10-29T10:13:52.783Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:14:06.710Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:14:41.470Z"}
+{"level":"error","timestamp":"2024-10-29T10:15:02.354Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:15:30.614Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:16:15.311Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:18:17.382Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:51:55.095Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017","timestamp":"2024-10-29T10:56:07.133Z"}
+{"level":"error","timestamp":"2024-10-29T10:59:17.175Z"}
+{"level":"error","timestamp":"2024-10-29T10:59:19.537Z"}
+{"level":"error","timestamp":"2024-10-29T11:01:10.505Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:04:41.403Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:04:41.411Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:04:53.470Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:04:53.477Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:01.057Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:01.061Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:05.364Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:05.369Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:06.783Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:06.789Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:08.061Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:08.065Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:09.792Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:09.797Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:19.843Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:19.850Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:38.576Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:05:38.580Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:06:26.781Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:06:26.785Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:06:35.387Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:06:35.390Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:06:38.168Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:06:38.172Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:11.642Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:11.645Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:12.665Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:12.670Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:13.363Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:13.367Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:13.946Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:13.950Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:14.477Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:14.482Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:14.971Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:14.977Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:18.474Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:18.477Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:28.054Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:28.056Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:29.613Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:07:29.617Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:08:48.023Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:08:48.027Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:09:12.376Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:09:12.382Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:09:22.619Z"}
+{"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:09:22.624Z"}
+
 {"level":"error","timestamp":"2024-10-30T12:18:05.864Z"}
 {"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:12:20.728Z"}
 {"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:12:20.740Z"}

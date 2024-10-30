@@ -60,7 +60,7 @@ function Profile() {
     async function getUser() {
       try {
         const res = await getStudent(user.connection_id, navigate);
-        console.log("res",res.data);
+        console.log(user.connection_id);
         setName(res.data?.name || "");
         setEmail(res.data?.email || "");
         setCGPA(res.data?.CGPA);

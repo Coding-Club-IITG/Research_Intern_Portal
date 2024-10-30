@@ -108,7 +108,6 @@ const updateStudent = async (req, res) => {
       data: student,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       status: "error",
       message: "Some Internal Server error occured",
@@ -215,8 +214,8 @@ const getStudentsByFilter = async (req, res) => {
       req.body;
     //making sure some numbers are sent from frontend for cpi, else puting the least and max poaaible value
     if (!rangeLowerCpi || !rangeUpperCpi) {
-      rangeLowerCpi = 0;
-      rangeUpperCpi = 100;
+      rangeLowerCpi = 0.0;
+      rangeUpperCpi = 10.0;
     }
 
     //using a array to store only such filters whoch are sent to the server. This removes any filter choice that might be null

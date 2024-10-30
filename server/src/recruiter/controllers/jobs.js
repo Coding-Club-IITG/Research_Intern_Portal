@@ -1,12 +1,14 @@
 import Jobs from "../models/jobs.js";
 import Student from "../../students/models/student.js";
+import logger from "../../utils/logger.js";
 
 const createJob = async(req,res)=>{
   try {
     const job = await Jobs.create(req.body);
     return res.status(201).json({ message: "Job created successfully", data: job, status: "success" });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    logger.error(error);
     return res.status(500).json({ message: "Server Error", status: "error", data: null });
   }
 }
@@ -18,7 +20,8 @@ const getAllJobsOfRecruiter = async (req, res) => {
 
     return res.status(200).json({ message: "Jobs retrieved successfully", data: jobs, status: "success" });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    logger.error(error);
     return res.status(500).json({ message: "Server Error", status: "error", data: null });
   }
 };
@@ -28,7 +31,8 @@ const getAllAcceptingJobs = async (req, res)=>{
     const activeJobs = await Jobs.find({accepting:true});
     return res.status(200).json({message:"Accepting Jobs Successfully retrieved",data:activeJobs,status:"success"});
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    logger.error(error);
     return res.status(500).json({ message: "Server Error", status: "error", data: null });
   }
 }
@@ -42,7 +46,8 @@ const getJob = async (req, res) => {
       data: getAllJobs,
     });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    logger.error(error);
     return res.status(500).json({ message: "Server Error", data: null, status: "error" });
   }
 };
@@ -50,7 +55,7 @@ const getJob = async (req, res) => {
 const getJobById = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(id);
+    // console.log(id);
     const job = await Jobs.findById(id);
     
     if (!job) {
@@ -59,7 +64,8 @@ const getJobById = async (req, res) => {
 
     return res.status(200).json({ message: "Job retrieved successfully", data: job, status: "success" });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    logger.error(error);
     return res.status(500).json({ message: "Server Error", data: null, status: "error" });
   }
 };
@@ -75,7 +81,8 @@ const stopAcceptingApplications = async (req, res) => {
 
     return res.status(200).json({ message: "Job applications stopped", data: job, status: "success" });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    logger.error(error);
     return res.status(500).json({ message: "Server Error", data: null, status: "error" });
   }
 };
@@ -92,7 +99,8 @@ const updateJob = async (req, res) => {
     return res.status(200).json({ message: "Job updated successfully", data: job, status: "success" });
   }
   catch (error) {
-    console.error(error);
+    // console.error(error);
+    logger.error(error);
     return res.status(500).json({ message: "Server Error", data: null, status: "error" });
   }
 };
@@ -116,7 +124,8 @@ const getAllStudentsOfJob = async (req, res) => {
 
     return res.status(200).json({ message: "Job retrieved successfully", data: applicantsData, status: "success" });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
+    logger.error(error);
     return res.status(500).json({ message: "Server Error", data: null, status: "error" });
   }
 }
@@ -132,7 +141,8 @@ const getJobByfilter = async (req, res) => {
       }
       return res.status(200).json(job);
   } catch (error) {
-      console.error(error);
+      // console.error(error);
+      logger.error(error);
       return res.status(500).json({ message: "Server Error", error: error.message });
   }
 };
@@ -155,7 +165,8 @@ const applyForJob = async (req, res) => {
           return res.status(404).json({ message: "Requirements did't match" });
       }
   } catch (error) {
-      console.error(error);
+      // console.error(error);
+      logger.error(error);
       return res.status(500).json({ message: "Server Error", error: error.message });
   }
 };

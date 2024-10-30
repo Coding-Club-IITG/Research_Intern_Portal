@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function DriveCard({ drive, index }) {
+function DriveCard({ drive }) {
   const navigate = useNavigate();
 
   const handleView = () => {
@@ -13,7 +13,7 @@ function DriveCard({ drive, index }) {
   };
 
   const handleApplied = () => {
-    navigate(`/recruiter/student-list/${index}`);
+    navigate(`/recruiter/student-list/${drive._id}`);
   };
 
   return (
@@ -22,13 +22,17 @@ function DriveCard({ drive, index }) {
         <h2 className="max-sm:text-lg text-xl font-bold capitalize">{drive?.title}</h2>
         <p className="text-gray-800 font-semibold">Stipend: ₹{drive?.stipend}</p>
         <p className={`text-sm ${drive.accepting ? "text-green-600" : "text-red-600"}`}>
-          {drive.accepting ? `Closing Date: ${new Date(drive.last_date).toLocaleDateString()}` : "Closed"}
+          {drive.accepting
+            ? `Closing Date: ${new Date(drive.last_date).toLocaleDateString()}`
+            : "Closed"}
         </p>
       </div>
 
       <div className="flex flex-col space-y-2 max-sm:w-full">
         <div className="flex gap-2">
-          <button className="bg-black text-white px-4 py-2 max-sm:py-1 rounded" onClick={handleView}>
+          <button
+            className="bg-black text-white px-4 py-2 max-sm:py-1 rounded"
+            onClick={handleView}>
             View
           </button>
           <button className="bg-black text-white px-4 py-2 max-sm:py-1 rounded  ">
@@ -37,11 +41,15 @@ function DriveCard({ drive, index }) {
         </div>
         <div className="flex gap-2">
           {drive.accepting && (
-            <button className="bg-blue-500 text-white px-4 py-2 max-sm:py-1 rounded" onClick={handleEdit}>
+            <button
+              className="bg-blue-500 text-white px-4 py-2 max-sm:py-1 rounded"
+              onClick={handleEdit}>
               Edit
             </button>
           )}
-          <button className="bg-red-500 text-white px-4 py-2 max-sm:py-1 rounded" onClick={handleApplied}>
+          <button
+            className="bg-red-500 text-white px-4 py-2 max-sm:py-1 rounded"
+            onClick={handleApplied}>
             Applied Students: {drive.applicants.length}
           </button>
         </div>

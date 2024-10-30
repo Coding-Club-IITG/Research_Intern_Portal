@@ -1,44 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InternshipCard from "../internships/InternshipCard";
+import { getStudentsApplicationById, getStudent } from "../../../apis/students";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../../../store/authStore";
+import { getJobById } from "../../../apis/recruiter";
 
-function Internships() {
-  const appliedInternships = [
-    {
-      prof_Name: "PSM",
-      department: "Mathematics",
-      image: "https://via.placeholder.com/100",
-      description:
-        "Personalised entrepreneurship learning and guidance. Made as simple as texting.",
-      tags: ["Top 1% of responders", "Responds within a day", "Early Stage", "Growing fast"],
-      role: "Flutter Intern",
-      stipend: "1000",
-      hours_required:"20hrs/week",
-      applications: "35"
-    },
-    {
-      prof_Name: "John Jose",
-      department: "CSE",
-      image: "https://via.placeholder.com/100",
-      description:
-        "Personalised entrepreneurship learning and guidance. Made as simple as texting.",
-      tags: ["Top 1% of responders", "Responds within a day", "Early Stage", "Growing fast"],
-      role: "Flutter Intern",
-      stipend: "2000",
-      hours_required:"12hrs/weeek",
-      applications: "75"
+function Applied() {
+  const { getUser } = useAuthStore();
+  const user = getUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getAppliedInternships() {
+      const id = await getStudent(user.connection_id, navigate);
+      const res = await getStudentsApplicationById(id, navigate);
+      const internships = [];
+      
+      if(res.status === "error") return;
+      res.map((internId) => {
+        const internship = getJobById(internId, navigate);
+        internships.push(internship);
+      });
+      setAppliedInternships(internships || []);
     }
-  ];
+    getAppliedInternships();
+  }, []);
+
+  const [appliedInternships, setAppliedInternships] = useState([]);
 
   return (
     <div>
       <div className="text-2xl font-bold mb-4">Your Applied Internships</div>
       <div>
         {appliedInternships.map((arr, index) => (
-          <InternshipCard key={index} arr={arr} index={index} />
+          <InternshipCard key={index} arr={arr} />
         ))}
       </div>
     </div>
   );
 }
 
-export default Internships;
+export default Applied;
