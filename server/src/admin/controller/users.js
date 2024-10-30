@@ -51,7 +51,8 @@ export const getJob = async (req, res) => {
       data: getAllJobs,
     });
   } catch (error) {
-    console.error(error);
+    logger.error(error);
+    // console.error(error);
     return res.status(500).json({ message: "Server Error", error: error.message });
   }
 };
@@ -103,7 +104,8 @@ export const getStudentsForJob = async (req, res) => {
       data: job.applicants,
     });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
+    // console.log(error);
     res.status(500).json({
       status: "error",
       message: "Internal server error",

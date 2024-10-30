@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { internships } from "./Data.js";
 import useAuthStore from "../../../store/authStore";
 import { handleSubmit } from "../../../apis/job.js";
+import { getJobById } from "../../../apis/recruiter.js";
 
 const InternshipDetails = () => {
+  const navigate = useNavigate();
   const { getUser } = useAuthStore();
   const user = getUser();
   const { internshipID } = useParams();
-  const jobId = parseInt(internshipID, 10);
-  const job = internships.find((job) => job.id === jobId);
-  const Navigate = useNavigate();
+  const [job, setJob] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const jobDetail = await getJobById(internshipID, navigate);
+      setJob(jobDetail);
+    }
+    fetchData();
+  }, []);
 
   if (!job) {
     return <div className="max-w-4xl mx-auto p-8">Job not found</div>;
@@ -96,7 +104,7 @@ const InternshipDetails = () => {
         <div className="flex gap-2 mt-6">
           <button
             className="bg-blue-600 text-white font-semibold py-1.5 px-4 rounded-md"
-            onClick={() => Navigate(-1)}>
+            onClick={() => navigate(-1)}>
             Back
           </button>
 
