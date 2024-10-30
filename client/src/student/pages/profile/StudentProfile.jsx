@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { DatePicker, Select, message } from "antd";
 import ProfilePic from "../../../root-components/ProfilePic";
 import EducationCard from "./EducationCard";
@@ -40,6 +40,7 @@ function Profile() {
   const [skills, setSkills] = useState([]);
   const [newSkill, setNewSkill] = useState("");
   const [achievements, setAchievements] = useState("");
+  const [social , setSocial] = useState([]);
 
   const courses = ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"];
   const departments = ["Chemistry", "Mathematics"];
@@ -51,22 +52,38 @@ function Profile() {
     }
   };
 
+  useEffect(()=>{
+    console.log(educations)
+  },[educations])
+
   useEffect(() => {
     async function getUser() {
       try {
         const res = await getStudent(user.connection_id, navigate);
-        console.log(res);
+        console.log("res",res.data);
         setName(res.data?.name || "");
         setEmail(res.data?.email || "");
+        setCGPA(res.data?.CGPA);
+        setYearOfGrad(res.data?.yearOfGrad);
+        setDOB(res.data?.DOB);
+        setBio(res.data?.bio || "");
+        setSelectedCourse(res.data?.course || 'Select');
         setSelectedDepartment(res.data?.department || "Select");
         setGender(res.data?.gender || "");
         setNumber(res.data?.number || "");
         setRoll(res.data?.roll || "");
-        setWebsite(res.data?.socialMedia?.website || "");
-        setLinkedin(res.data?.socialMedia?.linkedIn || "");
+        setWebsite(res.data?.social[0].url|| "");
+        setLinkedin(res.data?.social[1].url || "");
+        setGithub(res.data?.social[2].url || "");
+        setSocial([
+          {platform:"Website",url:res.data?.social[0].url},
+          {platform:"Linkedin",url:res.data?.social[1].url},
+          {platform:"Github",url:res.data?.social[2].url}
+        ])
         setSkills(res.data?.skills || []);
         setEducations(res.data?.educations || []);
         setExperiences(res.data?.experiences || []);
+        setInterests(res.data?.interests || []);
       } catch (error) {
         console.error("Error fetching student data:", error);
       }
@@ -74,32 +91,36 @@ function Profile() {
     getUser();
   }, [user.connection_id, navigate]);
 
+  useEffect(()=>{
+    console.log(educations)
+  },[educations])
+
   const handleYearOfGrad = (date) => {
     setYearOfGrad(date);
   };
-
+  
   const handleDOB = (date) => {
-    setDOB(date);
+    setDOB(`${date.$D}-${date.$M+1}-${date.$y}`);
   };
 
   const deleteExperience = (index) => {
     setExperiences((prevExperiences) => prevExperiences.filter((_, i) => i !== index));
   };
 
-  const updateProfileExperience = (index, updatedExperience) => {
-    setExperiences((prevExperiences) =>
-      prevExperiences.map((exp, i) => (i === index ? updatedExperience : exp))
-    );
+  const updateProfileExperience = (updatedExperience) => {
+    const tempExperience = [...experiences , updatedExperience];
+    // tempExperience.sort((a,b)=>(b?.startDate).localeCompare(a.startDate));
+    setExperiences(tempExperience);
   };
 
   const deleteEducation = (index) => {
     setEducations((prevEducations) => prevEducations.filter((_, i) => i !== index));
   };
 
-  const updateProfileEducation = (index, updatedEducation) => {
-    setEducations((prevEducations) =>
-      prevEducations.map((edu, i) => (i === index ? updatedEducation : edu))
-    );
+  const updateProfileEducation = (updatedEducation) => {
+    const tempEducation = [...educations , updatedEducation];
+    tempEducation.sort((a,b)=>(b.startDate).localeCompare(a.startDate));
+    setEducations(tempEducation);
   };
 
   const AddSkill = () => {
@@ -111,13 +132,30 @@ function Profile() {
     }
   };
 
+  const removeInterest=(interest)=>{
+    const tempInterests = interests.filter((int)=>{return interest!==int})
+    setInterests(tempInterests)
+  }
+
+  const removeSkills=(skill)=>{
+    const tempSkills = skills.filter((skl)=>{return skl!==skill})
+    setSkills(tempSkills)
+  }
+
+  useEffect(()=>{
+    setSocial([{platform:"Website",url:website},
+      {platform:"Linkedin",url:linkedin},
+      {platform:"Github",url:github}])
+  },[github,linkedin,website])
+
+
   const handleSaveProfile = async () => {
     if (
-      !name.trim() ||
+      // !name.trim() ||
       !roll ||
       selectedCourse === "Select" ||
       selectedDepartment === "Select" ||
-      !email.trim() ||
+      // !email.trim() ||
       !number ||
       !CGPA ||
       !yearOfGrad ||
@@ -126,26 +164,21 @@ function Profile() {
       message.error("Please fill in all required fields.");
       return;
     }
-
     const updatedProfile = {
-      name,
+      // name,
       roll,
       CGPA,
-      DOB,
+      DOB:DOB,
       course: selectedCourse,
       department: selectedDepartment,
       gender,
       interests,
-      email,
+      // email,
       number,
       yearOfGrad,
       skills,
       bio,
-      social: {
-        website,
-        linkedin: linkedin,
-        github
-      },
+      social:social,
       educations,
       experiences,
       achievements
@@ -268,7 +301,7 @@ function Profile() {
               <DatePicker
                 className="grow shrink w-full pb-2 mt-1"
                 picker="date"
-                value={DOB}
+                // value={DOB}
                 onChange={handleDOB}
                 placeholder="Date Of Birth"
               />
@@ -315,10 +348,11 @@ function Profile() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Fields of Interest</label>
+            <label className="block text-sm font-medium text-gray-700">Fields of Interest<span className="text-xs" style={{fontStyle:'italic'}}>(Click on the existing to intersets to remove them)</span></label>
             <div className="flex gap-2 flex-wrap py-2">
               {interests.map((interest) => (
-                <span className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md" key={interest}>
+                <span style={{cursor:'pointer'}} onClick={()=>{removeInterest(interest)}}
+                className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md" key={interest}>
                   {interest}
                 </span>
               ))}
@@ -340,13 +374,19 @@ function Profile() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Your bio</label>
+            <label className="block text-sm font-medium text-gray-700">Your bio {"  "}
+              <span className="text-xs" style={{fontStyle:'italic'}}>(Upto 200 words)</span>
+            </label>
             <textarea
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               rows="4"
+              value={bio}
               placeholder="Write your bio here"
-              onChange={(e) => setBio(e.target.value)}
+              onChange={(e) =>{
+                if(e.target.value.length<=200) setBio(e.target.value)
+              }}
             />
+            <div className="text-right text-sm text-gray-700">{200 - bio.length} words left</div>
           </div>
         </div>
       </div>
@@ -447,19 +487,23 @@ function Profile() {
           <div className="font-bold">Skills</div>
           <div>What are you skilled at?</div>
         </div>
-        <div className="flex-col grow shrink ml-4">
-          <div className="flex gap-2 flex-wrap py-2 mb-4">
+        <div className="flex-col grow shrink ml-4 ">
+          <div className="flex gap-2 flex-wrap py-2 mb-4 items-center justify-between">
+            <div className="flex gap-2 flex-wrap ">
             {skills.map((skill, index) => (
-              <span key={index} className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md">
+              <span key={index} onClick={()=>{removeSkills(skill)}}  style={{cursor:'pointer'}}
+              className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md">
                 {skill}
               </span>
             ))}
+            </div>
+            <span className="text-xs" style={{fontStyle:'italic'}}>(Click on the existing to Skills to remove them)</span>
           </div>
           <div className="flex gap-2 flex-wrap">
             <input
               type="text"
               className="flex-1 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Add Interest"
+              placeholder="Add Skills"
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
             />

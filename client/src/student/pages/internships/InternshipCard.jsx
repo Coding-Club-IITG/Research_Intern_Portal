@@ -1,9 +1,13 @@
 // InternshipCard.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { applyToJobs } from "../../../apis/student";
+import useAuthStore from "../../../store/authStore";
 
 function InternshipCard({ arr, index }) {
   const navigate = useNavigate();
+  const {getUser} = useAuthStore();
+  const user = getUser();
 
   const handleLearnMore = () => {
     navigate(`internship/${index}`);
@@ -13,7 +17,7 @@ function InternshipCard({ arr, index }) {
     <div key={index} className="bg-white border border-gray-300 mb-6 rounded-md">
       <div className="flex p-4 gap-4 max-sm:flex-col">
         <div className="w-40 flex-shrink-0">
-          <img src={arr.image} alt={`${arr.proffName} Logo`} className="h-full" />
+          <img src={arr.image} alt={`${arr.prof_Name} Logo`} className="h-full" />
         </div>
 
         <div className="flex-1">
@@ -34,12 +38,15 @@ function InternshipCard({ arr, index }) {
               <div className="mt-4 text-sm text-gray-500">
                 <span>{arr.role}</span> <span>•</span>
                 <span>Stipend: ₹{arr.stipend}</span>
+                <span>•</span>
+                <span>{arr.hours_required}</span>
               </div>
             </div>
 
             <div className="flex items-center">
-              <button className="bg-gray-100 text-gray-700 px-4 py-1 text-sm rounded-lg hover:bg-gray-200">
-                Save
+              <button className="bg-gray-100 text-gray-700 px-4 py-1 text-sm rounded-lg hover:bg-gray-200"
+              onClick={()=>{applyToJobs(user.connection_id , arr._id)}}>
+                Apply
               </button>
             </div>
           </div>

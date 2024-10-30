@@ -4,7 +4,7 @@ import InternshipCard from "../internships/InternshipCard";
 function Internships() {
   const appliedInternships = [
     {
-      proffName: "PSM",
+      prof_Name: "PSM",
       department: "Mathematics",
       image: "https://via.placeholder.com/100",
       description:
@@ -12,10 +12,11 @@ function Internships() {
       tags: ["Top 1% of responders", "Responds within a day", "Early Stage", "Growing fast"],
       role: "Flutter Intern",
       stipend: "1000",
+      hours_required:"20hrs/week",
       applications: "35"
     },
     {
-      proffName: "John Jose",
+      prof_Name: "John Jose",
       department: "CSE",
       image: "https://via.placeholder.com/100",
       description:
@@ -23,6 +24,7 @@ function Internships() {
       tags: ["Top 1% of responders", "Responds within a day", "Early Stage", "Growing fast"],
       role: "Flutter Intern",
       stipend: "2000",
+      hours_required:"12hrs/weeek",
       applications: "75"
     }
   ];

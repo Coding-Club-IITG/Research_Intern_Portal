@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InternshipCard from "./InternshipCard";
 import Filter from "./Filter";
-import { internships } from "./Data.js";
-import { getAllAcceptingJobs } from "../../../apis/job.js";
+// import { internships } from "./Data.js";
+import { getAllAcceptingJobs, getAllJobs } from "../../../apis/job.js";
 import { useNavigate } from "react-router-dom";
 
 function Internships() {
@@ -11,14 +11,23 @@ function Internships() {
     department: "",
     role: ""
   });
-
+  const [internships , setInterships] = useState([])
   const navigate = useNavigate()
+
+  useEffect(()=>{
+    const getJobs=async()=>{
+      const response = await getAllJobs(navigate);
+      if(Array.isArray(response)) setInterships(response);
+      console.log(response);
+    }
+    getJobs()
+  },[navigate]);
 
   const handleSearch = ({ searchTerm, department, role }) => {
     setFilters({ searchTerm, department, role });
   };
 
-  const filteredInternships = internships.filter((internship) => {
+  const filteredInternships = internships?.filter((internship) => {
     const matchesSearchTerm = internship.proffName
       .toLowerCase()
       .includes(filters.searchTerm.toLowerCase());
@@ -37,6 +46,7 @@ function Internships() {
         <button className="bg-gray-100 text-gray-700 px-4 py-2 text-sm rounded-lg hover:bg-gray-200"
         onClick={async ()=>{
           const acceptingJobs = await getAllAcceptingJobs(navigate)
+          setInterships(acceptingJobs)
           console.log(acceptingJobs)
           }}>
                 Get All Open Jobs

@@ -39,3 +39,42 @@
 {"level":"error","message":"Recruiter not found with ID 671a4d6c09e816ee2fe4e03d","timestamp":"2024-10-24T17:03:28.985Z"}
 {"level":"error","message":"Recruiter not found with ID 671a4d6c09e816ee2fe4e03d","timestamp":"2024-10-24T17:04:07.111Z"}
 {"level":"error","timestamp":"2024-10-30T12:18:05.864Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:12:20.728Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:12:20.740Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:12:27.253Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:12:27.261Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:13:41.331Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:13:41.341Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:16:55.420Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:16:55.428Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:17:18.293Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:17:18.312Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:17:54.402Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:17:54.413Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:18:27.912Z"}
+{"level":"error","message":"Student not found with ID 672258c22376d237eac1ba23","timestamp":"2024-10-30T17:18:27.920Z"}
+{"level":"error","message":"unable to connect to db , MongoNetworkError: 746A0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n","timestamp":"2024-10-30T18:21:54.744Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: D41F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n","timestamp":"2024-10-30T18:22:32.594Z"}
+{"level":"error","timestamp":"2024-10-30T18:22:57.140Z"}
+{"level":"error","timestamp":"2024-10-30T18:42:52.679Z"}
+{"level":"error","timestamp":"2024-10-30T18:43:25.013Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","timestamp":"2024-10-30T18:44:13.948Z"}
+{"level":"error","timestamp":"2024-10-30T18:45:08.358Z"}
+{"level":"error","timestamp":"2024-10-30T18:46:15.250Z"}
+{"level":"error","timestamp":"2024-10-30T18:48:08.515Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: AC650000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n","timestamp":"2024-10-30T18:48:22.659Z"}
+{"level":"error","timestamp":"2024-10-30T18:48:26.257Z"}
+{"level":"error","timestamp":"2024-10-30T18:48:51.107Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: 305C0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n","timestamp":"2024-10-30T19:03:57.477Z"}
+{"level":"error","message":"unable to connect to db , MongooseServerSelectionError: 10500000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\\ws\\deps\\openssl\\openssl\\ssl\\record\\ssl3_record.c:355:\n","timestamp":"2024-10-30T20:35:38.748Z"}
+{"level":"error","timestamp":"2024-10-30T20:36:57.257Z"}
+{"level":"error","timestamp":"2024-10-30T20:37:26.822Z"}
+{"level":"error","timestamp":"2024-10-30T20:38:27.048Z"}
+{"level":"error","timestamp":"2024-10-30T20:38:45.841Z"}
+{"level":"error","timestamp":"2024-10-30T20:39:01.251Z"}
+{"level":"error","timestamp":"2024-10-30T20:39:29.609Z"}
+{"level":"error","timestamp":"2024-10-30T20:42:34.547Z"}
+{"level":"error","timestamp":"2024-10-30T20:42:40.190Z"}
+{"level":"error","timestamp":"2024-10-30T20:44:53.467Z"}
+{"level":"error","timestamp":"2024-10-30T20:46:45.615Z"}
+{"level":"error","timestamp":"2024-10-30T20:47:55.363Z"}
