@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { internships } from "./Data.js";
+import { getJobById } from "../../../apis/recruiter.js";
 
 const InternshipDetails = () => {
+  const navigate = useNavigate();
+
   const { internshipID } = useParams();
-  const jobId = parseInt(internshipID, 10);
-  const job = internships.find((job) => job.id === jobId);
-  const Navigate = useNavigate();
+  const [job, setJob] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const jobDetail = await getJobById(internshipID, navigate);
+      setJob(jobDetail);
+    }
+    fetchData();
+  }, []);
 
   if (!job) {
     return <div className="max-w-4xl mx-auto p-8">Job not found</div>;
@@ -54,16 +62,24 @@ const InternshipDetails = () => {
 
         {/* About the Work */}
         <section className="mb-6">
-          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">About the Work</h2>
-          <p className="text-gray-700 max-sm:text-sm leading-relaxed text-base">{job.description}</p>
+          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">
+            About the Work
+          </h2>
+          <p className="text-gray-700 max-sm:text-sm leading-relaxed text-base">
+            {job.description}
+          </p>
         </section>
 
         {/* Skills Required */}
         <section className="mb-6">
-          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">Skills Required</h2>
+          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">
+            Skills Required
+          </h2>
           <ul className="list-disc list-inside text-gray-700 space-y-2 text-base">
             {job.skills.map((skill, index) => (
-              <li key={index} className="max-sm:text-sm text-base">{skill}</li>
+              <li key={index} className="max-sm:text-sm text-base">
+                {skill}
+              </li>
             ))}
           </ul>
         </section>
@@ -73,7 +89,9 @@ const InternshipDetails = () => {
           <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">Who Can Apply</h2>
           <ul className="list-disc list-inside text-gray-700 space-y-2 text-base">
             {job.whoCanApply.map((requirement, index) => (
-              <li key={index} className="max-sm:text-sm text-base">{requirement}</li>
+              <li key={index} className="max-sm:text-sm text-base">
+                {requirement}
+              </li>
             ))}
           </ul>
         </section>
@@ -82,7 +100,7 @@ const InternshipDetails = () => {
         <div className="flex gap-2 mt-6">
           <button
             className="bg-blue-600 text-white font-semibold py-1.5 px-4 rounded-md"
-            onClick={() => Navigate(-1)}>
+            onClick={() => navigate(-1)}>
             Back
           </button>
 

@@ -1,8 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InternshipCard from "./InternshipCard";
 import Filter from "./Filter";
-import { internships } from "./Data.js";
+import { getAllJobs } from "../../../apis/recruiter";
+import { useNavigate } from "react-router-dom";
+// import { internships } from "./Data.js";
+
 function Internships() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getJobs() {
+      const res = await getAllJobs(navigate);
+      setInternships(res.data || []);
+    }
+    getJobs();
+  }, []);
+
+  const [internships, setInternships] = useState([]);
+
   const [filters, setFilters] = useState({
     searchTerm: "",
     department: "",
@@ -30,7 +45,7 @@ function Internships() {
       <Filter onSearch={handleSearch} />
       <div>
         {filteredInternships.map((arr, index) => (
-          <InternshipCard key={index} arr={arr} index={index} />
+          <InternshipCard key={index} arr={arr} />
         ))}
       </div>
     </div>

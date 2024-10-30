@@ -23,8 +23,6 @@ const router = express.Router();
 
 // router.post('/create' , createStudent)
 
-
-
 /**
  * @swagger
  *  /api/v1/students:

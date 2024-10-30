@@ -1,16 +1,15 @@
-// InternshipCard.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function InternshipCard({ arr, index }) {
+function InternshipCard({ arr }) {
   const navigate = useNavigate();
 
   const handleLearnMore = () => {
-    navigate(`internship/${index}`);
+    navigate(`internship/${arr._id}`);
   };
 
   return (
-    <div key={index} className="bg-white border border-gray-300 mb-6 rounded-md">
+    <div className="bg-white border border-gray-300 mb-6 rounded-md">
       <div className="flex p-4 gap-4 max-sm:flex-col">
         <div className="w-40 flex-shrink-0">
           <img src={arr.image} alt={`${arr.proffName} Logo`} className="h-full" />
