@@ -84,17 +84,21 @@ const updateStudent = async (req, res) => {
       });
     }
 
-    student.cpi = data.cpi;
-    student.interest = data.interest;
-    //in interest we expect an array of strings
-    student.prevEducation = data.prevEducation;
-    //in prevEducation we expect an array of objects that consists for the Uni/Clg , Degree , Grade, year Of graduation
-    student.resume = data.resume;
-    //in resume we expect a url of the google drive link
-    student.bio = data.bio;
-    student.social = data.social;
-    //we expect an array of objects that conists of the platform name and url link.
-    student.updatedAt = Date.now();
+    student.cpi = data?.cpi || "7.0"; // Default CPI as "5.0"
+    student.interest = Array.isArray(data?.interest) ? data.interest : [""]; // Default to an empty array with one empty string
+    student.prevEducation = Array.isArray(data?.prevEducation)
+        ? data.prevEducation
+        : [{ university: "", degree: "", grade: "", graduationYear: "" }];
+    // Default to an array with one object containing default values for each expected field
+    
+    student.resume = data?.resume || ""; // Default resume URL as an empty string
+    student.bio = data?.bio || ""; // Default bio as an empty string
+    student.social = Array.isArray(data?.social)
+        ? data.social
+        : [{ platform: "", url: "" }];
+    // Default social to an array with one object containing default values for platform name and URL
+    
+    student.updatedAt = Date.now(); // Updated timestamp
 
     await student.save({ validateBeforeSave: false });
     logger.info(`Student updated successfully with ID ${id}`);
@@ -211,8 +215,8 @@ const getStudentsByFilter = async (req, res) => {
       req.body;
     //making sure some numbers are sent from frontend for cpi, else puting the least and max poaaible value
     if (!rangeLowerCpi || !rangeUpperCpi) {
-      rangeLowerCpi = 0;
-      rangeUpperCpi = 100;
+      rangeLowerCpi = 0.0;
+      rangeUpperCpi = 10.0;
     }
 
     //using a array to store only such filters whoch are sent to the server. This removes any filter choice that might be null
