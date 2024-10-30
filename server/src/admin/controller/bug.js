@@ -1,5 +1,5 @@
 const Bug = require("../models/bug");
-
+import logger from "../../utils/logger.js";
 // Create new bug report
 exports.createBugReport = async (req, res) => {
   const { title, description, userId } = req.body;
@@ -14,7 +14,8 @@ exports.createBugReport = async (req, res) => {
     await newBug.save();
     res.status(201).json({ message: "Bug report submitted successfully." });
   } catch (error) {
-    console.error("Error submitting bug report:", error);
+    logger.error(error);
+    // console.error("Error submitting bug report:", error);
     res.status(500).json({ error: "Failed to submit bug report." });
   }
 };
@@ -25,7 +26,8 @@ exports.getAllBugReports = async (req, res) => {
     const bugs = await Bug.find().populate("userId", "name email");
     res.status(200).json(bugs);
   } catch (error) {
-    console.error("Error fetching bugs:", error);
+    logger.error(`Error fetching bugs: ${error}`);
+    // console.error("Error fetching bugs:", error);
     res.status(500).json({ error: "Failed to fetch bugs." });
   }
 };
