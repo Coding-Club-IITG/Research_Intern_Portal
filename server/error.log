@@ -38,12 +38,3 @@
 {"level":"error","message":"Recruiter not found with ID 671a4d6c09e816ee2fe4e03d","timestamp":"2024-10-24T17:03:00.376Z"}
 {"level":"error","message":"Recruiter not found with ID 671a4d6c09e816ee2fe4e03d","timestamp":"2024-10-24T17:03:28.985Z"}
 {"level":"error","message":"Recruiter not found with ID 671a4d6c09e816ee2fe4e03d","timestamp":"2024-10-24T17:04:07.111Z"}
-{"level":"error","timestamp":"2024-10-29T15:35:39.855Z"}
-{"level":"error","timestamp":"2024-10-29T15:38:55.499Z"}
-{"level":"error","timestamp":"2024-10-29T15:39:09.181Z"}
-{"level":"error","timestamp":"2024-10-29T15:41:33.184Z"}
-{"level":"error","timestamp":"2024-10-29T15:42:01.967Z"}
-{"level":"error","timestamp":"2024-10-29T15:42:20.084Z"}
-{"level":"error","timestamp":"2024-10-30T06:36:39.352Z"}
-{"level":"error","timestamp":"2024-10-30T06:37:10.918Z"}
-{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"1\" (type string) at path \"_id\" for model \"Recruiter\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"1\"","value":"1","valueType":"string"}

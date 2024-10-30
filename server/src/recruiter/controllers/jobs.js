@@ -23,6 +23,16 @@ const getAllJobsOfRecruiter = async (req, res) => {
   }
 };
 
+const getAllAcceptingJobs = async (req, res)=>{
+  try {
+    const activeJobs = await Jobs.find({accepting:true});
+    return res.status(200).json({message:"Accepting Jobs Successfully retrieved",data:activeJobs,status:"success"});
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server Error", status: "error", data: null });
+  }
+}
+
 const getJob = async (req, res) => {
   try {
     const getAllJobs = await Jobs.find();
@@ -130,7 +140,7 @@ const getJobByfilter = async (req, res) => {
 const applyForJob = async (req, res) => {
   try {
       const { job_id, user_id } = req.body;
-      let user=await Students.findById(user_id)
+      let user=await Student.findById(user_id)
       let job=await Jobs.findById(job_id)
       let jobRequirement=job.requirements
 
@@ -159,5 +169,6 @@ export {
   getJobByfilter,
   getAllJobsOfRecruiter,
   stopAcceptingApplications,
-  getAllStudentsOfJob
+  getAllStudentsOfJob,
+  getAllAcceptingJobs
 };
