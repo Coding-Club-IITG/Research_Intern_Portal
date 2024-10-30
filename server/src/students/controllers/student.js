@@ -87,7 +87,7 @@ const updateStudent = async (req, res) => {
       });
     }
 
-    student.cpi = data?.cpi || "5.0"; // Default CPI as "5.0"
+    student.cpi = data?.cpi || "7.0"; // Default CPI as "5.0"
     student.interest = Array.isArray(data?.interest) ? data.interest : [""]; // Default to an empty array with one empty string
     student.prevEducation = Array.isArray(data?.prevEducation)
         ? data.prevEducation
@@ -223,8 +223,8 @@ const getStudentsByFilter = async (req, res) => {
       req.body;
     //making sure some numbers are sent from frontend for cpi, else puting the least and max poaaible value
     if (!rangeLowerCpi || !rangeUpperCpi) {
-      rangeLowerCpi = 0;
-      rangeUpperCpi = 100;
+      rangeLowerCpi = 0.0;
+      rangeUpperCpi = 10.0;
     }
 
     //using a array to store only such filters whoch are sent to the server. This removes any filter choice that might be null
