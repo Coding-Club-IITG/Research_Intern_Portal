@@ -157,3 +157,31 @@
 {"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
 {"level":"error","message":"Recruiter not found with ID 67225d4cea67af0ff56a9369","timestamp":"2024-10-30T16:29:54.865Z"}
 {"level":"error","message":"Recruiter not found with ID 67225d4cea67af0ff56a9369","timestamp":"2024-10-30T16:29:54.966Z"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:56:22.342Z"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:56:22.344Z"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:56:51.145Z"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:56:51.154Z"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:57:17.049Z"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:57:17.051Z"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:58:07.286Z"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:58:07.288Z"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:59:33.832Z"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:59:33.836Z"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:59:42.951Z"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:59:42.957Z"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:59:49.846Z"}
+{"level":"error","message":"Student not found with ID 672263a024d4354426ded606","timestamp":"2024-10-30T16:59:49.847Z"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
+{"kind":"ObjectId","message":"Cast to ObjectId failed for value \"[object Object]\" (type string) at path \"_id\" for model \"Student\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"[object Object]\"","value":"[object Object]","valueType":"string"}
