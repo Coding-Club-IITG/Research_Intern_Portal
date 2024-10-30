@@ -111,7 +111,7 @@ const InternshipDetails = () => {
           {/* Apply Button */}
           <button
             className="bg-black text-white font-semibold py-1.5 px-6 rounded-md"
-            onClick={() => handleSubmit(jobId, user.connection_id)} 
+            onClick={() => handleSubmit(internshipID, user.connection_id)} 
           >
             Apply Now
           </button>

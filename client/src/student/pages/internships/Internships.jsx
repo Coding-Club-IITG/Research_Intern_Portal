@@ -3,14 +3,12 @@ import InternshipCard from "./InternshipCard";
 import Filter from "./Filter";
 import { internships } from "./Data.js";
 import { getAllAcceptingJobs } from "../../../apis/job.js";
-import { useNavigate } from "react-router-dom";
 import { getAllJobs } from "../../../apis/recruiter";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 // import { internships } from "./Data.js";
 
-function Internships() {
-  const navigate = useNavigate();
-
+export default function Internships() {
+  
   useEffect(() => {
     async function getJobs() {
       const res = await getAllJobs(navigate);
@@ -68,4 +66,3 @@ function Internships() {
   );
 }
 
-export default Internships;
