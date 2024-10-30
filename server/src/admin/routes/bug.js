@@ -14,7 +14,7 @@ router.get("/", getAllBugReports); // Retrieve all bug reports
 
 /**
  * @swagger
- * /api/bugs:
+ * /api/v1/admin/bugs:
  *   post:
  *     summary: Create a new bug report
  *     tags: [Bugs]
@@ -63,7 +63,7 @@ router.get("/", getAllBugReports); // Retrieve all bug reports
 
 /**
  * @swagger
- * /api/bugs:
+ * /api/v1/admin/bugs:
  *   get:
  *     summary: Retrieve all bug reports
  *     tags: [Bugs]
