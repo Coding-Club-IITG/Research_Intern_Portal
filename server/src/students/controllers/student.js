@@ -2,7 +2,6 @@ import Student from "../models/student.js";
 import Updates from "../../admin/models/updates.js";
 import logger from "../../utils/logger.js";
 
-
 const createStudent = async (req, res) => {
   try {
     const {
@@ -49,21 +48,17 @@ const createStudent = async (req, res) => {
       createdAt: Date.now(),
     });
     if (!newStudent)
-      return res
-        .status(500)
-        .json({
-          status: "error",
-          message: "Student could not be created",
-          data: null,
-        });
-    logger.info(`student created successfully with id ${newStudent.id}`);
-    return res
-      .status(200)
-      .json({
-        status: "success",
-        message: "Student Created successfully",
-        data: newStudent,
+      return res.status(500).json({
+        status: "error",
+        message: "Student could not be created",
+        data: null,
       });
+    logger.info(`student created successfully with id ${newStudent.id}`);
+    return res.status(200).json({
+      status: "success",
+      message: "Student Created successfully",
+      data: newStudent,
+    });
   } catch (error) {
     logger.error(error);
     res
@@ -78,8 +73,10 @@ const updateStudent = async (req, res) => {
     const id = req.params.id;
 
     const student = await Student.findById(id);
-    if (!student){
-      logger.error(`Updating student is not succesfull because student with ${id} does not exisits in database`);
+    if (!student) {
+      logger.error(
+        `Updating student is not succesfull because student with ${id} does not exisits in database`
+      );
       return res.status(400).json({
         status: "error",
         message: "Student does not exist",
@@ -101,21 +98,17 @@ const updateStudent = async (req, res) => {
 
     await student.save({ validateBeforeSave: false });
     logger.info(`Student updated successfully with ID ${id}`);
-    return res
-      .status(200)
-      .json({
-        status: "success",
-        message: "Account Updated Successfully",
-        data: student,
-      });
+    return res.status(200).json({
+      status: "success",
+      message: "Account Updated Successfully",
+      data: student,
+    });
   } catch (error) {
-    return res
-      .status(500)
-      .json({
-        status: "error",
-        message: "Some Internal Server error occured",
-        data: null,
-      });
+    return res.status(500).json({
+      status: "error",
+      message: "Some Internal Server error occured",
+      data: null,
+    });
   }
 };
 
@@ -168,7 +161,7 @@ const getStudentByID = async (req, res) => {
     const id = req.params.id;
     const student = await Student.findById(id);
 
-    if (!student){
+    if (!student) {
       logger.error(`Student not found with ID ${id}`);
       return res.status(400).json({
         status: "error",
@@ -197,11 +190,11 @@ const getStudents = async (req, res) => {
     const students = await Student.find();
 
     logger.info(`Retrieved ${students.length} students from the database`);
-    
+
     return res.status(200).json({
       status: "success",
-      message: "Students found", 
-      data: students,   
+      message: "Students found",
+      data: students,
     });
   } catch (error) {
     return res.status(500).json({
@@ -211,7 +204,6 @@ const getStudents = async (req, res) => {
     });
   }
 };
-
 
 const getStudentsByFilter = async (req, res) => {
   try {
