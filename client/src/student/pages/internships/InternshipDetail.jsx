@@ -1,8 +1,12 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { internships } from "./Data.js";
+import useAuthStore from "../../../store/authStore";
+import { handleSubmit } from "../../../apis/job.js";
 
 const InternshipDetails = () => {
+  const { getUser } = useAuthStore();
+  const user = getUser();
   const { internshipID } = useParams();
   const jobId = parseInt(internshipID, 10);
   const job = internships.find((job) => job.id === jobId);
@@ -54,16 +58,24 @@ const InternshipDetails = () => {
 
         {/* About the Work */}
         <section className="mb-6">
-          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">About the Work</h2>
-          <p className="text-gray-700 max-sm:text-sm leading-relaxed text-base">{job.description}</p>
+          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">
+            About the Work
+          </h2>
+          <p className="text-gray-700 max-sm:text-sm leading-relaxed text-base">
+            {job.description}
+          </p>
         </section>
 
         {/* Skills Required */}
         <section className="mb-6">
-          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">Skills Required</h2>
+          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">
+            Skills Required
+          </h2>
           <ul className="list-disc list-inside text-gray-700 space-y-2 text-base">
             {job.skills.map((skill, index) => (
-              <li key={index} className="max-sm:text-sm text-base">{skill}</li>
+              <li key={index} className="max-sm:text-sm text-base">
+                {skill}
+              </li>
             ))}
           </ul>
         </section>
@@ -73,7 +85,9 @@ const InternshipDetails = () => {
           <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">Who Can Apply</h2>
           <ul className="list-disc list-inside text-gray-700 space-y-2 text-base">
             {job.whoCanApply.map((requirement, index) => (
-              <li key={index} className="max-sm:text-sm text-base">{requirement}</li>
+              <li key={index} className="max-sm:text-sm text-base">
+                {requirement}
+              </li>
             ))}
           </ul>
         </section>
@@ -87,7 +101,10 @@ const InternshipDetails = () => {
           </button>
 
           {/* Apply Button */}
-          <button className="bg-black text-white font-semibold py-1.5 px-6 rounded-md">
+          <button
+            className="bg-black text-white font-semibold py-1.5 px-6 rounded-md"
+            onClick={() => handleSubmit(jobId, user.connection_id)} 
+          >
             Apply Now
           </button>
         </div>

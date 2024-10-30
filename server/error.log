@@ -120,3 +120,11 @@
 {"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:09:12.382Z"}
 {"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:09:22.619Z"}
 {"level":"error","message":"Recruiter not found with ID 6720c0a3f25dbcf7564064bb","timestamp":"2024-10-29T11:09:22.624Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : Authentication failed.","timestamp":"2024-10-30T16:08:37.975Z"}
+{"level":"error","timestamp":"2024-10-30T16:09:30.940Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : Authentication failed.","timestamp":"2024-10-30T16:13:44.279Z"}
+{"level":"error","timestamp":"2024-10-30T16:14:00.125Z"}
+{"level":"error","timestamp":"2024-10-30T16:14:05.134Z"}
+{"level":"error","timestamp":"2024-10-30T16:14:05.541Z"}
+{"level":"error","timestamp":"2024-10-30T16:14:42.407Z"}
+{"level":"error","timestamp":"2024-10-30T16:14:46.158Z"}

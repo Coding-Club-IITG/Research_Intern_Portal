@@ -7,7 +7,7 @@ import EducationForm from "./EducationForm";
 import ExperienceCard from "../../../root-components/ExperienceCard";
 import ExperienceForm from "../../../root-components/ExperienceForm";
 
-function Profile() {
+function Profile() { 
   const profile = {
     name: "Aditya Samal",
     img: null,
@@ -48,6 +48,7 @@ function Profile() {
     achievements: "",
     bio: ""
   };
+
 
   // Profile Information
   const [name, setName] = useState(profile.name || "");
