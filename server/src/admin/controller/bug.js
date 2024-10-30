@@ -1,7 +1,7 @@
-const Bug = require("../models/bug");
+import Bug from "../models/bug.js";
 import logger from "../../utils/logger.js";
 // Create new bug report
-exports.createBugReport = async (req, res) => {
+export const createBugReport = async (req, res) => {
   const { title, description, userId } = req.body;
 
   try {
@@ -21,7 +21,7 @@ exports.createBugReport = async (req, res) => {
 };
 
 // Retrieve all bug reports
-exports.getAllBugReports = async (req, res) => {
+export const getAllBugReports = async (req, res) => {
   try {
     const bugs = await Bug.find().populate("userId", "name email");
     res.status(200).json(bugs);
