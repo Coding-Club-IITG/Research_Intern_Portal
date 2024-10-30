@@ -1,78 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DatePicker, Select, message } from "antd";
-import moment from "moment";
 import ProfilePic from "../../../root-components/ProfilePic";
 import EducationCard from "./EducationCard";
 import EducationForm from "./EducationForm";
 import ExperienceCard from "../../../root-components/ExperienceCard";
 import ExperienceForm from "../../../root-components/ExperienceForm";
+import { useNavigate } from "react-router-dom";
+import { getStudent, updateStudent } from "../../../apis/student";
+import useAuthStore from "../../../store/authStore";
 
 function Profile() {
-  const profile = {
-    name: "Aditya Samal",
-    img: null,
-    roll: 230123002,
-    courses: ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"],
-    departments: [
-      "Chemistry",
-      "Chemical Engineering",
-      "Computer Science",
-      "Design",
-      "Humanities and Social Science",
-      "Physics",
-      "Mathematics",
-      "Mehta School of Data Science",
-      "Mechanical Engineering",
-      "Electrical and Electronics Engineering",
-      "Civil Engineering",
-      "Bioscience and Bioengineering",
-      "Energy Engineering"
-    ],
-    interests: ["software dev", "machine learning"],
-    skills: ["React", "Node", "MongoDB"],
-    social: {
-      website: "https://aditya-samal/Portfolio",
-      linkedin: "https://linkedin.com/in/",
-      github: "https://github.com/in/"
-    },
-    educations: [],
-    experiences: [],
-    department: "",
-    course: "",
-    number: "",
-    gender: "",
-    CGPA: "",
-    yearOfGrad: "",
-    DOB: "",
-    email: "",
-    achievements: "",
-    bio: ""
-  };
+  const { getUser } = useAuthStore();
+  const user = getUser();
+  const navigate = useNavigate();
 
-  // Profile Information
-  const [name, setName] = useState(profile.name || "");
-  const [roll, setRoll] = useState(profile.roll || "");
-  const [selectedCourse, setSelectedCourse] = useState(profile.course || "Select");
-  const [selectedDepartment, setSelectedDepartment] = useState(profile.department || "Select");
-  const [CGPA, setCGPA] = useState(profile.CGPA || "");
+  // Initial profile data state
 
-  const [yearOfGrad, setYearOfGrad] = useState(
-    profile?.yearOfGrad ? moment(profile.yearOfGrad, "YYYY") : null
-  );
-  const handleYearOfGrad = (value) => {
-    setYearOfGrad(value);
-  };
-
-  const [DOB, setDOB] = useState(profile?.DOB ? moment(profile.DOB) : null);
-  const handleDOB = (value) => {
-    setDOB(value);
-  };
-
-  const [email, setEmail] = useState(profile.email || "");
-  const [gender, setGender] = useState(profile.gender || "");
-  const [number, setNumber] = useState(profile.number || "");
-  const [interests, setInterests] = useState(profile.interests || []);
+  // State variables for individual fields
+  const [name, setName] = useState("");
+  const [roll, setRoll] = useState("");
+  const [selectedCourse, setSelectedCourse] = useState("Select");
+  const [selectedDepartment, setSelectedDepartment] = useState("Select");
+  const [CGPA, setCGPA] = useState("");
+  const [yearOfGrad, setYearOfGrad] = useState(null);
+  const [DOB, setDOB] = useState(null);
+  const [email, setEmail] = useState("");
+  const [gender, setGender] = useState("");
+  const [number, setNumber] = useState("");
+  const [interests, setInterests] = useState([]);
   const [newInterest, setNewInterest] = useState("");
+  const [bio, setBio] = useState("");
+  const [website, setWebsite] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [github, setGithub] = useState("");
+  const [addExp, setAddExp] = useState(false);
+  const [experiences, setExperiences] = useState([]);
+  const [addEdu, setAddEdu] = useState(false);
+  const [educations, setEducations] = useState([]);
+  const [skills, setSkills] = useState([]);
+  const [newSkill, setNewSkill] = useState("");
+  const [achievements, setAchievements] = useState("");
+
+  const courses = ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"];
+  const departments = ["Chemistry", "Mathematics"];
 
   const AddInterest = (e) => {
     if (newInterest.trim()) {
@@ -80,53 +50,68 @@ function Profile() {
       setNewInterest("");
     }
   };
-  const [bio, setBio] = useState(profile.bio || "");
 
-  // Social Profiles
-  const [website, setWebsite] = useState(profile.social.website || "");
-  const [linkedin, setLinkedin] = useState(profile.social.linkedin || "");
-  const [github, setGithub] = useState(profile.social.github || "");
+  useEffect(() => {
+    async function getUser() {
+      try {
+        const res = await getStudent(user.connection_id, navigate);
+        console.log(res);
+        setName(res.data?.name || "");
+        setEmail(res.data?.email || "");
+        setSelectedDepartment(res.data?.department || "Select");
+        setGender(res.data?.gender || "");
+        setNumber(res.data?.number || "");
+        setRoll(res.data?.roll || "");
+        setWebsite(res.data?.socialMedia?.website || "");
+        setLinkedin(res.data?.socialMedia?.linkedIn || "");
+        setSkills(res.data?.skills || []);
+        setEducations(res.data?.educations || []);
+        setExperiences(res.data?.experiences || []);
+      } catch (error) {
+        console.error("Error fetching student data:", error);
+      }
+    }
+    getUser();
+  }, [user.connection_id, navigate]);
 
-  //Education & Experience
-  const [addExp, setAddExp] = useState(false);
-  const [experiences, setExperiences] = useState(profile.experiences);
-
-  function updateProfileExperience(newExperience) {
-    setExperiences([...experiences, newExperience]);
-  }
-
-  const deleteExperience = (index) => {
-    const updatedExperiences = experiences.filter((_, i) => i !== index);
-    setExperiences(updatedExperiences);
+  const handleYearOfGrad = (date) => {
+    setYearOfGrad(date);
   };
 
-  const [addEdu, setAddEdu] = useState(false);
-  const [educations, setEducations] = useState(profile.educations);
+  const handleDOB = (date) => {
+    setDOB(date);
+  };
 
-  const updateProfileEducation = (newEducation) => {
-    setEducations([...educations, newEducation]);
+  const deleteExperience = (index) => {
+    setExperiences((prevExperiences) => prevExperiences.filter((_, i) => i !== index));
+  };
+
+  const updateProfileExperience = (index, updatedExperience) => {
+    setExperiences((prevExperiences) =>
+      prevExperiences.map((exp, i) => (i === index ? updatedExperience : exp))
+    );
   };
 
   const deleteEducation = (index) => {
-    const updatedEducations = educations.filter((_, i) => i !== index);
-    setEducations(updatedEducations);
+    setEducations((prevEducations) => prevEducations.filter((_, i) => i !== index));
   };
 
-  //Skills
-  const [skills, setSkills] = useState(profile.skills || []);
-  const [newSkill, setNewSkill] = useState("");
+  const updateProfileEducation = (index, updatedEducation) => {
+    setEducations((prevEducations) =>
+      prevEducations.map((edu, i) => (i === index ? updatedEducation : edu))
+    );
+  };
 
-  const AddSkill = (e) => {
+  const AddSkill = () => {
     if (newSkill.trim()) {
-      setSkills([...skills, newSkill.trim()]);
-      setNewSkill("");
+      setSkills((prevSkills) => [...prevSkills, newSkill.trim()]);
+      setNewSkill(""); // Reset the input field after adding
+    } else {
+      message.error("Please enter a valid skill.");
     }
   };
 
-  //Achievements
-  const [achievements, setAchievements] = useState(profile.achievements || "");
-
-  const handleSaveProfile = () => {
+  const handleSaveProfile = async () => {
     if (
       !name.trim() ||
       !roll ||
@@ -143,7 +128,6 @@ function Profile() {
     }
 
     const updatedProfile = {
-      ...profile,
       name,
       roll,
       CGPA,
@@ -159,16 +143,23 @@ function Profile() {
       bio,
       social: {
         website,
-        linkedin,
+        linkedin: linkedin,
         github
       },
       educations,
       experiences,
       achievements
     };
+    const res = await updateStudent(user.connection_id, updatedProfile);
 
-    message.success("Profile updated successfully!");
-    console.log(updatedProfile);
+    if (res.status === "success") {
+      message.destroy("saveProfile");
+      message.success("Profile updated successfully!");
+      console.log(2);
+      console.log(res.data);
+    } else {
+      message.error("Error updating profile");
+    }
   };
 
   return (
@@ -222,7 +213,7 @@ function Profile() {
                 style={{
                   width: "100%"
                 }}
-                options={profile.courses.map((course) => ({
+                options={courses.map((course) => ({
                   value: course,
                   label: course
                 }))}
@@ -238,7 +229,7 @@ function Profile() {
                 style={{
                   width: "100%"
                 }}
-                options={profile.departments.map((department) => ({
+                options={departments.map((department) => ({
                   value: department,
                   label: department
                 }))}
@@ -438,11 +429,7 @@ function Profile() {
             <EducationCard key={index} education={edu} onDelete={() => deleteEducation(index)} />
           ))}
           {addEdu ? (
-            <EducationForm
-              profile={profile}
-              setAddEdu={setAddEdu}
-              updateProfile={updateProfileEducation}
-            />
+            <EducationForm setAddEdu={setAddEdu} updateProfile={updateProfileEducation} />
           ) : (
             <span
               className="text-blue-700 hover:underline cursor-pointer"

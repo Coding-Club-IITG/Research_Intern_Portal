@@ -45,7 +45,7 @@ app.use("/api/v1/admin/updates", verifyJWT, adminUpdateRoutes);
 app.use("/api/v1/admin/branches", adminBranchNameChangeRouter);
 
 // student routes
-app.use("/api/v1/students", verifyJWT, studentRoutes);
+app.use("/api/v1/students", studentRoutes);
 
 // app.use("/api/v1/recruiters", verifyJWT, recruiterGuard, recruiterRoutes);
 app.use("/api/v1/recruiters", recruiterRoutes);
