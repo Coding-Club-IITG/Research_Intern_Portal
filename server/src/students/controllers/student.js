@@ -359,6 +359,27 @@ const addStudentsApplications = async (req, res) => {
   }
 };
 
+
+const logoutStudent = async(req, res)=>{
+  try {
+    const options = {
+      httpOnly: false,
+      secure: false,
+    }
+    res.status(200).clearCookie("user", options).clearCookie("jwt" , options).json({
+      status:"success",
+      message: "Student logged out",
+    })
+  } catch (error) {
+    logger.error(error);
+    return res.status(500).json({
+      status: "error",
+      message: "Internal Server Error Occurred",
+      data: null,
+    });
+  }
+}
+
 export {
   getStudentByID,
   getStudents,
@@ -369,4 +390,5 @@ export {
   getStudentsByFilter,
   getStudentsApplicationById,
   addStudentsApplications,
+  logoutStudent
 };
