@@ -5,11 +5,11 @@ import { internships } from "./Data.js";
 import { getAllAcceptingJobs } from "../../../apis/job.js";
 import { useNavigate } from "react-router-dom";
 import { getAllJobs } from "../../../apis/recruiter";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 // import { internships } from "./Data.js";
 
 function Internships() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     async function getJobs() {
