@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { message } from "antd";
+import { createBugReport } from "../apis/admin";
+import useAuthStore from "../store/authStore";
+import { useNavigate } from "react-router-dom";
 
 function Form() {
+  const { getUser } = useAuthStore(); // Access the getUser function
+  const user = getUser(); // Get the user details, including userId
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     title: "",
     description: ""
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -15,7 +21,7 @@ function Form() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.title || !formData.description) {
@@ -23,14 +29,19 @@ function Form() {
       return;
     }
 
-    console.log("Form submitted:", formData);
+    const dataWithUserId = { ...formData, userId: user.user_id }; // Include userId in the submission data
 
-    message.success("Form successfully submitted!");
+    try {
+      const responseMessage = await createBugReport(dataWithUserId, navigate);
+      message.success(responseMessage || "Form successfully submitted!");
 
-    setFormData({
-      title: "",
-      description: ""
-    });
+      setFormData({
+        title: "",
+        description: ""
+      });
+    } catch (error) {
+      message.error("Failed to submit bug report. Please try again.");
+    }
   };
 
   return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Checkbox, DatePicker } from "antd";
 
-function ExperienceForm({ setAddExp, updateProfileExperience }) {
+function ExperienceForm({ setAddExp, updateProfileExperience  }) {
   const [isWorking, setIsWorking] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -27,7 +27,7 @@ function ExperienceForm({ setAddExp, updateProfileExperience }) {
   };
 
   const handleDateChange = (field, date) => {
-    setFormData({ ...formData, [field]: date });
+    setFormData({ ...formData, [field]:date});
     setErrors({ ...errors, [field]: "" });
 
     if (field === "endDate" && date && formData.startDate) {

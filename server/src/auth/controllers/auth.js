@@ -84,7 +84,6 @@ export const onedriveRedirect = async (req, res) => {
 
     const userDataFromGraphApi = await getUserFromToken(tokenData.access_token);
     const findUser = await User.findOne({ email: userDataFromGraphApi.email });
-
     if (findUser) {
       const userCookie = {
         name: findUser.name,

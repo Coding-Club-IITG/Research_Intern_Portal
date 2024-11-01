@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import InternshipCard from "./InternshipCard";
 import Filter from "./Filter";
-import { getAllAcceptingJobs } from "../../../apis/job.js";
+import { getAllAcceptingJobs, getAllJobs } from "../../../apis/job.js";
 import { useNavigate } from "react-router-dom";
-import { getAllJobs } from "../../../apis/recruiter";
-// import { internships } from "./Data.js";
 
 function Internships() {
   const navigate = useNavigate();
@@ -15,7 +13,7 @@ function Internships() {
       setInternships(res.data || []);
     }
     getJobs();
-  }, []);
+  }, [navigate]);
 
   const [internships, setInternships] = useState([]);
 
@@ -29,7 +27,7 @@ function Internships() {
     setFilters({ searchTerm, department, role });
   };
 
-  const filteredInternships = internships.filter((internship) => {
+  const filteredInternships = internships?.filter((internship) => {
     const matchesSearchTerm = internship.proffName
       .toLowerCase()
       .includes(filters.searchTerm.toLowerCase());
@@ -49,6 +47,7 @@ function Internships() {
             className="bg-gray-100 text-gray-700 px-4 py-2 text-sm rounded-lg hover:bg-gray-200"
             onClick={async () => {
               const acceptingJobs = await getAllAcceptingJobs(navigate);
+              setInternships(acceptingJobs);
               console.log(acceptingJobs);
             }}>
             Get All Open Jobs
