@@ -1,7 +1,7 @@
 import { Button, DatePicker } from "antd";
 import { useState } from "react";
 
-function EducationForm({ profile, setAddEdu, updateProfile }) {
+function EducationForm({ setAddEdu, updateProfile }) {
   const [formData, setFormData] = useState({
     name: "",
     role: "",
