@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Branch from "./pages/home/branch.jsx";
 import Course from "./pages/home/course.jsx";
 import ProfessorsPage from "./pages/home/professor.jsx";
@@ -14,16 +14,17 @@ import AdminLayout from "./layout.jsx";
 const AdminRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<AdminLayout />} />
-      <Route path="/professor" element={<ProfessorsPage />} />
-      <Route path="/student" element={<StudentPage />} />
-      <Route path="/jobs" element={<JobsPage />} />
-      <Route path="/branch" element={<Branch />} />
-      <Route path="/course" element={<Course />} />
-      <Route path="/errors-logs" element={<ErrorLogPage />} />
-      <Route path="/server-logs" element={<ServerLogPage />} />
-
-
+      <Route path="/" element={<AdminLayout />}>
+        <Route index element={<Navigate replace to="dashboard" />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/branch" element={<Branch />} />
+        <Route path="/course" element={<Course />} />
+        <Route path="/professor" element={<ProfessorsPage />} />
+        <Route path="/student" element={<StudentPage />} />
+        <Route path="/jobs" element={<JobsPage />} />
+        <Route path="/errors-logs" element={<ErrorLogPage />} />
+        <Route path="/server-logs" element={<ServerLogPage />} />
+      </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

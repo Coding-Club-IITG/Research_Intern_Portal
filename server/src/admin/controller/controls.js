@@ -9,7 +9,9 @@ export const verifyRecruiter = async (req, res) => {
   try {
     const recruiter = await Recruiter.findById(id);
     if (!recruiter) {
-        logger.warn(`Attempt to verify recruiter with ID ${id} failed: Recruiter not found`);
+      logger.warn(
+        `Attempt to verify recruiter with ID ${id} failed: Recruiter not found`
+      );
       return res.status(404).json({
         status: "error",
         message: "Recruiter not found",
@@ -31,7 +33,7 @@ export const verifyRecruiter = async (req, res) => {
       status: "error",
       message: "Internal server error",
       data: null,
-    });    
+    });
   }
 };
 
@@ -42,7 +44,9 @@ export const removeRecruiter = async (req, res) => {
     const recruiter = await Recruiter.findById(id);
 
     if (!recruiter) {
-        logger.warn(`Attempt to remove recruiter with ID ${id} failed: Recruiter not found`);
+      logger.warn(
+        `Attempt to remove recruiter with ID ${id} failed: Recruiter not found`
+      );
       return res.status(404).json({
         status: "error",
         message: "Recruiter not found",
@@ -67,14 +71,15 @@ export const removeRecruiter = async (req, res) => {
   }
 };
 
-
 export const removeStudent = async (req, res) => {
   const { id } = req.body;
   try {
     const student = await Student.findById(id);
 
     if (!student) {
-      logger.warn(`Attempt to remove student with ID ${id} failed: Student not found`);
+      logger.warn(
+        `Attempt to remove student with ID ${id} failed: Student not found`
+      );
       return res.status(404).json({ message: "Student not found" });
     }
     logger.error(`removed student with ID ${id}`);
@@ -100,7 +105,9 @@ export const banRecruiter = async (req, res) => {
     const recruiter = await Recruiter.findById(id);
 
     if (!recruiter) {
-        logger.warn(`Attempt to ban recruiter with ID ${id} failed: Recruiter not found`);
+      logger.warn(
+        `Attempt to ban recruiter with ID ${id} failed: Recruiter not found`
+      );
       return res.status(404).json({
         status: "error",
         message: "Recruiter not found",
@@ -125,7 +132,6 @@ export const banRecruiter = async (req, res) => {
     });
   }
 };
-
 
 export const deleteJob = async (req, res) => {
   const { id } = req.body;

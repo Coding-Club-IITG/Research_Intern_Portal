@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import InternshipCard from "./InternshipCard";
 import Filter from "./Filter";
-import { internships } from "./Data.js";
 import { getAllAcceptingJobs } from "../../../apis/job.js";
 import { useNavigate } from "react-router-dom";
 import { getAllJobs } from "../../../apis/recruiter";
-import { useNavigate } from "react-router-dom";
 // import { internships } from "./Data.js";
 
 function Internships() {
@@ -27,8 +25,6 @@ function Internships() {
     role: ""
   });
 
-  const navigate = useNavigate()
-
   const handleSearch = ({ searchTerm, department, role }) => {
     setFilters({ searchTerm, department, role });
   };
@@ -49,13 +45,14 @@ function Internships() {
       <div className="text-2xl font-bold mb-4 flex justify-between items-center">
         <div>Search For internships</div>
         <div>
-        <button className="bg-gray-100 text-gray-700 px-4 py-2 text-sm rounded-lg hover:bg-gray-200"
-        onClick={async ()=>{
-          const acceptingJobs = await getAllAcceptingJobs(navigate)
-          console.log(acceptingJobs)
-          }}>
-                Get All Open Jobs
-        </button>
+          <button
+            className="bg-gray-100 text-gray-700 px-4 py-2 text-sm rounded-lg hover:bg-gray-200"
+            onClick={async () => {
+              const acceptingJobs = await getAllAcceptingJobs(navigate);
+              console.log(acceptingJobs);
+            }}>
+            Get All Open Jobs
+          </button>
         </div>
       </div>
       <Filter onSearch={handleSearch} />
