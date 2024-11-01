@@ -308,7 +308,7 @@ const getStudentsApplicationById = async (req, res) => {
 
 const addStudentsApplications = async (req, res) => {
   try {
-    const { id, internId } = req.params.id;
+    const { id, internId } = req.params;
     //assumed for now that the id for the document of intern post is sent is params
 
     //checking if the id's sent are true or not
@@ -317,21 +317,19 @@ const addStudentsApplications = async (req, res) => {
       Jobs.findById(internId),
     ]);
     if (!student) {
-      return res.status(401).json({
+      return res.status(404).json({
         status: "error",
         message: "Invalid Student Id",
         data: null,
       });
     }
-
     if (!intern) {
-      return res.status(401).json({
+      return res.status(404).json({
         status: "error",
         message: "Invalid Intern Id",
         data: null,
       });
     }
-
     //checking if the student had already applied ti this intern
     const applicationsList = student.applications;
     if (applicationsList.includes(internId)) {
