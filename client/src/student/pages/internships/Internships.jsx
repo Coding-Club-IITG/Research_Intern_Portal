@@ -30,7 +30,7 @@ function Internships() {
   const handleSearch = ({ searchTerm, department, role }) => {
     setFilters({ searchTerm, department, role });
   };
-  console.log(internships);
+  // console.log(internships);
   const filteredInternships = internships?.filter((internship) => {
     const matchesSearchTerm =
       !filters.searchTerm ||
@@ -48,8 +48,8 @@ function Internships() {
     return matchesRole && matchesSearchTerm && matchesDepartment;
   });
 
-  console.log("filters are ", filters);
-  console.log(filteredInternships);
+  // console.log("filters are ", filters);
+  // console.log(filteredInternships);
   return (
     <div>
       <div className="text-2xl font-bold mb-4 flex justify-between items-center">
@@ -60,7 +60,7 @@ function Internships() {
             onClick={async () => {
               const acceptingJobs = await getAllAcceptingJobs(navigate);
               setInternships(acceptingJobs.data);
-              console.log("accepting jobs are : ", acceptingJobs.data);
+              // console.log("accepting jobs are : ", acceptingJobs.data);
             }}>
             Get All Open Jobs
           </button>
