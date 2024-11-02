@@ -60,14 +60,14 @@ function MainLandingPage() {
               {/* Features */}
               <div className="flex flex-col gap-4 mb-8">
                 <div className="flex items-start gap-4">
-                  <span className="text-pink-500 text-2xl">📍</span>
+       
                   <div>
                     <h3 className="font-semibold text-lg text-gray-800">Stay in the know</h3>
                     <p className="text-gray-600">No guessing games. View stipend options before you apply.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <span className="text-red-500 text-2xl">⚙️</span>
+         
                   <div>
                     <h3 className="font-semibold text-lg text-gray-800">Personalized search</h3>
                     <p className="text-gray-600">Personalized filters make it quick and easy to find the jobs you care about</p>
@@ -93,14 +93,14 @@ function MainLandingPage() {
               {/* Features */}
               <div className="flex flex-col gap-4 mb-8">
                 <div className="flex items-start gap-4">
-                  <span className="text-pink-500 text-2xl">📍</span>
+                
                   <div>
                     <h3 className="font-semibold text-lg text-gray-800">One click apply</h3>
                     <p className="text-gray-600">Say goodbye to cover letters - your profile is all you need. One click to apply, and you’re done.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <span className="text-red-500 text-2xl">⚙️</span>
+              
                   <div>
                     <h3 className="font-semibold text-lg text-gray-800">Set your preferences</h3>
                     <p className="text-gray-600">Streamline the interview process by setting your expectations (salary, industry, culture, etc.) upfront.</p>
