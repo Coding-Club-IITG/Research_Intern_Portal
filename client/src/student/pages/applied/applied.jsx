@@ -16,12 +16,15 @@ function Applied() {
       const res = await getStudentsApplicationById(id, navigate);
       const internships = [];
       
-      if(res.status === "error") return;
-      res.map((internId) => {
-        const internship = getJobById(internId, navigate);
-        internships.push(internship);
-      });
-      setAppliedInternships(internships || []);
+      if(res.status === "error"){
+        setAppliedInternships([]);
+      }else{
+        res.map((internId) => {
+          const internship = getJobById(internId, navigate);
+          internships.push(internship);
+        });
+        setAppliedInternships(internships || []);
+      }
     }
     getAppliedInternships();
   }, []);
