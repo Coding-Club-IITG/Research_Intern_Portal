@@ -29,7 +29,7 @@ function QualificationForm({ setAddEdu, updateProfile }) {
   };
 
   return (
-    <form className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-300">
+    <form className="bg-gray-50 p-4 rounded-lg border border-gray-300">
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Name Of Institute</label>
         <input

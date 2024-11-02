@@ -13,7 +13,7 @@ function QualificationCard({ qualification, onDelete }) {
   } = qualification;
 
   return (
-    <div className="bg-gray-50 shadow border border-b-4 border-gray-200 rounded-lg p-4 mb-4 w-full">
+    <div className="bg-white border border-b-4 rounded-lg p-4 mb-4 w-full">
       <div className="flex justify-between">
         <div className="flex items-start">
           <svg

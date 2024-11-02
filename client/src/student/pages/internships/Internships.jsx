@@ -3,13 +3,16 @@ import InternshipCard from "./InternshipCard";
 import Filter from "./Filter";
 import { getAllAcceptingJobs, getAllJobs } from "../../../apis/job.js";
 import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 function Internships() {
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getJobs() {
+      message.loading({ content: "Loading Data...", key: "loadingData"});
       const res = await getAllJobs(navigate);
+      message.destroy("loadingData");
       setInternships(res.data || []);
     }
     getJobs();
@@ -59,6 +62,7 @@ function Internships() {
         </div>
       </div>
       <Filter onSearch={handleSearch} />
+      
       {filteredInternships.length === 0 && (
         <div className="mt-20 flex flex-col items-center">
           <img

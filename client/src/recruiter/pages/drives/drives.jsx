@@ -15,6 +15,7 @@ function Drives() {
     const fetchJobs = async () => {
       message.loading({ content: "Loading...", key: "loading" });
       const res = await getJobsOfRecruiter(user.connection_id, navigate);
+      console.log(res)
       if (res.status === "success") {
         message.destroy("loading");
         setJobs(res.data);
@@ -29,9 +30,18 @@ function Drives() {
       <h1 className="max-sm:text-xl text-3xl font-bold text-center mb-6">
         Your Internship Openings
       </h1>
-      {jobs.map((drive, index) => (
-        <DriveCard key={index} drive={drive} />
-      ))}
+      {jobs.length === 0 ? (
+        <div>
+          <img src="/no-data.png" alt="empty" className="mx-auto w-1/3 mt-20" />
+          <p className="text-center">You do not create internship yet </p>
+        </div>
+      ) : (
+        <div className="w-full flex flex-col gap-2">
+          {jobs.map((job) => (
+            <DriveCard key={job.id} drive={job} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -88,8 +88,7 @@ function Profile() {
       },
       qualifications
     };
-    console.log(qualifications);
-
+  
     const res = await updateRecruiter(user.connection_id, updatedProfile);
 
     if (res.status === "success") {
@@ -102,7 +101,6 @@ function Profile() {
 
   return (
     <div className="flex flex-col space-y-4 min-h-screen">
-      {/* About Section */}
       <div className="flex w-full space-x-4 flex-wrap">
         <div className="basis-full md:basis-1/3 p-4">
           <div className="font-bold">About</div>
@@ -287,7 +285,6 @@ function Profile() {
       {/* no need for v1 */}
       <hr />
 
-      {/* Qualification Section */}
       <div className="flex w-full flex-wrap">
         <div className="basis-full md:basis-1/3 p-4">
           <div className="font-bold">Qualification</div>
@@ -314,7 +311,6 @@ function Profile() {
       </div>
       <hr />
 
-      {/* Save Button */}
       <div className="flex justify-end p-4">
         <button
           type="primary"
