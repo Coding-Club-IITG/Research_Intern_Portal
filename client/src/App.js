@@ -1,13 +1,16 @@
-// import Cv from "./pages/profile/Cv";
-
+import { useEffect } from "react";
 import ClientRoutes from "./routes";
+import useAuthStore from "./store/authStore";
 
-// import StudentLayout from "./student/layout";
 function App() {
+  const { checkAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
   return (
     <div className="App">
-      {/* <Cv />
-      <StudentLayout /> */}
       <ClientRoutes />
     </div>
   );

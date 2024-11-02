@@ -15,8 +15,8 @@ const options = {
       },
     ],
   },
-  apis: ["./src/recruiter/routes/*.js", "./src/students/routes/*.js"],
-};
+  apis: ["./src/students/models/*.js","./src/recruiter/models/*.js","./src/auth/models/*.js","./src/admin/models/*.js","./src/recruiter/routes/*.js", "./src/students/routes/*.js", "./src/users/routes/*.js", "./src/auth/routes/*.js","./src/admin/routes/*.js"],
+}
 
 const specs = swaggerJsDoc(options);
 

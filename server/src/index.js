@@ -6,15 +6,19 @@ import errorHandler from "./utils/errorHandler.js";
 import connectToDb from "./config/db_config.js";
 import authRoutes from "./auth/routes/auth.js";
 import { uploadFile } from "./students/upload/onedrive.upload.js";
-import recruiterRouter from "./recruiter/routes/recruiter.js";
 import verifyJWT from "./middlewares/token-verify.js";
 import cookieParser from "cookie-parser";
 import { setupSwagger } from "./config/swagger_config.js";
 import cors from "cors";
-import jobRouter from "./recruiter/routes/Jobs.js";
-
-
-
+import logger from "./utils/logger.js";
+// import bugRoutes from "./admin/routes/bug.js";
+import adminControlRouter from "./admin/routes/controls.js";
+import adminBranchNameChangeRouter from "./admin/routes/course-branches.js";
+import { adminGuard, recruiterGuard } from "./middlewares/role-guard.js";
+import adminUpdateRoutes from "./admin/routes/updates.js";
+import studentRoutes from "./students/routes/student.js";
+import jobRoutes from "./recruiter/routes/jobs.js";
+import recruiterRoutes from "./recruiter/routes/recruiter.js";
 
 const app = express();
 
@@ -22,31 +26,41 @@ setupSwagger(app);
 
 app.use(
   cors({
-    origin: "*",
+    origin: "*", // change this to the frontend url
     credentials: true,
-  }),
+  })
 );
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(cookieParser());
 
 app.use("/", authRoutes);
-app.get("/upload", verifyJWT, uploadFile);
-app.use("/api/v1/recruiters", recruiterRouter);
-app.use('/job',jobRouter)
+//app.get("/upload", verifyJWT, uploadFile);
 
-// app.use("/api/v1/admin",)
+// admin routes
+app.use("/api/v1/admin/controls", verifyJWT, adminControlRouter);
+app.use("/api/v1/admin/updates", verifyJWT, adminUpdateRoutes);
+app.use("/api/v1/admin/branches", adminBranchNameChangeRouter);
+
+// student routes
+app.use("/api/v1/students", verifyJWT, studentRoutes);
+
+// app.use("/api/v1/recruiters", verifyJWT, recruiterGuard, recruiterRoutes);
+app.use("/api/v1/recruiters", recruiterRoutes);
+app.use("/api/v1/job", jobRoutes);
+
+// app.use("/api/v1/admin/bugs", bugRoutes);
+
 // test route
 app.get("/ping", (req, res) => {
   return res.json({ message: "server is alive" });
 });
 
-//last middleware if any error comes
+// Last middleware if any error comes
 app.use(errorHandler);
 app.listen(data.PORT, async () => {
   await connectToDb();
-  console.log(`Server is running on ${data.PORT}`);
+  logger.info(`Server is running on ${data.PORT}`);
 });
-
-
