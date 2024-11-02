@@ -9,11 +9,11 @@ import {
 
 const router = Router();
 
-router.post("/verify-recruiter", verifyRecruiter);
-router.post("/remove-recruiter", removeRecruiter);
-router.post("/remove-student", removeStudent);
-router.post("/ban-recruiter", banRecruiter);
-router.post("/delete-job", deleteJob);
+router.post("/verify-recruiter/:id", verifyRecruiter);
+router.post("/remove-recruiter/:id", removeRecruiter);
+router.delete("/remove-student/:id", removeStudent);
+router.post("/ban-recruiter/:id", banRecruiter);
+router.post("/delete-job/:id", deleteJob);
 
 /**
  * @swagger
@@ -21,8 +21,6 @@ router.post("/delete-job", deleteJob);
  *   name: Controls
  *   description: API for managing Controls
  */
-
-
 
 /**
  * @swagger
@@ -83,7 +81,6 @@ router.post("/delete-job", deleteJob);
  *                   example: Internal server error
  */
 
-
 /**
  * @swagger
  * /api/v1/admin/controls/remove-recruiter:
@@ -141,7 +138,6 @@ router.post("/delete-job", deleteJob);
  *                   example: Internal server error
  */
 
-
 /**
  * @swagger
  * /api/v1/admin/controls/remove-student:
@@ -198,7 +194,6 @@ router.post("/delete-job", deleteJob);
  *                   type: string
  *                   example: Internal server error
  */
-
 
 /**
  * @swagger
@@ -259,7 +254,6 @@ router.post("/delete-job", deleteJob);
  *                   example: Internal server error
  */
 
-
 /**
  * @swagger
  * /api/v1/admin/controls/delete-job:
@@ -316,6 +310,5 @@ router.post("/delete-job", deleteJob);
  *                   type: string
  *                   example: Internal server error
  */
-
 
 export default router;

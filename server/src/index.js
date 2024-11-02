@@ -40,8 +40,8 @@ app.use("/", authRoutes);
 //app.get("/upload", verifyJWT, uploadFile);
 
 // admin routes
-app.use("/api/v1/admin/controls", verifyJWT, adminControlRouter);
-app.use("/api/v1/admin/updates", verifyJWT, adminUpdateRoutes);
+app.use("/api/v1/admin/controls", adminControlRouter);
+app.use("/api/v1/admin/updates", adminUpdateRoutes);
 app.use("/api/v1/admin/branches", adminBranchNameChangeRouter);
 
 // student routes

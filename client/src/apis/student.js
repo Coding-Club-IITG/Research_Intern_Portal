@@ -23,23 +23,34 @@ export const updateStudent = async (id, data) => {
   }
 };
 
-
-export const getAppliedJobsByStudents = async(id , navigate)=>{
+export const getAppliedJobsByStudents = async (id, navigate) => {
   try {
     const response = await axios.get(`${backendURL}/api/v1/students/${id}/intern-applied`);
-    console.log(response.data)
+    console.log(response.data);
     return response.data;
   } catch (error) {
     navigate("/500");
     return error?.response?.data || error;
   }
-}
+};
 
-export const applyToJobs = async (id,internId) => {
+export const applyToJobs = async (id, internId) => {
   try {
-    const response = await axios.post(`${backendURL}/api/v1/students/${id}/intern-apply/${internId}`);
-    return response.data
+    const response = await axios.post(
+      `${backendURL}/api/v1/students/${id}/intern-applied/${internId}`
+    );
+    return response.data;
   } catch (error) {
     return error?.response?.data || error;
   }
-}
+};
+
+export const getAllStudents = async (navigate) => {
+  try {
+    const response = await axios.post(`${backendURL}/api/v1/students/${id}/intern-apply/${internId}`);
+    return response.data;
+  } catch (error) {
+    navigate("/500");
+    return error?.response?.data || error;
+  }
+};

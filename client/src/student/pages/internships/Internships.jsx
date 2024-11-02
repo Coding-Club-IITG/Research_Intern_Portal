@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import InternshipCard from "./InternshipCard";
 import Filter from "./Filter";
-// import { internships } from "./Data.js";
-// import { useNavigate } from "react-router-dom";
-// import { internships } from "./Data.js";
 import { getAllAcceptingJobs, getAllJobs } from "../../../apis/job.js";
 import { useNavigate } from "react-router-dom";
-// import { internships } from "./Data.js";
 
 function Internships() {
   const navigate = useNavigate();
