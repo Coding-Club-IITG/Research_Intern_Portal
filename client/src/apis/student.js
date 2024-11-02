@@ -37,7 +37,7 @@ export const getAppliedJobsByStudents = async(id , navigate)=>{
 
 export const applyToJobs = async (id,internId) => {
   try {
-    const response = await axios.post(`${backendURL}/api/v1/students/${id}/intern-applied/${internId}`);
+    const response = await axios.post(`${backendURL}/api/v1/students/${id}/intern-apply/${internId}`);
     return response.data
   } catch (error) {
     return error?.response?.data || error;

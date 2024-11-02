@@ -24,7 +24,7 @@ function InternshipCard({ arr }) {
             <div className="flex-1">
               <h3 className="font-bold text-lg">{arr.proffName}</h3>
               <p className="text-sm text-gray-500">{arr.department}</p>
-              <p className="text-sm text-gray-500 mt-2">{arr.description}</p>
+              <p className="text-sm text-gray-500 mt-2" dangerouslySetInnerHTML={{__html : arr.description}}></p>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 {arr.tags.map((tag, tagIndex) => (
