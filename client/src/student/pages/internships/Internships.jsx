@@ -43,9 +43,7 @@ function Internships() {
 
     return matchesRole && matchesSearchTerm && matchesDepartment;
   });
-
-  // console.log("filters are ", filters);
-  // console.log(filteredInternships);
+  
   return (
     <div>
       <div className="text-2xl font-bold mb-4 flex justify-between items-center">
@@ -63,6 +61,12 @@ function Internships() {
         </div>
       </div>
       <Filter onSearch={handleSearch} />
+      {filteredInternships.length === 0 && (
+        <div className="mt-20">
+          <img src="/no-data.png" alt="No data" className="mx-auto w-1/3" />
+          <p className="text-center text-xl mt-4">No internships found</p>
+        </div>
+      )}
       <div>
         {filteredInternships.map((arr, index) => (
           <InternshipCard key={index} arr={arr} />

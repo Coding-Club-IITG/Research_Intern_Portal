@@ -39,7 +39,7 @@ function Filter({ onSearch }) {
   };
 
   return (
-    <div className="bg-white p-4 rounded-md shadow-md mb-6 flex items-center gap-4 max-sm:flex-col">
+    <div className="bg-white p-4 rounded-md mb-6 flex items-center gap-4 max-sm:flex-col">
       <input
         type="text"
         placeholder="Search for a job title..."

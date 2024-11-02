@@ -9,7 +9,7 @@ function EducationCard({ education, onDelete , deletable = true}) {
   } = education;
 
   return (
-    <div className="bg-gray-50 shadow border border-b-4 border-gray-200 rounded-lg p-4 mb-4 w-full">
+    <div className="bg-gray-50 border border-b-4 border-gray-200 rounded-lg p-4 mb-4 w-full">
       <div className="flex justify-between">
         <div className="flex items-start">
           <svg
@@ -30,10 +30,10 @@ function EducationCard({ education, onDelete , deletable = true}) {
             <div className="flex-col items-start justify-between">
               <h3 className="text-lg font-semibold text-gray-900">{name}</h3>
               <p className="text-gray-600">{role}</p>
-              <p className="text-gray-500">{`${startDate} - ${endDate}`}</p>
-              <p className="text-gray-500">{`Grade: ${grade}`}</p>
+              <p className="text-gray-600">{`${(new Date(startDate).getMonth() + 1) + "/" + new Date(startDate).getFullYear()}  - ${(new Date(endDate).getMonth() + 1) + "/" + new Date(endDate).getFullYear()}`}</p>
+              <p className="text-gray-600">{`Grade: ${grade}`}</p>
             </div>
-            <p className="text-gray-800 mt-3">{description}</p>
+            <p className="text-gray-600 mt-3">{description}</p>
           </div>
         </div>
         {deletable && <button

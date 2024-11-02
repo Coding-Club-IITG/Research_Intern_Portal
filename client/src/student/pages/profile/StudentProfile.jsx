@@ -14,9 +14,6 @@ function Profile() {
   const user = getUser();
   const navigate = useNavigate();
 
-  // Initial profile data state
-
-  // State variables for individual fields
   const [name, setName] = useState("");
   const [roll, setRoll] = useState("");
   const [selectedCourse, setSelectedCourse] = useState("Select");
@@ -58,8 +55,13 @@ function Profile() {
 
   useEffect(() => {
     async function getUser() {
-      try {
         const res = await getStudent(user.connection_id, navigate);
+
+        if(res.status === "error") {
+          navigate("/500");
+        }
+        console.log(res.data);
+
         setName(res.data?.name || "");
         setEmail(res.data?.email || "");
         setCGPA(res.data?.CGPA);
@@ -80,12 +82,10 @@ function Profile() {
           { platform: "Github", url: res.data?.social[2].url }
         ]);
         setSkills(res.data?.skills || []);
+        setAchievements(res.data?.achievements || "");
         setEducations(res.data?.educations || []);
         setExperiences(res.data?.experiences || []);
         setInterests(res.data?.interests || []);
-      } catch (error) {
-        console.error("Error fetching student data:", error);
-      }
     }
     getUser();
   }, [user.connection_id, navigate]);
@@ -99,7 +99,7 @@ function Profile() {
   };
 
   const handleDOB = (date) => {
-    setDOB(`${date.$D}-${date.$M + 1}-${date.$y}`);
+    setDOB(date.$d);
   };
 
   const deleteExperience = (index) => {
@@ -155,11 +155,11 @@ function Profile() {
 
   const handleSaveProfile = async () => {
     if (
-      // !name.trim() ||
+      !name.trim() ||
       !roll ||
       selectedCourse === "Select" ||
       selectedDepartment === "Select" ||
-      // !email.trim() ||
+      !email.trim() ||
       !number ||
       !CGPA ||
       !yearOfGrad ||
@@ -168,8 +168,9 @@ function Profile() {
       message.error("Please fill in all required fields.");
       return;
     }
+
     const updatedProfile = {
-      // name,
+      name,
       roll,
       CGPA,
       DOB: DOB,
@@ -177,7 +178,7 @@ function Profile() {
       department: selectedDepartment,
       gender,
       interests,
-      // email,
+      email,
       number,
       yearOfGrad,
       skills,
@@ -187,12 +188,12 @@ function Profile() {
       experiences,
       achievements
     };
+    message.loading({ content: "Saving Profile...", key: "saveProfile" });
     const res = await updateStudent(user.connection_id, updatedProfile);
 
     if (res.status === "success") {
       message.destroy("saveProfile");
       message.success("Profile updated successfully!");
-      console.log(2);
       console.log(res.data);
     } else {
       message.error("Error updating profile");

@@ -4,6 +4,7 @@ import { backendURL } from "./server";
 export const getStudent = async (id, navigate) => {
   try {
     const response = await axios.get(`${backendURL}/api/v1/students/${id}`);
+    console.log(response.data)
     return response.data;
   } catch (error) {
     navigate("/500");
@@ -13,7 +14,6 @@ export const getStudent = async (id, navigate) => {
 
 export const updateStudent = async (id, data) => {
   try {
-    console.log(1);
     console.log(data);
     const response = await axios.put(`${backendURL}/api/v1/students/${id}`, data);
 
@@ -45,7 +45,7 @@ export const applyToJobs = async (id, internId) => {
   }
 };
 
-export const getAllStudents = async (navigate) => {
+export const getAllStudents = async (id, internId, navigate) => {
   try {
     const response = await axios.post(`${backendURL}/api/v1/students/${id}/intern-apply/${internId}`);
     return response.data;

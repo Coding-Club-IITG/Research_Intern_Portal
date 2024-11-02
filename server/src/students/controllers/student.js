@@ -64,7 +64,7 @@ const updateStudent = async (req, res) => {
     const data = req.body;
     const id = req.params.id;
 
-    const student = await Student.findById(id);
+    const student = await Student.findByIdAndUpdate({ _id: id}, {...data, updatedAt: Date.now(), DOB: new Date(data?.DOB)}, { new: true });
     if (!student) {
       logger.error(
         `Updating student is not succesfull because student with ${id} does not exisits in database`
@@ -76,31 +76,6 @@ const updateStudent = async (req, res) => {
       });
     }
 
-    console.log("sdf", data);
-
-    student.gender =data?.gender
-    student.roll = data?.roll
-    student.CGPA = data?.CGPA;
-    student.yearOfGrad = (data?.yearOfGrad.slice(0,4))
-    student.skills = data?.skills
-    student.number = data?.number
-    student.interests = data?.interests;
-    //in interest we expect an array of strings
-    student.educations = data?.educations;
-    student.experiences = data?.experiences;
-    student.achievements = data?.achievements;
-    //in prevEducation we expect an array of objects that consists for the Uni/Clg , Degree , Grade, year Of graduation
-    // student.resume = data.resume;
-    //in resume we expect a url of the google drive link
-    student.bio = data?.bio;
-    student.DOB = data?.DOB;
-    student.social = data?.social;
-    student.department = data?.department;
-    student.course = data?.course;
-    //we expect an array of objects that conists of the platform name and url link.
-    student.updatedAt = Date.now();
-
-    await student.save({ validateBeforeSave: false });
     logger.info(`Student updated successfully with ID ${id}`);
     return res.status(200).json({
       status: "success",

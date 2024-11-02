@@ -65,7 +65,7 @@ function ExperienceForm({ setAddExp, updateProfileExperience  }) {
   };
 
   return (
-    <div className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-300 w-full">
+    <div className="bg-gray-50 p-4 rounded-lg border border-gray-300 w-full">
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Name Of Organisation</label>
         <input

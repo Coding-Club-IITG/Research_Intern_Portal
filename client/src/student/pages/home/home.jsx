@@ -12,7 +12,7 @@ export default function StudentHome() {
   if (loading) return <Skeleton />;
 
   return (
-    <div className="w-full min-h-screen flex flex-col gap-4 items-center py-8">
+    <div className="w-full min-h-screen flex flex-col gap-4 items-center py-8 ">
       <div className="w-[80%] p-8 h-fit rounded-lg border border-gray-400">
         <div className="flex flex-col">
           <h2 className="font-bold text-base md:text-lg m-0">Recomemded Jobs</h2>
