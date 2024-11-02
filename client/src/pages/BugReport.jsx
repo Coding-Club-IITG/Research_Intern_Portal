@@ -13,6 +13,7 @@ function Form() {
     title: "",
     description: ""
   });
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -45,13 +46,15 @@ function Form() {
   };
 
   return (
-    <div className="max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-10 p-6 bg-white border rounded-lg">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+    <div className="max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-10 p-6 bg-white dark:bg-slate-700 border border-gray-400 dark:border-yellow-400 rounded-lg">
+      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
         Submit a Title and Description
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-5">
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Title <span className="text-red-500">*</span>:
           </label>
           <input
@@ -60,13 +63,15 @@ function Form() {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="w-full px-4 py-2 border border-gray-300 dark:border-yellow-500 rounded-md shadow-sm text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm"
             required
           />
         </div>
 
         <div className="mb-5">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
+          <label
+            htmlFor="description"
+            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Description <span className="text-red-500">*</span>:
           </label>
           <textarea
@@ -74,7 +79,7 @@ function Form() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full h-80 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            className="w-full h-80 px-4 py-2 border border-gray-300 dark:border-yellow-500 rounded-md shadow-sm text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm"
             rows="4"
             required
           />
@@ -82,7 +87,7 @@ function Form() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          className="w-full bg-yellow-400 text-white py-2 px-4 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 dark:text-black">
           Submit
         </button>
       </form>

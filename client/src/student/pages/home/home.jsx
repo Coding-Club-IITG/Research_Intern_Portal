@@ -10,13 +10,16 @@ export default function StudentHome() {
   const { data, loading, error } = useFetch("https://jsonplaceholder.typicode.com/todos/1");
 
   if (loading) return <Skeleton />;
+  if (error) return <InternalServerErrorPage />;
 
   return (
-    <div className="w-full min-h-screen flex flex-col gap-4 items-center py-8 ">
+    <div className="w-full min-h-screen flex flex-col gap-4 items-center py-8 bg-white dark:bg-slate-700">
       <div className="w-[80%] p-8 h-fit rounded-lg border border-gray-400">
         <div className="flex flex-col">
-          <h2 className="font-bold text-base md:text-lg m-0">Recomemded Jobs</h2>
-          <p className="text-sm text-slate-400 font-thin">
+          <h2 className="font-bold text-base md:text-lg text-black dark:text-white m-0">
+            Recommended Jobs
+          </h2>
+          <p className="text-m text-gray-700 dark:text-yellow-400 font-thin">
             Jobs where you're a top applicant based on your profile job search
           </p>
         </div>
@@ -29,17 +32,17 @@ export default function StudentHome() {
           <Button
             type="primary"
             size="large"
-            style={{
-              backgroundColor: "black"
-            }}>
+            className="bg-blue-500 dark:bg-yellow-400 dark:text-black hover:bg-gray-400 dark:hover:bg-yellow-500 transition duration-200">
             View Jobs
           </Button>
         </div>
       </div>
       <div className="w-[80%] p-8 h-fit rounded-lg border border-gray-400">
         <div className="flex flex-col">
-          <h2 className="font-bold text-base md:text-lg m-0">Applied Jobs</h2>
-          <p className="text-sm text-slate-400 font-thin">
+          <h2 className="font-bold text-base md:text-lg text-black dark:text-white m-0">
+            Applied Jobs
+          </h2>
+          <p className="text-m text-gray-700 dark:text-yellow-400 font-thin">
             Jobs where you're a top applicant based on your profile job search
           </p>
         </div>
@@ -52,9 +55,7 @@ export default function StudentHome() {
           <Button
             type="primary"
             size="large"
-            style={{
-              backgroundColor: "black"
-            }}>
+            className="bg-blue-500 dark:bg-yellow-400 hover:bg-gray-400 dark:hover:bg-yellow-500 transition duration-200 dark:text-black">
             View Jobs
           </Button>
         </div>
