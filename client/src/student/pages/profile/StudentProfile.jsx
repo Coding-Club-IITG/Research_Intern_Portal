@@ -55,12 +55,13 @@ function Profile() {
 
   useEffect(() => {
     async function getUser() {
+        message.loading({ content: "Loading....", key: "loadingData"});
         const res = await getStudent(user.connection_id, navigate);
-
+        message.destroy("loadingData");
         if(res.status === "error") {
           navigate("/500");
         }
-        console.log(res.data);
+        
 
         setName(res.data?.name || "");
         setEmail(res.data?.email || "");
@@ -73,13 +74,13 @@ function Profile() {
         setGender(res.data?.gender || "");
         setNumber(res.data?.number || "");
         setRoll(res.data?.roll || "");
-        setWebsite(res.data?.social[0].url || "");
-        setLinkedin(res.data?.social[1].url || "");
-        setGithub(res.data?.social[2].url || "");
+        setWebsite(res.data?.social[0]?.url || "");
+        setLinkedin(res.data?.social[1]?.url || "");
+        setGithub(res.data?.social[2]?.url || "");
         setSocial([
-          { platform: "Website", url: res.data?.social[0].url },
-          { platform: "Linkedin", url: res.data?.social[1].url },
-          { platform: "Github", url: res.data?.social[2].url }
+          { platform: "Website", url: res.data?.social[0]?.url },
+          { platform: "Linkedin", url: res.data?.social[1]?.url },
+          { platform: "Github", url: res.data?.social[2]?.url }
         ]);
         setSkills(res.data?.skills || []);
         setAchievements(res.data?.achievements || "");

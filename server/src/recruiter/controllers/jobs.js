@@ -4,7 +4,8 @@ import logger from "../../utils/logger.js";
 
 const createJob = async(req,res)=>{
   try {
-    const job = await Jobs.create(req.body);
+    const data = req.body;
+    const job = await Jobs.create(data);
     return res.status(201).json({ message: "Job created successfully", data: job, status: "success" });
   } catch (error) {
     // console.error(error);
@@ -55,9 +56,8 @@ const getJob = async (req, res) => {
 const getJobById = async (req, res) => {
   try {
     const { id } = req.params;
-    // console.log(id);
     const job = await Jobs.findById(id);
-    
+
     if (!job) {
       return res.status(404).json({ message: "Job not found", data: null, status: "error" });
     }
