@@ -11,7 +11,7 @@ import cookieParser from "cookie-parser";
 import { setupSwagger } from "./config/swagger_config.js";
 import cors from "cors";
 import logger from "./utils/logger.js";
-// import bugRoutes from "./admin/routes/bug.js";
+import bugRoutes from "./admin/routes/bug.js";
 import adminControlRouter from "./admin/routes/controls.js";
 import adminBranchNameChangeRouter from "./admin/routes/course-branches.js";
 import { adminGuard, recruiterGuard } from "./middlewares/role-guard.js";
@@ -40,8 +40,8 @@ app.use("/", authRoutes);
 //app.get("/upload", verifyJWT, uploadFile);
 
 // admin routes
-app.use("/api/v1/admin/controls", verifyJWT, adminControlRouter);
-app.use("/api/v1/admin/updates", verifyJWT, adminUpdateRoutes);
+app.use("/api/v1/admin/controls", adminControlRouter);
+app.use("/api/v1/admin/updates", adminUpdateRoutes);
 app.use("/api/v1/admin/branches", adminBranchNameChangeRouter);
 
 // student routes
@@ -51,7 +51,7 @@ app.use("/api/v1/students", studentRoutes);
 app.use("/api/v1/recruiters", recruiterRoutes);
 app.use("/api/v1/job", jobRoutes);
 
-// app.use("/api/v1/admin/bugs", bugRoutes);
+app.use("/api/v1/admin/bugs", bugRoutes);
 
 // test route
 app.get("/ping", (req, res) => {

@@ -11,6 +11,16 @@ export const getRecruiter = async (id, navigate) => {
   }
 };
 
+export const getAllRecruiters = async (navigate) => {
+  try {
+    const response = await axios.get(`${backendURL}/api/v1/recruiters`);
+    return response.data;
+  } catch (error) {
+    navigate("/500");
+    return error?.response?.data || error;
+  }
+};
+
 export const updateRecruiter = async (id, data) => {
   try {
     const response = await axios.put(`${backendURL}/api/v1/recruiters/${id}`, data);

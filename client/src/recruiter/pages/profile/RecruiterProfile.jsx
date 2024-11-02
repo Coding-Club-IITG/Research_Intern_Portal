@@ -25,6 +25,7 @@ function Profile() {
       setInterests(res.data?.areaOfInterest || []);
       setQualifications(res.data?.qualifications || []);
     }
+
     getUser();
   }, []);
 
@@ -87,7 +88,7 @@ function Profile() {
       },
       qualifications
     };
-    // console.log(qualifications);
+    console.log(qualifications);
 
     const res = await updateRecruiter(user.connection_id, updatedProfile);
 
@@ -284,6 +285,7 @@ function Profile() {
           </div>
         </div> */}
       {/* no need for v1 */}
+      <hr />
 
       {/* Qualification Section */}
       <div className="flex w-full flex-wrap">

@@ -20,7 +20,7 @@ const JobSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    title: {
+    role: {
         type: String,
         required: true,
     },

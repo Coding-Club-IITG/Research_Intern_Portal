@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InternshipCard from "../internships/InternshipCard";
-import { getStudentsApplicationById, getStudent } from "../../../apis/students";
+import { getStudent, getAppliedJobsByStudents } from "../../../apis/student";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../../store/authStore";
 import { getJobById } from "../../../apis/recruiter";
@@ -12,8 +12,9 @@ function Applied() {
 
   useEffect(() => {
     async function getAppliedInternships() {
-      const id = await getStudent(user.connection_id, navigate);
-      const res = await getStudentsApplicationById(id, navigate);
+      const student = await getStudent(user.connection_id, navigate);
+      const id = student.data._id;
+      const res = await getAppliedJobsByStudents(id, navigate);
       const internships = [];
       
       if(res.status === "error"){
