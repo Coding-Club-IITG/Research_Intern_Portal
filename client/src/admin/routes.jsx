@@ -10,6 +10,7 @@ import Dashboard from "./pages/home/home.jsx";
 import ErrorLogPage from "./pages/home/error-logs.jsx";
 import ServerLogPage from "./pages/home/server-logs.jsx";
 import AdminLayout from "./layout.jsx";
+import Bugs from "./pages/home/bugs.jsx";
 
 const AdminRoutes = () => {
   return (
@@ -24,6 +25,7 @@ const AdminRoutes = () => {
         <Route path="/jobs" element={<JobsPage />} />
         <Route path="/errors-logs" element={<ErrorLogPage />} />
         <Route path="/server-logs" element={<ServerLogPage />} />
+        <Route path="/bugs" element={<Bugs />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

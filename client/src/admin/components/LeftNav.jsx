@@ -23,6 +23,9 @@ const LeftNav = () => {
         <Link to="/admin/course" className="font-medium text-lg">
           Course
         </Link>
+        <Link to="/admin/bugs" className="font-medium text-lg">
+          Bugs
+        </Link>
         <Link to="/admin/errors-logs" className="font-medium text-lg">
           Error Logs
         </Link>

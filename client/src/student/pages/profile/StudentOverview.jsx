@@ -1,6 +1,6 @@
 // import React, { useEffect, useState } from "react";
 
-import { useEffect , useState} from "react";
+import { useEffect, useState } from "react";
 import { getStudent } from "../../../apis/student";
 import useAuthStore from "../../../store/authStore";
 import { useNavigate } from "react-router-dom";
@@ -8,47 +8,46 @@ import EducationCard from "./EducationCard";
 import ExperienceCard from "../../../root-components/ExperienceCard";
 
 // const Overview = () => {
-  // const profileData = {
-  //   name: "Mahak ",
-  //   activityStatus: "Active today",
-  //   location: "Kota, India",
-  //   timezone: "0.5 hours behind",
-  //   lookingFor: "Eager to learn.",
-  //   education: {
-  //     degree: "Bachelor's, Civil engineering",
-  //     institution: "Indian Institute of Technology - Guwahati",
-  //     graduationYear: "2027"
-  //   },
-  //   idealNextOpportunity: {
-  //     desiredSalary: "Flexible",
-  //     desiredRole: "Software Engineer",
-  //     remoteWork: "Onsite Or Remote",
-  //     desiredLocation: "Kota (current)",
-  //     desiredTechStack: ["Node.js", "React", "Express.js", "C++"],
-  //     wants: [
-  //       "To solve technical problems",
-  //       "Progression to management",
-  //       "Company with clear roles",
-  //       "Team members to learn from",
-  //       "Challenging problems to work on"
-  //     ]
-  //   }
-  // };
+// const profileData = {
+//   name: "Mahak ",
+//   activityStatus: "Active today",
+//   location: "Kota, India",
+//   timezone: "0.5 hours behind",
+//   lookingFor: "Eager to learn.",
+//   education: {
+//     degree: "Bachelor's, Civil engineering",
+//     institution: "Indian Institute of Technology - Guwahati",
+//     graduationYear: "2027"
+//   },
+//   idealNextOpportunity: {
+//     desiredSalary: "Flexible",
+//     desiredRole: "Software Engineer",
+//     remoteWork: "Onsite Or Remote",
+//     desiredLocation: "Kota (current)",
+//     desiredTechStack: ["Node.js", "React", "Express.js", "C++"],
+//     wants: [
+//       "To solve technical problems",
+//       "Progression to management",
+//       "Company with clear roles",
+//       "Team members to learn from",
+//       "Challenging problems to work on"
+//     ]
+//   }
+// };
 
-  const Overview = () => {
-    const [profileData, setProfileData] = useState(null);
-    const {getUser} = useAuthStore()
-    const user = getUser()
-    const navigate = useNavigate()
+const Overview = () => {
+  const [profileData, setProfileData] = useState(null);
+  const { getUser } = useAuthStore();
+  const user = getUser();
+  const navigate = useNavigate();
 
-    useEffect(()=>{
-      const getUser=async ()=>{
-        const response = await getStudent(user.connection_id, navigate)
-        setProfileData(response.data)
-        console.log(response.data)
-      }
-      getUser()
-    },[navigate])
+  useEffect(() => {
+    const getUser = async () => {
+      const response = await getStudent(user.connection_id, navigate);
+      setProfileData(response.data);
+    };
+    getUser();
+  }, [navigate]);
 
   if (!profileData) {
     return <div>Loading...</div>;
@@ -78,17 +77,14 @@ import ExperienceCard from "../../../root-components/ExperienceCard";
               {profileData.course} from department of {profileData.department}
             </p>{" "}
             {/* Location and Timezone */}
-            <p>
-              Year of Graduation : {profileData.yearOfGrad}
-            </p>
+            <p>Year of Graduation : {profileData.yearOfGrad}</p>
           </div>
           <div className="max-sm:ml-0 max-sm:space-x-2 max-sm:py-2 ml-auto flex space-x-4 w-fit">
             <a
               href={profileData.social[1].url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800"
-            >
+              className="text-blue-600 hover:text-blue-800">
               <img
                 src="https://img.icons8.com/ios-filled/50/000000/linkedin.png"
                 alt="LinkedIn"
@@ -115,27 +111,19 @@ import ExperienceCard from "../../../root-components/ExperienceCard";
           <p className="black">{profileData.lookingFor}</p>
         </div> */}
 
-          {/* array */}
+        {/* array */}
         <div className="bg-white p-2 rounded-lg mb-2">
           <h3 className="text-gray-500 mb-2">Education</h3>
-          {
-            profileData?.educations.map((education)=>{
-              return(
-                <EducationCard education={education} onDelete={()=>{}} deletable={false}/>
-              )
-            })
-          }
+          {profileData?.educations.map((education) => {
+            return <EducationCard education={education} onDelete={() => {}} deletable={false} />;
+          })}
         </div>
 
         <div className="bg-white p-2 rounded-lg mb-2">
           <h3 className="text-gray-500 mb-2">Experience</h3>
-          {
-            profileData?.experiences.map((experience)=>{
-              return(
-                <ExperienceCard experience={experience} onDelete={()=>{}} deletable={false}/>
-              )
-            })
-          }
+          {profileData?.experiences.map((experience) => {
+            return <ExperienceCard experience={experience} onDelete={() => {}} deletable={false} />;
+          })}
         </div>
 
         {/* <div className="p-2 rounded-lg mb-2">

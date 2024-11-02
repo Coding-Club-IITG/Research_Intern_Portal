@@ -3,7 +3,7 @@ import { Button, Flex } from "antd";
 import { Card, Col, Row } from "antd";
 import { removeStudent } from "../../../apis/admin";
 import { useNavigate } from "react-router-dom";
-import { getAllStudents, getStudent } from "../../../apis/students";
+import { getAllStudents, getStudent } from "../../../apis/student";
 
 export default function StudentPage() {
   const [Students, setStudents] = useState([]);
@@ -28,7 +28,7 @@ export default function StudentPage() {
     try {
       const response = await removeStudent(id, navigate);
       // const response = await getStudent(id, navigate);
-      console.log(response);
+      // console.log(response);
       refreshStudents();
     } catch (error) {
       navigate("/500");
