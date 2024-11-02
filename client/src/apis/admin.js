@@ -59,7 +59,7 @@ export const removeStudent = async (id, navigate) => {
 export const getAllBugReports = async (navigate) => {
   try {
     const response = await axios.get(`${backendURL}/api/v1/admin/bugs`);
-    console.log(response);
+    // console.log(response);
     return response.data;
   } catch (error) {
     navigate("/500");
