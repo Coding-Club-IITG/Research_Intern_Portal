@@ -16,11 +16,11 @@ const requirementSchema = new mongoose.Schema({
 });
 
 const JobSchema = new mongoose.Schema({
-    prof_name: {
+    title: {
         type: String,
-        required: true,
+        required: true
     },
-    role: {
+    prof_name: {
         type: String,
         required: true,
     },
@@ -30,8 +30,7 @@ const JobSchema = new mongoose.Schema({
     },
     isActive: {
         type: Boolean,
-         default: true,
-       
+        default: true, 
     },
     createdAt: {
         type: Date,

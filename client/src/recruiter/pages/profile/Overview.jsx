@@ -33,7 +33,7 @@ export default function Overview() {
       <div className="py-4">
         <div className="font-semibold">What students will see</div>
       </div>
-      <div className="max-w-4xl mx-auto p-6 rounded-lg mt-6 border border-gray-300">
+      <div className="max-w-4xl mx-auto p-6 rounded-lg mt-6 border border-gray-300 bg-white">
         <div className="flex items-center mb-4">
           <div className="w-32 h-32 rounded-full overflow-hiddenflex items-center justify-center mr-6">
             <img

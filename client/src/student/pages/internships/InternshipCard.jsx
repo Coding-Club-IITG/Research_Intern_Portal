@@ -12,6 +12,8 @@ function InternshipCard({ arr }) {
     navigate(`internship/${arr._id}`);
   };
 
+  console.log(arr)
+
   return (
     <div className="bg-white border border-gray-300 mb-6 rounded-md">
       <div className="flex p-4 gap-4 max-sm:flex-col">
@@ -22,7 +24,7 @@ function InternshipCard({ arr }) {
         <div className="flex-1">
           <div className="flex justify-between items-start">
             <div className="flex-1">
-              <h3 className="font-bold text-lg">{arr.proffName}</h3>
+              <h3 className="font-bold text-lg">{arr?.prof_name}</h3>
               <p className="text-sm text-gray-500">{arr.department}</p>
               <p className="text-sm text-gray-500 mt-2" dangerouslySetInnerHTML={{__html : arr.description}}></p>
 
@@ -35,10 +37,18 @@ function InternshipCard({ arr }) {
               </div>
 
               <div className="mt-4 text-sm text-gray-500">
-                <span>{arr.role}</span> <span>•</span>
-                <span>Stipend: ₹{arr.stipend}</span>
-                <span>•</span>
-                <span>{arr.hours_required}</span>
+                <div className="flex gap-4">
+                  <p>Stipend :</p>
+                  <p>{arr.stipend}Rs</p>
+                </div>
+                <div className="flex gap-4">
+                  <p>Role :</p>
+                  <p>{arr.role}</p>
+                </div>
+                <div className="flex gap-4">
+                  <p>Hours Required :</p>
+                  <p>{arr.hours_required}hrs</p>
+                </div>
               </div>
             </div>
 
@@ -53,7 +63,7 @@ function InternshipCard({ arr }) {
       </div>
 
       <div className="border-t border-gray-200 flex justify-between items-center p-4">
-        <div className="text-sm text-gray-500">Applications: {arr.applications}</div>
+        <div className="text-sm text-gray-500">Applications: {arr.applications || 0}</div>
         <button onClick={handleLearnMore} className="text-blue-600 font-semibold hover:underline">
           Learn more
         </button>
