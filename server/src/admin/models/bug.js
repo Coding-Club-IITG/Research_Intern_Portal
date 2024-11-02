@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const bugSchema = new mongoose.Schema(
   {
@@ -58,4 +58,4 @@ const bugSchema = new mongoose.Schema(
  *           example: 2023-10-09T14:48:00.000Z
  */
 
-module.exports = mongoose.model("Bug", bugSchema);
+export default mongoose.model("Bug", bugSchema);

@@ -84,7 +84,6 @@ export const onedriveRedirect = async (req, res) => {
 
     const userDataFromGraphApi = await getUserFromToken(tokenData.access_token);
     const findUser = await User.findOne({ email: userDataFromGraphApi.email });
-
     if (findUser) {
       const userCookie = {
         name: findUser.name,
@@ -105,7 +104,7 @@ export const onedriveRedirect = async (req, res) => {
         case roles.STUDENT:
           return res.redirect("http://localhost:3000/student/");
         case roles.RECRUITER:
-          console.log("i am here 4");
+          // console.log("i am here 4");
           return res.redirect("http://localhost:3000/recruiter/");
         case roles.ADMIN:
           return res.redirect("http://localhost:3000/admin/");

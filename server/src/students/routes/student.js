@@ -10,6 +10,7 @@ import {
   createStudent,
   getStudentsApplicationById,
   addStudentsApplications,
+  logoutStudent
 } from "../controllers/student.js";
 
 const router = express.Router();
@@ -22,8 +23,6 @@ const router = express.Router();
  */
 
 // router.post('/create' , createStudent)
-
-
 
 /**
  * @swagger
@@ -335,6 +334,7 @@ router.post("/:id/intern-apply/:internId", addStudentsApplications);
  *         description: Internal server error
  */
 router.put("/:id", updateStudent);
+router.get("/logout/:id" , logoutStudent)
 //router.delete('/:id', deleteStudent);
 
 export default router;

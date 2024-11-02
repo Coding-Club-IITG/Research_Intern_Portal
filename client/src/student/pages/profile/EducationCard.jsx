@@ -1,4 +1,4 @@
-function EducationCard({ education, onDelete }) {
+function EducationCard({ education, onDelete , deletable = true}) {
   const {
     name = "Institution not specified",
     role = "Degree not specified",
@@ -36,12 +36,12 @@ function EducationCard({ education, onDelete }) {
             <p className="text-gray-800 mt-3">{description}</p>
           </div>
         </div>
-        <button
+        {deletable && <button
           className="text-red-500 hover:underline self-start ml-4"
           onClick={onDelete}
           aria-label={`Delete education at ${name}`}>
           Delete
-        </button>
+        </button>}
       </div>
     </div>
   );

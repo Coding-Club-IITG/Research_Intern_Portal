@@ -10,10 +10,10 @@ const studentSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  phoneNumber: {
+  number: {
     type: Number,
   },
-  rollNo: {
+  roll: {
     type: Number,
   },
   college: {
@@ -24,19 +24,23 @@ const studentSchema = new mongoose.Schema({
   gender: {
     type: String,
   },
-  // course: {
-  //   type: String,
-  //   enum: ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"],
-  // },
   course: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Course",
+    type: String,
+    enum: ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"],
   },
-  department: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Branch",
+  department:{
+    type: String,
+    enum:["Computer Science and Engineering","Design","Humanities and Social Science","Physics","Mathematics","Chemistry", "Mehta School of Data Science", "Mechanical Engineering","Electrical and Electronics Engineering", "Civil Engineering","Bioscience and Bioengineering","Energy Engineering","Chemical Engineering"]
   },
-  cpi: {
+  // course: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Course",
+  // },
+  // department: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Branch",
+  // },
+  CGPA: {
     type: Number,
   },
   social: {
@@ -51,29 +55,35 @@ const studentSchema = new mongoose.Schema({
       },
     ],
   },
-  dob: {
-    type: Date,
+  DOB: {
+    type: String,
   },
   yearOfGrad: {
-    type: Number,
+    type: String,
   },
   resume: {
     type: String,
     default: "",
   },
-  interest: {
-    type: [{ field: { type: String } }],
+  interests: {
+    type: [{type:String}],
   },
-  prevEducation: {
+  educations: {
     type: [
       {
-        degree: {
+        role: {
           type: String,
         },
-        year: {
-          type: Number,
+        description:{
+          type:String
         },
-        college: {
+        startDate: {
+          type: String,
+        },
+        endDate:{
+          type: String
+        },
+        name: {
           type: String,
         },
         grade: {
@@ -85,27 +95,33 @@ const studentSchema = new mongoose.Schema({
   bio: {
     type: String,
   },
-  prevExperience: {
+  experiences: {
     type: [
       {
         role: {
           type: String,
         },
-        company_college: {
+        name: {
           type: String,
         },
         description: {
           type: String,
         },
-        start_date: {
-          type: Date,
+        startDate: {
+          type: String,
         },
-        end_date: {
-          type: Date,
-        },
+        endDate: {
+          type: String,
+        }
       },
     ],
   },
+  achievements: {
+    type: String,
+  },
+  skills:[{
+    type:String
+  }],
   applications: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Updates" }],
   },
@@ -118,9 +134,6 @@ const studentSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-
-
-
 
 /**
  * @swagger
@@ -284,7 +297,5 @@ const studentSchema = new mongoose.Schema({
  *           description: The date and time when the student's information was last updated.
  *           example: 2024-10-09T14:48:00.000Z
  */
-
-
 
 export default mongoose.model("Student", studentSchema);

@@ -1,4 +1,4 @@
-function ExperienceCard({ experience, onDelete }) {
+function ExperienceCard({ experience, onDelete , deletable = true }) {
   const {
     role = "Role not specified",
     name = "Organization not specified",
@@ -35,12 +35,12 @@ function ExperienceCard({ experience, onDelete }) {
           <p className="text-gray-800 mt-3">{description}</p>
         </div>
 
-        <button
+        {deletable && <button
           className="text-red-500 hover:underline ml-4"
           onClick={onDelete}
           aria-label={`Delete experience at ${name}`}>
           Delete
-        </button>
+        </button>}
       </div>
     </div>
   );
