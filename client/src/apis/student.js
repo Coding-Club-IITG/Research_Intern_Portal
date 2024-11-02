@@ -47,7 +47,7 @@ export const applyToJobs = async (id, internId) => {
 
 export const getAllStudents = async (navigate) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/students`);
+    const response = await axios.post(`${backendURL}/api/v1/students/${id}/intern-apply/${internId}`);
     return response.data;
   } catch (error) {
     navigate("/500");

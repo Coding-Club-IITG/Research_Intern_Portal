@@ -26,18 +26,26 @@ function Internships() {
   const handleSearch = ({ searchTerm, department, role }) => {
     setFilters({ searchTerm, department, role });
   };
-
+  // console.log(internships);
   const filteredInternships = internships?.filter((internship) => {
-    const matchesSearchTerm = internship.proffName
-      .toLowerCase()
-      .includes(filters.searchTerm.toLowerCase());
-    const matchesDepartment = internship.department
-      .toLowerCase()
-      .includes(filters.department.toLowerCase());
-    const matchesRole = internship.role.toLowerCase().includes(filters.role.toLowerCase());
+    const matchesSearchTerm =
+      !filters.searchTerm ||
+      internship.prof_name?.toLowerCase().includes(filters.searchTerm.toLowerCase());
+
+    const matchesDepartment =
+      !filters.department ||
+      internship.requirements?.branch
+        ?.map((branch) => branch.toLowerCase())
+        .some((branch) => branch.includes(filters.department.toLowerCase()));
+
+    const matchesRole =
+      !filters.role || internship.role?.toLowerCase().includes(filters.role.toLowerCase());
+
     return matchesRole && matchesSearchTerm && matchesDepartment;
   });
 
+  // console.log("filters are ", filters);
+  // console.log(filteredInternships);
   return (
     <div>
       <div className="text-2xl font-bold mb-4 flex justify-between items-center">
@@ -47,8 +55,8 @@ function Internships() {
             className="bg-gray-100 text-gray-700 px-4 py-2 text-sm rounded-lg hover:bg-gray-200"
             onClick={async () => {
               const acceptingJobs = await getAllAcceptingJobs(navigate);
-              setInternships(acceptingJobs);
-              console.log(acceptingJobs);
+              setInternships(acceptingJobs.data);
+              // console.log("accepting jobs are : ", acceptingJobs.data);
             }}>
             Get All Open Jobs
           </button>
