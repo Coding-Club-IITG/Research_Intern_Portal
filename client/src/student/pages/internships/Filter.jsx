@@ -39,25 +39,25 @@ function Filter({ onSearch }) {
   };
 
   return (
-    <div className="bg-white p-4 rounded-md mb-6 flex items-center gap-4 max-sm:flex-col">
+    <div className="bg-gray-50 dark:bg-slate-700 p-4 rounded-md mb-6 flex items-center gap-4 max-sm:flex-col">
       <input
         type="text"
         placeholder="Search for a job title..."
-        className="border border-gray-300 rounded-md px-4 py-2 w-full"
+        className="border border-gray-300 dark:border-yellow-300 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:outline-none focus:ring dark:focus:ring-yellow-400"
         value={searchTerm}
         onChange={handleSearchTermChange}
       />
       <input
         type="text"
         placeholder="Department"
-        className="border border-gray-300 rounded-md px-4 py-2 w-full"
+        className="border border-gray-300 dark:border-yellow-300 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:outline-none focus:ring dark:focus:ring-yellow-400"
         value={department}
         onChange={handleDepartmentChange}
       />
       <input
         type="text"
         placeholder="Role"
-        className="border border-gray-300 rounded-md px-4 py-2 w-full"
+        className="border border-gray-300 dark:border-yellow-300 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:outline-none focus:ring dark:focus:ring-yellow-400"
         value={role}
         onChange={handleRoleChange}
       />

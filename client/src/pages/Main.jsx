@@ -6,7 +6,7 @@ function MainLandingPage() {
     <div className="min-h-screen bg-gray-100 flex flex-col">
       <header className="fixed top-0 left-0 right-0 bg-white p-5 shadow-md z-50">
         <nav className="flex items-center justify-between mx-auto">
-          <img src="/rip_logo.png" className="h-14 " />
+          <img src="/rip_logo_light.png" className="h-14 " />
 
           {/* <div className="flex-grow flex justify-center">
             <span className="font-bold text-black text-md hover:text-blue-500 hover:shadow-lg cursor-pointer px-4 py-2 rounded">
