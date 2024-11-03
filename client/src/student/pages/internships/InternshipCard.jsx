@@ -24,8 +24,7 @@ function InternshipCard({ arr }) {
         <div className="flex-1">
           <div className="flex justify-between items-start">
             <div className="flex-1">
-              <h3 className="font-bold text-lg">{arr?.prof_name}</h3>
-              <p className="text-sm text-gray-500">{arr.department}</p>
+              <h3 className="font-bold text-lg">{arr?.title}</h3>
               <p className="text-sm text-gray-500 mt-2" dangerouslySetInnerHTML={{__html : arr.description}}></p>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
