@@ -55,7 +55,7 @@ const Overview = () => {
               rel="noopener noreferrer"
               className="text-blue-600 hover:text-blue-800">
               <svg
-                class="fill-yellow-500"
+                class="dark:fill-yellow-500"
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
                 y="0px"
@@ -86,7 +86,7 @@ const Overview = () => {
         </div> */}
 
         {/* array */}
-        <div className="bg-white border border-white  p-2 rounded-lg mb-2 dark: bg-slate-700 dark:text-gray-500 dark:border-yellow-400">
+        <div className="bg-white border border-white  p-2 rounded-lg mb-2 dark:bg-slate-700 dark:text-gray-500 dark:border-yellow-400">
           <h3 className="text-gray-500 mb-2">Education</h3>
           {profileData?.educations &&
             profileData?.educations.map((education) => {
