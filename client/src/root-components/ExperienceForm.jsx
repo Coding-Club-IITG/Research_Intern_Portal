@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Checkbox, DatePicker } from "antd";
 
-function ExperienceForm({ setAddExp, updateProfileExperience  }) {
+function ExperienceForm({ setAddExp, updateProfileExperience }) {
   const [isWorking, setIsWorking] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -27,7 +27,7 @@ function ExperienceForm({ setAddExp, updateProfileExperience  }) {
   };
 
   const handleDateChange = (field, date) => {
-    setFormData({ ...formData, [field]:date});
+    setFormData({ ...formData, [field]: date });
     setErrors({ ...errors, [field]: "" });
 
     if (field === "endDate" && date && formData.startDate) {
@@ -67,25 +67,27 @@ function ExperienceForm({ setAddExp, updateProfileExperience  }) {
   return (
     <div className="bg-gray-50 p-4 rounded-lg border border-gray-300 w-full">
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Name Of Organisation</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+          Name Of Organisation
+        </label>
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           placeholder="Enter the name of the organisation"
         />
         {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
       </div>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Role</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">Role</label>
         <input
           type="text"
           name="role"
           value={formData.role}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           placeholder="e.g. Software Engineer"
         />
         {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role}</p>}
@@ -118,12 +120,14 @@ function ExperienceForm({ setAddExp, updateProfileExperience  }) {
         I am currently working here.
       </Checkbox>
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Description</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+          Description
+        </label>
         <textarea
           name="description"
           value={formData.description}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           rows="4"
           placeholder="Write a brief description of your role and responsibilities"
         />

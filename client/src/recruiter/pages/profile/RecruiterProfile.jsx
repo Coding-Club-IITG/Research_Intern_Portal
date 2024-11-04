@@ -88,7 +88,7 @@ function Profile() {
       },
       qualifications
     };
-  
+
     const res = await updateRecruiter(user.connection_id, updatedProfile);
 
     if (res.status === "success") {
@@ -111,23 +111,23 @@ function Profile() {
           <div className="flex w-full justify-between items-center flex-wrap">
             <div className="flex-col basis-80 grow shrink">
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                   Your Name <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                   Email <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Eg. abc@gmail.com"
@@ -141,7 +141,7 @@ function Profile() {
 
           <div className="flex justify-between gap-4 flex-wrap">
             <div className="mb-4 basis-72 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                 Department <span className="text-red-500">*</span>
               </label>
               <Select
@@ -161,7 +161,7 @@ function Profile() {
             </div>
 
             {/* <div className="basis-32 grow shrink">
-                <label className="block text-sm font-medium text-gray-700">DOB</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">DOB</label>
                 <DatePicker
                   className="grow shrink w-full pb-2 mt-1"
                   picker="date"
@@ -174,12 +174,12 @@ function Profile() {
 
           <div className="flex justify-between gap-4 flex-wrap">
             <div className="basis-32 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                 Gender <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
                 placeholder="Your Gender"
@@ -187,12 +187,12 @@ function Profile() {
             </div>
 
             <div className="mb-4 basis-72 grow shrink">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
                 Contact Number <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={number}
                 onChange={(e) => setNumber(e.target.value)}
                 placeholder="Mobile Number"
@@ -200,7 +200,9 @@ function Profile() {
             </div>
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Fields of Interest</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+              Fields of Interest
+            </label>
             <div className="flex gap-2 flex-wrap py-2">
               {interests.map((interest) => (
                 <span className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md" key={interest}>
@@ -236,19 +238,23 @@ function Profile() {
         <div className="flex-col grow shrink">
           <div className="flex-col basis-80 grow shrink">
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Website</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                Website
+              </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">Linkedin</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                Linkedin
+              </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={linkedin}
                 onChange={(e) => setLinkedin(e.target.value)}
               />

@@ -7,7 +7,7 @@ function QualificationForm({ setAddEdu, updateProfile }) {
     degree: "",
     description: "",
     startYear: null,
-    endYear: null,
+    endYear: null
   });
 
   const handleInputChange = (e) => {
@@ -31,31 +31,37 @@ function QualificationForm({ setAddEdu, updateProfile }) {
   return (
     <form className="bg-gray-50 p-4 rounded-lg border border-gray-300">
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Name Of Institute</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+          Name Of Institute
+        </label>
         <input
           type="text"
           name="college"
           value={formData.college}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           placeholder="Enter the name of the institute"
         />
       </div>
 
       <div className="flex space-between gap-4 flex-wrap">
         <div className="mb-4 grow shrink basis-32">
-          <label className="block text-sm font-medium text-gray-700">Degree (Field Of Study)</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+            Degree (Field Of Study)
+          </label>
           <input
             type="text"
             name="degree"
             value={formData.degree}
             onChange={handleInputChange}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
             placeholder="e.g. Computer Science"
           />
         </div>
         <div className="mb-4 grow shrink basis-32">
-          <label className="block text-sm font-medium text-gray-700 pb-2">Start Year</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 pb-2">
+            Start Year
+          </label>
           <DatePicker
             className="grow shrink w-full"
             picker="year"
@@ -64,7 +70,9 @@ function QualificationForm({ setAddEdu, updateProfile }) {
           />
         </div>
         <div className="mb-4 grow shrink basis-32">
-          <label className="block text-sm font-medium text-gray-700 pb-2">End Year</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 pb-2">
+            End Year
+          </label>
           <DatePicker
             className="grow shrink w-full"
             picker="year"
@@ -75,12 +83,14 @@ function QualificationForm({ setAddEdu, updateProfile }) {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Description</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+          Description
+        </label>
         <textarea
           name="description"
           value={formData.description}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           rows="4"
           placeholder="Write a brief description of your qualification"
         />
