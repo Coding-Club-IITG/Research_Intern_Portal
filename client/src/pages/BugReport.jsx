@@ -54,7 +54,7 @@ function Form() {
         <div className="mb-5">
           <label
             htmlFor="title"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-2">
+            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
             Title <span className="text-red-500">*</span>:
           </label>
           <input
@@ -71,7 +71,7 @@ function Form() {
         <div className="mb-5">
           <label
             htmlFor="description"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-200 dark:text-gray-300 mb-2">
+            className="block text-sm font-medium text-gray-700  dark:text-gray-300 mb-2">
             Description <span className="text-red-500">*</span>:
           </label>
           <textarea
@@ -87,7 +87,7 @@ function Form() {
 
         <button
           type="submit"
-          className="w-full bg-yellow-400 text-white py-2 px-4 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 dark:text-black">
+          className="w-full bg-blue-600 dark:bg-yellow-400 text-white py-2 px-4 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 dark:text-black">
           Submit
         </button>
       </form>
