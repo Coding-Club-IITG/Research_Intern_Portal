@@ -4,6 +4,7 @@ import useAuthStore from "../../../store/authStore";
 import { useNavigate } from "react-router-dom";
 import EducationCard from "./EducationCard";
 import ExperienceCard from "../../../root-components/ExperienceCard";
+import daysjs from "dayjs";
 
 const Overview = () => {
   const [profileData, setProfileData] = useState(null);
@@ -22,7 +23,7 @@ const Overview = () => {
   return (
     <div>
       <div className="py-4">
-        <div className="font-semibold dark:text-white">What recruiters will see</div>
+        <div className="font-semibold dark:text-white">What recruiters will see:</div>
       </div>
       <div className="max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300 dark:border-yellow-400">
         <div className="max-sm:flex-col max-sm:items-start flex items-center mb-4">
@@ -30,7 +31,7 @@ const Overview = () => {
             <img
               src={profileData?.profilePicUrl || ""}
               alt="Profile Pic"
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full dark:text-white"
             />
           </div>
           <div>
@@ -45,7 +46,7 @@ const Overview = () => {
             </p>{" "}
             {/* Location and Timezone */}
             <p className="text-gray-600 dark:text-gray-300">
-              Year of Graduation : {profileData?.yearOfGrad || ""}
+              Year of Graduation : {daysjs(profileData?.yearOfGrad).$y || ""}
             </p>
           </div>
           <div className="max-sm:ml-0 max-sm:space-x-2 max-sm:py-2 ml-auto flex space-x-4 w-fit">
@@ -55,7 +56,7 @@ const Overview = () => {
               rel="noopener noreferrer"
               className="text-blue-600 hover:text-blue-800">
               <svg
-                class="dark:fill-yellow-500"
+                class="dark:fill-yellow-500 fill-indigo-600"
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
                 y="0px"
@@ -86,23 +87,33 @@ const Overview = () => {
         </div> */}
 
         {/* array */}
-        <div className="bg-white border border-white  p-2 rounded-lg mb-2 dark:bg-slate-700 dark:text-gray-500 dark:border-yellow-400">
-          <h3 className="text-gray-500 mb-2">Education</h3>
-          {profileData?.educations &&
-            profileData?.educations.map((education) => {
-              return <EducationCard education={education} onDelete={() => {}} deletable={false} />;
-            })}
-        </div>
+        {profileData?.educations?.length > 0 && (
+          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2 ">
+            <h3 className="text-black dark:text-white mb-2">Education</h3>
+            {profileData.educations.map((education) => (
+              <EducationCard
+                key={education.id}
+                education={education}
+                onDelete={() => {}}
+                deletable={false}
+              />
+            ))}
+          </div>
+        )}
 
-        <div className=" border border-white dark:border-yellow-400 p-2 rounded-lg mb-2">
-          <h3 className="text-gray-500 mb-2">Experience</h3>
-          {profileData?.experiences &&
-            profileData?.experiences.map((experience) => {
-              return (
-                <ExperienceCard experience={experience} onDelete={() => {}} deletable={false} />
-              );
-            })}
-        </div>
+        {profileData?.experiences?.length > 0 && (
+          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2">
+            <h3 className="text-black dark:text-white mb-2">Experience</h3>
+            {profileData.experiences.map((experience) => (
+              <ExperienceCard
+                key={experience.id} // Replace with a unique key for each experience
+                experience={experience}
+                onDelete={() => {}}
+                deletable={false}
+              />
+            ))}
+          </div>
+        )}
 
         {/* <div className="p-2 rounded-lg mb-2">
           <h3 className="text-lg font-semibold text-gray-800 mb-2">Ideal Next Opportunity</h3>
@@ -128,23 +139,28 @@ const Overview = () => {
           </p>
         </div> */}
 
-        <div className="border border-white dark:border-yellow-400 p-2 rounded-lg mb-2">
-          <h4 className="text-gray-500 mb-2">Skills</h4>
-          <div className="flex flex-wrap gap-4">
-            {profileData?.skills &&
-              profileData?.skills.map((skill, index) => (
-                <p className="border px-2 py-0.5 rounded-md">{skill}</p>
+        {profileData?.skills?.length > 0 && (
+          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2">
+            <h4 className="text-black dark:text-white mb-2">Skills</h4>
+            <div className="flex flex-wrap gap-4">
+              {profileData.skills.map((skill, index) => (
+                <p
+                  key={index}
+                  className="py-0.5 px-2 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-yellow-400 dark:text-black dark:bg-yellow-400">
+                  {skill}
+                </p>
               ))}
+            </div>
           </div>
-        </div>
+        )}
 
-        <div className="border border-white dark:border-yellow-400 p-2 rounded-lg mb-2">
-          <h4 className="text-gray-500 mb-2">Interests</h4>
+        <div className="border dark:border-slate-700 p-2 rounded-lg mb-2">
+          <h4 className="text-black dark:text-white mb-2">Interests</h4>
           <ul className="list-none list-inside flex gap-2">
             {profileData?.interests &&
               profileData?.interests.map((interest, index) => (
                 <li
-                  className="py-0.5 px-2 bg-indigo-600 rounded-lg w-fit text-white text-sm"
+                  className="py-0.5 px-2 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-yellow-400 dark:text-black dark:bg-yellow-400"
                   key={index}>
                   {interest}
                 </li>
