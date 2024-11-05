@@ -5,8 +5,8 @@ import useAuthStore from "../store/authStore";
 import { useNavigate } from "react-router-dom";
 
 function Form() {
-  const { getUser } = useAuthStore(); // Access the getUser function
-  const user = getUser(); // Get the user details, including userId
+  const { getUser } = useAuthStore();
+  const user = getUser();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -30,7 +30,7 @@ function Form() {
       return;
     }
 
-    const dataWithUserId = { ...formData, userId: user.user_id }; // Include userId in the submission data
+    const dataWithUserId = { ...formData, userId: user.user_id };
 
     try {
       const responseMessage = await createBugReport(dataWithUserId, navigate);
@@ -54,7 +54,7 @@ function Form() {
         <div className="mb-5">
           <label
             htmlFor="title"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
             Title <span className="text-red-500">*</span>:
           </label>
           <input
@@ -63,7 +63,7 @@ function Form() {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-yellow-500 rounded-md shadow-sm text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm"
+            className="border border-gray-300 dark:border-yellow-300 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:outline-none focus:ring dark:focus:ring-yellow-400"
             required
           />
         </div>
@@ -71,7 +71,7 @@ function Form() {
         <div className="mb-5">
           <label
             htmlFor="description"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
             Description <span className="text-red-500">*</span>:
           </label>
           <textarea
@@ -79,15 +79,15 @@ function Form() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full h-80 px-4 py-2 border border-gray-300 dark:border-yellow-500 rounded-md shadow-sm text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:ring-yellow-400 focus:border-yellow-400 sm:text-sm"
-            rows="4"
+            className="border border-gray-300 dark:border-yellow-300 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:outline-none focus:ring dark:focus:ring-yellow-400"
+            rows="12"
             required
           />
         </div>
 
         <button
           type="submit"
-          className="w-full bg-yellow-400 text-white py-2 px-4 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 dark:text-black">
+          className="w-full dark:bg-yellow-400 dark:hover:bg-yellow-500 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 dark:text-black">
           Submit
         </button>
       </form>

@@ -45,8 +45,8 @@ const App = () => (
     <p className="ant-upload-drag-icon">
       <InboxOutlined />
     </p>
-    <p className="ant-upload-text">Click or drag file to this area to upload</p>
-    <p className="ant-upload-hint">
+    <p className="ant-upload-text dark:text-white">Click or drag file to this area to upload</p>
+    <p className="ant-upload-hint dark:text-white">
       Support for a single or bulk upload. Strictly prohibited from uploading company data or other
       banned files.
     </p>

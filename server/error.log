@@ -282,3 +282,83 @@
 {"_message":"Jobs validation failed","errors":{"description":{"kind":"required","message":"Path `description` is required.","name":"ValidatorError","path":"description","properties":{"message":"Path `description` is required.","path":"description","type":"required","value":""},"value":""}},"level":"error","message":"Jobs validation failed: description: Path `description` is required.","name":"ValidationError","timestamp":"2024-11-02T11:14:06.459Z"}
 {"_message":"Jobs validation failed","errors":{"description":{"kind":"required","message":"Path `description` is required.","name":"ValidatorError","path":"description","properties":{"message":"Path `description` is required.","path":"description","type":"required","value":""},"value":""}},"level":"error","message":"Jobs validation failed: description: Path `description` is required.","name":"ValidationError","timestamp":"2024-11-02T11:14:07.112Z"}
 >>>>>>>>> Temporary merge branch 2
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T05:44:48.645Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T05:44:48.709Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T05:44:50.659Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T05:44:50.720Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T05:45:32.598Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T05:45:32.661Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T05:45:34.262Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T05:45:34.324Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:15:41.461Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:15:41.531Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:15:44.051Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:15:44.120Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:23:38.568Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:23:38.638Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:23:40.833Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:23:40.905Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-03T17:24:00.395Z"}
+{"level":"error","timestamp":"2024-11-03T17:24:22.392Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:34:57.566Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:34:57.639Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:34:59.715Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T17:34:59.779Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-03T18:55:00.304Z"}
+{"level":"error","timestamp":"2024-11-03T18:55:19.624Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T19:15:44.020Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T19:15:44.097Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T19:15:45.970Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T19:15:46.042Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T19:18:15.339Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-03T19:18:15.413Z"}
+{"level":"error","timestamp":"2024-11-04T04:09:55.089Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-04T04:10:35.549Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-04T04:10:53.692Z"}
+{"level":"error","message":"Error fetching bugs: MongooseError: Operation `bugs.find()` buffering timed out after 10000ms","timestamp":"2024-11-04T04:11:21.348Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-04T04:12:21.655Z"}
+{"level":"error","message":"Error fetching bugs: MongooseError: Operation `bugs.find()` buffering timed out after 10000ms","timestamp":"2024-11-04T04:12:32.966Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-04T04:14:05.688Z"}
+{"level":"error","message":"Error fetching bugs: MongooseError: Operation `bugs.find()` buffering timed out after 10000ms","timestamp":"2024-11-04T04:14:18.366Z"}
+{"level":"error","message":"Error fetching bugs: MongooseError: Operation `bugs.find()` buffering timed out after 10000ms","timestamp":"2024-11-04T04:14:34.281Z"}
+{"level":"error","timestamp":"2024-11-04T04:15:23.434Z"}
+{"level":"error","timestamp":"2024-11-04T04:15:29.380Z"}
+{"level":"error","timestamp":"2024-11-04T04:15:39.393Z"}
+{"level":"error","timestamp":"2024-11-04T04:15:47.709Z"}
+{"level":"error","timestamp":"2024-11-04T04:16:12.660Z"}
+{"level":"error","timestamp":"2024-11-04T04:16:32.314Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-04T06:34:36.490Z"}
+{"level":"error","message":"Student not found with ID 67230cbcb581f4e904b1cf5b","timestamp":"2024-11-04T06:34:36.556Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-04T06:50:25.564Z"}
+{"level":"error","timestamp":"2024-11-04T06:50:56.921Z"}
+{"level":"error","timestamp":"2024-11-04T06:51:08.413Z"}
+{"level":"error","timestamp":"2024-11-04T06:51:30.940Z"}
+{"level":"error","timestamp":"2024-11-04T06:51:32.007Z"}
+{"level":"error","timestamp":"2024-11-04T06:51:32.890Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-04T06:51:48.462Z"}
+{"level":"error","timestamp":"2024-11-04T06:52:41.442Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-04T06:53:30.611Z"}
+{"level":"error","timestamp":"2024-11-04T06:53:49.586Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-04T06:55:34.900Z"}
+{"level":"error","timestamp":"2024-11-04T06:56:06.502Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : Authentication failed.","timestamp":"2024-11-04T06:58:12.786Z"}
+{"level":"error","timestamp":"2024-11-04T06:58:32.935Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : Authentication failed.","timestamp":"2024-11-04T07:00:56.438Z"}
+{"level":"error","timestamp":"2024-11-04T07:01:15.255Z"}
+{"level":"error","timestamp":"2024-11-04T07:01:32.764Z"}
+{"level":"error","timestamp":"2024-11-04T07:01:46.357Z"}
+{"level":"error","timestamp":"2024-11-04T07:08:56.293Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-04T07:58:47.496Z"}
+{"level":"error","timestamp":"2024-11-04T07:59:06.220Z"}
+{"level":"error","message":"unable to connect to db , MongoServerError: bad auth : authentication failed","timestamp":"2024-11-04T08:00:31.777Z"}
+{"level":"error","timestamp":"2024-11-04T08:00:49.447Z"}
+{"code":11000,"errorResponse":{"code":11000,"errmsg":"E11000 duplicate key error collection: test.students index: email_1 dup key: { email: \"aditya.samal@iitg.ac.in\" }","index":0,"keyPattern":{"email":1},"keyValue":{"email":"aditya.samal@iitg.ac.in"}},"index":0,"keyPattern":{"email":1},"keyValue":{"email":"aditya.samal@iitg.ac.in"},"level":"error","timestamp":"2024-11-04T08:05:57.447Z"}
+{"code":11000,"errorResponse":{"code":11000,"errmsg":"E11000 duplicate key error collection: test.students index: email_1 dup key: { email: \"aditya.samal@iitg.ac.in\" }","index":0,"keyPattern":{"email":1},"keyValue":{"email":"aditya.samal@iitg.ac.in"}},"index":0,"keyPattern":{"email":1},"keyValue":{"email":"aditya.samal@iitg.ac.in"},"level":"error","timestamp":"2024-11-04T08:06:36.113Z"}
+{"level":"error","message":"Student not found with ID 67289b430c87c736e4ac0d0f","timestamp":"2024-11-04T10:21:45.432Z"}
+{"level":"error","message":"Student not found with ID 67289b430c87c736e4ac0d0f","timestamp":"2024-11-04T10:21:45.545Z"}
+{"level":"error","message":"Student not found with ID 67289b430c87c736e4ac0d0f","timestamp":"2024-11-04T10:21:54.102Z"}
+{"level":"error","message":"Student not found with ID 67289b430c87c736e4ac0d0f","timestamp":"2024-11-04T10:21:54.216Z"}
+{"level":"error","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":{"$oid":"7fffffff000000000000006c"},"maxSetVersion":18,"servers":{"cluster0-shard-00-00.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-00.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341750404,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"cluster0-shard-00-01.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-01.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341755918,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"cluster0-shard-00-02.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-02.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341750284,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":"atlas-78md4l-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"timestamp":"2024-11-04T13:19:18.090Z"}
+{"level":"error","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":{"$oid":"7fffffff000000000000006c"},"maxSetVersion":18,"servers":{"cluster0-shard-00-00.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-00.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341781002,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"cluster0-shard-00-01.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-01.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341786523,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"cluster0-shard-00-02.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-02.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341780795,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":"atlas-78md4l-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"timestamp":"2024-11-04T13:19:30.839Z"}
+{"level":"error","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":{"$oid":"7fffffff000000000000006c"},"maxSetVersion":18,"servers":{"cluster0-shard-00-00.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-00.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341781002,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"cluster0-shard-00-01.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-01.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341786523,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"cluster0-shard-00-02.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-02.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341780795,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":"atlas-78md4l-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"timestamp":"2024-11-04T13:19:31.425Z"}
+{"level":"error","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":{"$oid":"7fffffff000000000000006c"},"maxSetVersion":18,"servers":{"cluster0-shard-00-00.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-00.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341781002,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"cluster0-shard-00-01.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-01.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341786523,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"cluster0-shard-00-02.qw8mo.mongodb.net:27017":{"$clusterTime":null,"address":"cluster0-shard-00-02.qw8mo.mongodb.net:27017","arbiters":[],"electionId":null,"error":{},"hosts":[],"lastUpdateTime":7341780795,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxWireVersion":0,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":"atlas-78md4l-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"timestamp":"2024-11-04T13:19:41.637Z"}

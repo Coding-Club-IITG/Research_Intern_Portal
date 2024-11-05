@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button, Checkbox, DatePicker } from "antd";
+import { DatePicker, Checkbox } from "antd";
 
-function ExperienceForm({ setAddExp, updateProfileExperience  }) {
+function ExperienceForm({ setAddExp, updateProfileExperience }) {
   const [isWorking, setIsWorking] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -12,7 +12,7 @@ function ExperienceForm({ setAddExp, updateProfileExperience  }) {
   });
   const [errors, setErrors] = useState({});
 
-  const onChange = (e) => {
+  const handleCheckboxChange = (e) => {
     setIsWorking(e.target.checked);
     if (e.target.checked) {
       setFormData({ ...formData, endDate: null });
@@ -27,12 +27,16 @@ function ExperienceForm({ setAddExp, updateProfileExperience  }) {
   };
 
   const handleDateChange = (field, date) => {
-    setFormData({ ...formData, [field]:date});
+    const year = date ? date.$y : null;
+    setFormData({ ...formData, [field]: year });
     setErrors({ ...errors, [field]: "" });
 
-    if (field === "endDate" && date && formData.startDate) {
-      if (date.isBefore(formData.startDate)) {
-        setErrors({ ...errors, endDate: "End date cannot be earlier than start date." });
+    if (field === "endDate" && year && formData.startDate) {
+      if (year < formData.startDate) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          endDate: "End date cannot be earlier than start date."
+        }));
       }
     }
   };
@@ -49,7 +53,8 @@ function ExperienceForm({ setAddExp, updateProfileExperience  }) {
     if (!formData.description) newErrors.description = "Please enter a description.";
     if (!isWorking && !formData.endDate) newErrors.endDate = "Please select an end date.";
 
-    if (formData.endDate && formData.startDate && formData.endDate.isBefore(formData.startDate)) {
+    // Validate end date against start date
+    if (formData.endDate && formData.startDate && formData.endDate < formData.startDate) {
       newErrors.endDate = "End date cannot be earlier than start date.";
     }
 
@@ -57,7 +62,8 @@ function ExperienceForm({ setAddExp, updateProfileExperience  }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (validateForm()) {
       updateProfileExperience(formData);
       setAddExp(false);
@@ -65,77 +71,114 @@ function ExperienceForm({ setAddExp, updateProfileExperience  }) {
   };
 
   return (
-    <div className="bg-gray-50 p-4 rounded-lg border border-gray-300 w-full">
+    <form className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-300 w-full dark:bg-slate-700 dark:border-yellow-500">
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Name Of Organisation</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+          Name Of Organisation
+        </label>
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           placeholder="Enter the name of the organisation"
         />
-        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+        {errors.name && (
+          <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.name}</p>
+        )}
       </div>
+
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Role</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">Role</label>
         <input
           type="text"
           name="role"
           value={formData.role}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           placeholder="e.g. Software Engineer"
         />
-        {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role}</p>}
+        {errors.role && (
+          <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.role}</p>
+        )}
       </div>
+
       <div className="flex space-between gap-4 flex-wrap">
         <div className="mb-4 grow shrink basis-32">
-          <label className="block w-full text-sm font-medium text-gray-700 pb-2">Start Year</label>
+          <label className="block w-full text-sm font-medium text-gray-700 dark:text-white pb-2">
+            Start Year
+          </label>
           <DatePicker
-            className="grow shrink w-full"
-            picker="month"
+            className="grow shrink w-full py-1 dark:bg-slate-700 dark:border-yellow-500 dark:text-white"
+            picker="year"
             onChange={(value) => handleDateChange("startDate", value)}
             placeholder="Select start year"
           />
-          {errors.startDate && <p className="text-red-500 text-xs mt-1">{errors.startDate}</p>}
+          {errors.startDate && (
+            <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.startDate}</p>
+          )}
         </div>
+
         {!isWorking && (
           <div className="mb-4 grow shrink basis-32">
-            <label className="block w-full text-sm font-medium text-gray-700 pb-2">End Year</label>
+            <label className="block w-full text-sm font-medium text-gray-700 pb-2 dark:text-white">
+              End Year
+            </label>
             <DatePicker
-              className="grow shrink w-full"
-              picker="month"
+              className="grow shrink w-full py-1 dark:bg-slate-700 dark:border-yellow-500 dark:text-white"
+              picker="year"
               onChange={(value) => handleDateChange("endDate", value)}
               placeholder="Select end year"
             />
-            {errors.endDate && <p className="text-red-500 text-xs mt-1">{errors.endDate}</p>}
+            {errors.endDate && (
+              <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.endDate}</p>
+            )}
           </div>
         )}
       </div>
-      <Checkbox onChange={onChange} className="pb-4" checked={isWorking}>
-        I am currently working here.
-      </Checkbox>
+
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Description</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+          Description
+        </label>
         <textarea
           name="description"
           value={formData.description}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           rows="4"
-          placeholder="Write a brief description of your role and responsibilities"
+          placeholder="Write a brief description of your experience"
         />
-        {errors.description && <p className="text-red-500 text-xs mt-1">{errors.description}</p>}
+        {errors.description && (
+          <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.description}</p>
+        )}
       </div>
+
+      <div className="flex items-center mb-4">
+        <Checkbox checked={isWorking} onChange={handleCheckboxChange} className="dark:text-white">
+          I am currently working here
+        </Checkbox>
+      </div>
+
       <div className="flex gap-4">
-        <Button onClick={handleCancel}>Cancel</Button>
-        <Button type="primary" className="bg-blue-600 text-white" onClick={handleSubmit}>
+        <button
+          onClick={handleCancel}
+          className="bg-gray-200 text-gray-700 border border-gray-300 hover:bg-gray-300 
+         dark:bg-gray-400 dark:text-black dark:border-gray-400 dark:hover:bg-gray-500 
+         py-1 px-2 rounded">
+          Cancel
+        </button>
+
+        <button
+          onClick={handleSubmit}
+          className="bg-gray-200 text-gray-700 border border-gray-300 hover:bg-gray-300 
+         dark:bg-yellow-400 dark:text-black dark:border-yellow-400 dark:hover:bg-yellow-500 
+         py-1 px-2 rounded">
           Save
-        </Button>
+        </button>
       </div>
-    </div>
+    </form>
   );
 }
 

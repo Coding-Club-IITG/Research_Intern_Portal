@@ -1,7 +1,9 @@
-import { Button, DatePicker } from "antd";
+import { DatePicker } from "antd";
 import { useState } from "react";
+import { useTheme } from "../../../store/themeStore";
 
 function EducationForm({ setAddEdu, updateProfile }) {
+  const [theme, toggleTheme] = useTheme();
   const [formData, setFormData] = useState({
     name: "",
     role: "",
@@ -20,7 +22,7 @@ function EducationForm({ setAddEdu, updateProfile }) {
   };
 
   const handleDateChange = (field, value) => {
-    setFormData({ ...formData, [field]: value ? value.format("YYYY") : "" });
+    setFormData({ ...formData, [field]: value ? value.$y : "" });
     setErrors({ ...errors, [field]: "" });
   };
 
@@ -53,99 +55,132 @@ function EducationForm({ setAddEdu, updateProfile }) {
     setAddEdu(false);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (validateForm()) {
-      // Validate before submitting
       updateProfile(formData);
       setAddEdu(false);
     }
   };
 
   return (
-    <form className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-300">
+    <form className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-300 dark:bg-slate-700 dark:border-yellow-500">
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Name Of Institute</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+          Name Of Institute
+        </label>
         <input
           type="text"
           name="name"
           value={formData.name}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           placeholder="Enter the name of the institute"
         />
-        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}{" "}
-        {/* Error message */}
+        {errors.name && (
+          <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.name}</p>
+        )}
       </div>
 
       <div className="flex space-between gap-4 flex-wrap">
         <div className="mb-4 grow shrink basis-32">
-          <label className="block text-sm font-medium text-gray-700">Degree (Field Of Study)</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+            Degree (Field Of Study)
+          </label>
           <input
             type="text"
             name="role"
             value={formData.role}
             onChange={handleInputChange}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
             placeholder="e.g. B.Tech (Computer Science)"
           />
-          {errors.role && <p className="text-red-500 text-xs mt-1">{errors.role}</p>}{" "}
-          {/* Error message */}
+          {errors.role && (
+            <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.role}</p>
+          )}
         </div>
         <div className="mb-4 grow shrink basis-32">
-          <label className="block text-sm font-medium text-gray-700 pb-2">Start Year</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 pb-2">
+            Start Year
+          </label>
           <DatePicker
-            className="grow shrink w-full"
+            className={`grow shrink w-full py-1 ${
+              theme === "dark"
+                ? "bg-slate-700 border-yellow-500 dark:hover:bg-slate-700 text-white placeholder:text-white"
+                : "bg-white border-gray-300"
+            }`}
             picker="year"
             onChange={(value) => handleDateChange("startDate", value)}
             placeholder="Select start year"
+            placeholderStyle={{ color: theme === "dark" ? "white" : "white" }}
           />
-          {errors.startDate && <p className="text-red-500 text-xs mt-1">{errors.startDate}</p>}{" "}
-          {/* Error message */}
+          {errors.startDate && (
+            <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.startDate}</p>
+          )}
         </div>
         <div className="mb-4 grow shrink basis-32">
-          <label className="block text-sm font-medium text-gray-700 pb-2">End Year</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 pb-2">
+            End Year
+          </label>
           <DatePicker
-            className="grow shrink w-full"
+            className="grow shrink w-full dark:bg-slate-700 dark:border-yellow-500 dark:text-white"
             picker="year"
             onChange={(value) => handleDateChange("endDate", value)}
             placeholder="Select end year"
           />
-          {errors.endDate && <p className="text-red-500 text-xs mt-1">{errors.endDate}</p>}{" "}
-          {/* Error message */}
+          {errors.endDate && (
+            <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.endDate}</p>
+          )}
         </div>
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Percentage / CGPA</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+          Percentage / CGPA
+        </label>
         <input
           type="text"
           name="grade"
           value={formData.grade}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           placeholder="e.g. 85% or 9.0 CGPA"
         />
-        {errors.grade && <p className="text-red-500 text-xs mt-1">{errors.grade}</p>}{" "}
-        {/* Error message */}
+        {errors.grade && (
+          <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.grade}</p>
+        )}
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Description</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+          Description
+        </label>
         <textarea
           name="description"
           value={formData.description}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
           rows="4"
           placeholder="Write a brief description of your education"
         />
       </div>
 
       <div className="flex gap-4">
-        <Button onClick={handleCancel}>Cancel</Button>
-        <Button type="primary" className="bg-blue-600 text-white" onClick={handleSubmit}>
+        <button
+          onClick={handleCancel}
+          class="bg-gray-200 text-gray-700 border border-gray-300 hover:bg-gray-300 
+         dark:bg-gray-400 dark:text-black dark:border-gray-400 dark:hover:bg-gray-500 
+         py-1 px-2 rounded">
+          Cancel
+        </button>
+
+        <button
+          onClick={(e) => handleSubmit(e)}
+          class="bg-gray-200 text-gray-700 border border-gray-300 hover:bg-gray-300 
+         dark:bg-yellow-400 dark:text-black dark:border-yellow-400 dark:hover:bg-yellow-500 
+         py-1 px-2 rounded">
           Save
-        </Button>
+        </button>
       </div>
     </form>
   );

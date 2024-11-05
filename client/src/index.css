@@ -5,10 +5,34 @@
 @import "tailwindcss/utilities";
 
 body {
-  @apply bg-white text-black; /* Light mode styles */
+  @apply bg-white text-black;
 }
 
 .custom-layout-height {
   height: calc(100vh - 4rem);
   min-height: calc(100vh - 4rem);
+}
+
+.dark .ant-picker-input input::placeholder {
+  color: #abaeb1;
+}
+
+.dark .ant-picker-input span {
+  color: #abaeb1;
+}
+
+.dark .ant-select-selector {
+  background-color: #334155 !important;
+  border-color: #fbbf24 !important;
+  color: #ffffff !important;
+  padding: 4px;
+}
+
+.dark .ant-select-selection-placeholder {
+  color: #d1d5db !important;
+}
+
+.dark .ant-select-selection-item {
+  background-color: #fbbf24 !important;
+  color: black !important;
 }
