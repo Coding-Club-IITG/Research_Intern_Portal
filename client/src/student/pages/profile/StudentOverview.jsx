@@ -146,27 +146,27 @@ const Overview = () => {
               {profileData.skills.map((skill, index) => (
                 <p
                   key={index}
-                  className="py-0.5 px-2 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-yellow-400 dark:text-black dark:bg-yellow-400">
+                  className="py-2 px-4 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-yellow-400 dark:text-black dark:bg-amber-400">
                   {skill}
                 </p>
               ))}
             </div>
           </div>
         )}
-
-        <div className="border dark:border-slate-700 p-2 rounded-lg mb-2">
-          <h4 className="text-black dark:text-white mb-2">Interests</h4>
-          <ul className="list-none list-inside flex gap-2">
-            {profileData?.interests &&
-              profileData?.interests.map((interest, index) => (
+        {profileData?.interests?.length > 0 && (
+          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2">
+            <h4 className="text-black dark:text-white mb-2">Interests</h4>
+            <ul className="list-none list-inside flex gap-2">
+              {profileData?.interests.map((interest, index) => (
                 <li
-                  className="py-0.5 px-2 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-yellow-400 dark:text-black dark:bg-yellow-400"
+                  className="py-2 px-4 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-yellow-400 dark:text-black dark:bg-amber-400"
                   key={index}>
                   {interest}
                 </li>
               ))}
-          </ul>
-        </div>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );

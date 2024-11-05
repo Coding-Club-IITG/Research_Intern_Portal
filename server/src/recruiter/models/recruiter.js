@@ -30,8 +30,8 @@ const Recruiter = new mongoose.Schema({
       type: String,
     },
     website: {
-      type: String
-    }
+      type: String,
+    },
   },
   phoneNumber: {
     type: Number,
@@ -68,9 +68,9 @@ const Recruiter = new mongoose.Schema({
         college: {
           type: String,
         },
-        description: {
-          type: String,
-        },
+        // description: {
+        //   type: String,
+        // },
       },
     ],
   },
@@ -85,7 +85,6 @@ const Recruiter = new mongoose.Schema({
     },
   ],
 });
-
 
 /**
  * @swagger

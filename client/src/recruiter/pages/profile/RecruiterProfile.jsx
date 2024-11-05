@@ -11,6 +11,7 @@ function Profile() {
   const { getUser } = useAuthStore();
   const user = getUser();
   const navigate = useNavigate();
+  const departments = ["Chemical", "Civil", "Computer", "Electrical", "Mechanical", "Metallurgy"];
 
   useEffect(() => {
     async function getUser() {
@@ -55,11 +56,19 @@ function Profile() {
 
   const updateProfileQualification = (newQualification) => {
     setQualifications([...qualifications, newQualification]);
+    console.log(qualifications);
   };
 
   const deleteQualification = (index) => {
     const updatedQualifications = qualifications.filter((_, i) => i !== index);
     setQualifications(updatedQualifications);
+  };
+
+  const removeInterest = (interest) => {
+    const tempInterests = interests.filter((int) => {
+      return interest !== int;
+    });
+    setInterests(tempInterests);
   };
 
   const handleSaveProfile = async () => {
@@ -103,8 +112,8 @@ function Profile() {
     <div className="flex flex-col space-y-4 min-h-screen">
       <div className="flex w-full space-x-4 flex-wrap">
         <div className="basis-full md:basis-1/3 p-4">
-          <div className="font-bold">About</div>
-          <div>Tell us about yourself so startups know who you are.</div>
+          <div className="font-bold dark:text-white">About</div>
+          <div className="dark:text-gray-400">Tell us about yourself.</div>
         </div>
 
         <div className="flex-col grow shrink">
@@ -139,37 +148,30 @@ function Profile() {
             </div>
           </div>
 
-          <div className="flex justify-between gap-4 flex-wrap">
-            <div className="mb-4 basis-72 grow shrink">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                Department <span className="text-red-500">*</span>
-              </label>
-              <Select
-                className="mt-1"
-                value={selectedDepartment}
-                onChange={(option) => setSelectedDepartment(option)}
-                style={{
-                  width: "100%"
-                }}
-                options={["Chemical"].map((department) => {
-                  return {
-                    value: department,
-                    label: department
-                  };
-                })}
-              />
-            </div>
-
-            {/* <div className="basis-32 grow shrink">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">DOB</label>
-                <DatePicker
-                  className="grow shrink w-full pb-2 mt-1"
-                  picker="date"
-                  value={DOB}
-                  onChange={handleDOB}
-                  placeholder="Date Of Birth"
-                />
-              </div> */}
+          <div className="mb-4 basis-72 grow shrink">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+              Department <span className="text-red-500">*</span>
+            </label>
+            <select
+              value={selectedDepartment}
+              onChange={(e) => setSelectedDepartment(e.target.value)}
+              className={`mt-1 block w-full p-2 border 
+                  border-gray-300 rounded-md shadow-sm 
+                  bg-white dark:bg-slate-700 
+                  dark:border-yellow-500 
+                  dark:text-white focus:outline-none 
+                  focus:ring-1 dark:focus:ring-yellow-400 
+                  focus:border-yellow-500 dark:focus:border-yellow-500
+                  sm:text-sm`}>
+              <option value="Select" disabled className="dark:bg-slate-700 dark:text-white">
+                Select
+              </option>
+              {departments.map((department) => (
+                <option key={department} value={department}>
+                  {department}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="flex justify-between gap-4 flex-wrap">
@@ -200,26 +202,36 @@ function Profile() {
             </div>
           </div>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-0 dark:bg-slate-700">
               Fields of Interest
             </label>
             <div className="flex gap-2 flex-wrap py-2">
               {interests.map((interest) => (
-                <span className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md" key={interest}>
+                <span
+                  className="relative inline-flex items-center px-4 py-1 bg-indigo-100 text-indigo-700 rounded-full shadow-lg font-medium cursor-pointer transition-all duration-300 ease-in-out hover:bg-indigo-200 hover:shadow-xl dark:bg-yellow-400 dark:text-black dark:hover:bg-yellow-500 dark:hover:shadow-xl"
+                  key={interest}>
                   {interest}
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeInterest(interest);
+                    }}
+                    className="absolute top-1 right-1 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center text-[10px] cursor-pointer shadow-md border border-white transition-transform duration-200 hover:bg-red-600 hover:scale-110">
+                    ✕
+                  </span>
                 </span>
               ))}
             </div>
             <div className="flex gap-2">
               <input
                 type="text"
-                className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400"
                 placeholder="Add Interest"
                 value={newInterest}
                 onChange={(e) => setNewInterest(e.target.value)}
               />
               <button
-                className="basis-28 p-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
+                className="basis-28 p-2 bg-indigo-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black text-white rounded-md hover:bg-indigo-700 transition duration-200"
                 onClick={AddInterest}>
                 Add
               </button>
@@ -227,13 +239,13 @@ function Profile() {
           </div>
         </div>
       </div>
-      <hr />
+      <hr className="border-t border-gray-300 dark:border-yellow-400" />
 
       {/* Social Section */}
       <div className="flex w-full space-x-4 flex-wrap">
         <div className="basis-full md:basis-1/3 p-4">
-          <div className="font-bold">Social Profiles</div>
-          <div>Where can people find you online?</div>
+          <div className="font-bold dark:text-white">Social Profiles</div>
+          <div className="dark:text-gray-400">Where can people find you online?</div>
         </div>
         <div className="flex-col grow shrink">
           <div className="flex-col basis-80 grow shrink">
@@ -246,6 +258,7 @@ function Profile() {
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
+                placeholder="eg. www.yourwebsite.com"
               />
             </div>
             <div className="mb-4">
@@ -257,12 +270,13 @@ function Profile() {
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={linkedin}
                 onChange={(e) => setLinkedin(e.target.value)}
+                placeholder="eg. www.linkedin.com/in/yourprofile"
               />
             </div>
           </div>
         </div>
       </div>
-      <hr />
+      <hr className="border-t border-gray-300 dark:border-yellow-400" />
 
       {/* Experience Section */}
       {/* <div className="flex w-full flex-wrap items-start">
@@ -289,12 +303,12 @@ function Profile() {
           </div>
         </div> */}
       {/* no need for v1 */}
-      <hr />
+      {/* <hr /> */}
 
       <div className="flex w-full flex-wrap">
         <div className="basis-full md:basis-1/3 p-4">
-          <div className="font-bold">Qualification</div>
-          <div>Which school have you studied at?</div>
+          <div className="font-bold dark:text-white">Education</div>
+          <div className="dark:text-gray-400">Which school have you studied at?</div>
         </div>
         <div className="flex-col pl-4 md:basis-2/3 grow shrink">
           {qualifications.map((edu, index) => (
@@ -302,25 +316,28 @@ function Profile() {
               key={index}
               qualification={edu}
               onDelete={() => deleteQualification(index)}
+              deletable={true}
             />
           ))}
           {addEdu ? (
-            <QualificationForm setAddEdu={setAddEdu} updateProfile={updateProfileQualification} />
+            <QualificationForm
+              setAddQualification={setAddEdu}
+              updateProfileQualification={updateProfileQualification}
+            />
           ) : (
             <span
-              className="text-blue-700 hover:underline cursor-pointer"
+              className="text-blue-700 hover:underline cursor-pointer dark:text-yellow-400"
               onClick={() => setAddEdu(true)}>
               + Add Qualification
             </span>
           )}
         </div>
       </div>
-      <hr />
 
       <div className="flex justify-end p-4">
         <button
           type="primary"
-          className="p-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
+          className="p-2 bg-indigo-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 text-white rounded-md hover:bg-indigo-700 transition duration-200 dark:text-black"
           onClick={handleSaveProfile}>
           Save Profile
         </button>

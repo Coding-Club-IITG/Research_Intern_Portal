@@ -15,7 +15,7 @@ function Drives() {
     const fetchJobs = async () => {
       message.loading({ content: "Loading...", key: "loading" });
       const res = await getJobsOfRecruiter(user.connection_id, navigate);
-      console.log(res)
+      console.log(res);
       if (res.status === "success") {
         message.destroy("loading");
         setJobs(res.data);
@@ -27,13 +27,13 @@ function Drives() {
 
   return (
     <div className="max-sm:p-2 p-6">
-      <h1 className="max-sm:text-xl text-3xl font-bold text-center mb-6">
+      <h1 className="max-sm:text-xl text-3xl font-bold text-center mb-6 dark:text-white">
         Your Internship Openings
       </h1>
       {jobs.length === 0 ? (
         <div>
           <img src="/no-data.png" alt="empty" className="mx-auto w-1/3 mt-20" />
-          <p className="text-center">You do not create internship yet </p>
+          <p className="text-center dark:text-white">You do not create internship yet </p>
         </div>
       ) : (
         <div className="w-full flex flex-col gap-2">
