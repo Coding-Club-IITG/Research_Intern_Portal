@@ -1,4 +1,4 @@
-import { Button, Flex } from "antd";
+import { Button, Flex, message } from "antd";
 import { Card, Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,7 @@ import { banRecruiter, removeRecruiter, verifyRecruiter } from "../../../apis/ad
 
 export default function ProfessorsPage() {
   const navigate = useNavigate();
-  const [Professors, setProfessors] = useState([]);
+  const [recruiters, setRecruiters] = useState([]);
 
   useEffect(() => {
     fetchProfessors();
@@ -19,103 +19,79 @@ export default function ProfessorsPage() {
 
   const fetchProfessors = async () => {
     const response = await getAllRecruiters(navigate);
-    setProfessors(response.data);
+    setRecruiters(response.data);
   };
 
   const handleVerify = async (id) => {
-    try {
-      await verifyRecruiter(id, navigate);
-      alert("Recruiter verified successfully.");
-      refreshProfessors();
-    } catch (error) {
-      console.error("Verification failed:", error);
+    const res = await verifyRecruiter(id, navigate);
+    if(res.status === "success"){
+        message.success({ content: res.message});
+    }else{
+      message.error({ content: res.message})
     }
   };
 
   const handleBan = async (id) => {
-    try {
-      await banRecruiter(id, navigate);
-      alert("Recruiter banned successfully.");
-      refreshProfessors();
-    } catch (error) {
-      console.error("Ban failed:", error);
-    }
+      const res = await banRecruiter(id, navigate);
+      console.log(res);
+
+      if(res.status == "success"){
+        message.success({ content: res.message });
+      }else{
+        message.error({ content: res.message })
+      }
   };
 
-  const handleRemove = async (id) => {
-    try {
-      await removeRecruiter(id, navigate);
-      alert("Recruiter removed successfully.");
-      refreshProfessors();
-    } catch (error) {
-      console.error("Remove failed:", error);
-    }
-  };
 
   return (
     <div>
-      {Professors.map((Prof, i) => (
+      {recruiters.map((recruiter, i) => (
         <Row gutter={16} key={i}>
           <Col span={16}>
-            <Card key={i} title={Prof.name} bordered={true}>
+            <Card key={i} title={recruiter.name} bordered={true}>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div style={{ padding: "0px 10px" }}>
                   <p>
-                    <li style={{ color: "#0000FF" }}>Qualifications : </li>{" "}
-                    {Prof.qualifications.map((qualification, i) => (
-                      <li key={i}>
-                        {qualification.degree} in {qualification.year} at {qualification.college}
-                      </li>
-                    ))}
-                  </p>
-                  <p>
-                    <li style={{ color: "#0000FF" }}>Area of Intrest : </li>
-                    {Prof.areaOfInterest}
-                  </p>
-                  <p>
                     <li style={{ color: "#0000FF" }}>University : </li>
-                    {Prof.university}
+                    {recruiter?.university}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Email : </li>
-                    {Prof.email}
+                    {recruiter?.email}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Phone Number : </li>
-                    {Prof.phoneNumber}
+                    {recruiter?.phoneNumber}
                   </p>
                 </div>
                 <div style={{ padding: "0px 10px" }}>
                   <p>
                     <li style={{ color: "#0000FF" }}>Status : </li>{" "}
-                    {Prof.isActive ? "Active" : "Inactive"}
+                    {recruiter?.isActive ? "Active" : "Inactive"}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Rating : </li>
-                    {Prof.rating}
+                    {recruiter?.rating}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Verified : </li>{" "}
-                    {Prof.isVerified ? "Yes" : "No"}
+                    {recruiter.isVerified ? "Yes" : "No"}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Created at : </li>
-                    {Prof.createdAt}
+                    {new Date(recruiter?.createdAt).toLocaleDateString()}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Updated at : </li>
-                    {Prof.updatedAt}
+                    {recruiter?.updatedAt}
                   </p>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <Button style={{ margin: "10px" }} type="primary" onClick={handleVerify}>
+                  <Button style={{ margin: "10px" }} type="primary" onClick={() => handleVerify(recruiter._id)}>
                     Verify Recruiter
                   </Button>
-                  <Button style={{ margin: "10px" }} type="primary" onClick={handleBan}>
+                  <Button style={{ margin: "10px" }} type="primary" onClick={() => handleBan(recruiter._id)}>
                     Ban Recruiter
-                  </Button>
-                  <Button style={{ margin: "10px" }} type="primary" onClick={handleRemove}>
-                    Remove Recruiter
                   </Button>
                 </div>
               </div>

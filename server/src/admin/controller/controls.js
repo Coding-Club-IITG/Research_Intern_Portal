@@ -3,9 +3,9 @@ import Student from "../../students/models/student.js";
 import Jobs from "../../recruiter/models/jobs.js";
 import logger from "../../utils/logger.js";
 
-// Verify a recruiter
 export const verifyRecruiter = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
+  console.log(req.user)
   try {
     const recruiter = await Recruiter.findById(id);
     if (!recruiter) {
@@ -37,70 +37,9 @@ export const verifyRecruiter = async (req, res) => {
   }
 };
 
-// Remove a recruiter
-export const removeRecruiter = async (req, res) => {
-  const { id } = req.body;
-  try {
-    const recruiter = await Recruiter.findById(id);
 
-    if (!recruiter) {
-      logger.warn(
-        `Attempt to remove recruiter with ID ${id} failed: Recruiter not found`
-      );
-      return res.status(404).json({
-        status: "error",
-        message: "Recruiter not found",
-        data: null,
-      });
-    }
-
-    await recruiter.remove();
-    logger.info(`Recruiter removed successfully with ID: ${id}`);
-    return res.status(200).json({
-      status: "success",
-      message: "Recruiter removed successfully",
-      data: null,
-    });
-  } catch (error) {
-    logger.error(`Error removing recruiter with ID ${id}: ${error.message}`);
-    res.status(500).json({
-      status: "error",
-      message: "Internal server error",
-      data: null,
-    });
-  }
-};
-
-export const removeStudent = async (req, res) => {
-  const { id } = req.body;
-  try {
-    const student = await Student.findById(id);
-
-    if (!student) {
-      logger.warn(
-        `Attempt to remove student with ID ${id} failed: Student not found`
-      );
-      return res.status(404).json({ message: "Student not found" });
-    }
-    logger.error(`removed student with ID ${id}`);
-    return res.status(200).json({
-      status: "success",
-      message: "Student removed successfully",
-      data: null,
-    });
-  } catch (error) {
-    logger.error(`Error removing student with ID ${id}: ${error.message}`);
-    res.status(500).json({
-      status: "error",
-      message: "Internal server error",
-      data: null,
-    });
-  }
-};
-
-// Ban a recruiter
 export const banRecruiter = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
     const recruiter = await Recruiter.findById(id);
 
@@ -116,6 +55,7 @@ export const banRecruiter = async (req, res) => {
     }
 
     recruiter.isActive = false;
+    recruiter.isVerified = false;
     await recruiter.save();
     logger.info(`Recruiter banned successfully with ID: ${id}`);
     return res.status(200).json({
@@ -134,7 +74,7 @@ export const banRecruiter = async (req, res) => {
 };
 
 export const deleteJob = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
     const job = await Jobs.findById(id);
 
