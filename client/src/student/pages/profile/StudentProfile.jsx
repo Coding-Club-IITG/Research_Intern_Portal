@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { getStudent, updateStudent } from "../../../apis/student";
 import useAuthStore from "../../../store/authStore";
 import { useTheme } from "../../../store/themeStore";
+import daysjs from "dayjs";
 
 function Profile() {
   const { getUser } = useAuthStore();
@@ -67,8 +68,8 @@ function Profile() {
       setName(res.data?.name || "");
       setEmail(res.data?.email || "");
       setCGPA(res.data?.CGPA);
-      setYearOfGrad(res.data?.yearOfGrad);
-      setDOB(res.data?.DOB);
+      setYearOfGrad(daysjs(res.data?.yearOfGrad));
+      setDOB(daysjs(res.data?.DOB));
       setBio(res.data?.bio || "");
       setSelectedCourse(res.data?.course || "Select");
       setSelectedDepartment(res.data?.department || "Select");
@@ -97,11 +98,11 @@ function Profile() {
   }, [educations]);
 
   const handleYearOfGrad = (date) => {
-    setYearOfGrad(date);
+    setYearOfGrad(daysjs(date));
   };
 
   const handleDOB = (date) => {
-    setDOB(date.$d);
+    setDOB(daysjs(date));
   };
 
   const deleteExperience = (index) => {
@@ -190,13 +191,13 @@ function Profile() {
       experiences,
       achievements
     };
+    console.log(updatedProfile);
     message.loading({ content: "Saving Profile...", key: "saveProfile" });
     const res = await updateStudent(user.connection_id, updatedProfile);
 
     if (res.status === "success") {
       message.destroy("saveProfile");
       message.success("Profile updated successfully!");
-      console.log(res.data);
     } else {
       message.error("Error updating profile");
     }
@@ -208,7 +209,7 @@ function Profile() {
       <div className="flex w-full space-x-4 flex-wrap">
         <div className="basis-full md:basis-1/3 p-4">
           <div className="font-bold dark:text-white">About</div>
-          <div className="dark:text-white">
+          <div className="dark:text-gray-400">
             Tell us about yourself so startups know who you are.
           </div>
         </div>
@@ -254,13 +255,16 @@ function Profile() {
                 value={selectedCourse}
                 onChange={(e) => setSelectedCourse(e.target.value)}
                 className={`mt-1 block w-full p-2 border 
-                  border-gray-300 rounded-md shadow-sm 
-                  bg-white dark:bg-slate-700 
-                  dark:border-yellow-500 
-                  dark:text-white focus:outline-none 
-                  focus:ring-1 dark:focus:ring-yellow-400 
-                  focus:border-yellow-500 dark:focus:border-yellow-500
-                  sm:text-sm`}>
+    border-gray-300 rounded-md shadow-sm 
+    bg-white dark:bg-slate-700 
+    dark:border-yellow-500 
+    dark:text-white focus:outline-none 
+    focus:ring-1 dark:focus:ring-yellow-400 
+    focus:border-yellow-500 dark:focus:border-yellow-500
+    sm:text-sm`}>
+                <option value="Select" disabled className="dark:bg-slate-700 dark:text-white">
+                  Select
+                </option>
                 {courses.map((course) => (
                   <option key={course} value={course} className="dark:bg-slate-700 dark:text-white">
                     {course}
@@ -283,6 +287,9 @@ function Profile() {
                   focus:ring-1 dark:focus:ring-yellow-400 
                   focus:border-yellow-500 dark:focus:border-yellow-500
                   sm:text-sm`}>
+                <option value="Select" disabled className="dark:bg-slate-700 dark:text-white">
+                  Select
+                </option>
                 {departments.map((department) => (
                   <option key={department} value={department}>
                     {department}
@@ -295,14 +302,14 @@ function Profile() {
           <div className="flex justify-between gap-4 flex-wrap pb-2">
             <div className="basis-32 grow shrink">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-                CGPA <span className="text-red-500">*</span>
+                Current CGPA <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={CGPA}
                 onChange={(e) => setCGPA(e.target.value)}
-                placeholder="Current Grade"
+                placeholder="eg. 8.75"
               />
             </div>
             <div className="basis-32 grow shrink">
@@ -312,7 +319,7 @@ function Profile() {
               <DatePicker
                 className={`grow shrink w-full pb-2 mt-1 ${
                   theme === "dark"
-                    ? "bg-slate-700 text-white  border-yellow-400"
+                    ? "bg-slate-700 text-white  border-yellow-400 dark:hover:bg-slate-700"
                     : "bg-white border-gray-300"
                 }`}
                 picker="year"
@@ -326,11 +333,14 @@ function Profile() {
                 DOB
               </label>
               <DatePicker
-                className="grow shrink w-full pb-2 mt-1"
+                className={`grow shrink w-full pb-2 mt-1 ${
+                  theme === "dark"
+                    ? "bg-slate-700 border-yellow-400 dark:hover:bg-slate-700 text-white placeholder:text-white"
+                    : "bg-white border-gray-300"
+                }`}
                 picker="date"
-                // value={DOB}
+                value={DOB}
                 onChange={handleDOB}
-                placeholder="Date Of Birth"
               />
             </div>
           </div>
@@ -375,17 +385,13 @@ function Profile() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-20 dark:bg-slate-700">
-              Fields of Interest (
-              <span className="text-xs" style={{ fontStyle: "italic" }}>
-                Click on the existing to intersets to remove them)
-              </span>
+            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-0 dark:bg-slate-700">
+              Fields of Interest
             </label>
             <div className="flex gap-2 flex-wrap py-2">
               {interests.map((interest) => (
                 <span
-                  onClick={() => removeInterest(interest)}
-                  className="relative inline-flex items-center px-4 py-1 bg-indigo-100 text-indigo-700 rounded-full shadow-lg font-medium cursor-pointer transition-all duration-300 ease-in-out hover:bg-indigo-200 hover:shadow-xl"
+                  className="relative inline-flex items-center px-4 py-1 bg-indigo-100 text-indigo-700 rounded-full shadow-lg font-medium cursor-pointer transition-all duration-300 ease-in-out hover:bg-indigo-200 hover:shadow-xl dark:bg-yellow-400 dark:text-black dark:hover:bg-yellow-500 dark:hover:shadow-xl"
                   key={interest}>
                   {interest}
                   <span
@@ -402,13 +408,13 @@ function Profile() {
             <div className="flex gap-2">
               <input
                 type="text"
-                className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400"
                 placeholder="Add Interest"
                 value={newInterest}
                 onChange={(e) => setNewInterest(e.target.value)}
               />
               <button
-                className="basis-28 p-2 bg-indigo-600 dark:bg-yellow-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
+                className="basis-28 p-2 bg-indigo-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black text-white rounded-md hover:bg-indigo-700 transition duration-200"
                 onClick={AddInterest}>
                 Add
               </button>
@@ -435,7 +441,7 @@ function Profile() {
           </div>
         </div>
       </div>
-      <hr />
+      <hr className="border-t border-gray-300 dark:border-yellow-400" />
 
       {/* Social Section */}
       <div className="flex w-full space-x-4 flex-wrap">
@@ -454,6 +460,7 @@ function Profile() {
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
+                placeholder="eg. www.yourwebsite.com"
               />
             </div>
             <div className="mb-4">
@@ -465,6 +472,7 @@ function Profile() {
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={linkedin}
                 onChange={(e) => setLinkedin(e.target.value)}
+                placeholder="eg. www.linkedin.com/in/yourprofile"
               />
             </div>
             <div className="mb-4">
@@ -476,12 +484,13 @@ function Profile() {
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={github}
                 onChange={(e) => setGithub(e.target.value)}
+                placeholder="eg. www.github.com/yourprofile"
               />
             </div>
           </div>
         </div>
       </div>
-      <hr />
+      <hr className="border-t border-gray-300 dark:border-yellow-400" />
 
       {/* Experience Section */}
       <div className="flex w-full flex-wrap items-start">
@@ -507,7 +516,7 @@ function Profile() {
           )}
         </div>
       </div>
-      <hr />
+      <hr className="border-t border-gray-300 dark:border-yellow-400" />
 
       {/* Education Section */}
       <div className="flex w-full flex-wrap">
@@ -530,7 +539,7 @@ function Profile() {
           )}
         </div>
       </div>
-      <hr />
+      <hr className="border-t border-gray-300 dark:border-yellow-400" />
 
       {/* Skills Section */}
       <div className="flex flex-col md:flex-row w-full space-y-4 md:space-y-0 md:space-x-4">
@@ -539,41 +548,42 @@ function Profile() {
           <div className="dark:text-gray-400">What are you skilled at?</div>
         </div>
         <div className="flex-col grow shrink ml-4 ">
-          <div className="flex gap-2 flex-wrap py-2 mb-4 items-center justify-between">
-            <div className="flex gap-2 flex-wrap ">
-              {skills.map((skill, index) => (
+          <div className="flex flex-wrap mb-4 items-center">
+            <div className="flex gap-2 flex-wrap">
+              {skills.map((skill) => (
                 <span
-                  key={index}
-                  onClick={() => {
-                    removeSkills(skill);
-                  }}
-                  style={{ cursor: "pointer" }}
-                  className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded-md">
+                  key={skill}
+                  className="relative inline-flex items-center px-4 py-1 bg-indigo-100 text-indigo-700 rounded-full shadow-lg font-medium cursor-pointer transition-all duration-300 ease-in-out hover:bg-indigo-200 hover:shadow-xl dark:bg-yellow-400 dark:text-black dark:hover:bg-yellow-500 dark:hover:shadow-xl">
                   {skill}
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeSkills(skill);
+                    }}
+                    className="absolute top-1 right-1 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white rounded-full w-3.5 h-3.5 flex items-center justify-center text-[10px] cursor-pointer shadow-md border border-white transition-transform duration-200 hover:bg-red-600 hover:scale-110">
+                    ✕
+                  </span>
                 </span>
               ))}
             </div>
-            <span className="text-xs dark:text-gray-400" style={{ fontStyle: "italic" }}>
-              (Click on the existing to Skills to remove them)
-            </span>
           </div>
           <div className="flex gap-2 flex-wrap">
             <input
               type="text"
-              className="flex-1 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400"
               placeholder="Add Skills"
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
             />
             <button
-              className="p-2 bg-indigo-600 dark:bg-yellow-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
+              className="p-2 bg-indigo-600 dark:bg-yellow-400 text-white rounded-md hover:bg-indigo-700 transition duration-200 dark:text-black dark:hover:bg-yellow-500"
               onClick={AddSkill}>
               Add
             </button>
           </div>
         </div>
       </div>
-      <hr />
+      <hr className="border-t border-gray-300 dark:border-yellow-400" />
 
       {/* Achievements Section */}
       <div className="flex w-full space-x-4 flex-wrap">
@@ -598,7 +608,7 @@ function Profile() {
       <div className="flex justify-end p-4">
         <button
           type="primary"
-          className="p-2 bg-indigo-600 dark:bg-yellow-600 text-white rounded-md hover:bg-indigo-700 transition duration-200"
+          className="p-2 bg-indigo-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 text-white rounded-md hover:bg-indigo-700 transition duration-200 dark:text-black"
           onClick={handleSaveProfile}>
           Save Profile
         </button>

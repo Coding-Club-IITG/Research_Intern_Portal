@@ -5,7 +5,7 @@
 @import "tailwindcss/utilities";
 
 body {
-  @apply bg-white text-black; /* Light mode styles */
+  @apply bg-white text-black;
 }
 
 .custom-layout-height {
@@ -13,15 +13,6 @@ body {
   min-height: calc(100vh - 4rem);
 }
 
-/* styles.css */
-.custom-date-picker .ant-picker-input > input::placeholder {
-  color: #a0aec0; /* Adjust to your desired color */
-}
-
-.custom-date-picker .ant-picker-input:focus > input::placeholder {
-  color: #fbbf24; /* Change on focus if desired */
-}
-
-.custom-date-picker .ant-picker-input > input {
-  color: #ffffff; /* Text color */
+.dark .ant-picker-input input::placeholder {
+  color: #abaeb1;
 }
