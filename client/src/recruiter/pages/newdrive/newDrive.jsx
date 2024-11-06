@@ -10,6 +10,7 @@ import daysjs from "dayjs";
 export default function NewDrive() {
   const { getUser } = useAuthStore();
   const user = getUser();
+  const [activeBranches, setActiveBranches] = useState([]);
 
   const [formData, setFormData] = useState({
     prof_name: user.name,
@@ -41,6 +42,12 @@ export default function NewDrive() {
   };
 
   const handleRequirementChange = (selectedBranches) => {
+    // console.log(selectedBranches);
+    if (selectedBranches.includes("") || selectedBranches.includes("All branches are allowed")) {
+      // console.log("All branches are allowed");
+      selectedBranches = ["All branches are allowed"];
+      // console.log(selectedBranches);
+    }
     setFormData({
       ...formData,
       requirements: {
@@ -48,6 +55,7 @@ export default function NewDrive() {
         branch: selectedBranches
       }
     });
+    setActiveBranches(selectedBranches);
   };
 
   const handleSubmit = async (e) => {
@@ -147,7 +155,7 @@ export default function NewDrive() {
           </div>
         </div>
 
-        <div className="flex py-8 md:py-12 flex-col md:flex-row gap-16">
+        <div className="flex border-b-2 dark:border-yellow-500 py-8 md:py-12 flex-col md:flex-row gap-16">
           <div className="flex flex-col gap-1 md:w-2/4 w-full">
             <h3 className="text-xl font-semibold dark:text-white">Requirements</h3>
             <p className="text-sm text-slate-600 dark:text-slate-300 max-w-80">
@@ -231,6 +239,7 @@ export default function NewDrive() {
                 placeholder="Select Branches"
                 onChange={handleRequirementChange}
                 options={branchOptions}
+                value={activeBranches}
                 className="mt-1 block rounded-md shadow-sm"
               />
             </div>

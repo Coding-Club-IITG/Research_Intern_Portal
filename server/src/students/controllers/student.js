@@ -64,7 +64,11 @@ const updateStudent = async (req, res) => {
     const data = req.body;
     const id = req.params.id;
 
-    const student = await Student.findByIdAndUpdate({ _id: id}, {...data, updatedAt: Date.now(), DOB: new Date(data?.DOB)}, { new: true });
+    const student = await Student.findByIdAndUpdate(
+      { _id: id },
+      { ...data, updatedAt: Date.now(), DOB: new Date(data?.DOB) },
+      { new: true }
+    );
     if (!student) {
       logger.error(
         `Updating student is not succesfull because student with ${id} does not exisits in database`
@@ -257,7 +261,7 @@ const getStudentByInterests = async (req, res) => {
 const getStudentsApplicationById = async (req, res) => {
   try {
     const id = req.params.id;
-    const student = await Student.findById(id).populate("applications").exec();
+    const student = await Student.findById(id);
     if (!student)
       return res.status(400).json({
         status: "error",
@@ -305,7 +309,7 @@ const addStudentsApplications = async (req, res) => {
         data: null,
       });
     }
-    //checking if the student had already applied ti this intern
+
     const applicationsList = student.applications;
     if (applicationsList.includes(internId)) {
       return res.status(400).json({
@@ -316,6 +320,7 @@ const addStudentsApplications = async (req, res) => {
     }
 
     student.applications.push(intern._id);
+    intern.applicants.push(id);
     await student.save({ validateBeforeSave: false });
     return res.status(200).json({
       status: "success",
@@ -332,17 +337,20 @@ const addStudentsApplications = async (req, res) => {
   }
 };
 
-
-const logoutStudent = async(req, res)=>{
+const logoutStudent = async (req, res) => {
   try {
     const options = {
       httpOnly: false,
       secure: false,
-    }
-    res.status(200).clearCookie("user", options).clearCookie("jwt" , options).json({
-      status:"success",
-      message: "Student logged out",
-    })
+    };
+    res
+      .status(200)
+      .clearCookie("user", options)
+      .clearCookie("jwt", options)
+      .json({
+        status: "success",
+        message: "Student logged out",
+      });
   } catch (error) {
     logger.error(error);
     return res.status(500).json({
@@ -351,7 +359,7 @@ const logoutStudent = async(req, res)=>{
       data: null,
     });
   }
-}
+};
 
 export {
   getStudentByID,
@@ -363,5 +371,5 @@ export {
   getStudentsByFilter,
   getStudentsApplicationById,
   addStudentsApplications,
-  logoutStudent
+  logoutStudent,
 };

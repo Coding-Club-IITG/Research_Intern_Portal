@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InternshipCard from "../internships/InternshipCard";
-import { getStudent, getAppliedJobsByStudents } from "../../../apis/student";
+import { getAppliedJobsByStudents } from "../../../apis/student";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../../store/authStore";
 import { getJobById } from "../../../apis/recruiter";
@@ -14,17 +14,20 @@ function Applied() {
   useEffect(() => {
     async function getAppliedInternships() {
       const res = await getAppliedJobsByStudents(id, navigate);
+      // console.log(res.data);
       const internships = [];
 
       if (res.status === "error") {
         setAppliedInternships([]);
       } else {
-        res.length > 0 &&
-          res.map((internId) => {
-            const internship = getJobById(internId, navigate);
-            internships.push(internship);
+        res.data.length > 0 &&
+          res.data?.map(async (internId) => {
+            // console.log(internId);
+            const internship = await getJobById(internId, navigate);
+            internships.push(internship.data);
+            setAppliedInternships(internships || []);
           });
-        setAppliedInternships(internships || []);
+        // console.log(internships);
       }
     }
     getAppliedInternships();

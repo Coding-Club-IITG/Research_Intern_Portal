@@ -1,117 +1,168 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getJobById } from "../../../apis/recruiter.js";
+import { getJobById } from "../../../apis/recruiter";
+import Htmlrender from "../../../utils/htmlrender";
+import { message } from "antd";
+import useAuthStore from "../../../store/authStore";
+import { applyToJobs } from "../../../apis/student";
 
-const InternshipDetails = () => {
+export default function DriveDetail() {
+  const { getUser } = useAuthStore();
+  const user = getUser();
+  const { internshipID } = useParams();
+  const [drive, setDrive] = useState({});
   const navigate = useNavigate();
 
-  const { internshipID } = useParams();
-  const [job, setJob] = useState(null);
-
   useEffect(() => {
-    async function fetchData() {
-      const jobDetail = await getJobById(internshipID, navigate);
-      console.log(jobDetail)
-      if(jobDetail.status === "success"){
-        setJob(jobDetail.data);
+    message.loading({ content: "Loading...", key: "loading" });
+    async function fetchDrive() {
+      const res = await getJobById(internshipID, navigate);
+      if (res.status === "success") {
+        message.destroy("loading");
+        setDrive(res.data);
       }
     }
-    fetchData();
+
+    fetchDrive();
   }, []);
 
-  if (!job) {
-    return <div className="max-w-4xl mx-auto p-8">Job not found</div>;
-  }
+  const handleApply = async () => {
+    const res = await applyToJobs(user.connection_id, internshipID, navigate);
+    if (res.status === "success") {
+      message.success("Applied Successfully");
+      navigate(`/student/applied`);
+    } else {
+      console.error(res);
+      message.error("Failed to apply");
+    }
+  };
+
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   return (
     <>
-      {/* Job Header Section */}
-      <div className="max-w-4xl mx-auto p-6 bg-white border rounded-lg mb-8 my-8">
-        <div className="flex justify-between items-start">
+      {/* Drive Header Section */}
+      <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-slate-700 dark:shadow-yellow-500 shadow-md rounded-lg mb-8">
+        <div className="flex justify-between items-start max-sm:flex-col max-sm:gap-4">
           <div className="flex-1">
-            <h3 className="text-2xl font-bold text-gray-800">{job?.title|| ""}</h3>
-            <p className="text-sm text-gray-700 mt-2 leading-relaxed">{job?.type || ""}</p>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+              {drive?.title || ""}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+              {drive?.prof_name || ""}
+            </p>
 
+            {/* Drive Tags
             <div className="mt-3 flex flex-wrap gap-2">
-              {job.tags > 0 && job?.tags.map((tag, tagIndex) => (
-                <span
-                  key={tagIndex}
-                  className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">
-                  {tag}
-                </span>
-              ))}
-            </div>
+              {drive?.tags &&
+                drive?.tags.map((tag, tagIndex) => (
+                  <span
+                    key={tagIndex}
+                    className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">
+                    {tag.trim()}
+                  </span>
+                ))}
+            </div> */}
+            {/* Role and Stipend */}
 
-            <div className="mt-3 text-sm text-gray-600">
-              <span>Stipend: ₹{job?.stipend || ""}</span>
+            <div className="mt-3 text-sm text-gray-600 dark:text-gray-300">
+              <span>Role: {drive?.type || ""}</span> <span>•</span>{" "}
+              <span>Stipend: ₹{drive?.stipend || " "}</span>
+            </div>
+            <div className="mt-1 text-sm">
+              <p
+                className={`text-sm ${drive?.accepting ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
+                {drive?.accepting
+                  ? `Closing Date: ${new Date(drive.last_date).toLocaleDateString()}`
+                  : "Closed"}
+              </p>
             </div>
           </div>
 
-          {/* Save Button */}
-          <div className="flex items-center">
-            <button className="bg-gray-200 text-gray-700 px-4 py-1 text-sm rounded-lg hover:bg-gray-300">
-              Save
-            </button>
+          {/* Buttons Section */}
+          <div className="flex gap-4">
+            {drive?.accepting && (
+              <button
+                className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-yellow-500 px-4 py-2 max-sm:py-1 rounded dark:bg-yellow-400 dark:text-black dark:hover:bg-yellow-500"
+                onClick={handleApply}>
+                Apply
+              </button>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Job Details Section */}
-      <div className="max-w-4xl mx-auto p-6 bg-white border rounded-lg flex flex-col gap-4">
-        <div className="flex gap-2 items-center">
-          <h1 className="max-sm:text-base text-lg font-medium">Recuriter Name : </h1>
-          <h1 className="text-base">{job?.prof_name || ""}</h1>  
-        </div>
+      {/* Drive Details Section */}
+      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8 dark:shadow-yellow-500 dark:bg-slate-700">
+        <h1 className="max-sm:text-xl text-3xl font-bold mb-6 text-gray-800 dark:text-white">
+          Drive Overview
+        </h1>
 
-        <section className="flex flex-col gap-2">
-          <h2 className="font-medium text-base">
-            Skills Required : 
+        {/* Combined Section */}
+        <section className="mb-6">
+          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800 dark:text-white">
+            About the Drive
           </h2>
-          <ul className="list-disc list-inside text-gray-700 space-y-2 text-base">
-            {job?.skill > 0 && job.skills.map((skill, index) => (
-              <li key={index} className="max-sm:text-sm text-base">
-                {skill}
-              </li>
-            ))}
-          </ul>
-        </section>
+          <p className=" text-gray-700 leading-relaxed mb-4 dark:text-gray-300">
+            {drive?.description && <Htmlrender description={drive?.description} />}
+          </p>
 
-        <section className="flex flex-col gap-2">
-          <h2 className="text-base font-medium">Who Can Apply : </h2>
-          <div className="flex gap-1 text-slate-600">
-            <p>Elligible Branches : </p>
-            <ul className="flex gap-2 items-center">
-              {job?.requirements?.branch && job?.requirements?.branch.map((requirement, index) => (
-                <li key={index} className="w-fit px-2 py-0.5 max-sm:text-sm text-base list-none rounded-md bg-blue-200">
-                  {requirement}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-gray-100 p-4 rounded-lg dark:bg-slate-700 dark:border dark:border-yellow-500">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
+                Requirements
+              </h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700 text-base dark:text-gray-300">
+                <li>
+                  <span className="font-medium">CPI Requirement:</span>{" "}
+                  {drive?.requirements?.cpi || ""}
                 </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex gap-1 text-slate-600">
-            <p>Cpi Cutoff : </p>
-            <p>{job?.requirements?.cpi}</p>
-          </div>
-          <div className="flex gap-1 text-slate-600">
-            <p>Cpi Cutoff : </p>
-            <p>{job?.requirements?.study_year}</p>
+                <li>
+                  <span className="font-medium">Eligible Branches:</span>{" "}
+                  {drive?.requirements?.branch.join(", ")}
+                </li>
+                <li>
+                  <span className="font-medium">Study Year:</span>{" "}
+                  {drive?.requirements?.study_year || ""}
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-gray-100 p-4 rounded-lg dark:bg-slate-700 dark:border dark:border-yellow-500">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
+                Job Details
+              </h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700 text-base dark:text-gray-300">
+                <li>
+                  <span className="font-medium">Role Type:</span> {drive?.type || ""}
+                </li>
+                <li>
+                  <span className="font-medium">Stipend:</span> ₹{drive?.stipend || ""}
+                </li>
+                <li>
+                  <span className="font-medium">Hours Required:</span>{" "}
+                  {drive?.hours_required || " "}
+                </li>
+                <li>
+                  <span className="font-medium">Closing Date:</span>{" "}
+                  {new Date(drive?.last_date).toLocaleDateString()}
+                </li>
+              </ul>
+            </div>
           </div>
         </section>
+      </div>
 
-        <div className="flex gap-2">
-          <button
-            className="bg-blue-600 text-white font-semibold py-1.5 px-4 rounded-md"
-            onClick={() => navigate(-1)}>
-            Back
-          </button>
-
-          <button className="bg-black text-white font-semibold py-1.5 px-6 rounded-md">
-            Apply Now
-          </button>
-        </div>
+      {/* Back Button */}
+      <div className="max-w-4xl mx-auto p-6">
+        <button
+          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black"
+          onClick={handleBack}>
+          Back
+        </button>
       </div>
     </>
   );
-};
-
-export default InternshipDetails;
+}
