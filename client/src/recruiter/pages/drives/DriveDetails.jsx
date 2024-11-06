@@ -5,24 +5,22 @@ import Htmlrender from "../../../utils/htmlrender";
 import { message } from "antd";
 
 export default function DriveDetail() {
-  const { driveIndex } = useParams();  
+  const { driveIndex } = useParams();
   const [drive, setDrive] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    message.loading({ content: "Loading...", key: "loading"});
+    message.loading({ content: "Loading...", key: "loading" });
     async function fetchDrive() {
       const res = await getJobById(driveIndex, navigate);
-      if(res.status === "success"){
+      if (res.status === "success") {
         message.destroy("loading");
-        setDrive(res.data); 
+        setDrive(res.data);
       }
     }
 
     fetchDrive();
-  }, [])
-
-  
+  }, []);
 
   const handleEdit = () => {
     navigate(`/recruiter/edit-drive/${driveIndex}`);
@@ -36,79 +34,105 @@ export default function DriveDetail() {
     navigate(-1);
   };
 
-
   return (
     <>
       {/* Drive Header Section */}
-      <div className="max-w-4xl mt-8 mx-auto p-6 bg-white shadow-md rounded-lg mb-8">
+      <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-slate-700 dark:shadow-yellow-500 shadow-md rounded-lg mb-8">
         <div className="flex justify-between items-start max-sm:flex-col max-sm:gap-4">
           <div className="flex-1">
-            <h3 className="text-2xl font-bold text-gray-800">{drive?.title || ""}</h3>
-            <p className="text-sm text-gray-600 mt-1">{drive?.prof_name || ""}</p>
+            <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
+              {drive?.title || ""}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+              {drive?.prof_name || ""}
+            </p>
 
-            {/* Drive Tags */}
+            {/* Drive Tags
             <div className="mt-3 flex flex-wrap gap-2">
-              {drive?.tags && drive?.tags.map((tag, tagIndex) => (
-                <span
-                  key={tagIndex}
-                  className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">
-                  {tag.trim()}
-                </span>
-              ))}
-            </div>
-
+              {drive?.tags &&
+                drive?.tags.map((tag, tagIndex) => (
+                  <span
+                    key={tagIndex}
+                    className="bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">
+                    {tag.trim()}
+                  </span>
+                ))}
+            </div> */}
             {/* Role and Stipend */}
-            <div className="mt-3 text-sm text-gray-600">
-              <span>Role: {drive?.type || ""}</span> <span>•</span> <span>Stipend: ₹{drive?.stipend || " "}</span>
+
+            <div className="mt-3 text-sm text-gray-600 dark:text-gray-300">
+              <span>Role: {drive?.type || ""}</span> <span>•</span>{" "}
+              <span>Stipend: ₹{drive?.stipend || " "}</span>
             </div>
-            <div className="mt-1 text-sm text-gray-600">
-              <span>{drive?.accepting ? `Closing Date: ${new Date(drive?.last_date).toLocaleDateString()}` : "Closed"}</span>
+            <div className="mt-1 text-sm">
+              <p
+                className={`text-sm ${drive?.accepting ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
+                {drive?.accepting
+                  ? `Closing Date: ${new Date(drive.last_date).toLocaleDateString()}`
+                  : "Closed"}
+              </p>
             </div>
           </div>
 
           {/* Buttons Section */}
           <div className="flex gap-4">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={handleEdit}>
-              Edit
-            </button>
-            <button className="bg-red-500 text-white px-4 py-2 rounded" onClick={handleApplied}>
-              Applied Students: {drive?.applicants && drive?.applicants.length}
+            {drive?.accepting && (
+              <button
+                className="border bg-gray-400 border-black dark:border-yellow-500 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded"
+                onClick={handleEdit}>
+                Edit
+              </button>
+            )}
+            <button
+              className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-yellow-500 px-4 py-2 max-sm:py-1 rounded"
+              onClick={handleApplied}>
+              Applied Students: {drive?.applicants?.length}
             </button>
           </div>
         </div>
       </div>
 
       {/* Drive Details Section */}
-      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8">
-        <h1 className="max-sm:text-xl text-3xl font-bold mb-6 text-gray-800">Drive Overview</h1>
+      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8 dark:shadow-yellow-500 dark:bg-slate-700">
+        <h1 className="max-sm:text-xl text-3xl font-bold mb-6 text-gray-800 dark:text-white">
+          Drive Overview
+        </h1>
 
         {/* Combined Section */}
         <section className="mb-6">
-          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800">About the Drive</h2>
-          <p className=" text-gray-700 leading-relaxed mb-4">
-             { drive?.description && <Htmlrender description={drive?.description} /> }  
+          <h2 className="max-sm:text-lg text-xl font-semibold mb-4 text-gray-800 dark:text-white">
+            About the Drive
+          </h2>
+          <p className=" text-gray-700 leading-relaxed mb-4 dark:text-gray-300">
+            {drive?.description && <Htmlrender description={drive?.description} />}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Requirements</h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 text-base">
+            <div className="bg-gray-100 p-4 rounded-lg dark:bg-slate-700 dark:border dark:border-yellow-500">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
+                Requirements
+              </h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700 text-base dark:text-gray-300">
                 <li>
-                  <span className="font-medium">CPI Requirement:</span> {drive?.requirements?.cpi|| ""}
+                  <span className="font-medium">CPI Requirement:</span>{" "}
+                  {drive?.requirements?.cpi || ""}
                 </li>
                 <li>
                   <span className="font-medium">Eligible Branches:</span>{" "}
                   {drive?.requirements?.branch.join(", ")}
                 </li>
                 <li>
-                  <span className="font-medium">Study Year:</span> {drive?.requirements?.study_year || ""}
+                  <span className="font-medium">Study Year:</span>{" "}
+                  {drive?.requirements?.study_year || ""}
                 </li>
               </ul>
             </div>
 
-            <div className="bg-gray-100 p-4 rounded-lg">
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Job Details</h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-700 text-base">
+            <div className="bg-gray-100 p-4 rounded-lg dark:bg-slate-700 dark:border dark:border-yellow-500">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
+                Job Details
+              </h3>
+              <ul className="list-disc list-inside space-y-2 text-gray-700 text-base dark:text-gray-300">
                 <li>
                   <span className="font-medium">Role Type:</span> {drive?.type || ""}
                 </li>
@@ -116,10 +140,12 @@ export default function DriveDetail() {
                   <span className="font-medium">Stipend:</span> ₹{drive?.stipend || ""}
                 </li>
                 <li>
-                  <span className="font-medium">Hours Required:</span> {drive?.hours_required || " "}
+                  <span className="font-medium">Hours Required:</span>{" "}
+                  {drive?.hours_required || " "}
                 </li>
                 <li>
-                  <span className="font-medium">Closing Date:</span> {new Date(drive?.last_date).toLocaleDateString()}
+                  <span className="font-medium">Closing Date:</span>{" "}
+                  {new Date(drive?.last_date).toLocaleDateString()}
                 </li>
               </ul>
             </div>
@@ -129,11 +155,12 @@ export default function DriveDetail() {
 
       {/* Back Button */}
       <div className="max-w-4xl mx-auto p-6">
-        <button className="bg-gray-600 text-white px-4 py-2 rounded" onClick={handleBack}>
+        <button
+          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black"
+          onClick={handleBack}>
           Back
         </button>
       </div>
     </>
   );
-};
-
+}

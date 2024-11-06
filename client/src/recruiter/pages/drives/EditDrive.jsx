@@ -1,51 +1,64 @@
 import React, { useState, useEffect } from "react";
-import { Select, message } from "antd";
-import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { DatePicker, Select, message } from "antd";
+import { useParams, useNavigate } from "react-router-dom";
 import { getJobById, updateJob } from "../../../apis/recruiter";
+import daysjs from "dayjs";
 
 const EditDrive = () => {
   const { driveIndex } = useParams();
+  const navigate = useNavigate();
+  const [activeBranches, setActiveBranches] = useState([]);
+
   const [formData, setFormData] = useState({
     prof_name: "",
     title: "",
     description: "",
-    isActive: true,
     tags: "",
     type: "",
     stipend: "",
     hours_required: "",
-    applicants: [],
     requirements: {
       cpi: "",
       branch: [],
       study_year: ""
     },
-    accepting: true,
     last_date: ""
   });
-  
-  const navigate=useNavigate();
 
   useEffect(() => {
     async function fetchDrive() {
       message.loading({ content: "Loading...", key: "loading" });
       const res = await getJobById(driveIndex, navigate);
-      if(res.status === "success"){
+      if (res.status === "success") {
         message.destroy("loading");
         setFormData(res.data);
+        setActiveBranches(res.data.requirements.branch);
+      } else {
+        message.destroy("loading");
+        message.error("Failed to load job details");
       }
     }
-
     fetchDrive();
-  }, [driveIndex]);
+  }, [driveIndex, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleDateChange = (date) => {
+    setFormData({ ...formData, last_date: daysjs(date) });
+  };
+
   const handleRequirementChange = (selectedBranches) => {
+    // console.log(selectedBranches);
+    if (selectedBranches.includes("") || selectedBranches.includes("All branches are allowed")) {
+      // console.log("All branches are allowed");
+      selectedBranches = ["All branches are allowed"];
+      // console.log(selectedBranches);
+    }
     setFormData({
       ...formData,
       requirements: {
@@ -53,18 +66,18 @@ const EditDrive = () => {
         branch: selectedBranches
       }
     });
+    setActiveBranches(selectedBranches);
   };
 
   const handleSubmit = async (e) => {
-    message.loading({ content: "Updating...", key: "updating" });
     e.preventDefault();
-    
+    message.loading({ content: "Updating...", key: "updating" });
     const res = await updateJob(driveIndex, formData);
-    if(res.status === "success"){
+    if (res.status === "success") {
       message.destroy("updating");
       message.success("Drive updated successfully");
       navigate(-1);
-    }else{
+    } else {
       message.destroy("updating");
       message.error("Failed to update drive");
     }
@@ -82,186 +95,216 @@ const EditDrive = () => {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="py-4 px-8 bg-white rounded-lg space-y-4">
-      <h2 className="text-2xl font-bold text-center">Edit Internship Opportunity</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="py-4 px-8 bg-white dark:bg-slate-700 rounded-lg space-y-4">
+      <h2 className="text-2xl font-bold text-center mb-8 mt-4 dark:text-white">
+        Create New Internship Opportunity
+      </h2>
 
-      {/* Internship Details Section */}
-      <div className="border-b pb-2">
-        <h3 className="text-xl font-semibold mb-2">Internship Details</h3>
-
-        <div className="flex flex-col sm:flex-row flex-wrap mb-2 gap-2">
-          <div className="flex flex-col flex-grow mb-2">
-            <label className="font-semibold">
-              Professor Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="prof_name"
-              value={formData.prof_name}
-              onChange={handleChange}
-              className="border border-gray-300 rounded p-2 mt-1 w-full"
-              required
-            />
+      <div className="flex flex-col">
+        <div className="flex border-b-2 dark:border-yellow-500 py-8 md:py-12 flex-col md:flex-row gap-16">
+          <div className="flex flex-col gap-1 md:w-2/4 w-full">
+            <h3 className="text-xl font-semibold dark:text-white">Internship Headers</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-300 w-full">
+              Enter basic details of internship, it helps the user to locate the jobs easily
+            </p>
           </div>
-
-          <div className="flex flex-col flex-grow mb-2">
-            <label className="font-semibold">
-              Internship Title <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              className="border border-gray-300 rounded p-2 mt-1 w-full"
-              required
-            />
+          <div className="flex flex-col gap-2 w-full">
+            <div className="flex flex-col flex-grow mb-2">
+              <label className="font-medium text-sm dark:text-white">
+                Professor Name <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="prof_name"
+                value={formData.prof_name}
+                onChange={handleChange}
+                placeholder="Enter Professor Name"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                required
+              />
+            </div>
+            <div className="flex flex-col flex-grow mb-2">
+              <label className="font-medium text-sm dark:text-white">
+                Internship Title <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="title"
+                value={formData.title}
+                onChange={handleChange}
+                placeholder="Enter Internship Title"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                required
+              />
+            </div>
           </div>
+        </div>
 
-          <div className="flex flex-col flex-grow mb-2 w-full">
-            <label className="font-semibold">
+        <div className="flex border-b-2 dark:border-yellow-500 py-8 md:py-12 flex-col md:flex-row gap-16">
+          <div className="flex flex-col gap-1 md:w-2/4 w-full">
+            <h3 className="text-xl font-semibold dark:text-white">Description</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-300 max-w-80">
+              Enter basic details of internship, it helps the user to locate the jobs easily
+            </p>
+          </div>
+          <div className="flex flex-col w-full">
+            <label className="font-medium text-sm dark:text-white">
               Internship Description <span className="text-red-500">*</span>
             </label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              className="border border-gray-300 rounded p-2 mt-1 ml-0 w-full"
+            <div className="my-4 h-80">
+              <ReactQuill
+                name="description"
+                required
+                theme="snow"
+                value={formData.description}
+                onChange={(value) => setFormData({ ...formData, description: value })}
+                className="h-[90%] rounded-sm dark:bg-slate-700 dark:text-white"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex  border-b-2 dark:border-yellow-500 py-8 md:py-12 flex-col md:flex-row gap-16">
+          <div className="flex flex-col gap-1 md:w-2/4 w-full">
+            <h3 className="text-xl font-semibold dark:text-white">Requirements</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-300 max-w-80">
+              Enter basic details of internship, it helps the user to locate the jobs easily
+            </p>
+          </div>
+          <div className="flex flex-col w-full gap-4">
+            <div className="flex flex-col">
+              <label className="font-medium text-sm dark:text-white">
+                Internship Type <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
+                placeholder="Enter Internship Type"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label className="font-medium text-sm dark:text-white">
+                Stipend <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="number"
+                name="stipend"
+                value={formData.stipend}
+                onChange={handleChange}
+                placeholder="Enter Stipend Amount"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label className="font-medium text-sm dark:text-white">
+                Hours Required <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="number"
+                name="hours_required"
+                value={formData.hours_required}
+                onChange={handleChange}
+                placeholder="Enter Hours Required"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label className="font-medium text-sm dark:text-white">
+                Minimum CPI Requirement <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="number"
+                name="cpi"
+                value={formData.requirements.cpi}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    requirements: { ...formData.requirements, cpi: e.target.value }
+                  })
+                }
+                placeholder="Enter Minimum CPI"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label className="font-medium text-sm dark:text-white">
+                Branch <span className="text-red-500">*</span>
+              </label>
+              <Select
+                mode="multiple"
+                allowClear
+                style={{ width: "100%" }}
+                placeholder="Select Branches"
+                onChange={handleRequirementChange}
+                options={branchOptions}
+                value={activeBranches}
+                className="mt-1 block rounded-md shadow-sm"
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label className="font-medium text-sm dark:text-white">
+                Study Year <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                name="study_year"
+                value={formData.requirements.study_year}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    requirements: { ...formData.requirements, study_year: e.target.value }
+                  })
+                }
+                placeholder="Enter Study Year"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="flex py-8 md:py-12 flex-col md:flex-row gap-16">
+          <div className="flex flex-col gap-1 md:w-2/4 w-full">
+            <h3 className="text-xl font-semibold dark:text-white">Last Date</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-300 max-w-80">
+              Enter the last date for applying to the internship
+            </p>
+          </div>
+          <div className="flex flex-col w-full">
+            <DatePicker
+              name="last_date"
+              value={formData.last_date ? daysjs(formData.last_date) : null}
+              onChange={handleDateChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
               required
             />
           </div>
         </div>
 
-        <div className="flex flex-wrap mb-2 gap-2">
-          <div className="flex flex-col flex-grow mb-2">
-            <label className="font-semibold">
-              Internship Type <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              name="type"
-              value={formData.type}
-              onChange={handleChange}
-              className="border border-gray-300 rounded p-2 mt-1 w-full"
-              required
-            />
-          </div>
-
-          <div className="flex flex-col flex-grow mb-2">
-            <label className="font-semibold">
-              Stipend <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              name="stipend"
-              value={formData.stipend}
-              onChange={handleChange}
-              className="border border-gray-300 rounded p-2 mt-1 w-full"
-              required
-            />
-          </div>
-
-          <div className="flex flex-col flex-grow mb-2">
-            <label className="font-semibold">
-              Hours Required <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              name="hours_required"
-              value={formData.hours_required}
-              onChange={handleChange}
-              className="border border-gray-300 rounded p-2 mt-1 w-full"
-              required
-            />
-          </div>
+        <div className="flex justify-between">
+          <button
+            className="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-all mt-4"
+            onClick={() => navigate("/recruiter/drives")}>
+            &larr; Back
+          </button>
+          <button className="bg-blue-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black text-white py-2 px-4 rounded hover:bg-gray-800 mb-4 mt-4">
+            Save
+          </button>
         </div>
-      </div>
-
-      {/* Requirements Section */}
-      <div className="border-b pb-2">
-        <h3 className="text-xl font-semibold mb-2">Requirements</h3>
-
-        <div className="flex flex-wrap mb-2 gap-2">
-          <div className="flex flex-col flex-grow mb-2">
-            <label className="font-semibold">
-              Minimum CPI Requirement <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              name="cpi"
-              value={formData.requirements.cpi}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  requirements: { ...formData.requirements, cpi: e.target.value }
-                })
-              }
-              className="border border-gray-300 rounded p-2 mt-1 w-full"
-              required
-            />
-          </div>
-
-          <div className="flex flex-col flex-grow mb-2">
-            <label className="font-semibold">
-              Study Year Requirement <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              name="study_year"
-              value={formData.requirements.study_year}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  requirements: { ...formData.requirements, study_year: e.target.value }
-                })
-              }
-              className="border border-gray-300 rounded p-2 mt-1 w-full"
-              required
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col mb-2">
-          <label className="font-semibold">
-            Branch Requirement <span className="text-red-500">*</span>
-          </label>
-          <Select
-            mode="multiple"
-            value={formData.requirements.branch}
-            onChange={handleRequirementChange}
-            placeholder="Please select branches"
-            style={{ width: "100%" }}
-            options={branchOptions}
-          />
-        </div>
-      </div>
-
-      {/* Application Details Section */}
-      <div>
-        <h3 className="text-xl font-semibold mb-2">Application Details</h3>
-        <div className="flex flex-col mb-2">
-          <label className="font-semibold">
-            Last Date to Apply <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="date"
-            name="last_date"
-            value={formData.last_date}
-            onChange={handleChange}
-            className="border border-gray-300 rounded p-2 mt-1 w-full"
-            required
-          />
-        </div>
-      </div>
-      
-      <div className="flex justify-between">
-      <button
-        className="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition-all mt-4"
-        onClick={() => navigate(-1)} // This navigates to the previous page
-      >
-        &larr; Back
-      </button> 
-        <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-gray-800 mb-4 mt-4">Save</button>
       </div>
     </form>
   );

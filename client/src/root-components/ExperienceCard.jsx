@@ -9,8 +9,8 @@ function ExperienceCard({ experience, onDelete, deletable = true }) {
   const endDate = experience.endDate || "Present";
 
   return (
-    <div className="bg-gray-50 border border-b-4 border-gray-200 dark:border-yellow-500 rounded-lg p-4 mb-4 w-full dark:bg-amber-400">
-      <div className="flex">
+    <div className="bg-gray-50 border border-b-4 border-gray-200 dark:border-yellow-500 rounded-lg p-4 mb-4 w-full dark:bg-slate-700">
+      <div className="flex dark:text-white">
         <div className="h-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@ function ExperienceCard({ experience, onDelete, deletable = true }) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-10 border-2 border-gray-500 dark:border-black mt-2 mr-4 p-1 w-10 h-10">
+            className="size-10 border-2 border-gray-500 dark:border-gray-300 mt-2 mr-4 p-1 w-10 h-10">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -30,14 +30,14 @@ function ExperienceCard({ experience, onDelete, deletable = true }) {
         <div className="flex-grow">
           <div className="flex items-start justify-between">
             <div>
-              <h3 className="text-lg font-semibold text-black">{role}</h3>
-              <p className="text-black">{name}</p>
-              <p className="text-black">
+              <h3 className="text-lg font-semibold text-black dark:text-white">{role}</h3>
+              <p className="text-black dark:text-gray-300">{name}</p>
+              <p className="text-black dark:text-gray-300">
                 {startDate} - {endDate}
               </p>
             </div>
           </div>
-          <p className="text-black mt-3">{description}</p>
+          <p className="text-black mt-3 dark:text-gray-300">{description}</p>
         </div>
 
         {deletable && (
