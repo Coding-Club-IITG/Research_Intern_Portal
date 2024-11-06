@@ -2,16 +2,12 @@ import { Router } from "express";
 import {
   banRecruiter,
   deleteJob,
-  removeRecruiter,
-  removeStudent,
   verifyRecruiter,
 } from "../controller/controls.js";
 
 const router = Router();
 
 router.post("/verify-recruiter/:id", verifyRecruiter);
-router.post("/remove-recruiter/:id", removeRecruiter);
-router.delete("/remove-student/:id", removeStudent);
 router.post("/ban-recruiter/:id", banRecruiter);
 router.post("/delete-job/:id", deleteJob);
 

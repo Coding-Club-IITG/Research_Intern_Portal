@@ -5,6 +5,7 @@ import logger from "../../utils/logger.js";
 const createJob = async(req,res)=>{
   try {
     const data = req.body;
+    // check is recruiter is verified or not;
     const job = await Jobs.create(data);
     return res.status(201).json({ message: "Job created successfully", data: job, status: "success" });
   } catch (error) {

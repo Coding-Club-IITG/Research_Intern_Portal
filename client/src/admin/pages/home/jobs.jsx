@@ -41,19 +41,19 @@ export default function JobPage() {
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Job description : </li>
-                    {Job.description}
+                    {Job?.description}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Stipend : </li>
-                    {Job.stipend}
+                    {Job?.stipend}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Hours required : </li>
-                    {Job.hours_required}
+                    {Job?.hours_required}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Total applicants : </li>
-                    {Job.total_applicants}
+                    {Job?.total_applicants}
                   </p>
                 </div>
                 <div style={{ padding: "0px 10px" }}>
@@ -62,23 +62,23 @@ export default function JobPage() {
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Accepting : </li>
-                    {Job.accepting ? "Yes" : "No"}
+                    {Job?.accepting ? "Yes" : "No"}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Status : </li>{" "}
-                    {Job.isActive ? "Active" : "Inactive"}
+                    {Job?.isActive ? "Active" : "Inactive"}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Last Date : </li>
-                    {Job.last_date}
+                    {Job?.last_date}
                   </p>
                   <p>
                     <li style={{ color: "#0000FF" }}>Created at : </li>
-                    {Job.createdAt}
+                    {Job?.createdAt}
                   </p>
                 </div>
                 <div>
-                  <Button type="primary" onClick={handleDelete}>
+                  <Button type="primary" onClick={() => handleDelete(Job?._id)}>
                     Delete Job
                   </Button>
                 </div>

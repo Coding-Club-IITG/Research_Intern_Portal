@@ -1,19 +1,15 @@
-import useAuthStore from "../../../store/authStore";
-
-function QualificationCard({ qualification, onDelete }) {
-  const { getUser } = useAuthStore();
-  const user = getUser();
-  // console.log(qualification);
+function QualificationCard({ qualification, onDelete, deletable }) {
+  console.log(qualification);
   const {
-    college = "Institution not specified",
+    college = "college not specified",
     degree = "Degree not specified",
-    startYear = "Start date not specified",
-    endYear = "End date not specified",
-    description = "Description not specified"
+    startYear = "Start date not specified"
   } = qualification;
 
+  const endYear = qualification.endYear || "Present";
+
   return (
-    <div className="bg-white border border-b-4 rounded-lg p-4 mb-4 w-full">
+    <div className="bg-gray-50 border border-b-4 border-gray-200 dark:border-yellow-500 rounded-lg p-4 mb-4 w-full dark:bg-amber-400">
       <div className="flex justify-between">
         <div className="flex items-start">
           <svg
@@ -22,7 +18,7 @@ function QualificationCard({ qualification, onDelete }) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-10 border-2 border-gray-500 mt-2 mr-4 p-1 w-10 h-10">
+            className="size-10 border-2 border-gray-500 dark:border-black mt-2 mr-4 p-1 w-10 h-10">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -32,19 +28,20 @@ function QualificationCard({ qualification, onDelete }) {
 
           <div>
             <div className="flex-col items-start justify-between">
-              <h3 className="text-lg font-semibold text-gray-900">{college}</h3>
-              <p className="text-gray-600">{degree}</p>
-              <p className="text-gray-500">{`${startYear} - ${endYear}`}</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-black">{college}</h3>
+              <p className="text-gray-600 dark:text-black">{degree}</p>
+              <p className="text-gray-500 dark:text-black">{`${startYear} - ${endYear}`}</p>
             </div>
-            <p className="text-gray-800 mt-3">{description}</p>
           </div>
         </div>
-        <button
-          className="text-red-500 hover:underline self-start ml-4"
-          onClick={onDelete}
-          aria-label={`Delete qualification at ${college}}`}>
-          Delete
-        </button>
+        {deletable && (
+          <button
+            className="text-red-500 hover:underline self-start ml-4 dark:text-red-500"
+            onClick={onDelete}
+            aria-label={`Delete qualification at ${college}`}>
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );

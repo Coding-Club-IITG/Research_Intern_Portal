@@ -3,10 +3,11 @@ import { backendURL } from "./server";
 
 export const verifyRecruiter = async (id, navigate) => {
   try {
+    console.log(id)
     const response = await axios.post(`${backendURL}/api/v1/admin/controls/verify-recruiter/${id}`);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    //navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -21,26 +22,13 @@ export const createBugReport = async (data, navigate) => {
   }
 };
 
-// Remove a recruiter
-export const removeRecruiter = async (id, navigate) => {
-  try {
-    const response = await axios.delete(
-      `${backendURL}/api/v1/admin/controls//remove-recruiter/${id}`
-    );
-    return response.data;
-  } catch (error) {
-    navigate("/500");
-    return error?.response?.data || error;
-  }
-};
-
 // Ban a recruiter
 export const banRecruiter = async (id, navigate) => {
   try {
     const response = await axios.post(`${backendURL}/api/v1/admin/controls//ban-recruiter/${id}`);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    //navigate("/500");
     return error?.response?.data || error;
   }
 };

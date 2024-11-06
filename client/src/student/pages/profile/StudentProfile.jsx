@@ -128,7 +128,7 @@ function Profile() {
   const AddSkill = () => {
     if (newSkill.trim()) {
       setSkills((prevSkills) => [...prevSkills, newSkill.trim()]);
-      setNewSkill(""); // Reset the input field after adding
+      setNewSkill("");
     } else {
       message.error("Please enter a valid skill.");
     }

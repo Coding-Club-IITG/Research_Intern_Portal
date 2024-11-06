@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { DatePicker, Checkbox } from "antd";
-import dayjs from "dayjs"; // Use dayjs for date handling
 
 function ExperienceForm({ setAddExp, updateProfileExperience }) {
   const [isWorking, setIsWorking] = useState(false);
@@ -32,7 +31,6 @@ function ExperienceForm({ setAddExp, updateProfileExperience }) {
     setFormData({ ...formData, [field]: year });
     setErrors({ ...errors, [field]: "" });
 
-    // Validate endDate against startDate
     if (field === "endDate" && year && formData.startDate) {
       if (year < formData.startDate) {
         setErrors((prevErrors) => ({
