@@ -1,5 +1,6 @@
 import axios from "axios";
 import { backendURL } from "./server";
+import { message } from "antd";
 
 export const getStudent = async (id, navigate) => {
   try {
@@ -26,7 +27,7 @@ export const updateStudent = async (id, data) => {
 export const getAppliedJobsByStudents = async (id, navigate) => {
   try {
     const response = await axios.get(`${backendURL}/api/v1/students/${id}/intern-applied`);
-    console.log(response.data);
+    console.log(response);
     return response.data;
   } catch (error) {
     navigate("/500");
@@ -34,13 +35,19 @@ export const getAppliedJobsByStudents = async (id, navigate) => {
   }
 };
 
-export const applyToJobs = async (id, internId) => {
+export const applyToJobs = async (id, internId, navigate) => {
   try {
     const response = await axios.post(
-      `${backendURL}/api/v1/students/${id}/intern-applied/${internId}`
+      `${backendURL}/api/v1/students/${id}/intern-apply/${internId}`
     );
+    console.log(response);
     return response.data;
   } catch (error) {
+    if (error?.response?.status === 400) {
+      message.error("Already Applied");
+      return error?.response?.data;
+    }
+    navigate("/500");
     return error?.response?.data || error;
   }
 };

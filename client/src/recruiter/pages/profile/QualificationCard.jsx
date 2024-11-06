@@ -9,8 +9,8 @@ function QualificationCard({ qualification, onDelete, deletable }) {
   const endYear = qualification.endYear || "Present";
 
   return (
-    <div className="bg-gray-50 border border-b-4 border-gray-200 dark:border-yellow-500 rounded-lg p-4 mb-4 w-full dark:bg-amber-400">
-      <div className="flex justify-between">
+    <div className="bg-gray-50 border border-b-4 border-gray-200 dark:border-yellow-500 rounded-lg p-4 mb-4 w-full dark:bg-slate-700">
+      <div className="flex justify-between dark:text-white">
         <div className="flex items-start">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@ function QualificationCard({ qualification, onDelete, deletable }) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="size-10 border-2 border-gray-500 dark:border-black mt-2 mr-4 p-1 w-10 h-10">
+            className="size-10 border-2 border-gray-500 dark:border-gray-300 mt-2 mr-4 p-1 w-10 h-10">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -28,9 +28,9 @@ function QualificationCard({ qualification, onDelete, deletable }) {
 
           <div>
             <div className="flex-col items-start justify-between">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-black">{college}</h3>
-              <p className="text-gray-600 dark:text-black">{degree}</p>
-              <p className="text-gray-500 dark:text-black">{`${startYear} - ${endYear}`}</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{college}</h3>
+              <p className="text-gray-600 dark:text-gray-300">{degree}</p>
+              <p className="text-gray-500 dark:text-gray-300">{`${startYear} - ${endYear}`}</p>
             </div>
           </div>
         </div>

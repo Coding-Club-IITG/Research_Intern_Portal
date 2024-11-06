@@ -9,7 +9,7 @@ function EducationCard({ education, onDelete, deletable = true }) {
   } = education;
 
   return (
-    <div className="bg-gray-50 border border-b-4 border-gray-200 dark:border-yellow-500 rounded-lg p-4 mb-4 w-full dark:bg-amber-400">
+    <div className="bg-gray-50 border border-b-4 border-gray-200 dark:border-yellow-500 rounded-lg p-4 mb-4 w-full dark:bg-slate-700 dark:text-white">
       <div className="flex">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +17,7 @@ function EducationCard({ education, onDelete, deletable = true }) {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="size-10 border-2 border-gray-500 dark:border-black mt-2 mr-4 p-1 w-10 h-10">
+          className="size-10 border-2 border-gray-500 dark:border-gray-300 mt-2 mr-4 p-1 w-10 h-10">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -27,14 +27,14 @@ function EducationCard({ education, onDelete, deletable = true }) {
 
         <div className="flex-grow">
           <div className="flex-col items-start justify-between">
-            <h3 className="text-lg font-semibold text-black">{name}</h3>
-            <p className="text-black">{role}</p>
-            <p className="text-black">
+            <h3 className="text-lg font-semibold text-black dark:text-white">{name}</h3>
+            <p className="text-black dark:text-gray-300">{role}</p>
+            <p className="text-black dark:text-gray-300">
               {startDate} - {endDate}
             </p>
-            <p className="text-black">{`Grade: ${grade}`}</p>
+            <p className="text-black dark:text-gray-300">{`Grade: ${grade}`}</p>
           </div>
-          <p className="text-black mt-3">{description}</p>
+          <p className="text-black mt-3 dark:text-gray-300">{description}</p>
         </div>
 
         {deletable && (
