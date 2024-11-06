@@ -240,7 +240,7 @@ export default function NewDrive() {
                 onChange={handleRequirementChange}
                 options={branchOptions}
                 value={activeBranches}
-                className="mt-1 block rounded-md shadow-sm"
+                className="mt-1 block rounded-md shadow-sm multi"
               />
             </div>
 
