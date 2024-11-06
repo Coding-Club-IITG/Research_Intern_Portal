@@ -14,24 +14,20 @@ function Applied() {
   useEffect(() => {
     async function getAppliedInternships() {
       const res = await getAppliedJobsByStudents(id, navigate);
-      // console.log(res.data);
-      const internships = [];
-
       if (res.status === "error") {
         setAppliedInternships([]);
       } else {
-        res.data.length > 0 &&
-          res.data?.map(async (internId) => {
-            // console.log(internId);
-            const internship = await getJobById(internId, navigate);
-            internships.push(internship.data);
-            setAppliedInternships(internships || []);
-          });
-        // console.log(internships);
+        const internshipPromises = res.data.map((internId) =>
+          getJobById(internId, navigate).then((internship) => internship.data)
+        );
+
+        const internships = await Promise.all(internshipPromises);
+        setAppliedInternships(internships || []);
       }
     }
+
     getAppliedInternships();
-  }, []);
+  }, [id, navigate]);
 
   const [appliedInternships, setAppliedInternships] = useState([]);
 
