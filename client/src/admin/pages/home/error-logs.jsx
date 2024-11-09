@@ -1,4 +1,6 @@
 import React from 'react';
+import { Table } from 'antd';
+import {ConfigProvider} from 'antd';
 
 const errors = [
     {
@@ -23,15 +25,27 @@ const errors = [
     }
 ]
 
+const header = [
+    {
+        title: 'Level',
+        dataIndex: 'level',
+        key: 'level',
+    },
+    {
+        title: 'Message',
+        dataIndex: 'message',
+        key: 'message',
+    },
+    {
+        title: 'Timestamps',
+        dataIndex: 'timestamps',
+        key: 'timestamps',
+    },
+]
+
 export default function ErrorLogPage() {
     return (
-        <div className='w-full p-4'>
-            {errors.map((error, index) => (
-                <div className='flex gap-4' key={index}>
-                    <h2>{error.level}</h2>
-                    <p>{error.message}</p>
-                    <p>{new Date(error.timestamp).toLocaleDateString()}</p>
-                </div>
-            ))}
-        </div>  
+    <ConfigProvider theme={{token:{colorPrimary:`#1890ff`}}}>
+     <Table columns={errors} dataSource={header} />
+     </ConfigProvider>
 )};
