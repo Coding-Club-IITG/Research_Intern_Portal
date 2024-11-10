@@ -7,6 +7,7 @@ import {
   updateDepartment,
   updateCourse,
   getDepartmentById,
+  getCourseById,
 } from "../controller/department-course.js";
 
 const router = express.Router();
@@ -16,6 +17,7 @@ router.get("/department", getAllDepartments);
 router.put("/department/:id", updateDepartment);
 router.get("/department/:id", getDepartmentById);
 router.put("/course/:id", updateCourse);
+router.get("/course/:id", getCourseById);
 router.post("/course", createCourse);
 router.post("/department", createDepartment);
 

@@ -10,7 +10,11 @@ import { getStudent, updateStudent } from "../../../apis/student";
 import useAuthStore from "../../../store/authStore";
 import { useTheme } from "../../../store/themeStore";
 import daysjs from "dayjs";
-import { getAllDepartments, getDepartmentById } from "../../../apis/courses-departments";
+import {
+  getAllCourses,
+  getAllDepartments,
+  getDepartmentById
+} from "../../../apis/courses-departments";
 
 function Profile() {
   const { getUser } = useAuthStore();
@@ -43,17 +47,7 @@ function Profile() {
   const [achievements, setAchievements] = useState("");
   const [social, setSocial] = useState([]);
 
-  const [courses, setCourses] = useState([
-    "BTech",
-    "MTech",
-    "BDes",
-    "MDes",
-    "MA",
-    "MSR",
-    "MSc",
-    "Phd",
-    "MBA"
-  ]);
+  const [courses, setCourses] = useState([]);
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
@@ -64,6 +58,16 @@ function Profile() {
       }
     };
     getDepartments();
+  }, [navigate]);
+
+  useEffect(() => {
+    const getCourses = async () => {
+      const res = await getAllCourses(navigate);
+      if (res.status === "success") {
+        setCourses(res.data);
+      }
+    };
+    getCourses();
   }, [navigate]);
 
   const AddInterest = (e) => {
@@ -84,7 +88,6 @@ function Profile() {
           return;
         }
 
-        // Fetch department ID and name correctly
         let deptId = res.data?.department || "Select";
         let deptName = "Select";
 
@@ -92,6 +95,15 @@ function Profile() {
           const dept = await getDepartmentById(deptId, navigate);
           deptName = dept.data?.name || "Select";
         }
+
+        let courseId = res.data?.department || "Select";
+        let courseName = "Select";
+
+        if (courseId !== "Select") {
+          const course = await getDepartmentById(courseId, navigate);
+          courseName = course.data?.name || "Select";
+        }
+
         message.destroy("loadingData");
         setName(res.data?.name || "");
         setEmail(res.data?.email || "");
@@ -100,7 +112,7 @@ function Profile() {
         setDOB(daysjs(res.data?.DOB));
         setBio(res.data?.bio || "");
         setSelectedDepartment(deptId);
-        setSelectedCourse(res.data?.course || "Select");
+        setSelectedCourse(courseId || "Select");
         setGender(res.data?.gender || "");
         setNumber(res.data?.number || "");
         setRoll(res.data?.roll || "");
@@ -297,8 +309,11 @@ function Profile() {
                   Select
                 </option>
                 {courses.map((course) => (
-                  <option key={course} value={course} className="dark:bg-slate-700 dark:text-white">
-                    {course}
+                  <option
+                    key={course._id}
+                    value={course._id}
+                    className="dark:bg-slate-700 dark:text-white">
+                    {course.name}
                   </option>
                 ))}
               </select>

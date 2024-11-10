@@ -142,6 +142,34 @@ export const getDepartmentById = async (req, res) => {
   }
 };
 
+export const getCourseById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res
+        .status(400)
+        .json({ status: "error", message: "Invalid course ID" });
+    }
+
+    const course = await Course.findById(id);
+    if (!course) {
+      return res
+        .status(404)
+        .json({ status: "error", message: "course not found" });
+    }
+
+    logger.info(`Course fetched successfully`);
+    return res.status(200).json({
+      status: "success",
+      data: course,
+      message: "Course fetched successfully",
+    });
+  } catch (error) {
+    logger.error(`Error in fetching course: ${error.message}`);
+    return res.status(500).json({ status: "error", message: error.message });
+  }
+};
+
 // export {
 //     getAllDepartments,
 //     createDepartment,
