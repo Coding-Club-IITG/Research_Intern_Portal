@@ -399,3 +399,19 @@
 {"level":"error","timestamp":"2024-11-10T18:01:32.710Z"}
 {"level":"error","timestamp":"2024-11-10T18:01:37.609Z"}
 {"level":"error","timestamp":"2024-11-10T18:01:37.764Z"}
+{"level":"error","timestamp":"2024-11-10T18:03:21.145Z"}
+{"level":"error","timestamp":"2024-11-10T18:03:21.279Z"}
+{"level":"error","timestamp":"2024-11-10T18:03:25.694Z"}
+{"level":"error","timestamp":"2024-11-10T18:03:25.829Z"}
+{"level":"error","timestamp":"2024-11-10T18:03:48.802Z"}
+{"level":"error","timestamp":"2024-11-10T18:03:48.936Z"}
+{"level":"error","timestamp":"2024-11-10T18:05:12.898Z"}
+{"level":"error","timestamp":"2024-11-10T18:11:14.761Z"}
+{"level":"error","timestamp":"2024-11-10T18:11:14.888Z"}
+{"level":"error","timestamp":"2024-11-10T18:11:50.107Z"}
+{"level":"error","timestamp":"2024-11-10T18:11:50.235Z"}
+{"level":"error","timestamp":"2024-11-10T18:16:47.802Z"}
+{"code":"ETIMEDOUT","errno":-60,"level":"error","syscall":"read","timestamp":"2024-11-10T18:23:49.657Z"}
+{"code":"ETIMEDOUT","errno":-60,"level":"error","syscall":"read","timestamp":"2024-11-10T18:23:53.970Z"}
+{"level":"error","message":"Student not found with ID 6730edc9d99adc25b0e2238f","timestamp":"2024-11-10T19:03:36.807Z"}
+{"level":"error","message":"Student not found with ID 6730edc9d99adc25b0e2238f","timestamp":"2024-11-10T19:03:36.872Z"}

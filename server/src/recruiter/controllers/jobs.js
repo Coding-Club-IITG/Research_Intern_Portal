@@ -159,13 +159,15 @@ const getAllStudentsOfJob = async (req, res) => {
         .status(404)
         .json({ message: "Job not found", data: null, status: "error" });
     }
-    const applicantsData = [];
+
+    let applicantsData = [];
 
     if (job.applicants.length > 0) {
       applicantsData = await Promise.all(
-        job.applicants.map((applicantDetail) =>
-          Student.findById(applicantDetail.applicant)
-        )
+        job.applicants.map(async (applicantDetail) => {
+          const applicant = await Student.findById(applicantDetail.applicant);
+          return applicant;
+        })
       );
     }
 
@@ -175,7 +177,6 @@ const getAllStudentsOfJob = async (req, res) => {
       status: "success",
     });
   } catch (error) {
-    // console.error(error);
     logger.error(error);
     return res
       .status(500)
