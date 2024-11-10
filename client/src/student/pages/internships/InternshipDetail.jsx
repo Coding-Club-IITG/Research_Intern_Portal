@@ -32,7 +32,10 @@ export default function DriveDetail() {
       message.success("Applied Successfully");
       navigate(`/student/applied`);
     } else {
-      console.error(res);
+      // console.log(res);
+      if (res.message === "Already applied") {
+        return;
+      }
       message.error("Failed to apply");
     }
   };

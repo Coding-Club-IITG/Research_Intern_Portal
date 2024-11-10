@@ -1,81 +1,81 @@
 import mongoose from "mongoose";
 
 const requirementSchema = new mongoose.Schema({
-    cpi: {
-        type: Number,
-        required: true,
-    },
-    branch: {
-        type: [String],
-        required: true,
-    },
-    study_year: {
-        type: Number,
-        required: true,
-    },
+  cpi: {
+    type: Number,
+    required: true,
+  },
+  branch: {
+    type: [String],
+    required: true,
+  },
+  study_year: {
+    type: Number,
+    required: true,
+  },
 });
 
 const JobSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true
+  title: {
+    type: String,
+    required: true,
+  },
+  prof_name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+  tags: [String],
+  type: {
+    type: String,
+    required: true,
+  },
+  stipend: {
+    type: Number,
+    required: true,
+  },
+  hours_required: {
+    type: Number,
+    required: true,
+  },
+  applicants: [
+    {
+      applicant: String,
+      enum: ["pending", "accepted", "rejected"],
     },
-    prof_name: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    isActive: {
-        type: Boolean,
-        default: true, 
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now,
-    },
-    tags: [String],
-    type: {
-        type: String,
-        required: true,
-    },
-    stipend: {
-        type: Number,
-        required: true,
-    },
-    hours_required: {
-        type: Number,
-        required: true,
-    },
-    applicants: [{
-        applicant: String,
-        enum: ["pending", "accepted", "rejected"],
-    }],
-    
-    requirements: requirementSchema,
+  ],
 
-    accepting: {
-        type: Boolean,
-        default: true,
-        required: true, 
-    },
-    last_date: {
-        type: Date,
-        required: true,
-    },
-    recruiter: {
-        type: String,
-        required: true,
-    }
+  requirements: requirementSchema,
+
+  accepting: {
+    type: Boolean,
+    default: true,
+    required: true,
+  },
+  last_date: {
+    type: Date,
+    required: true,
+  },
+  recruiter: {
+    type: String,
+    required: true,
+  },
 });
-
-
 
 /**
  * @swagger
@@ -173,8 +173,5 @@ const JobSchema = new mongoose.Schema({
  *           description: The last date to apply for the job.
  *           example: 2024-11-30T00:00:00.000Z
  */
-
-
-
 
 export default mongoose.model("Jobs", JobSchema);

@@ -12,7 +12,7 @@ export const deleteJob = async (id, navigate) => {
 };
 export const getAllJobs = async (navigate) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/job`);
+    const response = await axios.get(`${backendURL}/api/v1/job/internship/accepting`);
     return response.data;
   } catch (error) {
     navigate("/500");

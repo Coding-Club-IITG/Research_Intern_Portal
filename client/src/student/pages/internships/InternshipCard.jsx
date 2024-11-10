@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { applyToJobs } from "../../../apis/student";
 import useAuthStore from "../../../store/authStore";
+import { message } from "antd";
 
 function InternshipCard({ arr }) {
   const navigate = useNavigate();
@@ -12,13 +13,27 @@ function InternshipCard({ arr }) {
     navigate(`/student/internships/internship/${arr._id}`);
   };
 
-  console.log(arr);
+  const handleApply = async () => {
+    const res = await applyToJobs(user.connection_id, arr._id, navigate);
+    if (res.status === "success") {
+      message.success("Applied Successfully");
+      navigate(`/student/applied`);
+    } else {
+      // console.log(res);
+      if (res.message === "Already applied") {
+        return;
+      }
+      message.error("Failed to apply");
+    }
+  };
+
+  // console.log(arr);
 
   return (
-    <div className="bg-white border border-gray-300 dark:bg-slate-800 mb-6 rounded-md">
+    <div className="bg-white border border-gray-300 dark:border-yellow-500 dark:bg-slate-800 mb-6 rounded-md">
       <div className="flex p-4 gap-4 max-sm:flex-col">
         <div className="w-40 flex-shrink-0">
-          <img src={arr.image} alt={`${arr.prof_Name} Logo`} className="h-full" />
+          <img src={arr.image} alt={`${arr.prof_name} Logo`} className="h-full dark:text-white" />
         </div>
 
         <div className="flex-1">
@@ -39,16 +54,16 @@ function InternshipCard({ arr }) {
 
               <div className="mt-4 text-sm text-gray-500 dark:text-gray-300">
                 <div className="flex gap-4 dark:text-gray-300">
-                  <p>Stipend :</p>
-                  <p>{arr.stipend}Rs</p>
+                  <p>Professor :</p>
+                  <p>{arr.prof_name}</p>
                 </div>
                 <div className="flex gap-4 dark:text-gray-300">
-                  <p>Role :</p>
-                  <p>{arr.role}</p>
+                  <p>Stipend :</p>
+                  <p>{arr.stipend} Rs</p>
                 </div>
                 <div className="flex gap-4 dark:text-gray-300">
                   <p>Hours Required :</p>
-                  <p>{arr.hours_required}hrs</p>
+                  <p>{arr.hours_required} hrs</p>
                 </div>
               </div>
             </div>
@@ -57,7 +72,7 @@ function InternshipCard({ arr }) {
               <button
                 className="bg-gray-100 text-gray-700 px-4 py-1 text-sm rounded-lg hover:bg-gray-200 dark:text-black dark:bg-yellow-400 dark:hover:bg-yellow-500"
                 onClick={() => {
-                  applyToJobs(user.connection_id, arr._id);
+                  handleApply();
                 }}>
                 Apply
               </button>
@@ -66,9 +81,9 @@ function InternshipCard({ arr }) {
         </div>
       </div>
 
-      <div className="border-t border-gray-200 flex justify-between items-center p-4">
+      <div className="border-t border-gray-200 dark:border-yellow-500 flex justify-between items-center p-4">
         <div className="text-sm text-gray-500 dark:text-gray-300">
-          Applications: {arr.applications || 0}
+          Applications: {arr?.applicants?.length || 0}
         </div>
         <button
           onClick={handleLearnMore}
