@@ -99,7 +99,6 @@ function Internships() {
           pageSize={pageSize}
           total={internships.length}
           onChange={handlePageChange}
-          showSizeChanger
         />
       </div>
     </div>

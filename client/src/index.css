@@ -36,3 +36,7 @@ body {
   background-color: #fbbf24 !important;
   color: black !important;
 }
+
+.dark .ant-pagination-item-link path {
+  fill: #fbbf24;
+}
