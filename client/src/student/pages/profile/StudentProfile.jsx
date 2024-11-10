@@ -111,7 +111,7 @@ function Profile() {
         setYearOfGrad(daysjs(res.data?.yearOfGrad));
         setDOB(daysjs(res.data?.DOB));
         setBio(res.data?.bio || "");
-        setSelectedDepartment(deptId);
+        setSelectedDepartment(deptId || "Select");
         setSelectedCourse(courseId || "Select");
         setGender(res.data?.gender || "");
         setNumber(res.data?.number || "");

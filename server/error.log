@@ -384,3 +384,18 @@
 {"kind":"ObjectId","message":"Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"Jobs\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
 {"kind":"ObjectId","message":"Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"Jobs\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
 {"kind":"ObjectId","message":"Cast to ObjectId failed for value \"undefined\" (type string) at path \"_id\" for model \"Jobs\"","name":"CastError","path":"_id","reason":{},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+{"level":"error","message":"Recruiter not found with ID 672a785639b1c05817f9fe68","timestamp":"2024-11-10T16:04:30.929Z"}
+{"level":"error","message":"Recruiter not found with ID 672a785639b1c05817f9fe68","timestamp":"2024-11-10T16:04:30.994Z"}
+{"level":"error","message":"Recruiter not found with ID 672a785639b1c05817f9fe68","timestamp":"2024-11-10T16:04:43.144Z"}
+{"level":"error","message":"Recruiter not found with ID 672a785639b1c05817f9fe68","timestamp":"2024-11-10T16:04:43.212Z"}
+{"level":"error","message":"Recruiter not found with ID 672a785639b1c05817f9fe68","timestamp":"2024-11-10T16:05:40.752Z"}
+{"level":"error","message":"Recruiter not found with ID 672a785639b1c05817f9fe68","timestamp":"2024-11-10T16:05:40.820Z"}
+{"level":"error","message":"Recruiter not found with ID 672a785639b1c05817f9fe68","timestamp":"2024-11-10T16:06:49.201Z"}
+{"level":"error","message":"Recruiter not found with ID 672a785639b1c05817f9fe68","timestamp":"2024-11-10T16:06:49.269Z"}
+{"level":"error","message":"Recruiter not found with ID 672a785639b1c05817f9fe68","timestamp":"2024-11-10T16:08:45.095Z"}
+{"level":"error","message":"Recruiter not found with ID 672a785639b1c05817f9fe68","timestamp":"2024-11-10T16:08:45.164Z"}
+{"code":11000,"errorResponse":{"code":11000,"errmsg":"E11000 duplicate key error collection: test.students index: email_1 dup key: { email: \"aditya.samal@iitg.ac.in\" }","index":0,"keyPattern":{"email":1},"keyValue":{"email":"aditya.samal@iitg.ac.in"}},"index":0,"keyPattern":{"email":1},"keyValue":{"email":"aditya.samal@iitg.ac.in"},"level":"error","timestamp":"2024-11-10T17:21:38.564Z"}
+{"level":"error","timestamp":"2024-11-10T18:01:32.575Z"}
+{"level":"error","timestamp":"2024-11-10T18:01:32.710Z"}
+{"level":"error","timestamp":"2024-11-10T18:01:37.609Z"}
+{"level":"error","timestamp":"2024-11-10T18:01:37.764Z"}

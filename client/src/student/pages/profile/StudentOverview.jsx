@@ -6,7 +6,6 @@ import EducationCard from "./EducationCard";
 import ExperienceCard from "../../../root-components/ExperienceCard";
 import daysjs from "dayjs";
 import { getCourseById, getDepartmentById } from "../../../apis/courses-departments";
-import { set } from "date-fns";
 
 const Overview = () => {
   const [profileData, setProfileData] = useState(null);

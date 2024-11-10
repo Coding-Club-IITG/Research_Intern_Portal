@@ -290,7 +290,7 @@ export default function NewDrive() {
         <div className="flex justify-center mt-8">
           <button
             type="submit"
-            className="bg-yellow-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-yellow-600 transition duration-300 ease-in-out dark:text-black">
+            className="bg-indigo-500 dark:bg-yellow-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-yellow-600 transition duration-300 ease-in-out dark:text-black">
             Create Job Listing
           </button>
         </div>
