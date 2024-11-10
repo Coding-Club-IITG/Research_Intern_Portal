@@ -1,26 +1,27 @@
 import express from "express";
 import {
-  createBranch,
+  createDepartment,
   createCourse,
-  getAllBranches,
+  getAllDepartments,
   getAllCourse,
-  updateBranch,
+  updateDepartment,
   updateCourse,
-} from "../controller/branch-course.js";
+  getDepartmentById,
+} from "../controller/department-course.js";
 
 const router = express.Router();
 
 router.get("/course", getAllCourse);
-router.get("/branch", getAllBranches);
-router.put("/branch/:id", updateBranch);
+router.get("/department", getAllDepartments);
+router.put("/department/:id", updateDepartment);
+router.get("/department/:id", getDepartmentById);
 router.put("/course/:id", updateCourse);
 router.post("/course", createCourse);
-router.post("/branch", createBranch);
-
+router.post("/department", createDepartment);
 
 /**
  * @swagger
- * /api/v1/admin/branches/course:
+ * /api/v1/admin/departments/course:
  *   get:
  *     summary: Retrieve all courses
  *     tags: [Courses]
@@ -59,13 +60,13 @@ router.post("/branch", createBranch);
 
 /**
  * @swagger
- * /api/v1/admin/branches/branch:
+ * /api/v1/admin/departments/department:
  *   get:
- *     summary: Retrieve all branches
- *     tags: [Branches]
+ *     summary: Retrieve all departments
+ *     tags: [Departments]
  *     responses:
  *       200:
- *         description: A list of branches
+ *         description: A list of departments
  *         content:
  *           application/json:
  *             schema:
@@ -77,12 +78,12 @@ router.post("/branch", createBranch);
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Branch'
+ *                     $ref: '#/components/schemas/Department'
  *                 message:
  *                   type: string
- *                   example: Branches fetched successfully
+ *                   example: Departments fetched successfully
  *       500:
- *         description: Failed to fetch branches
+ *         description: Failed to fetch departments
  *         content:
  *           application/json:
  *             schema:
@@ -98,7 +99,7 @@ router.post("/branch", createBranch);
 
 /**
  * @swagger
- * /api/v1/admin/branches/course:
+ * /api/v1/admin/departments/course:
  *   post:
  *     summary: Create a new course
  *     tags: [Courses]
@@ -141,19 +142,19 @@ router.post("/branch", createBranch);
 
 /**
  * @swagger
- * /api/v1/admin/branches/branch:
+ * /api/v1/admin/departments/department:
  *   post:
- *     summary: Create a new branch
- *     tags: [Branches]
+ *     summary: Create a new department
+ *     tags: [Departments]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Branch'
+ *             $ref: '#/components/schemas/Department'
  *     responses:
  *       201:
- *         description: Branch created successfully
+ *         description: Department created successfully
  *         content:
  *           application/json:
  *             schema:
@@ -163,12 +164,12 @@ router.post("/branch", createBranch);
  *                   type: string
  *                   example: success
  *                 data:
- *                   $ref: '#/components/schemas/Branch'
+ *                   $ref: '#/components/schemas/Department'
  *                 message:
  *                   type: string
- *                   example: Branch created successfully
+ *                   example: Department created successfully
  *       500:
- *         description: Failed to create branch
+ *         description: Failed to create department
  *         content:
  *           application/json:
  *             schema:
@@ -184,7 +185,7 @@ router.post("/branch", createBranch);
 
 /**
  * @swagger
- * /api/v1/admin/branches/course/{id}:
+ * /api/v1/admin/departments/course/{id}:
  *   put:
  *     summary: Update a course
  *     tags: [Courses]
@@ -234,15 +235,15 @@ router.post("/branch", createBranch);
 
 /**
  * @swagger
- * /api/v1/admin/branches/branch/{id}:
+ * /api/v1/admin/departments/department/{id}:
  *   put:
- *     summary: Update a branch
- *     tags: [Branches]
+ *     summary: Update a department
+ *     tags: [Departments]
  *     parameters:
  *       - name: id
  *         in: path
  *         required: true
- *         description: The ID of the branch to update
+ *         description: The ID of the department to update
  *         schema:
  *           type: string
  *     requestBody:
@@ -250,10 +251,10 @@ router.post("/branch", createBranch);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Branch'
+ *             $ref: '#/components/schemas/Department'
  *     responses:
  *       200:
- *         description: Branch updated successfully
+ *         description: Department updated successfully
  *         content:
  *           application/json:
  *             schema:
@@ -263,12 +264,12 @@ router.post("/branch", createBranch);
  *                   type: string
  *                   example: success
  *                 data:
- *                   $ref: '#/components/schemas/Branch'
+ *                   $ref: '#/components/schemas/Department'
  *                 message:
  *                   type: string
- *                   example: Branch updated successfully
+ *                   example: Department updated successfully
  *       500:
- *         description: Failed to update branch
+ *         description: Failed to update department
  *         content:
  *           application/json:
  *             schema:
@@ -281,7 +282,5 @@ router.post("/branch", createBranch);
  *                   type: string
  *                   example: Error message
  */
-
-
 
 export default router;

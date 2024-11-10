@@ -10,7 +10,7 @@ import daysjs from "dayjs";
 export default function NewDrive() {
   const { getUser } = useAuthStore();
   const user = getUser();
-  const [activeBranches, setActiveBranches] = useState([]);
+  const [activeDepartments, setActiveDepartments] = useState([]);
 
   const [formData, setFormData] = useState({
     prof_name: user.name,
@@ -22,7 +22,7 @@ export default function NewDrive() {
     hours_required: "",
     requirements: {
       cpi: "",
-      branch: [],
+      department: [],
       study_year: ""
     },
     last_date: "",
@@ -41,21 +41,24 @@ export default function NewDrive() {
     });
   };
 
-  const handleRequirementChange = (selectedBranches) => {
-    // console.log(selectedBranches);
-    if (selectedBranches.includes("") || selectedBranches.includes("All branches are allowed")) {
-      // console.log("All branches are allowed");
-      selectedBranches = ["All branches are allowed"];
-      // console.log(selectedBranches);
+  const handleRequirementChange = (selectedDepartments) => {
+    // console.log(selectedDepartments);
+    if (
+      selectedDepartments.includes("") ||
+      selectedDepartments.includes("All departments are allowed")
+    ) {
+      // console.log("All departments are allowed");
+      selectedDepartments = ["All departments are allowed"];
+      // console.log(selectedDepartments);
     }
     setFormData({
       ...formData,
       requirements: {
         ...formData.requirements,
-        branch: selectedBranches
+        department: selectedDepartments
       }
     });
-    setActiveBranches(selectedBranches);
+    setActiveDepartments(selectedDepartments);
   };
 
   const handleSubmit = async (e) => {
@@ -72,8 +75,8 @@ export default function NewDrive() {
     }
   };
 
-  const branchOptions = [
-    { value: "", label: "All branches are allowed" },
+  const departmentOptions = [
+    { value: "", label: "All departments are allowed" },
     { value: "Computer Science", label: "Computer Science" },
     { value: "Mechanical", label: "Mechanical" },
     { value: "Electrical", label: "Electrical" },
@@ -230,16 +233,16 @@ export default function NewDrive() {
 
             <div className="flex flex-col">
               <label className="font-medium text-sm dark:text-white">
-                Branch <span className="text-red-500">*</span>
+                Department <span className="text-red-500">*</span>
               </label>
               <Select
                 mode="multiple"
                 allowClear
                 style={{ width: "100%" }}
-                placeholder="Select Branches"
+                placeholder="Select Departments"
                 onChange={handleRequirementChange}
-                options={branchOptions}
-                value={activeBranches}
+                options={departmentOptions}
+                value={activeDepartments}
                 className="mt-1 block rounded-md shadow-sm multi"
               />
             </div>

@@ -5,18 +5,35 @@ import { useNavigate } from "react-router-dom";
 import EducationCard from "./EducationCard";
 import ExperienceCard from "../../../root-components/ExperienceCard";
 import daysjs from "dayjs";
+import { getDepartmentById } from "../../../apis/courses-departments";
+import { set } from "date-fns";
 
 const Overview = () => {
   const [profileData, setProfileData] = useState(null);
   const { getUser } = useAuthStore();
   const user = getUser();
   const navigate = useNavigate();
+  const [dept, setDept] = useState(null);
 
   useEffect(() => {
     const getUser = async () => {
-      const response = await getStudent(user.connection_id, navigate);
-      setProfileData(response.data);
-      console.log(response.data);
+      try {
+        const response = await getStudent(user.connection_id, navigate);
+        if (!response || response.status === "error") {
+          navigate("/500");
+          return;
+        }
+        let dept = null;
+        if (response.data.department) {
+          dept = await getDepartmentById(response.data.department, navigate);
+        }
+
+        setDept(dept.data);
+        setProfileData(response.data);
+      } catch (error) {
+        console.error("Error in fetching user data:", error);
+        navigate("/500");
+      }
     };
     getUser();
   }, [user.connection_id, navigate]);
@@ -43,7 +60,7 @@ const Overview = () => {
               Current CGPA: {profileData?.CGPA || ""}
             </p>{" "}
             <p className="text-gray-600 dark:text-gray-300">
-              {profileData?.course || ""} from department of {profileData?.department || ""}
+              {profileData?.course || ""} from department of {dept?.name || ""}
             </p>{" "}
             {/* Location and Timezone */}
             <p className="text-gray-600 dark:text-gray-300">

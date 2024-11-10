@@ -17,8 +17,8 @@ const LeftNav = () => {
         <Link to="/admin/jobs" className="font-medium text-lg">
           Jobs
         </Link>
-        <Link to="/admin/branch" className="font-medium text-lg">
-          Branch
+        <Link to="/admin/department" className="font-medium text-lg">
+          Department
         </Link>
         <Link to="/admin/course" className="font-medium text-lg">
           Course

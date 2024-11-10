@@ -5,7 +5,7 @@ const requirementSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  branch: {
+  department: {
     type: [String],
     required: true,
   },
@@ -85,16 +85,16 @@ const JobSchema = new mongoose.Schema({
  *       type: object
  *       required:
  *         - cpi
- *         - branch
+ *         - department
  *         - study_year
  *       properties:
  *         cpi:
  *           type: number
  *           description: The minimum CPI requirement for the job.
  *           example: 7.5
- *         branch:
+ *         department:
  *           type: string
- *           description: The branch of study required for the job.
+ *           description: The department of study required for the job.
  *           example: Computer Science
  *         study_year:
  *           type: number

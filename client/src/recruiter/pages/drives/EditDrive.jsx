@@ -9,7 +9,7 @@ import daysjs from "dayjs";
 const EditDrive = () => {
   const { driveIndex } = useParams();
   const navigate = useNavigate();
-  const [activeBranches, setActiveBranches] = useState([]);
+  const [activeDepartments, setActiveDepartments] = useState([]);
 
   const [formData, setFormData] = useState({
     prof_name: "",
@@ -21,7 +21,7 @@ const EditDrive = () => {
     hours_required: "",
     requirements: {
       cpi: "",
-      branch: [],
+      department: [],
       study_year: ""
     },
     last_date: ""
@@ -34,7 +34,7 @@ const EditDrive = () => {
       if (res.status === "success") {
         message.destroy("loading");
         setFormData(res.data);
-        setActiveBranches(res.data.requirements.branch);
+        setActiveDepartments(res.data.requirements.department);
       } else {
         message.destroy("loading");
         message.error("Failed to load job details");
@@ -52,21 +52,24 @@ const EditDrive = () => {
     setFormData({ ...formData, last_date: daysjs(date) });
   };
 
-  const handleRequirementChange = (selectedBranches) => {
-    // console.log(selectedBranches);
-    if (selectedBranches.includes("") || selectedBranches.includes("All branches are allowed")) {
-      // console.log("All branches are allowed");
-      selectedBranches = ["All branches are allowed"];
-      // console.log(selectedBranches);
+  const handleRequirementChange = (selectedDepartments) => {
+    // console.log(selectedDepartments);
+    if (
+      selectedDepartments.includes("") ||
+      selectedDepartments.includes("All departments are allowed")
+    ) {
+      // console.log("All departments are allowed");
+      selectedDepartments = ["All departments are allowed"];
+      // console.log(selectedDepartments);
     }
     setFormData({
       ...formData,
       requirements: {
         ...formData.requirements,
-        branch: selectedBranches
+        department: selectedDepartments
       }
     });
-    setActiveBranches(selectedBranches);
+    setActiveDepartments(selectedDepartments);
   };
 
   const handleSubmit = async (e) => {
@@ -83,8 +86,8 @@ const EditDrive = () => {
     }
   };
 
-  const branchOptions = [
-    { value: "", label: "All branches are allowed" },
+  const departmentOptions = [
+    { value: "", label: "All departments are allowed" },
     { value: "Computer Science", label: "Computer Science" },
     { value: "Mechanical", label: "Mechanical" },
     { value: "Electrical", label: "Electrical" },
@@ -241,16 +244,16 @@ const EditDrive = () => {
 
             <div className="flex flex-col">
               <label className="font-medium text-sm dark:text-white">
-                Branch <span className="text-red-500">*</span>
+                Department <span className="text-red-500">*</span>
               </label>
               <Select
                 mode="multiple"
                 allowClear
                 style={{ width: "100%" }}
-                placeholder="Select Branches"
+                placeholder="Select Departments"
                 onChange={handleRequirementChange}
-                options={branchOptions}
-                value={activeBranches}
+                options={departmentOptions}
+                value={activeDepartments}
                 className="mt-1 block rounded-md shadow-sm"
               />
             </div>

@@ -40,7 +40,7 @@ export const applyToJobs = async (id, internId, navigate) => {
     const response = await axios.post(
       `${backendURL}/api/v1/students/${id}/intern-apply/${internId}`
     );
-    console.log(response);
+    // console.log(response);
     return response.data;
   } catch (error) {
     if (error?.response?.status === 400) {

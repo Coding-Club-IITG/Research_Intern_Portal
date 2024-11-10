@@ -118,8 +118,8 @@ export default function DriveDetail() {
                   {drive?.requirements?.cpi || ""}
                 </li>
                 <li>
-                  <span className="font-medium">Eligible Branches:</span>{" "}
-                  {drive?.requirements?.branch.join(", ")}
+                  <span className="font-medium">Eligible Departments:</span>{" "}
+                  {drive?.requirements?.department.join(", ")}
                 </li>
                 <li>
                   <span className="font-medium">Study Year:</span>{" "}

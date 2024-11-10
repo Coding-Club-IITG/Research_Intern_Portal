@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Branch from "./pages/home/branch.jsx";
+import Department from "./pages/home/department.jsx";
 import Course from "./pages/home/course.jsx";
 import ProfessorsPage from "./pages/home/professor.jsx";
 import StudentPage from "./pages/home/student.jsx";
@@ -18,7 +18,7 @@ const AdminRoutes = () => {
       <Route path="/" element={<AdminLayout />}>
         <Route index element={<Navigate replace to="dashboard" />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/branch" element={<Branch />} />
+        <Route path="/department" element={<Department />} />
         <Route path="/course" element={<Course />} />
         <Route path="/professor" element={<ProfessorsPage />} />
         <Route path="/student" element={<StudentPage />} />
