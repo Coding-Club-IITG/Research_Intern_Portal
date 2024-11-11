@@ -8,7 +8,6 @@ import Admin from "../admin/models/admin.js";
 import axios from "axios";
 // import Admin from "../admin/models/updates.js"
 
-
 export const createUser = async (data) => {
   try {
     const { name, email, typeOfUser } = data;
@@ -23,12 +22,12 @@ export const createUser = async (data) => {
         updatedAt: new Date(),
       });
     } else if (typeOfUser === roles.RECRUITER) {
-        user = await Recruiter.create({
-          name,
-          email,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
+      user = await Recruiter.create({
+        name,
+        email,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
     } else if (typeOfUser === roles.ADMIN) {
       user = await Admin.create({
         name,
@@ -44,7 +43,7 @@ export const createUser = async (data) => {
       typeOfUser,
       connection_id: user._id,
     });
-    logger.info(`an app user of type ${typeOfUser} is created succesfully`)
+    logger.info(`an app user of type ${typeOfUser} is created succesfully`);
     return appUser;
   } catch (error) {
     throw error;
@@ -67,7 +66,7 @@ export const getUserFromToken = async function (accessToken) {
       name: response.data.displayName,
       email: response.data.mail,
       rollNumber: response.data.surname,
-      branch: response.data.jobTitle,
+      department: response.data.jobTitle,
     };
 
     return userData;
@@ -95,7 +94,9 @@ export const getSavedJobs = async (req, res) => {
     }
 
     // Return the populated saved jobs
-    logger.info(`Saved jobs fetched successfully for user ${userId} and returned a total of ${user.savedJobs.length} saved jobs`);
+    logger.info(
+      `Saved jobs fetched successfully for user ${userId} and returned a total of ${user.savedJobs.length} saved jobs`
+    );
     return res.status(200).json({ savedJobs: user.savedJobs });
   } catch (error) {
     logger.error(`Error fetching saved jobs: ${error}`);

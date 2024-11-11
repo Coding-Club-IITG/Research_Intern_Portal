@@ -40,3 +40,18 @@ body {
 .dark .ant-pagination-item-link path {
   fill: #fbbf24;
 }
+
+.dark .ant-table-thead > tr > th {
+  background-color: #374151; /* Dark header */
+  color: #f9fafb;
+}
+
+.dark .ant-table-tbody > tr > td {
+  background-color: #1f2937; /* Dark rows */
+  color: #f9fafb;
+}
+
+.dark .ant-table-tbody > tr:hover > td {
+  background-color: #1f2937 !important;
+  color: #f9fafb !important;
+}

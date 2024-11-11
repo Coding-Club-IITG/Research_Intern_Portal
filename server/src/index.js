@@ -13,7 +13,7 @@ import cors from "cors";
 import logger from "./utils/logger.js";
 import bugRoutes from "./admin/routes/bug.js";
 import adminControlRouter from "./admin/routes/controls.js";
-import adminBranchNameChangeRouter from "./admin/routes/course-branches.js";
+import adminDepartmentNameChangeRouter from "./admin/routes/course-departments.js";
 import { adminGuard, recruiterGuard } from "./middlewares/role-guard.js";
 import adminUpdateRoutes from "./admin/routes/updates.js";
 import studentRoutes from "./students/routes/student.js";
@@ -42,7 +42,7 @@ app.use("/", authRoutes);
 // admin routes
 app.use("/api/v1/admin/controls", adminControlRouter);
 app.use("/api/v1/admin/updates", adminUpdateRoutes);
-app.use("/api/v1/admin/branches", adminBranchNameChangeRouter);
+app.use("/api/v1/admin/departments", adminDepartmentNameChangeRouter);
 
 // student routes
 app.use("/api/v1/students", studentRoutes);

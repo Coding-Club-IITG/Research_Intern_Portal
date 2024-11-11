@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { DatePicker, Select } from "antd";
@@ -6,11 +6,31 @@ import { createJob } from "../../../apis/recruiter";
 import { message } from "antd";
 import useAuthStore from "../../../store/authStore";
 import daysjs from "dayjs";
+import { backendURL } from "../../../apis/server";
+import { getAllDepartments } from "../../../apis/courses-departments";
+import { useNavigate } from "react-router-dom";
 
 export default function NewDrive() {
   const { getUser } = useAuthStore();
   const user = getUser();
-  const [activeBranches, setActiveBranches] = useState([]);
+  const [activeDepartments, setActiveDepartments] = useState([]);
+  const navigate = useNavigate();
+
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+
+  useEffect(() => {
+    const getDepartments = async () => {
+      const res = await getAllDepartments(navigate);
+      if (res.status === "success") {
+        const departments = res.data.map((department) => ({
+          value: department._id,
+          label: department.name
+        }));
+        setDepartmentOptions([{ value: "", label: "All departments are allowed" }, ...departments]);
+      }
+    };
+    getDepartments();
+  }, [navigate]);
 
   const [formData, setFormData] = useState({
     prof_name: user.name,
@@ -22,7 +42,7 @@ export default function NewDrive() {
     hours_required: "",
     requirements: {
       cpi: "",
-      branch: [],
+      department: [],
       study_year: ""
     },
     last_date: "",
@@ -41,21 +61,24 @@ export default function NewDrive() {
     });
   };
 
-  const handleRequirementChange = (selectedBranches) => {
-    // console.log(selectedBranches);
-    if (selectedBranches.includes("") || selectedBranches.includes("All branches are allowed")) {
-      // console.log("All branches are allowed");
-      selectedBranches = ["All branches are allowed"];
-      // console.log(selectedBranches);
+  const handleRequirementChange = (selectedDepartments) => {
+    // console.log(selectedDepartments);
+    if (
+      selectedDepartments.includes("") ||
+      selectedDepartments.includes("All departments are allowed")
+    ) {
+      // console.log("All departments are allowed");
+      selectedDepartments = ["All departments are allowed"];
+      // console.log(selectedDepartments);
     }
     setFormData({
       ...formData,
       requirements: {
         ...formData.requirements,
-        branch: selectedBranches
+        department: selectedDepartments
       }
     });
-    setActiveBranches(selectedBranches);
+    setActiveDepartments(selectedDepartments);
   };
 
   const handleSubmit = async (e) => {
@@ -71,17 +94,6 @@ export default function NewDrive() {
       message.error("Failed to create job listing");
     }
   };
-
-  const branchOptions = [
-    { value: "", label: "All branches are allowed" },
-    { value: "Computer Science", label: "Computer Science" },
-    { value: "Mechanical", label: "Mechanical" },
-    { value: "Electrical", label: "Electrical" },
-    { value: "Chemistry", label: "Chemistry" },
-    { value: "Physics", label: "Physics" },
-    { value: "Civil", label: "Civil" },
-    { value: "Other", label: "Other" }
-  ];
 
   return (
     <form
@@ -230,16 +242,16 @@ export default function NewDrive() {
 
             <div className="flex flex-col">
               <label className="font-medium text-sm dark:text-white">
-                Branch <span className="text-red-500">*</span>
+                Department <span className="text-red-500">*</span>
               </label>
               <Select
                 mode="multiple"
                 allowClear
                 style={{ width: "100%" }}
-                placeholder="Select Branches"
+                placeholder="Select Departments"
                 onChange={handleRequirementChange}
-                options={branchOptions}
-                value={activeBranches}
+                options={departmentOptions}
+                value={activeDepartments}
                 className="mt-1 block rounded-md shadow-sm multi"
               />
             </div>
@@ -287,7 +299,7 @@ export default function NewDrive() {
         <div className="flex justify-center mt-8">
           <button
             type="submit"
-            className="bg-yellow-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-yellow-600 transition duration-300 ease-in-out dark:text-black">
+            className="bg-indigo-500 dark:bg-yellow-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-yellow-600 transition duration-300 ease-in-out dark:text-black">
             Create Job Listing
           </button>
         </div>

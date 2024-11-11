@@ -46,9 +46,9 @@ function Internships() {
 
     // const matchesDepartment =
     //   !filters.department ||
-    //   internship.requirements?.branch
-    //     ?.map((branch) => branch.toLowerCase())
-    //     .some((branch) => branch.includes(filters.department.toLowerCase()));
+    //   internship.requirements?.department
+    //     ?.map((department) => department.toLowerCase())
+    //     .some((department) => department.includes(filters.department.toLowerCase()));
 
     const matchesRole =
       !filters.role || internship.title?.toLowerCase().includes(filters.role.toLowerCase());

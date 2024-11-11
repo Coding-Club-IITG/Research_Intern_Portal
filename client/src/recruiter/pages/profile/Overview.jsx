@@ -4,30 +4,49 @@ import { message } from "antd";
 import useAuthStore from "../../../store/authStore";
 import { useNavigate } from "react-router-dom";
 import QualificationCard from "./QualificationCard";
+import { getDepartmentById } from "../../../apis/courses-departments";
 
 export default function Overview() {
   const [profileData, setProfileData] = useState({});
   const { getUser } = useAuthStore();
-  const navagate = useNavigate();
+  const navigate = useNavigate();
+  const [dept, setDept] = useState(null);
 
   const user = getUser();
 
   useEffect(() => {
     async function getUser() {
-      message.loading({ content: "Fetching Profile...", key: "fetchProfile" });
+      try {
+        message.loading({ content: "Fetching Profile...", key: "fetchProfile" });
+        const res = await getRecruiter(user.connection_id, navigate);
+        if (!res || res.status === "error") {
+          message.destroy("fetchProfile");
+          navigate("/500");
+          return;
+        }
 
-      const res = await getRecruiter(user.connection_id, navagate);
-      if (res.status === "success") {
-        setProfileData(res?.data);
+        let dept = null;
+        if (res.data.department) {
+          try {
+            dept = await getDepartmentById(res.data.department, navigate);
+          } catch (deptError) {
+            console.error("Error fetching department data:", deptError);
+            dept = null;
+          }
+        }
+
         message.destroy("fetchProfile");
-      } else {
+        setDept(dept?.data || { name: "Unknown" });
+        setProfileData(res.data);
+      } catch (error) {
+        console.error("Error in fetching user data:", error);
         message.destroy("fetchProfile");
-        message.error(res.message);
+        navigate("/500");
       }
     }
 
     getUser();
-  }, [user.connection_id, navagate]);
+  }, [user.connection_id, navigate]);
 
   return (
     <div>
@@ -48,7 +67,7 @@ export default function Overview() {
               {profileData.name}
             </h1>
             <p className="text-green-600 dark:text-yellow-400 mt-1 inline-block rounded-md">
-              Professor at Department of {profileData?.department}
+              Professor at Department of {dept?.name}
             </p>{" "}
           </div>
           <div className="ml-auto flex space-x-4">

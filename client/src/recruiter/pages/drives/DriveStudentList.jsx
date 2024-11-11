@@ -22,8 +22,8 @@ function DriveStudentList() {
       }
     }
 
-    fetchApplicants();  
-  }, [])
+    fetchApplicants();
+  }, []);
 
   console.log(applicants);
 
@@ -76,7 +76,7 @@ function DriveStudentList() {
         <Space size="middle" className="flex flex-wrap justify-center gap-2 lg:gap-4">
           <button
             className="px-2 py-1 md:px-4 md:py-2 rounded bg-yellow-400 text-black border border-yellow-400 hover:bg-yellow-500 transition-all"
-            onClick={() => handleView(record.rollNo)}>
+            onClick={() => handleView(record._id)}>
             View Profile
           </button>
           <button className="px-2 py-1 md:px-4 md:py-2 rounded bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 transition-all">
@@ -92,9 +92,7 @@ function DriveStudentList() {
 
   return (
     <div className="w-full p-4 md:p-6 flex flex-col items-center">
-      <h1 className="text-center mb-4 md:mb-6">
-        Applicants List
-      </h1>
+      <h1 className="text-center mb-4 md:mb-6 dark:text-white">Applicants List</h1>
 
       {applicants.length === 0 ? (
         <div className="text-center text-gray-600">No applicants available.</div>
