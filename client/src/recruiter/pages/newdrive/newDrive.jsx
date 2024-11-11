@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { DatePicker, Select } from "antd";
@@ -6,11 +6,31 @@ import { createJob } from "../../../apis/recruiter";
 import { message } from "antd";
 import useAuthStore from "../../../store/authStore";
 import daysjs from "dayjs";
+import { backendURL } from "../../../apis/server";
+import { getAllDepartments } from "../../../apis/courses-departments";
+import { useNavigate } from "react-router-dom";
 
 export default function NewDrive() {
   const { getUser } = useAuthStore();
   const user = getUser();
   const [activeDepartments, setActiveDepartments] = useState([]);
+  const navigate = useNavigate();
+
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+
+  useEffect(() => {
+    const getDepartments = async () => {
+      const res = await getAllDepartments(navigate);
+      if (res.status === "success") {
+        const departments = res.data.map((department) => ({
+          value: department._id,
+          label: department.name
+        }));
+        setDepartmentOptions([{ value: "", label: "All departments are allowed" }, ...departments]);
+      }
+    };
+    getDepartments();
+  }, [navigate]);
 
   const [formData, setFormData] = useState({
     prof_name: user.name,
@@ -74,17 +94,6 @@ export default function NewDrive() {
       message.error("Failed to create job listing");
     }
   };
-
-  const departmentOptions = [
-    { value: "", label: "All departments are allowed" },
-    { value: "Computer Science", label: "Computer Science" },
-    { value: "Mechanical", label: "Mechanical" },
-    { value: "Electrical", label: "Electrical" },
-    { value: "Chemistry", label: "Chemistry" },
-    { value: "Physics", label: "Physics" },
-    { value: "Civil", label: "Civil" },
-    { value: "Other", label: "Other" }
-  ];
 
   return (
     <form

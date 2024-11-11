@@ -5,11 +5,28 @@ import { DatePicker, Select, message } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
 import { getJobById, updateJob } from "../../../apis/recruiter";
 import daysjs from "dayjs";
+import { getAllDepartments } from "../../../apis/courses-departments";
 
 const EditDrive = () => {
   const { driveIndex } = useParams();
   const navigate = useNavigate();
   const [activeDepartments, setActiveDepartments] = useState([]);
+
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+
+  useEffect(() => {
+    const getDepartments = async () => {
+      const res = await getAllDepartments(navigate);
+      if (res.status === "success") {
+        const departments = res.data.map((department) => ({
+          value: department._id,
+          label: department.name
+        }));
+        setDepartmentOptions([{ value: "", label: "All departments are allowed" }, ...departments]);
+      }
+    };
+    getDepartments();
+  }, [navigate]);
 
   const [formData, setFormData] = useState({
     prof_name: "",
@@ -85,17 +102,6 @@ const EditDrive = () => {
       message.error("Failed to update drive");
     }
   };
-
-  const departmentOptions = [
-    { value: "", label: "All departments are allowed" },
-    { value: "Computer Science", label: "Computer Science" },
-    { value: "Mechanical", label: "Mechanical" },
-    { value: "Electrical", label: "Electrical" },
-    { value: "Chemistry", label: "Chemistry" },
-    { value: "Physics", label: "Physics" },
-    { value: "Civil", label: "Civil" },
-    { value: "Other", label: "Other" }
-  ];
 
   return (
     <form
@@ -254,7 +260,7 @@ const EditDrive = () => {
                 onChange={handleRequirementChange}
                 options={departmentOptions}
                 value={activeDepartments}
-                className="mt-1 block rounded-md shadow-sm"
+                className="mt-1 block rounded-md shadow-sm multi"
               />
             </div>
 
