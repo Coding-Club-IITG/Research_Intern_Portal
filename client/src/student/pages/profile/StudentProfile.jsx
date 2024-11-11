@@ -10,6 +10,11 @@ import { getStudent, updateStudent } from "../../../apis/student";
 import useAuthStore from "../../../store/authStore";
 import { useTheme } from "../../../store/themeStore";
 import daysjs from "dayjs";
+import {
+  getAllCourses,
+  getAllDepartments,
+  getDepartmentById
+} from "../../../apis/courses-departments";
 
 function Profile() {
   const { getUser } = useAuthStore();
@@ -42,8 +47,28 @@ function Profile() {
   const [achievements, setAchievements] = useState("");
   const [social, setSocial] = useState([]);
 
-  const courses = ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"];
-  const departments = ["Chemistry", "Mathematics"];
+  const [courses, setCourses] = useState([]);
+  const [departments, setDepartments] = useState([]);
+
+  useEffect(() => {
+    const getDepartments = async () => {
+      const res = await getAllDepartments(navigate);
+      if (res.status === "success") {
+        setDepartments(res.data);
+      }
+    };
+    getDepartments();
+  }, [navigate]);
+
+  useEffect(() => {
+    const getCourses = async () => {
+      const res = await getAllCourses(navigate);
+      if (res.status === "success") {
+        setCourses(res.data);
+      }
+    };
+    getCourses();
+  }, [navigate]);
 
   const AddInterest = (e) => {
     if (newInterest.trim()) {
@@ -53,49 +78,67 @@ function Profile() {
   };
 
   useEffect(() => {
-    console.log(educations);
-  }, [educations]);
-
-  useEffect(() => {
     async function getUser() {
-      message.loading({ content: "Loading....", key: "loadingData" });
-      const res = await getStudent(user.connection_id, navigate);
-      message.destroy("loadingData");
-      if (res.status === "error") {
+      try {
+        message.loading({ content: "Loading....", key: "loadingData" });
+        const res = await getStudent(user.connection_id, navigate);
+        if (res.status === "error") {
+          message.destroy("loadingData");
+          navigate("/500");
+          return;
+        }
+
+        let deptId = res.data?.department || "Select";
+        let deptName = "Select";
+
+        if (deptId !== "Select") {
+          const dept = await getDepartmentById(deptId, navigate);
+          deptName = dept.data?.name || "Select";
+        }
+
+        let courseId = res.data?.department || "Select";
+        let courseName = "Select";
+
+        if (courseId !== "Select") {
+          const course = await getDepartmentById(courseId, navigate);
+          courseName = course.data?.name || "Select";
+        }
+
+        message.destroy("loadingData");
+        setName(res.data?.name || "");
+        setEmail(res.data?.email || "");
+        setCGPA(res.data?.CGPA);
+        setYearOfGrad(daysjs(res.data?.yearOfGrad));
+        setDOB(daysjs(res.data?.DOB));
+        setBio(res.data?.bio || "");
+        setSelectedDepartment(deptId || "Select");
+        setSelectedCourse(courseId || "Select");
+        setGender(res.data?.gender || "");
+        setNumber(res.data?.number || "");
+        setRoll(res.data?.roll || "");
+        setWebsite(res.data?.social[0]?.url || "");
+        setLinkedin(res.data?.social[1]?.url || "");
+        setGithub(res.data?.social[2]?.url || "");
+        setSocial([
+          { platform: "Website", url: res.data?.social[0]?.url || "" },
+          { platform: "Linkedin", url: res.data?.social[1]?.url || "" },
+          { platform: "Github", url: res.data?.social[2]?.url || "" }
+        ]);
+        setSkills(res.data?.skills || []);
+        setAchievements(res.data?.achievements || "");
+        setEducations(res.data?.educations || []);
+        setExperiences(res.data?.experiences || []);
+        setInterests(res.data?.interests || []);
+      } catch (error) {
+        message.destroy("loadingData");
+        message.error("An error occurred while fetching user data.");
+        console.error("Error in getUser:", error);
         navigate("/500");
       }
-
-      setName(res.data?.name || "");
-      setEmail(res.data?.email || "");
-      setCGPA(res.data?.CGPA);
-      setYearOfGrad(daysjs(res.data?.yearOfGrad));
-      setDOB(daysjs(res.data?.DOB));
-      setBio(res.data?.bio || "");
-      setSelectedCourse(res.data?.course || "Select");
-      setSelectedDepartment(res.data?.department || "Select");
-      setGender(res.data?.gender || "");
-      setNumber(res.data?.number || "");
-      setRoll(res.data?.roll || "");
-      setWebsite(res.data?.social[0]?.url || "");
-      setLinkedin(res.data?.social[1]?.url || "");
-      setGithub(res.data?.social[2]?.url || "");
-      setSocial([
-        { platform: "Website", url: res.data?.social[0]?.url },
-        { platform: "Linkedin", url: res.data?.social[1]?.url },
-        { platform: "Github", url: res.data?.social[2]?.url }
-      ]);
-      setSkills(res.data?.skills || []);
-      setAchievements(res.data?.achievements || "");
-      setEducations(res.data?.educations || []);
-      setExperiences(res.data?.experiences || []);
-      setInterests(res.data?.interests || []);
     }
+
     getUser();
   }, [user.connection_id, navigate]);
-
-  useEffect(() => {
-    console.log(educations);
-  }, [educations]);
 
   const handleYearOfGrad = (date) => {
     setYearOfGrad(daysjs(date));
@@ -191,7 +234,7 @@ function Profile() {
       experiences,
       achievements
     };
-    console.log(updatedProfile);
+
     message.loading({ content: "Saving Profile...", key: "saveProfile" });
     const res = await updateStudent(user.connection_id, updatedProfile);
 
@@ -259,8 +302,11 @@ function Profile() {
                   Select
                 </option>
                 {courses.map((course) => (
-                  <option key={course} value={course} className="dark:bg-zinc-900 dark:text-white">
-                    {course}
+                  <option
+                    key={course._id}
+                    value={course._id}
+                    className="dark:bg-slate-700 dark:text-white">
+                    {course.name}
                   </option>
                 ))}
               </select>
@@ -282,8 +328,8 @@ function Profile() {
                   Select
                 </option>
                 {departments.map((department) => (
-                  <option key={department} value={department}>
-                    {department}
+                  <option key={department._id} value={department._id}>
+                    {department.name}
                   </option>
                 ))}
               </select>

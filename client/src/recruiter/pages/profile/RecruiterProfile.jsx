@@ -6,29 +6,65 @@ import QualificationForm from "./QualificationForm";
 import { getRecruiter, updateRecruiter } from "../../../apis/recruiter";
 import useAuthStore from "../../../store/authStore";
 import { useNavigate } from "react-router-dom";
+import { getAllDepartments, getDepartmentById } from "../../../apis/courses-departments";
 
 function Profile() {
   const { getUser } = useAuthStore();
   const user = getUser();
   const navigate = useNavigate();
-  const departments = ["Chemical", "Civil", "Computer", "Electrical", "Mechanical", "Metallurgy"];
+  const [departments, setDepartments] = useState([]);
+
+  useEffect(() => {
+    const getDepartments = async () => {
+      const res = await getAllDepartments(navigate);
+      if (res.status === "success") {
+        setDepartments(res.data);
+      }
+    };
+    getDepartments();
+  }, [navigate]);
 
   useEffect(() => {
     async function getUser() {
-      const res = await getRecruiter(user.connection_id, navigate);
-      setName(res.data?.name || "");
-      setEmail(res.data?.email || "");
-      setSelectedDepartment(res.data?.department || "Select");
-      setGender(res.data?.gender || "");
-      setNumber(res.data?.phoneNumber || "");
-      setWebsite(res.data?.socialMedia?.website || "");
-      setLinkedin(res.data?.socialMedia?.linkedIn || "");
-      setInterests(res.data?.areaOfInterest || []);
-      setQualifications(res.data?.qualifications || []);
+      try {
+        message.loading({ content: "Loading...", key: "loadingData" });
+
+        const res = await getRecruiter(user.connection_id, navigate);
+        if (res.status === "error") {
+          message.destroy("loadingData");
+          navigate("/500");
+          return;
+        }
+
+        let deptId = res.data?.department || "Select";
+        let deptName = "Select";
+
+        if (deptId !== "Select") {
+          const dept = await getDepartmentById(deptId, navigate);
+          deptName = dept.data?.name || "Select";
+        }
+
+        setName(res.data?.name || "");
+        setEmail(res.data?.email || "");
+        setSelectedDepartment(deptId || "Select");
+        setGender(res.data?.gender || "");
+        setNumber(res.data?.phoneNumber || "");
+        setWebsite(res.data?.socialMedia?.website || "");
+        setLinkedin(res.data?.socialMedia?.linkedIn || "");
+        setInterests(res.data?.areaOfInterest || []);
+        setQualifications(res.data?.qualifications || []);
+
+        message.destroy("loadingData");
+      } catch (error) {
+        message.destroy("loadingData");
+        message.error("An error occurred while fetching recruiter data.");
+        console.error("Error in getUser:", error);
+        navigate("/500");
+      }
     }
 
     getUser();
-  }, []);
+  }, [user.connection_id, navigate]);
 
   // Profile Information
   const [name, setName] = useState("");
@@ -167,8 +203,8 @@ function Profile() {
                 Select
               </option>
               {departments.map((department) => (
-                <option key={department} value={department}>
-                  {department}
+                <option key={department._id} value={department._id}>
+                  {department.name}
                 </option>
               ))}
             </select>

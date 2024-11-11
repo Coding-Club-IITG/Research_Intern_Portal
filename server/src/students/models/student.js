@@ -28,9 +28,23 @@ const studentSchema = new mongoose.Schema({
     type: String,
     enum: ["BTech", "MTech", "BDes", "MDes", "MA", "MSR", "MSc", "Phd", "MBA"],
   },
-  department:{
+  department: {
     type: String,
-    enum:["Computer Science and Engineering","Design","Humanities and Social Science","Physics","Mathematics","Chemistry", "Mehta School of Data Science", "Mechanical Engineering","Electrical and Electronics Engineering", "Civil Engineering","Bioscience and Bioengineering","Energy Engineering","Chemical Engineering"]
+    enum: [
+      "Computer Science and Engineering",
+      "Design",
+      "Humanities and Social Science",
+      "Physics",
+      "Mathematics",
+      "Chemistry",
+      "Mehta School of Data Science",
+      "Mechanical Engineering",
+      "Electrical and Electronics Engineering",
+      "Civil Engineering",
+      "Bioscience and Bioengineering",
+      "Energy Engineering",
+      "Chemical Engineering",
+    ],
   },
   // course: {
   //   type: mongoose.Schema.Types.ObjectId,
@@ -38,7 +52,7 @@ const studentSchema = new mongoose.Schema({
   // },
   // department: {
   //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Branch",
+  //   ref: "Department",
   // },
   CGPA: {
     type: Number,
@@ -66,7 +80,7 @@ const studentSchema = new mongoose.Schema({
     default: "",
   },
   interests: {
-    type: [{type:String}],
+    type: [{ type: String }],
   },
   educations: {
     type: [
@@ -74,14 +88,14 @@ const studentSchema = new mongoose.Schema({
         role: {
           type: String,
         },
-        description:{
-          type:String
+        description: {
+          type: String,
         },
         startDate: {
           type: String,
         },
-        endDate:{
-          type: String
+        endDate: {
+          type: String,
         },
         name: {
           type: String,
@@ -112,16 +126,18 @@ const studentSchema = new mongoose.Schema({
         },
         endDate: {
           type: String,
-        }
+        },
       },
     ],
   },
   achievements: {
     type: String,
   },
-  skills:[{
-    type:String
-  }],
+  skills: [
+    {
+      type: String,
+    },
+  ],
   applications: {
     type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Updates" }],
   },

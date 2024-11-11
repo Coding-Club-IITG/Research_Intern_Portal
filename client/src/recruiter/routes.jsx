@@ -31,12 +31,12 @@ const RecuriterRoutes = () => {
         <Route path="drives" element={<RecruiterDrives />} />
         <Route path="newdrive" element={<RecruiterNewDrive />} />
         <Route path="drive/:driveIndex" element={<DriveDetail />} />
-      <Route path="edit-drive/:driveIndex" element={<EditDrive />} />
-      <Route path="student-list/:driveIndex" element={<DriveStudentList />} />
-      <Route path="bugReport" element={<BugReport/>}/>
-      <Route path="profile/student/:roll" element={<StudentProfileView/>}/>
+        <Route path="edit-drive/:driveIndex" element={<EditDrive />} />
+        <Route path="student-list/:driveIndex" element={<DriveStudentList />} />
+        <Route path="bugReport" element={<BugReport />} />
+        <Route path="profile/student/:id" element={<StudentProfileView />} />
       </Route>
-     
+
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

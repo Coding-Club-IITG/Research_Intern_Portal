@@ -4,55 +4,60 @@ import { Card, Col, Row, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useFetch } from "../../../hooks/useFetch";
 
-export default function Course() {
-  const [courses, setCourses] = useState([]);
-  const [newcourse, setNewCourse] = useState("");
-  const [editcourseId, setEditCourseId] = useState(null);
-  const [updatedcourseName, setUpdatedCourseName] = useState("");
+export default function Department() {
+  const [departments, setDepartments] = useState([]);
+  const [newDepartment, setNewDepartment] = useState("");
+  const [editDepartmentId, setEditDepartmentId] = useState(null);
+  const [updatedDepartmentName, setUpdatedDepartmentName] = useState("");
   const navigate = useNavigate();
 
-  const { data, loading } = useFetch("http://localhost:8000/api/v1/admin/departments/course");
+  const { data, loading } = useFetch("http://localhost:8000/api/v1/admin/departments/department");
 
   useEffect(() => {
     if (data && data.status === "success") {
-      setCourses(data.data);
+      setDepartments(data.data);
       console.log(data.data);
     }
   }, [data]);
 
-  const createCourse = async () => {
+  const createDepartment = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/admin/departments/course", {
-        name: newcourse
-      });
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/admin/departments/department",
+        {
+          name: newDepartment
+        }
+      );
       if (response.data.status === "success") {
-        setCourses([...courses, response.data.data]);
-        setNewCourse("");
+        setDepartments([...departments, response.data.data]);
+        setNewDepartment("");
       }
     } catch (error) {
-      console.error("Error creating course", error);
+      console.error("Error creating department", error);
       navigate("/500");
     }
   };
 
-  const updateCourse = async (courseId) => {
+  const updateDepartment = async (departmentId) => {
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/v1/admin/departments/course/${courseId}`,
+        `http://localhost:8000/api/v1/admin/departments/department/${departmentId}`,
         {
-          name: updatedcourseName
+          name: updatedDepartmentName
         }
       );
       if (response.data.status === "success") {
-        const updatedcourses = courses.map((course) =>
-          course._id === courseId ? { ...course, name: updatedcourseName } : course
+        const updatedDepartments = departments.map((department) =>
+          department._id === departmentId
+            ? { ...department, name: updatedDepartmentName }
+            : department
         );
-        setCourses(updatedcourses);
-        setEditCourseId(null);
-        setUpdatedCourseName("");
+        setDepartments(updatedDepartments);
+        setEditDepartmentId(null);
+        setUpdatedDepartmentName("");
       }
     } catch (error) {
-      console.error("Error updating course", error);
+      console.error("Error updating department", error);
       navigate("/500");
     }
   };
@@ -63,52 +68,52 @@ export default function Course() {
     <div className="p-6 bg-white rounded-lg">
       <Row gutter={16}>
         <Col span={24}>
-          <Card bordered={true} title="course Manager">
+          <Card bordered={true} title="Department Manager">
             <div className="mb-6">
               <input
                 type="text"
-                value={newcourse}
-                onChange={(e) => setNewCourse(e.target.value)}
-                placeholder="New course Name"
+                value={newDepartment}
+                onChange={(e) => setNewDepartment(e.target.value)}
+                placeholder="New Department Name"
                 className="p-3 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black"
               />
               <button
-                onClick={createCourse}
+                onClick={createDepartment}
                 className="mt-4 w-full px-4 py-2 bg-black text-white rounded-lg shadow-md hover:bg-gray-800 transition">
-                Create course
+                Create Department
               </button>
             </div>
 
-            {courses && courses.length === 0 ? (
-              <p className="text-gray-500">No courses found</p>
+            {departments && departments.length === 0 ? (
+              <p className="text-gray-500">No departments found</p>
             ) : (
               <ul className="space-y-4">
-                {courses.map((course) => (
+                {departments.map((department) => (
                   <li
-                    key={course._id}
+                    key={department._id}
                     className="flex items-center justify-between p-4 bg-gray-50 border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition">
-                    {editcourseId === course._id ? (
+                    {editDepartmentId === department._id ? (
                       <>
                         <input
                           type="text"
-                          value={updatedcourseName}
-                          onChange={(e) => setUpdatedCourseName(e.target.value)}
-                          placeholder="Update course Name"
+                          value={updatedDepartmentName}
+                          onChange={(e) => setUpdatedDepartmentName(e.target.value)}
+                          placeholder="Update Department Name"
                           className="p-2 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-black"
                         />
                         <button
-                          onClick={() => updateCourse(course._id)}
+                          onClick={() => updateDepartment(department._id)}
                           className="ml-4 px-4 py-2 bg-black text-white rounded-lg shadow-md hover:bg-gray-800 transition">
                           Update
                         </button>
                       </>
                     ) : (
                       <>
-                        <span className="text-gray-700 font-medium">{course.name}</span>
+                        <span className="text-gray-700 font-medium">{department.name}</span>
                         <button
                           onClick={() => {
-                            setEditCourseId(course._id);
-                            setUpdatedCourseName(course.name);
+                            setEditDepartmentId(department._id);
+                            setUpdatedDepartmentName(department.name);
                           }}
                           className="ml-4 px-4 py-2 bg-black text-white rounded-lg shadow-md hover:bg-gray-800 transition">
                           Edit
