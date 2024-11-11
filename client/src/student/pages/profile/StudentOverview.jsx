@@ -26,7 +26,7 @@ const Overview = () => {
       <div className="py-4">
         <div className="font-semibold dark:text-white">What recruiters will see:</div>
       </div>
-      <div className="max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300 dark:border-yellow-400">
+      <div className="bg-white dark:bg-zinc-900 max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300 dark:border-none">
         <div className="max-sm:flex-col max-sm:items-start flex items-center mb-4">
           <div className="w-32 h-32 rounded-full overflow-hiddenflex items-center justify-center mr-6">
             <img

@@ -13,13 +13,13 @@ export default function StudentHome() {
   if (error) return <InternalServerErrorPage />;
 
   return (
-    <div className="w-full min-h-screen flex flex-col gap-4 items-center py-8 bg-white dark:bg-slate-700">
-      <div className="w-[80%] p-8 h-fit rounded-lg border border-gray-400">
+    <div className="w-full min-h-screen flex flex-col gap-4 items-center py-8">
+      <div className="w-[80%] p-8 h-fit rounded-lg border dark:bg-zinc-900 dark:border-none bg-white border-gray-400">
         <div className="flex flex-col">
           <h2 className="font-bold text-base md:text-lg text-black dark:text-white m-0">
             Recommended Jobs
           </h2>
-          <p className="text-m text-gray-700 dark:text-yellow-400 font-thin">
+          <p className="text-m text-gray-700 dark:text-white font-thin">
             Jobs where you're a top applicant based on your profile job search
           </p>
         </div>
@@ -32,17 +32,17 @@ export default function StudentHome() {
           <Button
             type="primary"
             size="large"
-            className="bg-blue-500 dark:bg-yellow-400 dark:text-black hover:bg-gray-400 dark:hover:bg-yellow-500 transition duration-200">
+            className="bg-blue-500 dark:bg-white dark:text-black hover:bg-gray-400 transition duration-200">
             View Jobs
           </Button>
         </div>
       </div>
-      <div className="w-[80%] p-8 h-fit rounded-lg border border-gray-400">
+      <div className="w-[80%] p-8 h-fit rounded-lg border dark:bg-zinc-900 dark:border-none bg-white border-gray-400">
         <div className="flex flex-col">
           <h2 className="font-bold text-base md:text-lg text-black dark:text-white m-0">
             Applied Jobs
           </h2>
-          <p className="text-m text-gray-700 dark:text-yellow-400 font-thin">
+          <p className="text-m text-gray-700 dark:text-white font-thin">
             Jobs where you're a top applicant based on your profile job search
           </p>
         </div>
@@ -55,7 +55,7 @@ export default function StudentHome() {
           <Button
             type="primary"
             size="large"
-            className="bg-blue-500 dark:bg-yellow-400 hover:bg-gray-400 dark:hover:bg-yellow-500 transition duration-200 dark:text-black">
+            className="bg-blue-500 dark:bg-white hover:bg-gray-400 transition duration-200 dark:text-black">
             View Jobs
           </Button>
         </div>

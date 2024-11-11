@@ -46,7 +46,7 @@ function Form() {
   };
 
   return (
-    <div className="max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-10 p-6 bg-white dark:bg-slate-700 border border-gray-400 dark:border-yellow-400 rounded-lg">
+    <div className="max-w-md sm:max-w-lg lg:max-w-xl mx-auto my-10 p-6 bg-white dark:bg-zinc-900 border border-gray-400 dark:border-none rounded-lg">
       <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
         Submit a Title and Description
       </h2>
@@ -63,7 +63,7 @@ function Form() {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className="border border-gray-300 dark:border-yellow-300 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:outline-none focus:ring dark:focus:ring-yellow-400"
+            className="border border-gray-300 dark:border-white rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-zinc-900 focus:outline-none focus:ring dark:focus:ring-white"
             required
           />
         </div>
@@ -79,7 +79,7 @@ function Form() {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="border border-gray-300 dark:border-yellow-300 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:outline-none focus:ring dark:focus:ring-yellow-400"
+            className="border border-gray-300 dark:border-white rounded-md px-4 py-2 w-full text-zinc-900 dark:text-white bg-white dark:bg-zinc-900 focus:outline-none focus:ring dark:focus:ring-white"
             rows="12"
             required
           />
@@ -87,7 +87,7 @@ function Form() {
 
         <button
           type="submit"
-          className="w-full dark:bg-yellow-400 dark:hover:bg-yellow-500 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 dark:text-black">
+          className="w-full dark:text-white bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400">
           Submit
         </button>
       </form>

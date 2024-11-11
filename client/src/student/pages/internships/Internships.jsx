@@ -47,7 +47,7 @@ function Internships() {
   });
 
   return (
-    <div className="bg-gray-50 dark:bg-slate-700 min-h-screen p-4">
+    <div className="min-h-screen p-4">
       <div className="text-2xl font-bold mb-4 flex justify-between items-center text-gray-800 dark:text-white">
         <div>Search For Internships</div>
         <div>

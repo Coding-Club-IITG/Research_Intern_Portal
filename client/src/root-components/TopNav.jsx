@@ -32,7 +32,7 @@ const TopNav = () => {
   ];
 
   return (
-    <div className="flex items-center justify-between bg-white dark:bg-slate-800 border dark:border-gray-700 p-4 h-full">
+    <div className="flex items-center justify-between bg-white dark:bg-zinc-900 border dark:border-none p-4 h-full">
       <img
         src={theme === "dark" ? "/rip_logo_dark.png" : "/rip_logo_light.png"}
         className="h-14"

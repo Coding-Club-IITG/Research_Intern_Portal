@@ -223,7 +223,7 @@ function Profile() {
                 </label>
                 <input
                   type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -235,7 +235,7 @@ function Profile() {
                 </label>
                 <input
                   type="text"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                   value={roll}
                   onChange={(e) => setRoll(e.target.value)}
                   placeholder="Roll"
@@ -254,19 +254,12 @@ function Profile() {
               <select
                 value={selectedCourse}
                 onChange={(e) => setSelectedCourse(e.target.value)}
-                className={`mt-1 block w-full p-2 border 
-    border-gray-300 rounded-md shadow-sm 
-    bg-white dark:bg-slate-700 
-    dark:border-yellow-500 
-    dark:text-white focus:outline-none 
-    focus:ring-1 dark:focus:ring-yellow-400 
-    focus:border-yellow-500 dark:focus:border-yellow-500
-    sm:text-sm`}>
-                <option value="Select" disabled className="dark:bg-slate-700 dark:text-white">
+                className={`mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm  bg-white dark:bg-zinc-900 dark:border-none dark:text-white focus:outline-none sm:text-sm`}>
+                <option value="Select" disabled className="dark:bg-zinc-900 dark:text-white">
                   Select
                 </option>
                 {courses.map((course) => (
-                  <option key={course} value={course} className="dark:bg-slate-700 dark:text-white">
+                  <option key={course} value={course} className="dark:bg-zinc-900 dark:text-white">
                     {course}
                   </option>
                 ))}
@@ -281,13 +274,11 @@ function Profile() {
                 onChange={(e) => setSelectedDepartment(e.target.value)}
                 className={`mt-1 block w-full p-2 border 
                   border-gray-300 rounded-md shadow-sm 
-                  bg-white dark:bg-slate-700 
-                  dark:border-yellow-500 
+                  bg-white dark:bg-zinc-900 
                   dark:text-white focus:outline-none 
-                  focus:ring-1 dark:focus:ring-yellow-400 
-                  focus:border-yellow-500 dark:focus:border-yellow-500
-                  sm:text-sm`}>
-                <option value="Select" disabled className="dark:bg-slate-700 dark:text-white">
+                  focus:ring-1 
+                  sm:text-sm`}>                  
+                <option value="Select" disabled className="dark:bg-zinc-900 dark:text-white">
                   Select
                 </option>
                 {departments.map((department) => (
@@ -306,7 +297,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={CGPA}
                 onChange={(e) => setCGPA(e.target.value)}
                 placeholder="eg. 8.75"
@@ -319,7 +310,7 @@ function Profile() {
               <DatePicker
                 className={`grow shrink w-full pb-2 mt-1 ${
                   theme === "dark"
-                    ? "bg-slate-700 text-white  border-yellow-400 dark:hover:bg-slate-700"
+                    ? "bg-zinc-900 text-white   dark:hover:bg-zinc-900"
                     : "bg-white border-gray-300"
                 }`}
                 picker="year"
@@ -335,7 +326,7 @@ function Profile() {
               <DatePicker
                 className={`grow shrink w-full pb-2 mt-1 ${
                   theme === "dark"
-                    ? "bg-slate-700 border-yellow-400 dark:hover:bg-slate-700 text-white placeholder:text-white"
+                    ? "bg-zinc-900  dark:hover:bg-zinc-900 text-white placeholder:text-white"
                     : "bg-white border-gray-300"
                 }`}
                 picker="date"
@@ -350,7 +341,7 @@ function Profile() {
             </label>
             <input
               type="text"
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Eg. abc@gmail.com"
@@ -364,7 +355,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
                 placeholder="Your Gender"
@@ -376,7 +367,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={number}
                 onChange={(e) => setNumber(e.target.value)}
                 placeholder="Mobile Number"
@@ -385,13 +376,13 @@ function Profile() {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-0 dark:bg-slate-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-white mb-0 dark:bg-zinc-900">
               Fields of Interest
             </label>
             <div className="flex gap-2 flex-wrap py-2">
               {interests.map((interest) => (
                 <span
-                  className="relative inline-flex items-center px-4 py-1 bg-indigo-100 text-indigo-700 rounded-full shadow-lg font-medium cursor-pointer transition-all duration-300 ease-in-out hover:bg-indigo-200 hover:shadow-xl dark:bg-yellow-400 dark:text-black dark:hover:bg-yellow-500 dark:hover:shadow-xl"
+                  className="relative inline-flex items-center px-4 py-1 bg-indigo-100 text-indigo-700 rounded-full shadow-lg font-medium cursor-pointer transition-all duration-300 ease-in-out hover:bg-indigo-200 hover:shadow-xl  dark:text-black dark:hover:bg-yellow-500 dark:hover:shadow-xl"
                   key={interest}>
                   {interest}
                   <span
@@ -408,13 +399,13 @@ function Profile() {
             <div className="flex gap-2">
               <input
                 type="text"
-                className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400"
+                className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400"
                 placeholder="Add Interest"
                 value={newInterest}
                 onChange={(e) => setNewInterest(e.target.value)}
               />
               <button
-                className="basis-28 p-2 bg-indigo-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black text-white rounded-md hover:bg-indigo-700 transition duration-200"
+                className="basis-28 p-2 bg-indigo-600  dark:hover:bg-yellow-500 dark:text-black text-white rounded-md hover:bg-indigo-700 transition duration-200"
                 onClick={AddInterest}>
                 Add
               </button>
@@ -429,7 +420,7 @@ function Profile() {
               </span>
             </label>
             <textarea
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
               rows="4"
               value={bio}
               placeholder="Write your bio here"
@@ -441,7 +432,7 @@ function Profile() {
           </div>
         </div>
       </div>
-      <hr className="border-t border-gray-300 dark:border-yellow-400" />
+      <hr className="border-t border-gray-300 dark:" />
 
       {/* Social Section */}
       <div className="flex w-full space-x-4 flex-wrap">
@@ -457,7 +448,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
                 placeholder="eg. www.yourwebsite.com"
@@ -469,7 +460,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={linkedin}
                 onChange={(e) => setLinkedin(e.target.value)}
                 placeholder="eg. www.linkedin.com/in/yourprofile"
@@ -481,7 +472,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
                 value={github}
                 onChange={(e) => setGithub(e.target.value)}
                 placeholder="eg. www.github.com/yourprofile"
@@ -490,7 +481,7 @@ function Profile() {
           </div>
         </div>
       </div>
-      <hr className="border-t border-gray-300 dark:border-yellow-400" />
+      <hr className="border-t border-gray-300 dark:" />
 
       {/* Experience Section */}
       <div className="flex w-full flex-wrap items-start">
@@ -516,7 +507,7 @@ function Profile() {
           )}
         </div>
       </div>
-      <hr className="border-t border-gray-300 dark:border-yellow-400" />
+      <hr className="border-t border-gray-300 dark:" />
 
       {/* Education Section */}
       <div className="flex w-full flex-wrap">
@@ -539,7 +530,7 @@ function Profile() {
           )}
         </div>
       </div>
-      <hr className="border-t border-gray-300 dark:border-yellow-400" />
+      <hr className="border-t border-gray-300 dark:" />
 
       {/* Skills Section */}
       <div className="flex flex-col md:flex-row w-full space-y-4 md:space-y-0 md:space-x-4">
@@ -553,7 +544,7 @@ function Profile() {
               {skills.map((skill) => (
                 <span
                   key={skill}
-                  className="relative inline-flex items-center px-4 py-1 bg-indigo-100 text-indigo-700 rounded-full shadow-lg font-medium cursor-pointer transition-all duration-300 ease-in-out hover:bg-indigo-200 hover:shadow-xl dark:bg-yellow-400 dark:text-black dark:hover:bg-yellow-500 dark:hover:shadow-xl">
+                  className="relative inline-flex items-center px-4 py-1 bg-indigo-100 text-indigo-700 rounded-full shadow-lg font-medium cursor-pointer transition-all duration-300 ease-in-out hover:bg-indigo-200 hover:shadow-xl  dark:text-black dark:hover:bg-yellow-500 dark:hover:shadow-xl">
                   {skill}
                   <span
                     onClick={(e) => {
@@ -570,20 +561,20 @@ function Profile() {
           <div className="flex gap-2 flex-wrap">
             <input
               type="text"
-              className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400"
+              className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400"
               placeholder="Add Skills"
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
             />
             <button
-              className="p-2 bg-indigo-600 dark:bg-yellow-400 text-white rounded-md hover:bg-indigo-700 transition duration-200 dark:text-black dark:hover:bg-yellow-500"
+              className="p-2 bg-indigo-600  text-white rounded-md hover:bg-indigo-700 transition duration-200 dark:text-black dark:hover:bg-yellow-500"
               onClick={AddSkill}>
               Add
             </button>
           </div>
         </div>
       </div>
-      <hr className="border-t border-gray-300 dark:border-yellow-400" />
+      <hr className="border-t border-gray-300 dark:" />
 
       {/* Achievements Section */}
       <div className="flex w-full space-x-4 flex-wrap">
@@ -595,7 +586,7 @@ function Profile() {
         </div>
         <div className="flex-col grow shrink">
           <textarea
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
             rows="4"
             placeholder="Write your achievements here"
             value={achievements}
@@ -608,7 +599,7 @@ function Profile() {
       <div className="flex justify-end p-4">
         <button
           type="primary"
-          className="p-2 bg-indigo-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 text-white rounded-md hover:bg-indigo-700 transition duration-200 dark:text-black"
+          className="p-2 bg-indigo-600  dark:hover:bg-yellow-500 text-white rounded-md hover:bg-indigo-700 transition duration-200 dark:text-black"
           onClick={handleSaveProfile}>
           Save Profile
         </button>
