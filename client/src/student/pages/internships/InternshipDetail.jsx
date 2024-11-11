@@ -5,6 +5,7 @@ import Htmlrender from "../../../utils/htmlrender";
 import { message } from "antd";
 import useAuthStore from "../../../store/authStore";
 import { applyToJobs } from "../../../apis/student";
+import { getJobById } from "../../../apis/recruiter";
 
 export default function DriveDetail() {
   const { getUser } = useAuthStore();
@@ -12,13 +13,31 @@ export default function DriveDetail() {
   const { internshipID } = useParams();
   const [drive, setDrive] = useState({});
   const navigate = useNavigate();
+  const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
     message.loading({ content: "Loading...", key: "loading" });
     async function fetchDrive() {
-      const res = await getJobById(internshipID, navigate);
+      const res = await getJobById(driveIndex, navigate);
       if (res.status === "success") {
+        let departments = [];
+        if (
+          res.data.requirements.department.length === 1 &&
+          res.data.requirements.department[0] === "All departments are allowed"
+        ) {
+          message.destroy("loading");
+          setDepartments(["All departments are allowed"]);
+          setDrive(res.data);
+          return;
+        }
+        departments = await Promise.all(
+          res.data.requirements.department.map(async (dept) => {
+            const dept_details = await getDepartmentById(dept, navigate);
+            return dept_details.data.name;
+          })
+        );
         message.destroy("loading");
+        setDepartments(departments);
         setDrive(res.data);
       }
     }
@@ -124,7 +143,7 @@ export default function DriveDetail() {
                 </li>
                 <li>
                   <span className="font-medium">Eligible Departments:</span>{" "}
-                  {drive?.requirements?.department.join(", ")}
+                  {departments.join(", ")}
                 </li>
                 <li>
                   <span className="font-medium">Study Year:</span>{" "}
