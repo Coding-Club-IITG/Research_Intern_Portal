@@ -5,7 +5,7 @@ import Htmlrender from "../../../utils/htmlrender";
 import { message } from "antd";
 import useAuthStore from "../../../store/authStore";
 import { applyToJobs } from "../../../apis/student";
-import { getJobById } from "../../../apis/recruiter";
+import { getDepartmentById } from "../../../apis/courses-departments";
 
 export default function DriveDetail() {
   const { getUser } = useAuthStore();
@@ -18,7 +18,7 @@ export default function DriveDetail() {
   useEffect(() => {
     message.loading({ content: "Loading...", key: "loading" });
     async function fetchDrive() {
-      const res = await getJobById(driveIndex, navigate);
+      const res = await getJobById(internshipID, navigate);
       if (res.status === "success") {
         let departments = [];
         if (

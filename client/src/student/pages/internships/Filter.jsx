@@ -44,8 +44,8 @@ function Filter({ onSearch }) {
         type="text"
         placeholder="Search for a job title..."
         className="border border-gray-300 dark:border-none rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-zinc-900 focus:outline-none"
-        value={searchTerm}
-        onChange={handleSearchTermChange}
+        value={prof}
+        onChange={handleProfChange}
       />
       {/* <input
         type="text"

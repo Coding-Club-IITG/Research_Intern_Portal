@@ -27,14 +27,14 @@ const Overview = () => {
         if (response.data.department) {
           dept = await getDepartmentById(response.data.department, navigate);
         }
-
-        setDept(dept.data);
+        console.log(dept);
+        if (dept) setDept(dept.data);
         let course = null;
         if (response.data.course) {
           course = await getCourseById(response.data.course, navigate);
         }
 
-        setCourse(course.data);
+        if (course) setCourse(course.data);
         setProfileData(response.data);
       } catch (error) {
         console.error("Error in fetching user data:", error);
