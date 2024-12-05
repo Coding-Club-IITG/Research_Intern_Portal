@@ -64,7 +64,7 @@ function EducationForm({ setAddEdu, updateProfile }) {
   };
 
   return (
-    <form className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-300 dark:bg-slate-700 dark:border-yellow-500">
+    <form className="bg-gray-50 p-4 rounded-lg shadow-md border border-gray-300 dark:bg-zinc-900 dark:border-gray-600">
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
           Name Of Institute
@@ -74,7 +74,7 @@ function EducationForm({ setAddEdu, updateProfile }) {
           name="name"
           value={formData.name}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
           placeholder="Enter the name of the institute"
         />
         {errors.name && (
@@ -92,7 +92,7 @@ function EducationForm({ setAddEdu, updateProfile }) {
             name="role"
             value={formData.role}
             onChange={handleInputChange}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
             placeholder="e.g. B.Tech (Computer Science)"
           />
           {errors.role && (
@@ -106,7 +106,7 @@ function EducationForm({ setAddEdu, updateProfile }) {
           <DatePicker
             className={`grow shrink w-full py-1 ${
               theme === "dark"
-                ? "bg-slate-700 border-yellow-500 dark:hover:bg-slate-700 text-white placeholder:text-white"
+                ? "bg-zinc-900  dark:hover:bg-zinc-900 text-white placeholder:text-white border-gray-600 hover:border-gray-600"
                 : "bg-white border-gray-300"
             }`}
             picker="year"
@@ -123,7 +123,7 @@ function EducationForm({ setAddEdu, updateProfile }) {
             End Year
           </label>
           <DatePicker
-            className="grow shrink w-full dark:bg-slate-700 dark:border-yellow-500 dark:text-white"
+            className="grow w-full shrink bg-zinc-900  dark:hover:bg-zinc-900 text-white placeholder:text-white border-gray-600 hover:border-gray-600"
             picker="year"
             onChange={(value) => handleDateChange("endDate", value)}
             placeholder="Select end year"
@@ -143,7 +143,7 @@ function EducationForm({ setAddEdu, updateProfile }) {
           name="grade"
           value={formData.grade}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
           placeholder="e.g. 85% or 9.0 CGPA"
         />
         {errors.grade && (
@@ -159,7 +159,7 @@ function EducationForm({ setAddEdu, updateProfile }) {
           name="description"
           value={formData.description}
           onChange={handleInputChange}
-          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
           rows="4"
           placeholder="Write a brief description of your education"
         />
@@ -177,7 +177,7 @@ function EducationForm({ setAddEdu, updateProfile }) {
         <button
           onClick={(e) => handleSubmit(e)}
           class="bg-gray-200 text-gray-700 border border-gray-300 hover:bg-gray-300 
-         dark:bg-yellow-400 dark:text-black dark:border-yellow-400 dark:hover:bg-yellow-500 
+         dark:bg-indigo-600 dark:text-black dark:border-indigo-600 dark:hover:bg-indigo-700 
          py-1 px-2 rounded">
           Save
         </button>

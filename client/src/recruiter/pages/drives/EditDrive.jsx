@@ -106,13 +106,13 @@ const EditDrive = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="py-4 px-8 bg-white dark:bg-slate-700 rounded-lg space-y-4">
+      className="py-4 px-8 bg-white dark:bg-zinc-900 rounded-lg space-y-4">
       <h2 className="text-2xl font-bold text-center mb-8 mt-4 dark:text-white">
         Create New Internship Opportunity
       </h2>
 
       <div className="flex flex-col">
-        <div className="flex border-b-2 dark:border-yellow-500 py-8 md:py-12 flex-col md:flex-row gap-16">
+        <div className="flex border-b-2 dark:border-gray-600 py-8 md:py-12 flex-col md:flex-row gap-16">
           <div className="flex flex-col gap-1 md:w-2/4 w-full">
             <h3 className="text-xl font-semibold dark:text-white">Internship Headers</h3>
             <p className="text-sm text-slate-600 dark:text-slate-300 w-full">
@@ -130,7 +130,7 @@ const EditDrive = () => {
                 value={formData.prof_name}
                 onChange={handleChange}
                 placeholder="Enter Professor Name"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -144,14 +144,14 @@ const EditDrive = () => {
                 value={formData.title}
                 onChange={handleChange}
                 placeholder="Enter Internship Title"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
           </div>
         </div>
 
-        <div className="flex border-b-2 dark:border-yellow-500 py-8 md:py-12 flex-col md:flex-row gap-16">
+        <div className="flex border-b-2 dark:border-gray-600 py-8 md:py-12 flex-col md:flex-row gap-16">
           <div className="flex flex-col gap-1 md:w-2/4 w-full">
             <h3 className="text-xl font-semibold dark:text-white">Description</h3>
             <p className="text-sm text-slate-600 dark:text-slate-300 max-w-80">
@@ -169,13 +169,13 @@ const EditDrive = () => {
                 theme="snow"
                 value={formData.description}
                 onChange={(value) => setFormData({ ...formData, description: value })}
-                className="h-[90%] rounded-sm dark:bg-slate-700 dark:text-white"
+                className="h-[90%] rounded-sm dark:bg-zinc-900 dark:text-white"
               />
             </div>
           </div>
         </div>
 
-        <div className="flex  border-b-2 dark:border-yellow-500 py-8 md:py-12 flex-col md:flex-row gap-16">
+        <div className="flex  border-b-2 dark:border-gray-600 py-8 md:py-12 flex-col md:flex-row gap-16">
           <div className="flex flex-col gap-1 md:w-2/4 w-full">
             <h3 className="text-xl font-semibold dark:text-white">Requirements</h3>
             <p className="text-sm text-slate-600 dark:text-slate-300 max-w-80">
@@ -193,7 +193,7 @@ const EditDrive = () => {
                 value={formData.type}
                 onChange={handleChange}
                 placeholder="Enter Internship Type"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -208,7 +208,7 @@ const EditDrive = () => {
                 value={formData.stipend}
                 onChange={handleChange}
                 placeholder="Enter Stipend Amount"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -223,7 +223,7 @@ const EditDrive = () => {
                 value={formData.hours_required}
                 onChange={handleChange}
                 placeholder="Enter Hours Required"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -243,7 +243,7 @@ const EditDrive = () => {
                   })
                 }
                 placeholder="Enter Minimum CPI"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -279,7 +279,7 @@ const EditDrive = () => {
                   })
                 }
                 placeholder="Enter Study Year"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -298,7 +298,7 @@ const EditDrive = () => {
               name="last_date"
               value={formData.last_date ? daysjs(formData.last_date) : null}
               onChange={handleDateChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
               required
             />
           </div>
@@ -310,7 +310,7 @@ const EditDrive = () => {
             onClick={() => navigate("/recruiter/drives")}>
             &larr; Back
           </button>
-          <button className="bg-blue-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black text-white py-2 px-4 rounded hover:bg-gray-800 mb-4 mt-4">
+          <button className="bg-blue-600 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:text-black text-white py-2 px-4 rounded hover:bg-gray-800 mb-4 mt-4">
             Save
           </button>
         </div>

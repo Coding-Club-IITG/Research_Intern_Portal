@@ -19,7 +19,7 @@ function DriveCard({ drive }) {
   console.log(drive);
 
   return (
-    <div className="border rounded-md p-4 flex justify-between items-center mb-4 max-sm:flex-col max-sm:gap-4 w-full bg-white dark:bg-slate-800 dark:border-yellow-500">
+    <div className="border rounded-md p-4 flex justify-between items-center mb-4 max-sm:flex-col max-sm:gap-4 w-full bg-white dark:bg-slate-800 dark:border-gray-600">
       <div className="flex flex-col gap-2">
         <h2 className="max-sm:text-lg text-xl font-bold capitalize dark:text-white">
           {drive?.title}
@@ -36,24 +36,24 @@ function DriveCard({ drive }) {
       <div className="flex flex-col space-y-2 max-sm:w-full">
         <div className="flex gap-2">
           <button
-            className="border bg-gray-400 border-black dark:border-yellow-500 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded-md"
+            className="border bg-gray-400 border-black dark:border-gray-600 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded-md"
             onClick={handleView}>
             View
           </button>
-          <button className="border border-black bg-red-400 dark:border-yellow-500 hover:bg-red-500 px-4 py-2 max-sm:py-1 rounded-md">
+          <button className="border border-black bg-red-400 dark:border-gray-600 hover:bg-red-500 px-4 py-2 max-sm:py-1 rounded-md">
             Stop Accepting Applications
           </button>
         </div>
         <div className="flex gap-2">
           {drive?.accepting && (
             <button
-              className="border bg-gray-400 border-black dark:border-yellow-500 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded"
+              className="border bg-gray-400 border-black dark:border-gray-600 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded"
               onClick={handleEdit}>
               Edit
             </button>
           )}
           <button
-            className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-yellow-500 px-4 py-2 max-sm:py-1 rounded"
+            className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-gray-600 px-4 py-2 max-sm:py-1 rounded"
             onClick={handleApplied}>
             Applied Students: {drive?.applicants?.length}
           </button>

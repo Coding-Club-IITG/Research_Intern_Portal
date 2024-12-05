@@ -22,8 +22,8 @@ body {
 }
 
 .dark .multi .ant-select-selector {
-  background-color: #334155 !important;
-  border-color: #fbbf24 !important;
+  background-color: inherit !important;
+  border-color: #4b5563 !important;
   color: #ffffff !important;
   padding: 4px;
 }
@@ -33,12 +33,12 @@ body {
 }
 
 .dark .multi .ant-select-selection-item {
-  background-color: #fbbf24 !important;
+  background-color: #abaeb1 !important;
   color: black !important;
 }
 
 .dark .ant-pagination-item-link path {
-  fill: #fbbf24;
+  fill: #abaeb1;
 }
 
 .dark .ant-table-thead > tr > th {

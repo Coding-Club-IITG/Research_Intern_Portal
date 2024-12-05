@@ -5,8 +5,8 @@ import { z } from "zod";
 
 const fileSchema = z.object({
   name: z.string().nonempty(),
-  size: z.number().max(5 * 1024 * 1024, "File size should be less than 5MB"), // Limit to 5MB
-  type: z.enum(["image/jpeg", "image/png", "application/pdf"]) // Only allow these types
+  size: z.number().max(5 * 1024 * 1024, "File size should be less than 5MB"),
+  type: z.enum(["image/jpeg", "image/png", "application/pdf"])
 });
 
 const { Dragger } = Upload;
@@ -19,7 +19,11 @@ const props = {
   onChange(info) {
     const { status, file } = info;
     try {
-      fileSchema.parse(file);
+      fileSchema.parse({
+        name: file.name,
+        size: file.size,
+        type: file.type
+      });
     } catch (error) {
       message.error(`Validation failed: ${error.errors[0].message}`);
       return;
@@ -41,16 +45,19 @@ const props = {
 };
 
 const App = () => (
-  <Dragger {...props}>
-    <p className="ant-upload-drag-icon">
-      <InboxOutlined />
-    </p>
-    <p className="ant-upload-text dark:text-white">Click or drag file to this area to upload</p>
-    <p className="ant-upload-hint dark:text-white">
-      Support for a single or bulk upload. Strictly prohibited from uploading company data or other
-      banned files.
-    </p>
-  </Dragger>
+  <div className="dark">
+    <Dragger {...props}>
+      <p className="ant-upload-drag-icon">
+        <InboxOutlined />
+      </p>
+      <p className="ant-upload-text dark:!text-white">Click or drag file to this area to upload</p>
+
+      <p className="ant-upload-hint dark:!text-gray-400">
+        Support for a single or bulk upload. Strictly prohibited from uploading company data or
+        other banned files.
+      </p>
+    </Dragger>
+  </div>
 );
 
 export default App;

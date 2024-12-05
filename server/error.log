@@ -415,3 +415,6 @@
 {"code":"ETIMEDOUT","errno":-60,"level":"error","syscall":"read","timestamp":"2024-11-10T18:23:53.970Z"}
 {"level":"error","message":"Student not found with ID 6730edc9d99adc25b0e2238f","timestamp":"2024-11-10T19:03:36.807Z"}
 {"level":"error","message":"Student not found with ID 6730edc9d99adc25b0e2238f","timestamp":"2024-11-10T19:03:36.872Z"}
+{"level":"error","message":"Error in fetching courses: read ETIMEDOUT","timestamp":"2024-12-04T22:58:59.095Z"}
+{"level":"error","message":"Error in fetching departments: read ETIMEDOUT","timestamp":"2024-12-04T22:58:59.142Z"}
+{"level":"error","message":"Error in fetching departments: getaddrinfo ENOTFOUND cluster0-shard-00-00.qw8mo.mongodb.net","timestamp":"2024-12-05T00:39:55.093Z"}

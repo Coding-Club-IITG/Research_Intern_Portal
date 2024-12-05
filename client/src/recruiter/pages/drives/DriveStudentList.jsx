@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Table, Space, Typography, message } from "antd";
+import { Table, Space, message } from "antd";
 import { getAllStudentsOfJob } from "../../../apis/recruiter";
 
 function DriveStudentList() {
@@ -75,7 +75,7 @@ function DriveStudentList() {
       render: (text, record) => (
         <Space size="middle" className="flex flex-wrap justify-center gap-2 lg:gap-4">
           <button
-            className="px-2 py-1 md:px-4 md:py-2 rounded bg-yellow-400 text-black border border-yellow-400 hover:bg-yellow-500 transition-all"
+            className="px-2 py-1 md:px-4 md:py-2 rounded bg-gray-400 text-black border border-gray-400 hover:bg-gray-500 transition-all"
             onClick={() => handleView(record._id)}>
             View Profile
           </button>

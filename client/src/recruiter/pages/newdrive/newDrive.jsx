@@ -6,7 +6,6 @@ import { createJob } from "../../../apis/recruiter";
 import { message } from "antd";
 import useAuthStore from "../../../store/authStore";
 import daysjs from "dayjs";
-import { backendURL } from "../../../apis/server";
 import { getAllDepartments } from "../../../apis/courses-departments";
 import { useNavigate } from "react-router-dom";
 
@@ -98,13 +97,13 @@ export default function NewDrive() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="py-4 px-8 bg-white dark:bg-slate-700 rounded-lg space-y-4">
+      className="py-4 px-8 bg-white dark:bg-zinc-900 rounded-lg space-y-4">
       <h2 className="text-2xl font-bold text-center mb-8 mt-4 dark:text-white">
         Create New Internship Opportunity
       </h2>
 
       <div className="flex flex-col">
-        <div className="flex border-b-2 dark:border-yellow-500 py-8 md:py-12 flex-col md:flex-row gap-16">
+        <div className="flex border-b-2 dark:border-gray-600 py-8 md:py-12 flex-col md:flex-row gap-16">
           <div className="flex flex-col gap-1 md:w-2/4 w-full">
             <h3 className="text-xl font-semibold dark:text-white">Internship Headers</h3>
             <p className="text-sm text-slate-600 dark:text-slate-300 w-full">
@@ -122,7 +121,7 @@ export default function NewDrive() {
                 value={formData.prof_name}
                 onChange={handleChange}
                 placeholder="Enter Professor Name"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -136,14 +135,14 @@ export default function NewDrive() {
                 value={formData.title}
                 onChange={handleChange}
                 placeholder="Enter Internship Title"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
           </div>
         </div>
 
-        <div className="flex border-b-2 dark:border-yellow-500 py-8 md:py-12 flex-col md:flex-row gap-16">
+        <div className="flex border-b-2 dark:border-gray-600 py-8 md:py-12 flex-col md:flex-row gap-16">
           <div className="flex flex-col gap-1 md:w-2/4 w-full">
             <h3 className="text-xl font-semibold dark:text-white">Description</h3>
             <p className="text-sm text-slate-600 dark:text-slate-300 max-w-80">
@@ -161,13 +160,13 @@ export default function NewDrive() {
                 theme="snow"
                 value={formData.description}
                 onChange={(value) => setFormData({ ...formData, description: value })}
-                className="h-[90%] rounded-sm dark:bg-slate-700 dark:text-white"
+                className="h-[90%] rounded-sm dark:bg-zinc-900 dark:text-white"
               />
             </div>
           </div>
         </div>
 
-        <div className="flex border-b-2 dark:border-yellow-500 py-8 md:py-12 flex-col md:flex-row gap-16">
+        <div className="flex border-b-2 dark:border-gray-600 py-8 md:py-12 flex-col md:flex-row gap-16">
           <div className="flex flex-col gap-1 md:w-2/4 w-full">
             <h3 className="text-xl font-semibold dark:text-white">Requirements</h3>
             <p className="text-sm text-slate-600 dark:text-slate-300 max-w-80">
@@ -185,7 +184,7 @@ export default function NewDrive() {
                 value={formData.type}
                 onChange={handleChange}
                 placeholder="Enter Internship Type"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -200,7 +199,7 @@ export default function NewDrive() {
                 value={formData.stipend}
                 onChange={handleChange}
                 placeholder="Enter Stipend Amount"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -215,7 +214,7 @@ export default function NewDrive() {
                 value={formData.hours_required}
                 onChange={handleChange}
                 placeholder="Enter Hours Required"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -235,7 +234,7 @@ export default function NewDrive() {
                   })
                 }
                 placeholder="Enter Minimum CPI"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -271,7 +270,7 @@ export default function NewDrive() {
                   })
                 }
                 placeholder="Enter Study Year"
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
                 required
               />
             </div>
@@ -290,7 +289,7 @@ export default function NewDrive() {
               name="last_date"
               value={formData.last_date ? daysjs(formData.last_date) : null}
               onChange={handleDateChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-slate-700 dark:text-white dark:border-yellow-500 focus:outline-none focus:ring-1 dark:focus:ring-yellow-400 sm:text-sm"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-400 sm:text-sm"
               required
             />
           </div>
@@ -299,7 +298,7 @@ export default function NewDrive() {
         <div className="flex justify-center mt-8">
           <button
             type="submit"
-            className="bg-indigo-500 dark:bg-yellow-500 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-yellow-600 transition duration-300 ease-in-out dark:text-black">
+            className="bg-indigo-500 dark:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:bg-indigo-600 dark:hover:bg-indigo-700 dark:text-black">
             Create Job Listing
           </button>
         </div>

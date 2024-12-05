@@ -64,7 +64,7 @@ function Internships() {
         <div>Search For Internships</div>
         {/* <div>
           <button
-            className="bg-gray-100 text-gray-700 px-4 py-2 text-sm rounded-lg hover:bg-gray-200 dark:bg-yellow-400 dark:text-gray-900 dark:hover:bg-yellow-500"
+            className="bg-gray-100 text-gray-700 px-4 py-2 text-sm rounded-lg hover:bg-gray-200 dark:bg-indigo-600 dark:text-gray-900 dark:hover:bg-yellow-500"
             onClick={async () => {
               const acceptingJobs = await getAllAcceptingJobs(navigate);
               setFilters({ prof: "", role: "" });

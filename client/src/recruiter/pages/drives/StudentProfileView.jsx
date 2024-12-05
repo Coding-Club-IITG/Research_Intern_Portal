@@ -53,7 +53,7 @@ export default function StudentProfileView() {
 
   return (
     <div>
-      <div className="max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300 dark:border-yellow-400">
+      <div className="max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300 dark:border-indigo-600">
         <div className="max-sm:flex-col max-sm:items-start flex items-center mb-4">
           <div className="w-32 h-32 rounded-full overflow-hiddenflex items-center justify-center mr-6">
             <img
@@ -84,7 +84,7 @@ export default function StudentProfileView() {
                   href={student?.resume || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black dark:text-yellow-400"
+                  className="text-black dark:text-gray-400"
                   title="View Resume">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,7 @@ export default function StudentProfileView() {
                   href={student?.social[0]?.url || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black dark:text-yellow-400"
+                  className="text-black dark:text-gray-400"
                   title="Social Profile 1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@ export default function StudentProfileView() {
                   className="text-black"
                   title="Social Profile 2">
                   <svg
-                    className="dark:fill-yellow-500 fill-black"
+                    className="dark:fill-gray-500 fill-black"
                     xmlns="http://www.w3.org/2000/svg"
                     x="0px"
                     y="0px"
@@ -164,7 +164,7 @@ export default function StudentProfileView() {
                   className="text-black"
                   title="Social Profile 3">
                   <svg
-                    className="dark:fill-yellow-500 fill-black"
+                    className="dark:fill-gray-500 fill-black"
                     xmlns="http://www.w3.org/2000/svg"
                     x="0px"
                     y="0px"
@@ -259,7 +259,7 @@ export default function StudentProfileView() {
               {student.skills.map((skill, index) => (
                 <p
                   key={index}
-                  className="py-2 px-4 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-yellow-400 dark:text-black dark:bg-amber-400">
+                  className="py-2 px-4 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-indigo-600 dark:text-black dark:bg-amber-400">
                   {skill}
                 </p>
               ))}
@@ -272,7 +272,7 @@ export default function StudentProfileView() {
             <ul className="list-none list-inside flex gap-2">
               {student?.interests.map((interest, index) => (
                 <li
-                  className="py-2 px-4 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-yellow-400 dark:text-black dark:bg-amber-400"
+                  className="py-2 px-4 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-indigo-600 dark:text-black dark:bg-amber-400"
                   key={index}>
                   {interest}
                 </li>
