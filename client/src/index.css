@@ -41,17 +41,17 @@ body {
   fill: #abaeb1;
 }
 
-.dark .ant-table-thead > tr > th {
-  background-color: #374151; /* Dark header */
+.dark .stud .ant-table-thead > tr > th {
+  background-color: #18181b;
   color: #f9fafb;
 }
 
-.dark .ant-table-tbody > tr > td {
-  background-color: #1f2937; /* Dark rows */
+.dark .stud .ant-table-tbody > tr > td {
+  background-color: #27272a; /* Dark rows */
   color: #f9fafb;
 }
 
-.dark .ant-table-tbody > tr:hover > td {
-  background-color: #1f2937 !important;
+.dark .stud .ant-table-tbody > tr:hover > td {
+  background-color: #27272a !important;
   color: #f9fafb !important;
 }

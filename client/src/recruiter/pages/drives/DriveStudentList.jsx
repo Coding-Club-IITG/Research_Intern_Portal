@@ -103,7 +103,7 @@ function DriveStudentList() {
           rowKey="rollNo"
           pagination={{ pageSize: 5 }}
           bordered
-          className="shadow-md w-full overflow-x-auto"
+          className="stud shadow-md w-full overflow-x-auto"
         />
       )}
 
