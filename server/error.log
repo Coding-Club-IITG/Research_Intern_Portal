@@ -418,3 +418,6 @@
 {"level":"error","message":"Error in fetching courses: read ETIMEDOUT","timestamp":"2024-12-04T22:58:59.095Z"}
 {"level":"error","message":"Error in fetching departments: read ETIMEDOUT","timestamp":"2024-12-04T22:58:59.142Z"}
 {"level":"error","message":"Error in fetching departments: getaddrinfo ENOTFOUND cluster0-shard-00-00.qw8mo.mongodb.net","timestamp":"2024-12-05T00:39:55.093Z"}
+{"code":"ETIMEDOUT","errno":-60,"level":"error","syscall":"read","timestamp":"2024-12-06T08:44:03.978Z"}
+{"level":"error","message":"Error fetching user information: Error: read ECONNRESET","timestamp":"2024-12-06T08:44:36.658Z"}
+{"level":"error","timestamp":"2024-12-06T08:44:36.660Z"}

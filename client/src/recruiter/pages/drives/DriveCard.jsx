@@ -35,8 +35,6 @@ function DriveCard({ drive }) {
     navigate(`/recruiter/edit-drive/${drive._id}`);
   };
 
-  // console.log(drive);
-
   return (
     <div className="border rounded-md p-4 flex justify-between items-center mb-4 max-sm:flex-col max-sm:gap-4 w-full bg-white dark:bg-zinc-800 dark:border-gray-600">
       <div className="flex flex-col gap-2">
@@ -81,7 +79,7 @@ function DriveCard({ drive }) {
           )}
         </div>
         <div className="flex gap-2 items-center justify-center">
-          {new Date(drive?.last_date) > currentdate && (
+          {new Date(drive?.last_date) > currentdate && drive?.accepting && (
             <button
               className="border bg-gray-400 border-black dark:border-gray-600 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded"
               onClick={handleEdit}>

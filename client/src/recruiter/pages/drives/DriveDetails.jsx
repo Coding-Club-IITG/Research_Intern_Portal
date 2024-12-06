@@ -4,6 +4,7 @@ import { getJobById } from "../../../apis/recruiter";
 import Htmlrender from "../../../utils/htmlrender";
 import { message } from "antd";
 import { getDepartmentById } from "../../../apis/courses-departments";
+import { reopenApplications, stopAcceptingJob } from "../../../apis/job";
 
 export default function DriveDetail() {
   const { driveIndex } = useParams();
@@ -11,6 +12,22 @@ export default function DriveDetail() {
   const navigate = useNavigate();
 
   const [departments, setDepartments] = useState([]);
+
+  const handleStop = async () => {
+    await stopAcceptingJob(drive._id, navigate);
+    message.success("Applications are closed for this drive");
+    window.location.reload();
+  };
+
+  const handleReopen = async () => {
+    await reopenApplications(drive._id, navigate);
+    message.success("Applications are reopened for this drive");
+    window.location.reload();
+  };
+
+  const handleExtend = async () => {
+    navigate(`/recruiter/edit-drive/${drive._id}`);
+  };
 
   useEffect(() => {
     message.loading({ content: "Loading...", key: "loading" });
@@ -54,6 +71,8 @@ export default function DriveDetail() {
     navigate(-1);
   };
 
+  const currentdate = new Date();
+
   return (
     <>
       {/* Drive Header Section */}
@@ -85,29 +104,57 @@ export default function DriveDetail() {
               <span>Stipend: ₹{drive?.stipend || " "}</span>
             </div>
             <div className="mt-1 text-sm">
-              <p
-                className={`text-sm ${drive?.accepting ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
-                {drive?.accepting
-                  ? `Closing Date: ${new Date(drive.last_date).toLocaleDateString()}`
-                  : "Closed"}
-              </p>
+              <div
+                className={`text-sm ${new Date(drive?.last_date) > currentdate ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
+                {drive?.accepting ? (
+                  `Closing Date: ${new Date(drive.last_date).toLocaleDateString()}`
+                ) : (
+                  <div className="flex-col">
+                    <div className="text-red-600 dark:text-red-400">Not Accepting</div>
+                    <div>Closing Date: {new Date(drive.last_date).toLocaleDateString()} </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Buttons Section */}
-          <div className="flex gap-4">
-            {drive?.accepting && (
+          <div className="flex-col space-y-2 items-center justify-center">
+            <div className="flex gap-4 justify-center">
+              {new Date(drive?.last_date) > currentdate && drive?.accepting && (
+                <button
+                  className="border bg-gray-400 border-black dark:border-gray-600 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded"
+                  onClick={handleEdit}>
+                  Edit
+                </button>
+              )}
               <button
-                className="border bg-gray-400 border-black dark:border-gray-600 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded"
-                onClick={handleEdit}>
-                Edit
+                className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-gray-600 px-4 py-2 max-sm:py-1 rounded"
+                onClick={handleApplied}>
+                Applied Students: {drive?.applicants?.length}
+              </button>
+            </div>
+            {new Date(drive?.last_date) > currentdate ? (
+              drive?.accepting ? (
+                <button
+                  onClick={handleStop}
+                  className="border border-black bg-red-400 dark:border-gray-600 hover:bg-red-500 px-4 py-2 max-sm:py-1 rounded-md">
+                  Stop Accepting Applications
+                </button>
+              ) : (
+                <button
+                  onClick={handleReopen}
+                  className="border border-black bg-green-400 dark:border-gray-600 hover:bg-green-500 px-4 py-2 max-sm:py-1 rounded-md">
+                  Reopen Applications
+                </button>
+              )
+            ) : (
+              <button
+                onClick={handleExtend}
+                className="border border-black bg-green-400 dark:border-gray-600 hover:bg-green-500 px-4 py-2 max-sm:py-1 rounded-md">
+                Extend Closing Date
               </button>
             )}
-            <button
-              className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-gray-600 px-4 py-2 max-sm:py-1 rounded"
-              onClick={handleApplied}>
-              Applied Students: {drive?.applicants?.length}
-            </button>
           </div>
         </div>
       </div>
