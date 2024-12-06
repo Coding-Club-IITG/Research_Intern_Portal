@@ -11,7 +11,6 @@ const EditDrive = () => {
   const { driveIndex } = useParams();
   const navigate = useNavigate();
   const [activeDepartments, setActiveDepartments] = useState([]);
-
   const [departmentOptions, setDepartmentOptions] = useState([]);
 
   useEffect(() => {
@@ -102,6 +101,11 @@ const EditDrive = () => {
       message.error("Failed to update drive");
     }
   };
+
+  const currentdate = new Date();
+  if (new Date(formData?.last_date) < currentdate && formData.accepting === false) {
+    message.error("Please Change the Closing Date to Reopen Applications");
+  }
 
   return (
     <form

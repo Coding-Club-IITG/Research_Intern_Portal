@@ -57,7 +57,7 @@ export default function DriveDetail() {
   return (
     <>
       {/* Drive Header Section */}
-      <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-zinc-900 dark:shadow-gray-500 shadow-md rounded-lg mb-8">
+      <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-zinc-800 dark:shadow-gray-500 shadow-md rounded-lg mb-8">
         <div className="flex justify-between items-start max-sm:flex-col max-sm:gap-4">
           <div className="flex-1">
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
@@ -113,7 +113,7 @@ export default function DriveDetail() {
       </div>
 
       {/* Drive Details Section */}
-      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8 dark:shadow-gray-500 dark:bg-zinc-900">
+      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8 dark:shadow-gray-500 dark:bg-zinc-800">
         <h1 className="max-sm:text-xl text-3xl font-bold mb-6 text-gray-800 dark:text-white">
           Drive Overview
         </h1>
@@ -128,7 +128,7 @@ export default function DriveDetail() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-100 p-4 rounded-lg dark:bg-zinc-900 dark:border dark:border-gray-600">
+            <div className="bg-gray-100 p-4 rounded-lg dark:bg-zinc-800 dark:border dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
                 Requirements
               </h3>
@@ -148,7 +148,7 @@ export default function DriveDetail() {
               </ul>
             </div>
 
-            <div className="bg-gray-100 p-4 rounded-lg dark:bg-zinc-900 dark:border dark:border-gray-600">
+            <div className="bg-gray-100 p-4 rounded-lg dark:bg-zinc-800 dark:border dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
                 Job Details
               </h3>

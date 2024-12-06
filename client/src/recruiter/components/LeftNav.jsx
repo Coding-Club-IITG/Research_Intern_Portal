@@ -10,7 +10,7 @@ import {
 
 const LeftNav = () => {
   return (
-    <div className="w-full md:w-20 lg:w-28 h-18 md:h-full shadow-md bg-white dark:bg-zinc-900 text-gray-800 dark:text-white">
+    <div className="w-full md:w-20 lg:w-28 h-18 md:h-full shadow-md bg-white dark:bg-zinc-900 text-gray-800 dark:text-white ">
       <div className="md:space-y-4 md:mt-4 flex md:flex-col md:px-0 px-2 md:gap-2 gap-6 max-sm:items-center max-sm:justify-center overscroll-x-scroll">
         <NavLink
           to="home"
