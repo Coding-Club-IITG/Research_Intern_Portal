@@ -4,6 +4,7 @@ import { getJobById } from "../../../apis/recruiter";
 import Htmlrender from "../../../utils/htmlrender";
 import { message } from "antd";
 import { getDepartmentById } from "../../../apis/courses-departments";
+import { reopenApplications, stopAcceptingJob } from "../../../apis/job";
 
 export default function DriveDetail() {
   const { driveIndex } = useParams();
@@ -11,6 +12,22 @@ export default function DriveDetail() {
   const navigate = useNavigate();
 
   const [departments, setDepartments] = useState([]);
+
+  const handleStop = async () => {
+    await stopAcceptingJob(drive._id, navigate);
+    message.success("Applications are closed for this drive");
+    window.location.reload();
+  };
+
+  const handleReopen = async () => {
+    await reopenApplications(drive._id, navigate);
+    message.success("Applications are reopened for this drive");
+    window.location.reload();
+  };
+
+  const handleExtend = async () => {
+    navigate(`/recruiter/edit-drive/${drive._id}`);
+  };
 
   useEffect(() => {
     message.loading({ content: "Loading...", key: "loading" });
@@ -54,10 +71,12 @@ export default function DriveDetail() {
     navigate(-1);
   };
 
+  const currentdate = new Date();
+
   return (
     <>
       {/* Drive Header Section */}
-      <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-slate-700 dark:shadow-yellow-500 shadow-md rounded-lg mb-8">
+      <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-zinc-800 dark:shadow-gray-500 shadow-md rounded-lg mb-8">
         <div className="flex justify-between items-start max-sm:flex-col max-sm:gap-4">
           <div className="flex-1">
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
@@ -85,35 +104,63 @@ export default function DriveDetail() {
               <span>Stipend: ₹{drive?.stipend || " "}</span>
             </div>
             <div className="mt-1 text-sm">
-              <p
-                className={`text-sm ${drive?.accepting ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
-                {drive?.accepting
-                  ? `Closing Date: ${new Date(drive.last_date).toLocaleDateString()}`
-                  : "Closed"}
-              </p>
+              <div
+                className={`text-sm ${new Date(drive?.last_date) > currentdate ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
+                {drive?.accepting ? (
+                  `Closing Date: ${new Date(drive.last_date).toLocaleDateString()}`
+                ) : (
+                  <div className="flex-col">
+                    <div className="text-red-600 dark:text-red-400">Not Accepting</div>
+                    <div>Closing Date: {new Date(drive.last_date).toLocaleDateString()} </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
           {/* Buttons Section */}
-          <div className="flex gap-4">
-            {drive?.accepting && (
+          <div className="flex-col space-y-2 items-center justify-center">
+            <div className="flex gap-4 justify-center">
+              {new Date(drive?.last_date) > currentdate && drive?.accepting && (
+                <button
+                  className="border bg-gray-400 border-black dark:border-gray-600 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded"
+                  onClick={handleEdit}>
+                  Edit
+                </button>
+              )}
               <button
-                className="border bg-gray-400 border-black dark:border-yellow-500 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded"
-                onClick={handleEdit}>
-                Edit
+                className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-gray-600 px-4 py-2 max-sm:py-1 rounded"
+                onClick={handleApplied}>
+                Applied Students: {drive?.applicants?.length}
+              </button>
+            </div>
+            {new Date(drive?.last_date) > currentdate ? (
+              drive?.accepting ? (
+                <button
+                  onClick={handleStop}
+                  className="border border-black bg-red-400 dark:border-gray-600 hover:bg-red-500 px-4 py-2 max-sm:py-1 rounded-md">
+                  Stop Accepting Applications
+                </button>
+              ) : (
+                <button
+                  onClick={handleReopen}
+                  className="border border-black bg-green-400 dark:border-gray-600 hover:bg-green-500 px-4 py-2 max-sm:py-1 rounded-md">
+                  Reopen Applications
+                </button>
+              )
+            ) : (
+              <button
+                onClick={handleExtend}
+                className="border border-black bg-green-400 dark:border-gray-600 hover:bg-green-500 px-4 py-2 max-sm:py-1 rounded-md">
+                Extend Closing Date
               </button>
             )}
-            <button
-              className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-yellow-500 px-4 py-2 max-sm:py-1 rounded"
-              onClick={handleApplied}>
-              Applied Students: {drive?.applicants?.length}
-            </button>
           </div>
         </div>
       </div>
 
       {/* Drive Details Section */}
-      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8 dark:shadow-yellow-500 dark:bg-slate-700">
+      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8 dark:shadow-gray-500 dark:bg-zinc-800">
         <h1 className="max-sm:text-xl text-3xl font-bold mb-6 text-gray-800 dark:text-white">
           Drive Overview
         </h1>
@@ -128,7 +175,7 @@ export default function DriveDetail() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-100 p-4 rounded-lg dark:bg-slate-700 dark:border dark:border-yellow-500">
+            <div className="bg-gray-100 p-4 rounded-lg dark:bg-zinc-800 dark:border dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
                 Requirements
               </h3>
@@ -148,7 +195,7 @@ export default function DriveDetail() {
               </ul>
             </div>
 
-            <div className="bg-gray-100 p-4 rounded-lg dark:bg-slate-700 dark:border dark:border-yellow-500">
+            <div className="bg-gray-100 p-4 rounded-lg dark:bg-zinc-800 dark:border dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
                 Job Details
               </h3>
@@ -176,7 +223,7 @@ export default function DriveDetail() {
       {/* Back Button */}
       <div className="max-w-4xl mx-auto p-6">
         <button
-          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black"
+          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:text-black"
           onClick={handleBack}>
           Back
         </button>

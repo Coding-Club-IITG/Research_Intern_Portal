@@ -11,7 +11,7 @@ const App = () => {
               to="overview"
               className={({ isActive }) =>
                 isActive
-                  ? "text-blue-700 border-b-2 pb-2 border-blue-700"
+                  ? "text-indigo-400 border-b-2 pb-2 border-indigo-400"
                   : "text-gray-600 dark:text-white"
               }
               exact>
@@ -23,7 +23,7 @@ const App = () => {
               to={`edit`}
               className={({ isActive }) =>
                 isActive
-                  ? "text-blue-700 border-b-2 pb-2 border-blue-700"
+                  ? "text-indigo-400 border-b-2 pb-2 border-indigo-400"
                   : "text-gray-600 dark:text-white"
               }>
               Edit Profile
@@ -34,7 +34,7 @@ const App = () => {
               to={`resume`}
               className={({ isActive }) =>
                 isActive
-                  ? "text-blue-700 border-b-2 pb-2 border-blue-700"
+                  ? "text-indigo-400 border-b-2 pb-2 border-indigo-400"
                   : "text-gray-600 dark:text-white"
               }>
               Resume/CV

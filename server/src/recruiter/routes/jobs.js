@@ -1,22 +1,32 @@
-import express from 'express'
+import express from "express";
 // import { getRecruiterById, getRecruiters, updateRecruiter, deleteRecruiter } from '../controllers/recruiter.js'
-import { createJob, getJob, getJobById,applyForJob,getJobByfilter, getAllJobsOfRecruiter, stopAcceptingApplications, updateJob, getAllStudentsOfJob , getAllAcceptingJobs} from '../controllers/jobs.js';
+import {
+  createJob,
+  getJob,
+  getJobById,
+  applyForJob,
+  getJobByfilter,
+  getAllJobsOfRecruiter,
+  stopAcceptingApplications,
+  updateJob,
+  getAllStudentsOfJob,
+  getAllAcceptingJobs,
+  reopenApplications,
+} from "../controllers/jobs.js";
 
+const jobRouter = express.Router();
 
-const jobRouter = express.Router()
-
-jobRouter.get('/:id',getJobById);
-jobRouter.put('/:id',updateJob);
-jobRouter.get('/',getJob );
-jobRouter.get('/recruiter/:recruiter_id',getAllJobsOfRecruiter);
-jobRouter.get('/students/:id', getAllStudentsOfJob);
-jobRouter.get('stop/:id',stopAcceptingApplications);
-jobRouter.post('/',createJob );
-jobRouter.post('/apply', applyForJob);
-jobRouter.post('/filter',getJobByfilter );
-jobRouter.get('/internship/accepting', getAllAcceptingJobs);
-
-
+jobRouter.get("/:id", getJobById);
+jobRouter.put("/:id", updateJob);
+jobRouter.get("/", getJob);
+jobRouter.get("/recruiter/:recruiter_id", getAllJobsOfRecruiter);
+jobRouter.get("/students/:id", getAllStudentsOfJob);
+jobRouter.get("/stop/:id", stopAcceptingApplications);
+jobRouter.get("/reopen/:id", reopenApplications);
+jobRouter.post("/", createJob);
+jobRouter.post("/apply", applyForJob);
+jobRouter.post("/filter", getJobByfilter);
+jobRouter.get("/internship/accepting", getAllAcceptingJobs);
 
 /**
  * @swagger

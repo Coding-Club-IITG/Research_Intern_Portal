@@ -5,7 +5,7 @@ import Htmlrender from "../../../utils/htmlrender";
 import { message } from "antd";
 import useAuthStore from "../../../store/authStore";
 import { applyToJobs } from "../../../apis/student";
-import { getJobById } from "../../../apis/recruiter";
+import { getDepartmentById } from "../../../apis/courses-departments";
 
 export default function DriveDetail() {
   const { getUser } = useAuthStore();
@@ -18,7 +18,7 @@ export default function DriveDetail() {
   useEffect(() => {
     message.loading({ content: "Loading...", key: "loading" });
     async function fetchDrive() {
-      const res = await getJobById(driveIndex, navigate);
+      const res = await getJobById(internshipID, navigate);
       if (res.status === "success") {
         let departments = [];
         if (
@@ -66,7 +66,7 @@ export default function DriveDetail() {
   return (
     <>
       {/* Drive Header Section */}
-      <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-slate-700 dark:shadow-yellow-500 shadow-md rounded-lg mb-8">
+      <div className="max-w-4xl mt-8 mx-auto p-6 bg-white dark:bg-zinc-900 dark:shadow-gray-400 shadow-md rounded-lg mb-8">
         <div className="flex justify-between items-start max-sm:flex-col max-sm:gap-4">
           <div className="flex-1">
             <h3 className="text-2xl font-bold text-gray-800 dark:text-white">
@@ -107,7 +107,7 @@ export default function DriveDetail() {
           <div className="flex gap-4">
             {drive?.accepting && (
               <button
-                className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-yellow-500 px-4 py-2 max-sm:py-1 rounded dark:bg-yellow-400 dark:text-black dark:hover:bg-yellow-500"
+                className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-gray-600 px-4 py-2 max-sm:py-1 rounded dark:bg-indigo-600 dark:text-black dark:hover:bg-indigo-700"
                 onClick={handleApply}>
                 Apply
               </button>
@@ -117,7 +117,7 @@ export default function DriveDetail() {
       </div>
 
       {/* Drive Details Section */}
-      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8 dark:shadow-yellow-500 dark:bg-slate-700">
+      <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg mb-8 dark:shadow-gray-400 dark:bg-zinc-900">
         <h1 className="max-sm:text-xl text-3xl font-bold mb-6 text-gray-800 dark:text-white">
           Drive Overview
         </h1>
@@ -132,7 +132,7 @@ export default function DriveDetail() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-gray-100 p-4 rounded-lg dark:bg-slate-700 dark:border dark:border-yellow-500">
+            <div className="bg-gray-100 p-4 rounded-lg dark:bg-zinc-900 dark:border dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
                 Requirements
               </h3>
@@ -152,7 +152,7 @@ export default function DriveDetail() {
               </ul>
             </div>
 
-            <div className="bg-gray-100 p-4 rounded-lg dark:bg-slate-700 dark:border dark:border-yellow-500">
+            <div className="bg-gray-100 p-4 rounded-lg dark:bg-zinc-900 dark:border dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-800 mb-2 dark:text-white">
                 Job Details
               </h3>
@@ -180,7 +180,7 @@ export default function DriveDetail() {
       {/* Back Button */}
       <div className="max-w-4xl mx-auto p-6">
         <button
-          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 dark:text-black"
+          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:text-black"
           onClick={handleBack}>
           Back
         </button>

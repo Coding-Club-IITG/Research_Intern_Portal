@@ -9,7 +9,7 @@ function ExperienceCard({ experience, onDelete, deletable = true }) {
   const endDate = experience.endDate || "Present";
 
   return (
-    <div className="bg-gray-50 border border-b-4 border-gray-200 dark:border-yellow-500 rounded-lg p-4 mb-4 w-full dark:bg-slate-700">
+    <div className="bg-gray-50 border border-b-4 border-gray-200 dark:border-gray-600 rounded-lg p-4 mb-4 w-full dark:bg-zinc-900">
       <div className="flex dark:text-white">
         <div className="h-full">
           <svg

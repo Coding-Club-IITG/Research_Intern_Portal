@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Table, Space, Typography, message } from "antd";
+import { Table, Space } from "antd";
 import { getAllStudentsOfJob } from "../../../apis/recruiter";
+import { getCourseById } from "../../../apis/courses-departments";
+import { getDepartmentById } from "../../../apis/courses-departments";
+import Loading from "../../../root-components/Loading";
 
 function DriveStudentList() {
+  const [loading, setLoading] = useState(false);
   const { driveIndex } = useParams();
   const [applicants, setApplicants] = useState([]);
   const navigate = useNavigate();
@@ -14,16 +18,27 @@ function DriveStudentList() {
 
   useEffect(() => {
     async function fetchApplicants() {
-      message.loading({ content: "Loading...", key: "loading" });
+      // message.loading({ content: "Loading...", key: "loading" });
+      setLoading(true);
       const res = await getAllStudentsOfJob(driveIndex, navigate);
+      const updatedStudents = await Promise.all(
+        res.data.map(async (student) => {
+          const cou = await getCourseById(student.course);
+          student.course = cou.data.name;
+          const dept = await getDepartmentById(student.department);
+          student.department = dept.data.name;
+          return student;
+        })
+      );
       if (res.status === "success") {
-        message.destroy("loading");
-        setApplicants(res.data);
+        // message.destroy("loading");
+        setApplicants(updatedStudents);
       }
+      setLoading(false);
     }
 
     fetchApplicants();
-  }, []);
+  }, [driveIndex, navigate]);
 
   console.log(applicants);
 
@@ -46,8 +61,8 @@ function DriveStudentList() {
     },
     {
       title: "Roll No",
-      dataIndex: "rollNo",
-      key: "rollNo",
+      dataIndex: "roll",
+      key: "roll",
       width: "10%",
       align: "center"
     },
@@ -75,7 +90,7 @@ function DriveStudentList() {
       render: (text, record) => (
         <Space size="middle" className="flex flex-wrap justify-center gap-2 lg:gap-4">
           <button
-            className="px-2 py-1 md:px-4 md:py-2 rounded bg-yellow-400 text-black border border-yellow-400 hover:bg-yellow-500 transition-all"
+            className="px-2 py-1 md:px-4 md:py-2 rounded bg-gray-400 text-black border border-gray-400 hover:bg-gray-500 transition-all"
             onClick={() => handleView(record._id)}>
             View Profile
           </button>
@@ -90,6 +105,10 @@ function DriveStudentList() {
     }
   ];
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className="w-full p-4 md:p-6 flex flex-col items-center">
       <h1 className="text-center mb-4 md:mb-6 dark:text-white">Applicants List</h1>
@@ -100,10 +119,10 @@ function DriveStudentList() {
         <Table
           dataSource={applicants}
           columns={columns}
-          rowKey="rollNo"
+          rowKey="roll"
           pagination={{ pageSize: 5 }}
           bordered
-          className="shadow-md w-full overflow-x-auto"
+          className="stud shadow-md w-full overflow-x-auto"
         />
       )}
 

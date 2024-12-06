@@ -62,7 +62,7 @@ function Form() {
             width="4"
             height="352.38"
             transform="translate(-37.98 167.04) rotate(-30.93)"
-            fill="gray"
+            fill="#ffffff"
           />
           <polygon
             points="245.05 178.56 268.82 186.38 268.82 152.16 247.25 152.16 245.05 178.56"
@@ -97,9 +97,10 @@ function Form() {
             d="m199.84,538.64c-3.04-1.92-18.12-11.71-16.33-15.51,1.64-3.49,5-5.89,5.47-6.2,11.8-12.55,12.42-12.31,12.8-12.17.6.23,1.49,1.98,2.65,5.22l.07.2-.1.19c-.12.24-2.93,6.02,2.46,8.94,3.7,2.01,5.33,2.1,5.95,2.01-.18-.34-.36-.83-.31-1.4.07-.83.55-1.59,1.45-2.27,2.35-1.78,6.77-3.7,6.96-3.78l.5-.22,9.11,27.23,9.11,12.28c.69.93.91,2.1.62,3.22h0c-.41,1.56-1.76,2.69-3.37,2.81-3.58.28-10.29.31-15.01-2.67-1.25-.79-2.84-1.94-4.59-3.28-7.29-5.6-17.36-14.52-17.43-14.59Z"
             fill="#2f2e43"
           />
+
           <path
             d="m314.2,315.16l-79.06,8.07s-11.29,37.11,4.84,54.86l9.68,50.02-43.56,59.7,27.43,17.75,38.72-41.95v70.99l37.11-3.23,17.75-111.33-12.91-104.88Z"
-            fill="#b1483a"
+            fill="#2f2e43"
           />
           <path
             d="m278.7,173.17s-6.45-11.29-33.88-9.68l-6.45,14.52s-19.36,4.84-19.36,33.88,9.68,116.17,9.68,116.17l94.39-5.65-43.66-136.47-.71-12.78Z"
@@ -107,18 +108,18 @@ function Form() {
           />
           <path
             d="m183.03,47.44c-3.34,22.1-1.81,44.89,4.34,66.36l103.82-54.67c-1.81-2.15-3.66-4.26-5.59-6.3-15.57-16.43-34.96-29.15-56.24-36.82-7.82,3.36-15.94,7.38-24.35,12.19-7.6,4.34-14.56,8.75-20.94,13.19-.39,2.01-.74,4.02-1.04,6.04Z"
-            fill="#f9a826"
+            fill="#6c63ff"
           />
           <path
             d="m241.89,17.9c12,5.5,23.22,12.64,33.35,21.1,6.78,5.66,13.02,11.94,18.66,18.72l68.6-36.12s-47.65-40.3-129.12-7.25c2.87,1.1,5.71,2.28,8.5,3.56Z"
-            fill="#f9a826"
+            fill="#6c63ff"
           />
           <path
             d="m182.33,106.3c-4.67-20.45-5.25-41.79-1.73-62.44-72.78,52.48-65.84,108.18-65.84,108.18l69.91-36.81c-.86-2.95-1.66-5.92-2.35-8.92Z"
-            fill="#f9a826"
+            fill="#6c63ff"
           />
           <path
-            id="uuid-215a2cca-fbee-4bbc-9bf2-8b7e67129ed8-183"
+            id="uuid-215a2cca-fbee-4bbc-9bf2-8b7e67129ed8-960"
             d="m364.5,276.19c6.17,2.84,9.62,8.42,7.71,12.47-1.91,4.05-8.47,5.03-14.64,2.2-2.48-1.1-4.65-2.79-6.32-4.95l-25.99-12.36,6.4-12.46,24.95,13.51c2.74-.12,5.46.42,7.91,1.59,0,0,0,0,0,0Z"
             fill="#f3a3a6"
           />
@@ -207,7 +208,7 @@ function Form() {
           />
         </svg>
       )}
-      <div className="max-w-md sm:max-w-lg lg:max-w-xl w-full mx-auto my-10 p-6 bg-white dark:bg-slate-700 border border-gray-400 dark:border-yellow-400 rounded-lg">
+      <div className="max-w-md sm:max-w-lg lg:max-w-xl w-full mx-auto my-10 p-6 bg-white dark:bg-zinc-900 border border-gray-400 dark:border-gray-400 rounded-lg">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
           Report a Bug
         </h2>
@@ -224,7 +225,7 @@ function Form() {
               name="title"
               value={formData.title}
               onChange={handleChange}
-              className="border border-gray-300 dark:border-yellow-300 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:outline-none focus:ring dark:focus:ring-yellow-400"
+              className="border border-gray-300 dark:border-gray-600 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-zinc-900 focus:outline-none dark:focus:border-gray-400"
               required
             />
           </div>
@@ -240,7 +241,7 @@ function Form() {
               name="description"
               value={formData.description}
               onChange={handleChange}
-              className="border border-gray-300 dark:border-yellow-300 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-slate-700 focus:outline-none focus:ring dark:focus:ring-yellow-400"
+              className="border border-gray-300 dark:border-gray-600 rounded-md px-4 py-2 w-full text-gray-800 dark:text-white bg-white dark:bg-zinc-900 focus:outline-none dark:focus:border-gray-400"
               rows="12"
               required
             />
@@ -248,7 +249,7 @@ function Form() {
 
           <button
             type="submit"
-            className="w-full dark:bg-yellow-400 dark:hover:bg-yellow-500 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 dark:text-black">
+            className="w-full dark:bg-indigo-600 dark:hover:bg-indigo-700 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 dark:text-black">
             Submit
           </button>
         </form>

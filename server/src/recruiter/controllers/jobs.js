@@ -124,6 +124,30 @@ const stopAcceptingApplications = async (req, res) => {
   }
 };
 
+const reopenApplications = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const job = await Jobs.findByIdAndUpdate(id, { accepting: true });
+
+    if (!job) {
+      return res
+        .status(404)
+        .json({ message: "Job not found", data: null, status: "error" });
+    }
+
+    return res.status(200).json({
+      message: "Job applications reopened",
+      data: job,
+      status: "success",
+    });
+  } catch (error) {
+    logger.error(error);
+    return res
+      .status(500)
+      .json({ message: "Server Error", data: null, status: "error" });
+  }
+};
+
 const updateJob = async (req, res) => {
   try {
     const { id } = req.params;
@@ -246,4 +270,5 @@ export {
   stopAcceptingApplications,
   getAllStudentsOfJob,
   getAllAcceptingJobs,
+  reopenApplications,
 };

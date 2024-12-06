@@ -22,18 +22,18 @@ export default function StudentProfileView() {
           navigate("/500");
           return;
         }
-        // let dept = null;
-        // if (response.data.department) {
-        //   console.log(response.data.department);
-        //   //   dept = await getDepartmentById(response.data.department, navigate);
-        // }
-        // setDept(dept.data);
-        // let course = null;
-        // if (response.data.course) {
-        //   //   course = await getCourseById(response.data.course, navigate);
-        // }
+        let dept = null;
+        if (response.data.department) {
+          console.log(response.data.department);
+          dept = await getDepartmentById(response.data.department, navigate);
+        }
+        setDept(dept.data);
+        let course = null;
+        if (response.data.course) {
+          course = await getCourseById(response.data.course, navigate);
+        }
 
-        // setCourse(course.data);
+        setCourse(course.data);
         setStudent(response.data);
       } catch (error) {
         console.error("Error in fetching user data:", error);
@@ -53,7 +53,7 @@ export default function StudentProfileView() {
 
   return (
     <div>
-      <div className="max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300 dark:border-yellow-400">
+      <div className="max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300 dark:border-gray-400">
         <div className="max-sm:flex-col max-sm:items-start flex items-center mb-4">
           <div className="w-32 h-32 rounded-full overflow-hiddenflex items-center justify-center mr-6">
             <img
@@ -84,7 +84,7 @@ export default function StudentProfileView() {
                   href={student?.resume || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black dark:text-yellow-400"
+                  className="text-black dark:text-gray-400"
                   title="View Resume">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,7 @@ export default function StudentProfileView() {
                   href={student?.social[0]?.url || "#"}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-black dark:text-yellow-400"
+                  className="text-black dark:text-gray-400"
                   title="Social Profile 1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@ export default function StudentProfileView() {
                   className="text-black"
                   title="Social Profile 2">
                   <svg
-                    className="dark:fill-yellow-500 fill-black"
+                    className="dark:fill-gray-500 fill-black"
                     xmlns="http://www.w3.org/2000/svg"
                     x="0px"
                     y="0px"
@@ -164,7 +164,7 @@ export default function StudentProfileView() {
                   className="text-black"
                   title="Social Profile 3">
                   <svg
-                    className="dark:fill-yellow-500 fill-black"
+                    className="dark:fill-gray-500 fill-black"
                     xmlns="http://www.w3.org/2000/svg"
                     x="0px"
                     y="0px"
@@ -201,7 +201,7 @@ export default function StudentProfileView() {
 
         {/* array */}
         {student?.educations?.length > 0 && (
-          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2 ">
+          <div className=" p-2 rounded-lg mb-2 ">
             <h3 className="text-black dark:text-white mb-2">Education</h3>
             {student.educations.map((education) => (
               <EducationCard
@@ -215,7 +215,7 @@ export default function StudentProfileView() {
         )}
 
         {student?.experiences?.length > 0 && (
-          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2">
+          <div className=" p-2 rounded-lg mb-2">
             <h3 className="text-black dark:text-white mb-2">Experience</h3>
             {student.experiences.map((experience) => (
               <ExperienceCard
@@ -253,13 +253,13 @@ export default function StudentProfileView() {
         </div> */}
 
         {student?.skills?.length > 0 && (
-          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2">
+          <div className=" p-2 rounded-lg mb-2">
             <h4 className="text-black dark:text-white mb-2">Skills</h4>
             <div className="flex flex-wrap gap-4">
               {student.skills.map((skill, index) => (
                 <p
                   key={index}
-                  className="py-2 px-4 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-yellow-400 dark:text-black dark:bg-amber-400">
+                  className="py-2 px-4 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-indigo-600 dark:text-black dark:bg-amber-400">
                   {skill}
                 </p>
               ))}
@@ -267,12 +267,12 @@ export default function StudentProfileView() {
           </div>
         )}
         {student?.interests?.length > 0 && (
-          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2">
+          <div className=" p-2 rounded-lg mb-2">
             <h4 className="text-black dark:text-white mb-2">Interests</h4>
             <ul className="list-none list-inside flex gap-2">
               {student?.interests.map((interest, index) => (
                 <li
-                  className="py-2 px-4 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-yellow-400 dark:text-black dark:bg-amber-400"
+                  className="py-2 px-4 bg-indigo-600 rounded-lg w-fit text-white text-sm dark:border-indigo-600 dark:text-black dark:bg-indigo-200"
                   key={index}>
                   {interest}
                 </li>
@@ -280,6 +280,14 @@ export default function StudentProfileView() {
             </ul>
           </div>
         )}
+        <div className="flex items-end justify-end gap-4 mx-auto">
+          <button className="px-2 py-1 md:px-4 md:py-2 rounded bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 transition-all">
+            Accept
+          </button>
+          <button className="px-2 py-1 md:px-4 md:py-2 rounded bg-red-600 text-white border border-red-600 hover:bg-red-700 transition-all">
+            Reject
+          </button>
+        </div>
       </div>
     </div>
     // <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">

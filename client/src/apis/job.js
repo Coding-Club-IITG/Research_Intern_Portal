@@ -29,3 +29,23 @@ export const getAllAcceptingJobs = async (navigate) => {
     return error?.response?.data || error;
   }
 };
+
+export const stopAcceptingJob = async (id, navigate) => {
+  try {
+    const response = await axios.get(`${backendURL}/api/v1/job/stop/${id}`);
+    return response.data;
+  } catch (error) {
+    navigate("/500");
+    return error?.response?.data || error;
+  }
+};
+
+export const reopenApplications = async (id, navigate) => {
+  try {
+    const response = await axios.get(`${backendURL}/api/v1/job/reopen/${id}`);
+    return response.data;
+  } catch (error) {
+    navigate("/500");
+    return error?.response?.data || error;
+  }
+};
