@@ -88,21 +88,24 @@ function Profile() {
           return;
         }
 
-        let deptId = res.data?.department || "Select";
-        let deptName = "Select";
+        // let deptId = res.data?.department || "Select";
+        // let deptName = "Select";
 
-        if (deptId !== "Select") {
-          const dept = await getDepartmentById(deptId, navigate);
-          deptName = dept.data?.name || "Select";
-        }
+        // if (deptId !== "Select") {
+        //   const dept = await getDepartmentById(deptId, navigate);
+          
+        //   deptName = dept.data?.name || "Select";
+        // }
 
-        let courseId = res.data?.department || "Select";
-        let courseName = "Select";
+        // let courseId = res.data?.department || "Select";
+        // let courseName = "Select";
 
-        if (courseId !== "Select") {
-          const course = await getDepartmentById(courseId, navigate);
-          courseName = course.data?.name || "Select";
-        }
+        // if (courseId !== "Select") {
+        //   const course = await getDepartmentById(courseId, navigate);
+        //   courseName = course.data?.name || "Select";
+        // }
+
+        // console.log("deptId", deptId);
 
         message.destroy("loadingData");
         setName(res.data?.name || "");
@@ -111,8 +114,8 @@ function Profile() {
         setYearOfGrad(daysjs(res.data?.yearOfGrad));
         setDOB(daysjs(res.data?.DOB));
         setBio(res.data?.bio || "");
-        setSelectedDepartment(deptId || "Select");
-        setSelectedCourse(courseId || "Select");
+        setSelectedDepartment(res.data?.department || "Select");
+        setSelectedCourse(res.data?.course || "Select");
         setGender(res.data?.gender || "");
         setNumber(res.data?.number || "");
         setRoll(res.data?.roll || "");
