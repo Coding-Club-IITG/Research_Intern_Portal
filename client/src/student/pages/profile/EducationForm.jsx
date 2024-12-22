@@ -123,7 +123,7 @@ function EducationForm({ setAddEdu, updateProfile }) {
             End Year
           </label>
           <DatePicker
-            className="grow w-full shrink bg-zinc-900  dark:hover:bg-zinc-900 text-white placeholder:text-white border-gray-600 hover:border-gray-600"
+            className="grow w-full shrink dark:bg-zinc-900 dark:text-white dark:border-gray-600 dark:hover:bg-zinc-900 dark:hover:border-gray-600"
             picker="year"
             onChange={(value) => handleDateChange("endDate", value)}
             placeholder="Select end year"
