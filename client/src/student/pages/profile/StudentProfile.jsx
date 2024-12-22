@@ -164,7 +164,7 @@ function Profile() {
 
   const updateProfileEducation = (updatedEducation) => {
     const tempEducation = [...educations, updatedEducation];
-    tempEducation.sort((a, b) => b.startDate.localeCompare(a.startDate));
+    // tempEducation.sort((a, b) => b.startDate.localeCompare(a.startDate));
     setEducations(tempEducation);
   };
 

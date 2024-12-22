@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { applyToJobs } from "../../../apis/student";
 import useAuthStore from "../../../store/authStore";
 import { message } from "antd";
+import { set } from "date-fns";
 
 function InternshipCard({ arr }) {
   const navigate = useNavigate();
   const { getUser } = useAuthStore();
+  const [applied, setApplied] = useState(false);
   const user = getUser();
-
   const handleLearnMore = () => {
     navigate(`/student/internships/internship/${arr._id}`);
   };
@@ -26,6 +27,18 @@ function InternshipCard({ arr }) {
       message.error("Failed to apply");
     }
   };
+
+  useEffect(() => {
+    if (arr.applicants) {
+      console.log(arr.applicants);
+      const applied = arr.applicants.find(
+        (applicant) => applicant.applicant === user.connection_id
+      );
+      if (applied) {
+        setApplied(true);
+      }
+    }
+  }, [arr.applicants, user.connection_id]);
 
   // console.log(arr);
 
@@ -69,13 +82,19 @@ function InternshipCard({ arr }) {
             </div>
 
             <div className="flex items-center">
-              <button
-                className="bg-gray-100 text-gray-700 px-4 py-1 text-sm rounded-lg hover:bg-gray-200 dark:text-black"
-                onClick={() => {
-                  handleApply();
-                }}>
-                Apply
-              </button>
+              {applied ? (
+                <button
+                  className="bg-gray-100 text-gray-700 px-4 py-1 text-sm rounded-lg hover:bg-gray-200 dark:text-black"
+                  disabled>
+                  Applied
+                </button>
+              ) : (
+                <button
+                  className="bg-gray-100 text-gray-700 px-4 py-1 text-sm rounded-lg hover:bg-gray-200 dark:text-black"
+                  onClick={handleApply}>
+                  Apply
+                </button>
+              )}
             </div>
           </div>
         </div>

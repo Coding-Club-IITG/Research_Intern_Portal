@@ -43,9 +43,13 @@ const getAllJobsOfRecruiter = async (req, res) => {
 const getAllAcceptingJobs = async (req, res) => {
   try {
     const activeJobs = await Jobs.find({ accepting: true });
+    const currentDate = new Date();
+    const jobs = activeJobs.filter(
+      (job) => new Date(job.last_date) > currentDate
+    );
     return res.status(200).json({
       message: "Accepting Jobs Successfully retrieved",
-      data: activeJobs,
+      data: jobs,
       status: "success",
     });
   } catch (error) {
