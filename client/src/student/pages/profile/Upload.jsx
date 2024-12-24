@@ -14,10 +14,12 @@ const { Dragger } = Upload;
 const props = {
   name: "file",
   multiple: true,
-  action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
+  action: "http://localhost:8000/api/v1/students/upload", // Change this to your backend API URL
 
   onChange(info) {
     const { status, file } = info;
+
+    // Validate file using zod schema
     try {
       fileSchema.parse({
         name: file.name,
@@ -29,6 +31,7 @@ const props = {
       return;
     }
 
+    // Provide feedback to the user based on upload status
     if (status !== "uploading") {
       console.log(file, info.fileList);
     }
@@ -50,11 +53,12 @@ const App = () => (
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>
-      <p className="dark:text-white !text-black">Click or drag file to this area to upload</p>
-
       <p className="dark:text-white !text-black">
-        Support for a single or bulk upload. Strictly prohibited from uploading company data or
-        other banned files.
+        Click or drag file to this area to upload
+      </p>
+      <p className="dark:text-white !text-black">
+        Support for a single or bulk upload. Strictly prohibited from uploading
+        company data or other banned files.
       </p>
     </Dragger>
   </div>

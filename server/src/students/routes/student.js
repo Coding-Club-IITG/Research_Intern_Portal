@@ -12,6 +12,8 @@ import {
   addStudentsApplications,
   logoutStudent
 } from "../controllers/student.js";
+import { upload, uploadFile } from "../upload/onedrive.upload.js";
+import verifyJWT from "../../middlewares/token-verify.js";
 
 const router = express.Router();
 
@@ -52,6 +54,7 @@ const router = express.Router();
  *         description: Internal server error
  */
 router.get("/", getStudents);
+router.post("/upload", upload.single("file"), uploadFile);
 
 /**
  * @swagger
