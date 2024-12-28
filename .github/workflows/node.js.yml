@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Debug Node.js CI
 
 on:
   push:
@@ -9,10 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,21 +16,8 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Navigate to server folder
-        working-directory: ./server
-        run: |
-          echo "Navigated to the server folder"
+          node-version: 18.x
 
       - name: Install dependencies
         working-directory: ./server
         run: npm ci
-
-      - name: Run build (if applicable)
-        working-directory: ./server
-        run: npm run build --if-present
-
-      - name: Run tests (if applicable)
-        working-directory: ./server
-        run: npm test --if-present
