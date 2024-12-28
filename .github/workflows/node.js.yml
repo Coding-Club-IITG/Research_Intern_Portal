@@ -18,14 +18,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Set the working directory for subsequent commands
+      - run: cd server
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-
-      # Set the working directory for subsequent commands
-      - run: cd server
 
       # Use npm ci with the working directory option
       - run: npm ci
