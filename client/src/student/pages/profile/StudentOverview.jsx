@@ -6,6 +6,7 @@ import EducationCard from "./EducationCard";
 import ExperienceCard from "../../../root-components/ExperienceCard";
 import daysjs from "dayjs";
 import { getCourseById, getDepartmentById } from "../../../apis/courses-departments";
+import { useTheme } from "../../../store/themeStore";
 
 const Overview = () => {
   const [profileData, setProfileData] = useState(null);
@@ -14,6 +15,7 @@ const Overview = () => {
   const navigate = useNavigate();
   const [dept, setDept] = useState(null);
   const [course, setCourse] = useState(null);
+  const [theme, toggleTheme] = useTheme();
 
   useEffect(() => {
     const getUser = async () => {
@@ -51,11 +53,14 @@ const Overview = () => {
       </div>
       <div className="bg-white dark:bg-zinc-900 max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300 dark:border-none">
         <div className="max-sm:flex-col max-sm:items-start flex items-center mb-4">
-          <div className="w-32 h-32 rounded-full overflow-hiddenflex items-center justify-center mr-6">
+          <div className="w-32 h-32 rounded-full overflow-hidden flex items-center justify-center mr-6">
             <img
-              src={profileData?.profilePicUrl || ""}
-              alt="Profile Pic"
-              className="object-cover w-full h-full dark:text-white"
+              src={
+                profileData?.profilePicUrl ||
+                (theme === "light" ? "/avatar.webp" : "/avatar-dark.png")
+              }
+              alt="Hi"
+              className="object-cover w-full h-full rounded-full dark:text-white"
             />
           </div>
           <div>
@@ -197,7 +202,7 @@ const Overview = () => {
 
         {/* array */}
         {profileData?.educations?.length > 0 && (
-          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2 ">
+          <div className=" p-2 rounded-lg mb-2 ">
             <h3 className="text-black dark:text-white mb-2">Education</h3>
             {profileData.educations.map((education) => (
               <EducationCard
@@ -211,7 +216,7 @@ const Overview = () => {
         )}
 
         {profileData?.experiences?.length > 0 && (
-          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2">
+          <div className=" p-2 rounded-lg mb-2">
             <h3 className="text-black dark:text-white mb-2">Experience</h3>
             {profileData.experiences.map((experience) => (
               <ExperienceCard
@@ -249,7 +254,7 @@ const Overview = () => {
         </div> */}
 
         {profileData?.skills?.length > 0 && (
-          <div className="border dark:border-slate-700 p-2 rounded-lg mb-2">
+          <div className=" p-2 rounded-lg mb-2">
             <h4 className="text-black dark:text-white mb-2">Skills</h4>
             <div className="flex flex-wrap gap-4">
               {profileData.skills.map((skill, index) => (

@@ -5,12 +5,14 @@ import useAuthStore from "../../../store/authStore";
 import { useNavigate } from "react-router-dom";
 import QualificationCard from "./QualificationCard";
 import { getDepartmentById } from "../../../apis/courses-departments";
+import { useTheme } from "../../../store/themeStore";
 
 export default function Overview() {
   const [profileData, setProfileData] = useState({});
   const { getUser } = useAuthStore();
   const navigate = useNavigate();
   const [dept, setDept] = useState(null);
+  const [theme, toggleTheme] = useTheme();
 
   const user = getUser();
 
@@ -57,9 +59,12 @@ export default function Overview() {
         <div className="flex items-center mb-4">
           <div className="w-32 h-32 rounded-full overflow-hiddenflex items-center justify-center mr-6">
             <img
-              src={profileData?.profilePicUrl || "https://img.icons8.com/ios-filled/"}
-              alt="Profile Pic"
-              className="object-cover w-full h-full dark:text-white"
+              src={
+                profileData?.profilePicUrl ||
+                (theme === "light" ? "/avatar.webp" : "/avatar-dark.png")
+              }
+              alt="Hi"
+              className="object-cover w-full h-full rounded-full dark:text-white"
             />
           </div>
           <div>

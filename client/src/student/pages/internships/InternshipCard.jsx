@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { applyToJobs } from "../../../apis/student";
 import useAuthStore from "../../../store/authStore";
 import { message } from "antd";
-import { set } from "date-fns";
+import { useTheme } from "../../../store/themeStore";
 
 function InternshipCard({ arr }) {
   const navigate = useNavigate();
   const { getUser } = useAuthStore();
   const [applied, setApplied] = useState(false);
+  const [theme, toggleTheme] = useTheme();
   const user = getUser();
   const handleLearnMore = () => {
     navigate(`/student/internships/internship/${arr._id}`);
@@ -43,10 +44,14 @@ function InternshipCard({ arr }) {
   // console.log(arr);
 
   return (
-    <div className="bg-white border border-gray-300 dark:border-none dark:bg-zinc-900 mb-6 rounded-md">
-      <div className="flex p-4 gap-4 max-sm:flex-col">
-        <div className="w-40 flex-shrink-0">
-          <img src={arr.image} alt={`${arr.prof_name} Logo`} className="h-full dark:text-white" />
+    <div className="bg-white border border-gray-300 dark:border-none dark:bg-zinc-900 mb-6 rounded-md relative">
+      <div className="flex p-4 gap-6 max-sm:flex-col">
+        <div className="w-32 h-32 flex-shrink-0">
+          <img
+            src={arr.image ? arr.image : theme === "light" ? "/avatar.webp" : "/avatar-dark.png"}
+            alt={`${arr.prof_name} Logo`}
+            className="dark:text-white rounded-full w-full h-full object-cover"
+          />
         </div>
 
         <div className="flex-1">
@@ -81,7 +86,7 @@ function InternshipCard({ arr }) {
               </div>
             </div>
 
-            <div className="flex items-center">
+            <div className="flex absolute right-4 top-4 items-center">
               {applied ? (
                 <button
                   className="bg-gray-100 text-gray-700 px-4 py-1 text-sm rounded-lg hover:bg-gray-200 dark:text-black"

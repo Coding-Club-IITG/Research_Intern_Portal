@@ -39,14 +39,26 @@ const TopNav = () => {
         alt="Logo"
       />
       <div className="flex max-sm:space-x-2 space-x-6 items-center">
-        <Dropdown trigger={["click"]} menu={{ items }}>
-          <a onClick={(e) => e.preventDefault()}>
-            <span className="font-medium -mt-0.5 cursor-pointer text-gray-800 dark:text-gray-300">
-              Menus
-            </span>
-          </a>
-        </Dropdown>
         <NotificationBell />
+        <Dropdown trigger={["click"]} menu={{ items }}>
+          <button
+            onClick={(e) => e.preventDefault()}
+            className="bg-transparent border-none p-0 m-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              className="size-6 dark:text-white">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
+            </svg>
+          </button>
+        </Dropdown>
       </div>
     </div>
   );

@@ -422,3 +422,7 @@
 {"level":"error","message":"Error fetching user information: Error: read ECONNRESET","timestamp":"2024-12-06T08:44:36.658Z"}
 {"level":"error","timestamp":"2024-12-06T08:44:36.660Z"}
 {"level":"error","timestamp":"2024-12-24T16:30:52.698Z"}
+{"level":"error","message":{"error":{"code":"InvalidAuthenticationToken","innerError":{"client-request-id":"da744d0d-ffe1-4fcf-8c80-ca176572f4e4","date":"2024-12-28T04:37:16","request-id":"da744d0d-ffe1-4fcf-8c80-ca176572f4e4"},"message":"Lifetime validation failed, the token is expired."}},"timestamp":"2024-12-28T04:37:16.749Z"}
+{"level":"error","message":{"error":{"code":"InvalidAuthenticationToken","innerError":{"client-request-id":"2379cfe9-45e5-4835-9889-e9e4e2c50a44","date":"2024-12-28T04:37:23","request-id":"2379cfe9-45e5-4835-9889-e9e4e2c50a44"},"message":"Lifetime validation failed, the token is expired."}},"timestamp":"2024-12-28T04:37:23.702Z"}
+{"level":"error","message":{"error":{"code":"InvalidAuthenticationToken","innerError":{"client-request-id":"2546d0ec-c169-4bfb-be06-fb924dbdd056","date":"2024-12-28T05:30:44","request-id":"2546d0ec-c169-4bfb-be06-fb924dbdd056"},"message":"Lifetime validation failed, the token is expired."}},"timestamp":"2024-12-28T05:30:45.058Z"}
+{"level":"error","message":{"error":{"code":"InvalidAuthenticationToken","innerError":{"client-request-id":"4e975f48-9675-47b4-9ecd-17d91232500a","date":"2024-12-28T06:54:46","request-id":"4e975f48-9675-47b4-9ecd-17d91232500a"},"message":"Lifetime validation failed, the token is expired."}},"timestamp":"2024-12-28T06:54:46.290Z"}

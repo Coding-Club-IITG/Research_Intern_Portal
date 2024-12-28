@@ -93,7 +93,7 @@ function Profile() {
 
         // if (deptId !== "Select") {
         //   const dept = await getDepartmentById(deptId, navigate);
-          
+
         //   deptName = dept.data?.name || "Select";
         // }
 
@@ -244,6 +244,7 @@ function Profile() {
     if (res.status === "success") {
       message.destroy("saveProfile");
       message.success("Profile updated successfully!");
+      navigate("/student/profile/overview");
     } else {
       message.error("Error updating profile");
     }
@@ -269,7 +270,7 @@ function Profile() {
                 </label>
                 <input
                   type="text"
-                  className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -281,7 +282,7 @@ function Profile() {
                 </label>
                 <input
                   type="text"
-                  className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
                   value={roll}
                   onChange={(e) => setRoll(e.target.value)}
                   placeholder="Roll"
@@ -300,7 +301,7 @@ function Profile() {
               <select
                 value={selectedCourse}
                 onChange={(e) => setSelectedCourse(e.target.value)}
-                className={`mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm  bg-white dark:bg-zinc-900 dark:border-gray-600 dark:text-white focus:outline-none sm:text-sm`}>
+                className={`mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm  bg-white dark:bg-zinc-900 dark:border-gray-600 dark:text-white focus:outline-none sm:text-sm`}>
                 <option value="Select" disabled className="dark:bg-zinc-900 dark:text-white">
                   Select
                 </option>
@@ -321,12 +322,7 @@ function Profile() {
               <select
                 value={selectedDepartment}
                 onChange={(e) => setSelectedDepartment(e.target.value)}
-                className={`mt-1 block w-full p-2 border 
-                  border-gray-600 rounded-md shadow-sm 
-                  bg-white dark:bg-zinc-900 
-                  dark:text-white focus:outline-none 
-                  focus:ring-1 
-                  sm:text-sm`}>
+                className={`mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm  bg-white dark:bg-zinc-900 dark:border-gray-600 dark:text-white focus:outline-none sm:text-sm`}>
                 <option value="Select" disabled className="dark:bg-zinc-900 dark:text-white">
                   Select
                 </option>
@@ -346,7 +342,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
                 value={CGPA}
                 onChange={(e) => setCGPA(e.target.value)}
                 placeholder="eg. 8.75"
@@ -360,7 +356,7 @@ function Profile() {
                 className={`grow shrink w-full pb-2 mt-1 ${
                   theme === "dark"
                     ? "bg-zinc-900 text-white   dark:hover:bg-zinc-900 border-gray-600 hover:border-gray-600"
-                    : "bg-white border-gray-600"
+                    : "bg-white border-gray-300"
                 }`}
                 picker="year"
                 value={yearOfGrad}
@@ -376,7 +372,7 @@ function Profile() {
                 className={`grow shrink w-full pb-2 mt-1 ${
                   theme === "dark"
                     ? "bg-zinc-900  dark:hover:bg-zinc-900 text-white placeholder:text-white border-gray-600 hover:border-gray-600"
-                    : "bg-white border-gray-600"
+                    : "bg-white border-gray-300"
                 }`}
                 picker="date"
                 value={DOB}
@@ -390,7 +386,7 @@ function Profile() {
             </label>
             <input
               type="text"
-              className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Eg. abc@gmail.com"
@@ -404,7 +400,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
                 placeholder="Your Gender"
@@ -416,7 +412,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
                 value={number}
                 onChange={(e) => setNumber(e.target.value)}
                 placeholder="Mobile Number"
@@ -448,7 +444,7 @@ function Profile() {
             <div className="flex gap-2">
               <input
                 type="text"
-                className="mt-1 grow shrink p-2 border border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300"
+                className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300"
                 placeholder="Add Interest"
                 value={newInterest}
                 onChange={(e) => setNewInterest(e.target.value)}
@@ -469,7 +465,7 @@ function Profile() {
               </span>
             </label>
             <textarea
-              className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
               rows="4"
               value={bio}
               placeholder="Write your bio here"
@@ -499,7 +495,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
                 value={website}
                 onChange={(e) => setWebsite(e.target.value)}
                 placeholder="eg. www.yourwebsite.com"
@@ -511,7 +507,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
                 value={linkedin}
                 onChange={(e) => setLinkedin(e.target.value)}
                 placeholder="eg. www.linkedin.com/in/yourprofile"
@@ -523,7 +519,7 @@ function Profile() {
               </label>
               <input
                 type="text"
-                className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
                 value={github}
                 onChange={(e) => setGithub(e.target.value)}
                 placeholder="eg. www.github.com/yourprofile"
@@ -612,7 +608,7 @@ function Profile() {
           <div className="flex gap-2 flex-wrap">
             <input
               type="text"
-              className="mt-1 grow shrink p-2 border border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300"
+              className="mt-1 grow shrink p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300"
               placeholder="Add Skills"
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
@@ -637,7 +633,7 @@ function Profile() {
         </div>
         <div className="flex-col grow shrink">
           <textarea
-            className="mt-1 block w-full p-2 border border-gray-600 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm dark:bg-zinc-900 dark:text-white dark:border-gray-600 focus:outline-none focus:ring-1 dark:focus:ring-gray-300 sm:text-sm"
             rows="4"
             placeholder="Write your achievements here"
             value={achievements}

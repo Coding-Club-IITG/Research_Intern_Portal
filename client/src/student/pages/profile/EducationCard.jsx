@@ -34,7 +34,7 @@ function EducationCard({ education, onDelete, deletable = true }) {
             </p>
             <p className="text-black dark:text-gray-300">{`Grade: ${grade}`}</p>
           </div>
-          <p className="text-black mt-3 dark:text-gray-300">{description}</p>
+          <p className="text-black mt-3 dark:text-gray-300 break-words">{description}</p>
         </div>
 
         {deletable && (
