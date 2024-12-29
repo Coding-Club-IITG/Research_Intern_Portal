@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - master
+      - aditya3
   pull_request:
     branches:
       - master
+      - aditya3
 
 jobs:
   build:
