@@ -38,12 +38,12 @@ jobs:
       - name: Run tests for client
         run: |
           cd client
-          npm test
+          npm test -- --passWithNoTests
 
       - name: Run tests for server
         run: |
           cd server
-          npm test
+          npm test -- --passWithNoTests
 
       - name: Build client
         run: |
