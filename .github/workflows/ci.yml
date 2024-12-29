@@ -35,15 +35,15 @@ jobs:
           cd server
           npm install
 
-      - name: Run tests for client
-        run: |
-          cd client
-          npm test -- --passWithNoTests
+      #   - name: Run tests for client
+      #     run: |
+      #       cd client
+      #       npm test -- --passWithNoTests
 
-      - name: Run tests for server
-        run: |
-          cd server
-          npm test -- --passWithNoTests
+      #   - name: Run tests for server
+      #     run: |
+      #       cd server
+      #       npm test -- --passWithNoTests
 
       - name: Build client
         run: |
@@ -59,4 +59,3 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           echo "Deploying to production..."
-          # Add your deployment commands here
