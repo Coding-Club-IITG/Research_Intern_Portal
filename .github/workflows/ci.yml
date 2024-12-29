@@ -1,0 +1,62 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies for client
+        run: |
+          cd client
+          npm install
+
+      - name: Install dependencies for server
+        run: |
+          cd server
+          npm install
+
+      - name: Run tests for client
+        run: |
+          cd client
+          npm test
+
+      - name: Run tests for server
+        run: |
+          cd server
+          npm test
+
+      - name: Build client
+        run: |
+          cd client
+          npm run build
+
+      - name: Build server
+        run: |
+          cd server
+          npm run build
+
+      - name: Deploy to production
+        if: github.ref == 'refs/heads/master'
+        run: |
+          echo "Deploying to production..."
+          # Add your deployment commands here
