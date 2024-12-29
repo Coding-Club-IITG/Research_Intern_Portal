@@ -13,6 +13,7 @@ export default function DriveDetail() {
   const { internshipID } = useParams();
   const [drive, setDrive] = useState({});
   const navigate = useNavigate();
+  const currentDate = new Date();
   const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
@@ -95,7 +96,7 @@ export default function DriveDetail() {
             </div>
             <div className="mt-1 text-sm">
               <p
-                className={`text-sm ${drive?.accepting ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
+                className={`text-sm ${drive?.accepting && new Date(drive?.last_date) > currentDate ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
                 {drive?.accepting
                   ? `Closing Date: ${new Date(drive.last_date).toLocaleDateString()}`
                   : "Closed"}

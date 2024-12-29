@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useTheme } from "../../../store/themeStore";
 
 function EducationForm({ setAddEdu, updateProfile }) {
-  const [theme, toggleTheme] = useTheme();
+  const [theme] = useTheme();
   const [formData, setFormData] = useState({
     name: "",
     role: "",

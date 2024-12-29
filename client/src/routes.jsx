@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import StudentRoutes from "./student/routes.jsx";
 import RecruiterRoutes from "./recruiter/routes.jsx";
 import AdminRoutes from "./admin/routes.jsx";
 import NotFoundPage from "./errors/NotFoundPage.jsx";
 import InternalServerErrorPage from "./errors/InternalServerErrorPage.jsx";
-import RecuriterRoutes from "./recruiter/routes.jsx";
 import MainLandingPage from "./pages/Main.jsx";
 import LoginPage from "./pages/Login.jsx";
 import ProtectedRoute from "./utils/protectedRoutes.jsx";

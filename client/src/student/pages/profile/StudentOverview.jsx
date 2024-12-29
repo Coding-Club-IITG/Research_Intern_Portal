@@ -15,7 +15,7 @@ const Overview = () => {
   const navigate = useNavigate();
   const [dept, setDept] = useState(null);
   const [course, setCourse] = useState(null);
-  const [theme, toggleTheme] = useTheme();
+  const [theme] = useTheme();
 
   useEffect(() => {
     const getUser = async () => {

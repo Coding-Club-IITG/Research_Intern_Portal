@@ -10,17 +10,13 @@ import { getStudent, updateStudent } from "../../../apis/student";
 import useAuthStore from "../../../store/authStore";
 import { useTheme } from "../../../store/themeStore";
 import daysjs from "dayjs";
-import {
-  getAllCourses,
-  getAllDepartments,
-  getDepartmentById
-} from "../../../apis/courses-departments";
+import { getAllCourses, getAllDepartments } from "../../../apis/courses-departments";
 
 function Profile() {
   const { getUser } = useAuthStore();
   const user = getUser();
   const navigate = useNavigate();
-  const [theme, toggleTheme] = useTheme();
+  const [theme] = useTheme();
 
   const [name, setName] = useState("");
   const [roll, setRoll] = useState("");

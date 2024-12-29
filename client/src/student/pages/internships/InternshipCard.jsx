@@ -9,7 +9,7 @@ function InternshipCard({ arr }) {
   const navigate = useNavigate();
   const { getUser } = useAuthStore();
   const [applied, setApplied] = useState(false);
-  const [theme, toggleTheme] = useTheme();
+  const [theme] = useTheme();
   const user = getUser();
   const handleLearnMore = () => {
     navigate(`/student/internships/internship/${arr._id}`);

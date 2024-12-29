@@ -7,7 +7,7 @@ export default function StudentHome() {
   const recommendedJobs = [];
   const appliedJobs = [];
 
-  const { data, loading, error } = useFetch("https://jsonplaceholder.typicode.com/todos/1");
+  const { loading, error } = useFetch("https://jsonplaceholder.typicode.com/todos/1");
 
   if (loading) return <Skeleton />;
   if (error) return <InternalServerErrorPage />;

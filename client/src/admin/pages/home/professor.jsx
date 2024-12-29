@@ -1,9 +1,9 @@
-import { Button, Flex, message } from "antd";
+import { Button, message } from "antd";
 import { Card, Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllRecruiters } from "../../../apis/recruiter";
-import { banRecruiter, removeRecruiter, verifyRecruiter } from "../../../apis/admin";
+import { banRecruiter, verifyRecruiter } from "../../../apis/admin";
 
 export default function ProfessorsPage() {
   const navigate = useNavigate();
@@ -13,10 +13,6 @@ export default function ProfessorsPage() {
     fetchProfessors();
   }, []);
 
-  const refreshProfessors = async () => {
-    await fetchProfessors();
-  };
-
   const fetchProfessors = async () => {
     const response = await getAllRecruiters(navigate);
     setRecruiters(response.data);
@@ -24,24 +20,23 @@ export default function ProfessorsPage() {
 
   const handleVerify = async (id) => {
     const res = await verifyRecruiter(id, navigate);
-    if(res.status === "success"){
-        message.success({ content: res.message});
-    }else{
-      message.error({ content: res.message})
+    if (res.status === "success") {
+      message.success({ content: res.message });
+    } else {
+      message.error({ content: res.message });
     }
   };
 
   const handleBan = async (id) => {
-      const res = await banRecruiter(id, navigate);
-      console.log(res);
+    const res = await banRecruiter(id, navigate);
+    console.log(res);
 
-      if(res.status == "success"){
-        message.success({ content: res.message });
-      }else{
-        message.error({ content: res.message })
-      }
+    if (res.status == "success") {
+      message.success({ content: res.message });
+    } else {
+      message.error({ content: res.message });
+    }
   };
-
 
   return (
     <div>
@@ -87,10 +82,16 @@ export default function ProfessorsPage() {
                   </p>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <Button style={{ margin: "10px" }} type="primary" onClick={() => handleVerify(recruiter._id)}>
+                  <Button
+                    style={{ margin: "10px" }}
+                    type="primary"
+                    onClick={() => handleVerify(recruiter._id)}>
                     Verify Recruiter
                   </Button>
-                  <Button style={{ margin: "10px" }} type="primary" onClick={() => handleBan(recruiter._id)}>
+                  <Button
+                    style={{ margin: "10px" }}
+                    type="primary"
+                    onClick={() => handleBan(recruiter._id)}>
                     Ban Recruiter
                   </Button>
                 </div>

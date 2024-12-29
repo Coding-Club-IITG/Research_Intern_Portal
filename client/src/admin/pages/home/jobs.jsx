@@ -1,4 +1,4 @@
-import { Button, Flex } from "antd";
+import { Button} from "antd";
 import { Card, Col, Row } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ export default function JobPage() {
       setJobs(res.data || []);
     }
     getJobs();
-  }, []);
+  }, [navigate]);
 
   const handleDelete = async (jobId) => {
     const confirmed = window.confirm("Are you sure you want to delete this job?");

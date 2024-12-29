@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { message, DatePicker, Select } from "antd";
+import { message } from "antd";
 import ProfilePic from "../../../root-components/ProfilePic";
 import QualificationCard from "./QualificationCard";
 import QualificationForm from "./QualificationForm";
@@ -37,12 +37,6 @@ function Profile() {
         }
 
         let deptId = res.data?.department || "Select";
-        let deptName = "Select";
-
-        if (deptId !== "Select") {
-          const dept = await getDepartmentById(deptId, navigate);
-          deptName = dept.data?.name || "Select";
-        }
 
         setName(res.data?.name || "");
         setEmail(res.data?.email || "");

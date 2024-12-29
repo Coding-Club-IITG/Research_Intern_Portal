@@ -12,7 +12,7 @@ export default function Overview() {
   const { getUser } = useAuthStore();
   const navigate = useNavigate();
   const [dept, setDept] = useState(null);
-  const [theme, toggleTheme] = useTheme();
+  const [theme] = useTheme();
 
   const user = getUser();
 

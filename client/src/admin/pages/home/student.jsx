@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Button, Flex } from "antd";
+import { Button } from "antd";
 import { Card, Col, Row } from "antd";
 import { removeStudent } from "../../../apis/admin";
 import { useNavigate } from "react-router-dom";
-import { getAllStudents, getStudent } from "../../../apis/student";
+import { getAllStudents } from "../../../apis/student";
 
 export default function StudentPage() {
   const [Students, setStudents] = useState([]);

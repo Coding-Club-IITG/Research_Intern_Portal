@@ -9,7 +9,7 @@ function Form() {
   const { getUser } = useAuthStore();
   const user = getUser();
   const navigate = useNavigate();
-  const [theme, toggleTheme] = useTheme();
+  const [theme] = useTheme();
 
   const [formData, setFormData] = useState({
     title: "",

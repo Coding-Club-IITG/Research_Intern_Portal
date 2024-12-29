@@ -16,7 +16,7 @@ export default function Dashboard() {
       setProfessors(response.data);
     };
     fetchProfessors();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -24,7 +24,7 @@ export default function Dashboard() {
       setStudents(response.data);
     };
     fetchStudents();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -32,7 +32,7 @@ export default function Dashboard() {
       setJobs(response.data);
     };
     fetchJobs();
-  }, []);
+  }, [navigate]);
 
   const Active_recruiters = Professors.filter((recruiter) => recruiter.isActive).length;
   const Active_jobs = Jobs.filter((job) => job.isActive).length;
