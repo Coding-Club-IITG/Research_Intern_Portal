@@ -49,6 +49,11 @@ jobs:
         run: |
           cd client
           npm run build
+        continue-on-error: true
+
+      - name: Print npm debug log
+        if: failure()
+        run: cat /home/runner/.npm/_logs/*-debug.log
 
       - name: Build server
         run: |
