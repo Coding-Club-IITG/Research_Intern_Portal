@@ -24,12 +24,11 @@ jobs:
 
       - name: Restart Backend with PM2 (Only if Running)
         run: |
-          if pm2 list | grep -q "backend"; then
-            pm2 restart backend
+          if pm2 describe backend > /dev/null 2>&1; then
+            pm2 restart backend --update-env
           else
             pm2 start server/src/index.js --name backend
           fi
-          pm2 save
 
       - name: Restart Nginx
         run: sudo systemctl restart nginx
