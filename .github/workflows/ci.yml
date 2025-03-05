@@ -25,7 +25,7 @@ jobs:
       - name: Start or Restart server with PM2
         working-directory: server # Adjust if needed
         run: |
-          pm2 start index.js --name server || pm2 restart server
+          pm2 start src/index.js --name server || pm2 restart server
           pm2 save
 
       - name: Restart Nginx
