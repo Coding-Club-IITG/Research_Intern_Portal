@@ -3,9 +3,9 @@ import { NavLink } from "react-router-dom";
 
 const App = () => {
   return (
-    <div className=" dark:bg-zinc-900">
+    <div>
       <h1 className="text-3xl font-bold mb-4 dark:text-white">Edit your Profile</h1>
-      <div className="border-b border-white mb-6 dark:border-gray-400">
+      <div className="border-b mb-6 dark:border-gray-400">
         <ul className="flex gap-8 font-xl mt-6 mb-2">
           <li>
             <NavLink

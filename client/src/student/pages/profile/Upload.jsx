@@ -14,7 +14,8 @@ const { Dragger } = Upload;
 const props = {
   name: "file",
   multiple: true,
-  action: "http://localhost:8000/api/v1/students/upload", // Change this to your backend API URL
+  action: "http://localhost:8000/api/v1/students/upload", 
+  withCredentials: true,
 
   onChange(info) {
     const { status, file } = info;

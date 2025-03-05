@@ -76,7 +76,7 @@ export const onedriveRedirect = async (req, res) => {
 
     const jwtToken = jwt.sign(jwtPayload, "fdgt4t93xzc3252523");
 
-    res.cookie("jwt", jwtToken, {
+    res.cookie("jwt", jwtPayload, {
       httpOnly: false,
       secure: false,
       maxAge: 1000 * 60 * 60 * 24,

@@ -26,7 +26,7 @@ setupSwagger(app);
 
 app.use(
   cors({
-    origin: "*", // change this to the frontend url
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -40,12 +40,12 @@ app.use("/", authRoutes);
 //app.get("/upload", verifyJWT, uploadFile);
 
 // admin routes
-app.use("/api/v1/admin/controls", adminControlRouter);
-app.use("/api/v1/admin/updates", adminUpdateRoutes);
-app.use("/api/v1/admin/departments", adminDepartmentNameChangeRouter);
+app.use("/api/v1/admin/controls", verifyJWT, adminGuard, adminControlRouter);
+app.use("/api/v1/admin/updates", verifyJWT, adminGuard, adminUpdateRoutes);
+app.use("/api/v1/admin/departments", verifyJWT, adminDepartmentNameChangeRouter);
 
 // student routes
-app.use("/api/v1/students", studentRoutes);
+app.use("/api/v1/students", verifyJWT, studentRoutes);
 
 // app.use("/api/v1/recruiters", verifyJWT, recruiterGuard, recruiterRoutes);
 app.use("/api/v1/recruiters", recruiterRoutes);

@@ -139,7 +139,7 @@ function Profile() {
   };
 
   return (
-    <div className="flex flex-col space-y-4 min-h-screen">
+    <div className="flex flex-col space-y-4 min-h-screen bg-white px-4 py-6 rounded-md dark:bg-zinc-900">
       <div className="flex w-full space-x-4 flex-wrap">
         <div className="basis-full md:basis-1/3 p-4">
           <div className="font-bold dark:text-white">About</div>

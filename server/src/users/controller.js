@@ -6,6 +6,7 @@ import Student from "../students/models/student.js";
 import logger from "../utils/logger.js";
 import Admin from "../admin/models/admin.js";
 import axios from "axios";
+import { adminList } from "./admin-list.js";
 // import Admin from "../admin/models/updates.js"
 
 export const createUser = async (data) => {
@@ -29,12 +30,20 @@ export const createUser = async (data) => {
         updatedAt: new Date(),
       });
     } else if (typeOfUser === roles.ADMIN) {
-      user = await Admin.create({
-        name,
-        email,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      });
+      // console.log(adminList.includes(email));
+
+      if(!adminList.includes(email)){
+        throw new Error("You are not authorized to create an admin account");
+      }
+
+      // if(adminList.includes(email)){
+        user = await Admin.create({
+          name,
+          email,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+      // }
     }
 
     const appUser = await User.create({

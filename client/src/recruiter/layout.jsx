@@ -14,7 +14,7 @@ const AppLayout = () => {
         <div className="md:w-20 lg:w-28 shadow-md bg-white dark:bg-zinc-900">
           <LeftNav />
         </div>
-        <div className="flex-1 p-8 md:p-4 lg:p-8 overflow-y-scroll bg-slate-50 dark:bg-zinc-900">
+        <div className="flex-1 p-8 md:p-4 lg:p-8 overflow-y-scroll bg-slate-50 dark:bg-black">
           <Outlet />
         </div>
       </div>

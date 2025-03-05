@@ -1,17 +1,21 @@
 import jwt from "jsonwebtoken";
 
 const verifyJWT = (req, res, next) => {
-  const token = req.cookies.jwt;
+  const token = req?.cookies?.jwt?.access_token;
+  const user = req?.cookies?.user;
+
+  const parseUser = JSON.parse(user);
+  // console.log(parseUser);
+
   if (!token) {
     return res.status(403).json({ status: "error", message: "Forbidden: No token provided", data: null });
   }
 
   try {
-    const jwtSecret = "fdgt4t93xzc3252523";
-    const decoded = jwt.verify(token, jwtSecret);
-
-    req.user = decoded;
+    req.user = parseUser;
+    req.user.token = token;
     next();
+
   } catch (err) {
     res.status(401).json({ status: "error", message: "Unauthorized: Invalid token", data: null });
   }

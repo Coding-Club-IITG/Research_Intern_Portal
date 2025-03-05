@@ -13,7 +13,9 @@ export function useFetch(url) {
     (async function () {
       try {
         setLoading(true);
-        const response = await axios.get(url);
+        const response = await axios.get(url, {
+          withCredentials: true,
+        });
         setData(response.data);
         setMessage(response.data.message);
       } catch (err) {

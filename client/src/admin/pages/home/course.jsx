@@ -24,6 +24,8 @@ export default function Course() {
     try {
       const response = await axios.post("http://localhost:8000/api/v1/admin/departments/course", {
         name: newcourse
+      }, {
+        withCredentials: true
       });
       if (response.data.status === "success") {
         setCourses([...courses, response.data.data]);
@@ -41,6 +43,8 @@ export default function Course() {
         `http://localhost:8000/api/v1/admin/departments/course/${courseId}`,
         {
           name: updatedcourseName
+        }, {
+        withCredentials: true
         }
       );
       if (response.data.status === "success") {

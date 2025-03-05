@@ -26,6 +26,8 @@ export default function Department() {
         "http://localhost:8000/api/v1/admin/departments/department",
         {
           name: newDepartment
+        }, {
+          withCredentials: true
         }
       );
       if (response.data.status === "success") {
@@ -44,6 +46,8 @@ export default function Department() {
         `http://localhost:8000/api/v1/admin/departments/department/${departmentId}`,
         {
           name: updatedDepartmentName
+        }, {
+        withCredentials: true
         }
       );
       if (response.data.status === "success") {

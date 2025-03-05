@@ -69,7 +69,7 @@ const LeftNav = () => {
           }
           exact>
           <BugAntIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-          <span className="mt-1 max-sm:text-xs">Bug Report</span>
+          <span className="mt-1 max-sm:text-xs">Report Bug</span>
         </NavLink>
       </div>
     </div>
