@@ -433,3 +433,7 @@
 {"level":"error","message":"Recruiter not found with ID 67c5d1df6bfa630e180415d9","timestamp":"2025-03-03T16:11:45.378Z"}
 {"level":"error","timestamp":"2025-03-03T16:58:22.460Z"}
 {"level":"error","timestamp":"2025-03-03T17:00:22.004Z"}
+{"level":"error","message":"unable to connect to db , MongoParseError: Invalid scheme, expected connection string to start with \"mongodb://\" or \"mongodb+srv://\"","timestamp":"2025-03-05T16:30:37.070Z"}
+{"level":"error","timestamp":"2025-03-05T16:30:46.763Z"}
+{"level":"error","timestamp":"2025-03-05T16:30:58.185Z"}
+{"level":"error","timestamp":"2025-03-05T16:31:21.684Z"}

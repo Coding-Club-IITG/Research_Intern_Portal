@@ -1,61 +1,32 @@
-name: CI/CD Pipeline
+name: Deploy to AWS Server
 
 on:
   push:
     branches:
       - master
-  pull_request:
-    branches:
-      - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
+  deploy:
+    runs-on: self-hosted # Using your GitHub self-hosted runner
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 22 # Adjust based on your project
 
-      - name: Install dependencies for client
+      - name: Install backend dependencies
+        working-directory: server # Adjust based on your server path
+        run: npm install
+
+      - name: Start or Restart server with PM2
+        working-directory: server # Adjust if needed
         run: |
-          cd client
-          npm install
+          pm2 start index.js --name server || pm2 restart server
+          pm2 save
 
-      - name: Install dependencies for server
-        run: |
-          cd server
-          npm install
-
-      #   - name: Run tests for client
-      #     run: |
-      #       cd client
-      #       npm test -- --passWithNoTests
-
-      #   - name: Run tests for server
-      #     run: |
-      #       cd server
-      #       npm test -- --passWithNoTests
-
-      - name: Build client
-        run: |
-          cd client
-          npm run build
-
-      - name: Build server
-        run: |
-          cd server
-          npm run build
-
-      - name: Deploy to production
-        if: github.ref == 'refs/heads/master'
-        run: |
-          echo "Deploying to production..."
+      - name: Restart Nginx
+        run: sudo systemctl restart nginx
