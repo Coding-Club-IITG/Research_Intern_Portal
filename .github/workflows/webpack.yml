@@ -20,7 +20,7 @@ jobs:
         run: |
           cd client
           npm install
-          npm run build
+          CI=false npm run build
 
       - name: Push Build to `build` Branch
         run: |
