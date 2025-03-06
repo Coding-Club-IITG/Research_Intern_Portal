@@ -30,7 +30,6 @@ jobs:
       - name: Push Build to `build` Branch
         run: |
           git checkout --orphan build
-          git rm -rf .
           git add -f client/build
           git commit -m "Deploy: update build"
           git push -f origin build
