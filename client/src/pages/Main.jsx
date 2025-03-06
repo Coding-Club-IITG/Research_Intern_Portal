@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function MainLandingPage() {
+  // console.log(process.env.REACT_APP_BACKEND_URL);
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       <header className="fixed top-0 left-0 right-0 bg-white p-5 shadow-md z-50">

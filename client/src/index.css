@@ -4,8 +4,20 @@
 
 @import "tailwindcss/utilities";
 
-body {
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body{
   @apply bg-white text-black;
+}
+
+body {
+  height: 100%;
+  position: fixed;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .custom-layout-height {
@@ -55,3 +67,4 @@ body {
   background-color: #27272a !important;
   color: #f9fafb !important;
 }
+
