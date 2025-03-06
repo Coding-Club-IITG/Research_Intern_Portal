@@ -19,9 +19,8 @@ jobs:
       - name: Build
         run: |
           cd client
-          npm install -D webpack-cli
           npm install
-          npx webpack
+          npm run build
 
       - name: Push Build to `build` Branch
         run: |
