@@ -48,5 +48,5 @@ jobs:
 
       - name: Deploy to AWS EC2
         run: |
-          cd ~/RESEARCH_INTERN_PORTAL
+          cd ~/Research_Intern_Portal
           git pull origin build
