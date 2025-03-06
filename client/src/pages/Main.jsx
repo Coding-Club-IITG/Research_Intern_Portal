@@ -19,7 +19,7 @@ function MainLandingPage() {
 
           <div>
             <button className="font-bold text-white bg-red-500 hover:bg-red-600 hover:shadow-lg cursor-pointer px-4 py-2 rounded-lg">
-              <Link to="/login">Login</Link>
+              <Link to="/login">Login with outlook</Link>
             </button>
           </div>
         </nav>
