@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Build
+      - name: Install dependencies & Build
         run: |
           cd client
           npm install
@@ -27,16 +27,13 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Pull latest changes from remote
-        run: git pull origin build
-
       - name: Push Build to `build` Branch
         run: |
-          cd client
-          git checkout -b build
-          git add -f build
+          git checkout --orphan build
+          git rm -rf .
+          git add -f client/build
           git commit -m "Deploy: update build"
-          git push origin build
+          git push -f origin build
 
   deploy:
     name: Deploy to AWS EC2
@@ -52,4 +49,5 @@ jobs:
       - name: Deploy to AWS EC2
         run: |
           cd ~/Research_Intern_Portal
-          git pull origin build
+          git fetch --all
+          git reset --hard origin/build
