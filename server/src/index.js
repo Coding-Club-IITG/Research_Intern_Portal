@@ -26,7 +26,7 @@ setupSwagger(app);
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://rip.codingclubiitg.in"],
     credentials: true,
   })
 );
