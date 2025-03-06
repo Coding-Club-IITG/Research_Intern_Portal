@@ -27,7 +27,8 @@ jobs:
           if pm2 describe backend > /dev/null 2>&1; then
             pm2 restart backend --update-env
           else
-            pm2 start server/src/index.js --name backend
+            cd ~/Research_Intern_Portal/server/
+            pm2 start src/index.js --name backend
           fi
 
           pm2 save

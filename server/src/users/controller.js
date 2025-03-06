@@ -13,7 +13,7 @@ export const createUser = async (data) => {
   try {
     const { name, email, typeOfUser } = data;
 
-    let user;
+    let user = {};
 
     if (typeOfUser === roles.STUDENT) {
       user = await Student.create({
