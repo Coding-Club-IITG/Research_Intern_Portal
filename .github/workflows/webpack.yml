@@ -27,6 +27,9 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Pull latest changes from remote
+        run: git pull origin build
+
       - name: Push Build to `build` Branch
         run: |
           cd client
