@@ -12,6 +12,8 @@ function DriveStudentList() {
   const [applicants, setApplicants] = useState([]);
   const navigate = useNavigate();
 
+  console.log(driveIndex);
+
   function handleView(roll) {
     navigate(`/recruiter/profile/student/${roll}`);
   }

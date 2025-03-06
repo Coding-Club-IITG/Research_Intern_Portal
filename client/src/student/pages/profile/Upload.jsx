@@ -2,11 +2,12 @@ import React from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import { message, Upload } from "antd";
 import { z } from "zod";
+import { backendURL } from "../../../apis/server";
 
 const fileSchema = z.object({
   name: z.string().nonempty(),
   size: z.number().max(5 * 1024 * 1024, "File size should be less than 5MB"),
-  type: z.enum(["image/jpeg", "image/png", "application/pdf"])
+  type: z.enum(["application/pdf"])
 });
 
 const { Dragger } = Upload;
@@ -14,7 +15,7 @@ const { Dragger } = Upload;
 const props = {
   name: "file",
   multiple: true,
-  action: "http://localhost:8000/api/v1/students/upload", 
+  action: `${backendURL}/api/v1/students/upload`, 
   withCredentials: true,
 
   onChange(info) {

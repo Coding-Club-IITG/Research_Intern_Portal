@@ -1,1 +1,3 @@
-export const backendURL = "https://rip.codingclubiitg.in/api";
+const url = process.env.BACKEND_URL;
+
+export const backendURL = url;
