@@ -22,6 +22,11 @@ jobs:
           npm install
           CI=false npm run build
 
+      - name: Set GitHub user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: Push Build to `build` Branch
         run: |
           cd client
