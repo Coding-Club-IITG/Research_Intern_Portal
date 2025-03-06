@@ -55,7 +55,7 @@ app.use("/api/v1/admin/bugs", bugRoutes);
 
 // test route
 app.get("/ping", (req, res) => {
-  return res.json({ message: "server is alive because of soumyadeep" });
+  return res.json({ message: "server is alive because of vm" });
 });
 
 // Last middleware if any error comes
