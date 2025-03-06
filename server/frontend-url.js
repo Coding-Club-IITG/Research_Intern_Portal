@@ -1,0 +1,1 @@
+export const frontendUrl = "https://rip.codingclubiitg.in";

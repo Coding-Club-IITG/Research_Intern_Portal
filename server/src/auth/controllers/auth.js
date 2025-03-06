@@ -5,6 +5,7 @@ import { roles } from "../../utils/roles.js";
 import { createUser, getUserFromToken } from "../../users/controller.js";
 import { User } from "../../users/model.js";
 import logger from "../../utils/logger.js";
+import { frontendUrl } from "../../../frontend-url.js";
 dotenv.config();
 
 export const onedriveLogin = async (req, res) => {
@@ -102,12 +103,12 @@ export const onedriveRedirect = async (req, res) => {
 
       switch (findUser.typeOfUser) {
         case roles.STUDENT:
-          return res.redirect("http://localhost:3000/student/");
+          return res.redirect(`${frontendUrl}/student/`);
         case roles.RECRUITER:
           // console.log("i am here 4");
-          return res.redirect("http://localhost:3000/recruiter/");
+          return res.redirect(`${frontendUrl}/recruiter/`);
         case roles.ADMIN:
-          return res.redirect("http://localhost:3000/admin/");
+          return res.redirect(`${frontendUrl}/admin/`);
         default:
           throw new Error("User type not recognized");
       }
@@ -136,11 +137,11 @@ export const onedriveRedirect = async (req, res) => {
 
     switch (state) {
       case roles.STUDENT:
-        return res.redirect("http://localhost:3000/student/");
+        return res.redirect(`${frontendUrl}/student/`);
       case roles.RECRUITER:
-        return res.redirect("http://localhost:3000/recruiter/");
+        return res.redirect(`${frontendUrl}/recruiter/`);
       case roles.ADMIN:
-        return res.redirect("http://localhost:3000/admin/");
+        return res.redirect(`${frontendUrl}/admin/`);
       default:
         return res.status(500).json({
           status: "error",
