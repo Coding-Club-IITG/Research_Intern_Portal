@@ -2,44 +2,45 @@ name: NodeJS with Webpack
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Use Node.js 22
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
-    - name: Build
-      run: |
-        npm install
-        npx webpack
-      
-    - name: Push Build to `build` Branch
-      run: |
-        git checkout -b build
-        git add -f dist
-        git commit -m "Deploy: update build"
-        git push origin build 
-        
+      - name: Build
+        run: |
+          cd client
+          npm install
+          npx webpack
+
+      - name: Push Build to `build` Branch
+        run: |
+          git checkout -b build
+          git add -f dist
+          git commit -m "Deploy: update build"
+          git push origin build
+
   deploy:
     name: Deploy to AWS EC2
     needs: build
-    runs-on: self-hosted 
+    runs-on: self-hosted
 
     steps:
-    - name: Checkout Build Branch
-      uses: actions/checkout@v4
-      with:
-        ref: build
+      - name: Checkout Build Branch
+        uses: actions/checkout@v4
+        with:
+          ref: build
 
-    - name: Deploy to AWS EC2
-      run: |
-        cd ~/RESEARCH_INTERN_PORTAL
-        git pull origin build  
+      - name: Deploy to AWS EC2
+        run: |
+          cd ~/RESEARCH_INTERN_PORTAL
+          git pull origin build
