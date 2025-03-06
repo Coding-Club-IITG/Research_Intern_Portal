@@ -1,1 +1,1 @@
-export const backendURL = "https://rip.codingclubiitg.in";
+export const backendURL = "https://rip.codingclubiitg.in/api";
