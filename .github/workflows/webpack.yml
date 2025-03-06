@@ -19,6 +19,7 @@ jobs:
       - name: Build
         run: |
           cd client
+          npm install -D webpack-cli
           npm install
           npx webpack
 
