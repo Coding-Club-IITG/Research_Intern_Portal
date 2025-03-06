@@ -54,5 +54,5 @@ jobs:
       - name: Restart Frontend with pm2
         run: |
           pm2 delete research-intern-portal || true
-          pm2 start "serve -s client/build -l 3003" --name "research-intern-portal"
+          pm2 start "serve -s ~/Research_Intern_Portal/client/build -l 3003" --name "research-intern-portal"
           pm2 save
