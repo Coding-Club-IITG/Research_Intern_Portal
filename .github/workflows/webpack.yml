@@ -25,7 +25,7 @@ jobs:
       - name: Push Build to `build` Branch
         run: |
           git checkout -b build
-          git add -f dist
+          git add -f build
           git commit -m "Deploy: update build"
           git push origin build
 
