@@ -30,5 +30,7 @@ jobs:
             pm2 start server/src/index.js --name backend
           fi
 
+          pm2 save
+
       - name: Restart Nginx
         run: sudo systemctl restart nginx
