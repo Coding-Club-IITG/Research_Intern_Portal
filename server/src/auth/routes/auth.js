@@ -1,5 +1,5 @@
 import express from "express";
-import { onedriveLogin, onedriveRedirect } from "../controllers/auth.js";
+import { logout, onedriveLogin, onedriveRedirect } from "../controllers/auth.js";
 const router = express.Router();
 
 /**
@@ -36,5 +36,6 @@ const router = express.Router();
  */
 router.get("/login", onedriveLogin);
 router.get("/", onedriveRedirect);
+router.get("/logout", logout);
 
 export default router;
