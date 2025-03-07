@@ -23,7 +23,7 @@ export default function Course() {
 
   const createCourse = async () => {
     try {
-      const response = await axios.post(`${backendURL}/api/v1/admin/departments/course1`, {
+      const response = await axios.post(`${backendURL}/api/v1/admin/departments/course`, {
         name: newcourse
       }, {
         withCredentials: true
