@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getRecruiter } from "../../../apis/recruiter";
-import { message } from "antd";
+import { deleteRecruiter, getRecruiter } from "../../../apis/recruiter";
+import { Button, message } from "antd";
 import useAuthStore from "../../../store/authStore";
 import { useNavigate } from "react-router-dom";
 import QualificationCard from "./QualificationCard";
@@ -50,9 +50,29 @@ export default function Overview() {
     getUser();
   }, [user.connection_id, navigate]);
 
+  async function deleteUser(){
+    message.loading({ content: "Deleting Profile...", key: "deleteProfile" });
+
+    const res = await deleteRecruiter(navigate);
+
+    if (!res || res.status === "error") {
+      message.destroy("deleteProfile");
+      message.error({ content: "Error deleting profile", key: "deleteProfile" });
+      return;
+    }else{
+      message.success({ content: "Profile deleted successfully", key: "deleteProfile" });
+      navigate("/login");
+    }
+
+    message.destroy("deleteProfile");
+  }
+
   return (
     <div>
       <div className="py-4">
+        <Button type="primary" danger onClick={deleteUser}>
+          Delete Profile
+        </Button>
         <div className="font-semibold dark:text-white">What students will see:</div>
       </div>
       <div className="max-w-4xl mx-auto p-6 rounded-lg mt-6 border dark:border-gray-600 dark:bg-zinc-900 border-gray-300 bg-white">

@@ -1,11 +1,21 @@
 import Jobs from "../models/jobs.js";
 import Student from "../../students/models/student.js";
 import logger from "../../utils/logger.js";
+import recruiter from "../models/recruiter.js";
 
 const createJob = async (req, res) => {
   try {
     const data = req.body;
-    // check is recruiter is verified or not;
+    const recruiter_data = await recruiter.findById(req?.user?.connection_id);
+
+    if(recruiter_data.isVerified === false){
+      return res.status(400).json({
+        message: "Recruiter not verified contact admin",
+        status: "error",
+        data: null,
+      });
+    }
+
     const job = await Jobs.create(data);
     return res.status(201).json({
       message: "Job created successfully",
@@ -243,7 +253,7 @@ const applyForJob = async (req, res) => {
     if (
       jobRequirement.cpi <= user.cpi &&
       jobRequirement.department == user.department &&
-      jobRequirement.study_year == user.study_year
+      new Date(job.last_date) >= new Date()
     ) {
       const apply = await Jobs.findByIdAndUpdate(job_id, {
         $push: { applicants: user_id },

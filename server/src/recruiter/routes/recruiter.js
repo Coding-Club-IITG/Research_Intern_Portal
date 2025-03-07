@@ -87,7 +87,10 @@ router
   .route("/:id")
   .get(getRecruiterById)
   .put(updateRecruiter)
-  .delete(deleteRecruiter);
+
+
+router.delete("/", deleteRecruiter);
+
 
 export default router;
 

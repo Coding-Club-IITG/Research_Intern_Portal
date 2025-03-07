@@ -15,6 +15,12 @@ const requirementSchema = new mongoose.Schema({
   },
 });
 
+const ApplicantStatus = {
+  PENDING: "pending",
+  ACCEPTED: "accepted",
+  REJECTED: "rejected",
+};
+
 const JobSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -56,7 +62,11 @@ const JobSchema = new mongoose.Schema({
   applicants: [
     {
       applicant: String,
-      enum: ["pending", "accepted", "rejected"],
+      status: {
+        type: String,
+        enum: Object.values(ApplicantStatus),
+        default: ApplicantStatus.PENDING,
+      },
     },
   ],
 

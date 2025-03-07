@@ -24,7 +24,7 @@ export const onedriveLogin = async (req, res) => {
         response_mode: "query",
         scope:
           "https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/User.Read offline_access",
-        state: "student", // we have to change this
+        state: "recruiter", // we have to change this
       });
     // console.log(authUrl)
     logger.info(`${authUrl}`);

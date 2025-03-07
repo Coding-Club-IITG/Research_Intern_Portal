@@ -3,6 +3,8 @@ import Recruiter from "../models/recruiter.js";
 import bcrypt from "bcrypt";
 import NotFound from "../../errors/Notfound.js";
 import logger from "../../utils/logger.js";
+import { User } from "../../users/model.js";
+import jobs from "../models/jobs.js";
 
 const createRecuiter = async (req, res) => {
   try {
@@ -108,9 +110,58 @@ const updateRecruiter = async (req, res) => {
 
 const deleteRecruiter = async (req, res) => {
   try {
-    const { id } = req.params;
-    await Recruiter.findByIdAndDelete(id);
-    logger.info(`Recruiter deleted successfully with ID ${id}`);
+    // console.log(req?.user);
+    const { user_id, connection_id } = req?.user;
+
+    // start mongodb transaction
+    const session = await Recruiter.startSession();
+    const user_session = await User.startSession();
+    const job_session = await jobs.startSession();
+
+    session.startTransaction();
+    user_session.startTransaction();
+    job_session.startTransaction();
+
+    const options = { session };
+    const options_user = { session: user_session };
+    const options_job = { session: job_session };
+
+    const user = await User.findById(user_id).session(user_session);
+    const recruiter = await Recruiter.findById(connection_id).session(session);
+
+    const allJobs = await jobs.find({ recruiter: user.connection_id }).session(job_session);
+
+    if (!recruiter || !user) {
+      logger.error(`Recruiter not found with ID ${user_id}`);
+      return res
+        .status(404)
+        .json({ status: "error", message: "Recruiter not found", data: {} });
+    }
+
+    if (allJobs.length > 0) {
+      for(let i = 0; i < allJobs.length; i++) {
+        try {
+          await jobs.findByIdAndDelete(allJobs[i]._id, options_job);   
+        } catch (error) {
+          console.log(error);
+          res.send(500).json({ status: "error", message: "Internal server error", data: {} });
+        }
+      }
+    }
+
+    await User.findByIdAndDelete(user_id).session(user_session);
+    await Recruiter.findByIdAndDelete(connection_id).session(session);
+
+    await session.commitTransaction();
+    await user_session.commitTransaction();
+    await job_session.commitTransaction();
+
+    session.endSession();
+    user_session.endSession();
+    job_session.endSession();
+
+    logger.info(`Recruiter deleted successfully with ID ${user_id}`);
+
     return res
       .status(200)
       .json({
@@ -119,6 +170,7 @@ const deleteRecruiter = async (req, res) => {
         data: {},
       });
   } catch (err) {
+    console.log(err);
     logger.error(err);
     res
       .status(500)
