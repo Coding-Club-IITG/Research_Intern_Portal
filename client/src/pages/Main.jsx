@@ -98,15 +98,17 @@ function MainLandingPage() {
         <nav className="flex items-center justify-between mx-auto">
           <img src="/rip_logo_light.png" className="h-[7vh]" alt="Research Intern Portal Logo" />
           <div>
-            <button className="font-bold text-white bg-blue-600 hover:bg-blue-700 hover:shadow-lg cursor-pointer px-4 py-2 rounded-lg">
-              <Link to="/login">Apply Now</Link>
-            </button>
+            <Link to="/login">
+              <button className="font-bold text-white bg-blue-600 hover:bg-blue-700 p-2 hover:shadow-lg cursor-pointer md:px-4 md:py-2 rounded-lg">
+                Login
+              </button>
+            </Link>
           </div>
         </nav>
       </header>
 
       <main className="flex-grow pt-[12vh] flex flex-col bg-slate-100">
-        <div className="flex flex-col sm:flex-row items-center h-auto sm:h-[90vh] px-6 sm:px-10 gap-5">
+        <div className="flex flex-col sm:flex-row items-center h-auto py-6 sm:h-[90vh] px-6 sm:px-10 gap-5">
           <section className="w-full sm:w-1/2 flex flex-col items-start text-left">
             <h2 className="text-3xl sm:text-5xl font-bold text-black">
               Find the perfect research internship for you.
@@ -122,7 +124,7 @@ function MainLandingPage() {
               <Link to="/login">Apply Now</Link>
             </button>
           </section>
-          <div className="w-full sm:w-1/2 flex justify-center sm:justify-start">
+          <div className="w-full md:w-1/2 md:flex justify-center md:justify-start hidden">
             <img
               src="/bg-landing.png"
               alt="Research Internship"
@@ -131,7 +133,7 @@ function MainLandingPage() {
           </div>
         </div>
 
-        <section className="flex flex-col justify-center items-center h-[90vh] bg-white text-center">
+        <section className="pt-10 md:pt-0 flex flex-col justify-center items-center md:h-[90vh] bg-white text-center">
           <div className="max-w-4xl mx-auto">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-600">
               Internship Programs
@@ -159,7 +161,7 @@ function MainLandingPage() {
           </div>
         </section>
 
-        <section className=" bg-gray-50 h-[90vh] flex flex-col items-center justify-center">
+        <section className="pt-10 md:pt-0 bg-gray-50 md:h-[90vh] flex flex-col items-center justify-center">
           <div className="text-center">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-600">
               Testimonials
@@ -171,7 +173,7 @@ function MainLandingPage() {
             </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto text-left">
+          <div className="p-6 mt-10 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto text-left">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
@@ -214,7 +216,7 @@ function MainLandingPage() {
         </section>
       </main>
 
-      <section className="flex flex-col bg-blue-600 text-white p-4 mt-auto h-[75vh] items-center justify-center">
+      <section className="flex flex-col bg-blue-600 text-white p-4 mt-auto md:h-[75vh] items-center justify-center">
         <div className="max-w-6xl mx-auto py-12">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div>

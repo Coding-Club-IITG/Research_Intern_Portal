@@ -14,10 +14,10 @@ function Applied() {
   useEffect(() => {
     async function getAppliedInternships() {
       const res = await getAppliedJobsByStudents(id, navigate);
-      if (res.status === "error") {
+      if (res.success === "false") {
         setAppliedInternships([]);
       } else {
-        const internshipPromises = res.data.map((internId) =>
+        const internshipPromises = res?.data && res?.data.map((internId) =>
           getJobById(internId, navigate).then((internship) => internship.data)
         );
 

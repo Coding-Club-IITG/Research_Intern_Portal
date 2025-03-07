@@ -7,17 +7,19 @@ import {
   CheckIcon,
   BugAntIcon
 } from "@heroicons/react/24/outline";
+import { Button } from "antd";
 
 const LeftNav = () => {
   return (
-    <div className="w-full md:w-20 lg:w-28 h-18 md:h-full shadow-md bg-white dark:bg-zinc-900 text-gray-800 dark:text-white">
-      <div className="md:space-y-4 md:mt-4 flex md:flex-col md:px-0 px-2 md:gap-2 gap-6 max-sm:items-center max-sm:justify-center overscroll-x-scroll">
+    <div className="justify-between flex flex-col w-full md:w-40 lg:w-72 h-18 md:h-full shadow-md bg-white dark:bg-zinc-900 text-gray-800 dark:text-white px-8">
+      <div className="md:space-y-4 md:mt-4 flex md:flex-col md:px-0 px-4 md:gap-2 gap-2 max-sm:items-center max-sm:justify-center overscroll-x-scroll">
+        <h2 className="text-lg font-semibold tracking-tight md:block hidden">Navigation</h2>
         <NavLink
           to="home"
           className={({ isActive }) =>
             isActive
-              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-blue-700 dark:text-blue-300 text-xs md:text-base border-b-2 pb-2 border-blue-700 dark:border-white mt-1"
-              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "flex gap-2 items-center cursor-pointer bg-gray-200 p-2 font-bold hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-xs md:text-base mt-1"
+              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
           }
           exact>
           <HomeIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
@@ -28,8 +30,8 @@ const LeftNav = () => {
           to="profile"
           className={({ isActive }) =>
             isActive
-              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-blue-700 dark:text-blue-300 text-xs md:text-base border-b-2 pb-2 border-blue-700 dark:border-white mt-1"
-              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "flex gap-2 items-center p-2 cursor-pointer bg-gray-200 font-bold  hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2  text-xs md:text-base mt-1"
+              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
           }
           exact>
           <UserIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
@@ -40,8 +42,8 @@ const LeftNav = () => {
           to="internships"
           className={({ isActive }) =>
             isActive
-              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-blue-700 dark:text-blue-300 text-xs md:text-base border-b-2 pb-2 border-blue-700 dark:border-white mt-1"
-              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "flex gap-2 items-center p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 font-bold  text-xs md:text-base mt-1"
+              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
           }
           exact>
           <BriefcaseIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
@@ -52,8 +54,8 @@ const LeftNav = () => {
           to="applied"
           className={({ isActive }) =>
             isActive
-              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-blue-700 dark:text-blue-300 text-xs md:text-base border-b-2 pb-2 border-blue-700 dark:border-white mt-1"
-              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "flex gap-2 items-center p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-blue-700 dark:text-blue-300 text-xs md:text-base mt-1"
+              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
           }
           exact>
           <CheckIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
@@ -64,13 +66,34 @@ const LeftNav = () => {
           to="bugReport"
           className={({ isActive }) =>
             isActive
-              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-blue-700 dark:text-blue-300 text-xs md:text-base border-b-2 pb-2 border-blue-700 dark:border-white mt-1"
-              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "flex gap-2 items-center p-2 cursor-pointer bg-gray-200 hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 font-bold dark:text-blue-300 text-xs md:text-base  mt-1"
+              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
           }
           exact>
           <BugAntIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
           Report Bug
         </NavLink>
+        <h2 className="text-lg font-semibold tracking-tight md:block hidden">Resources</h2>
+        <NavLink
+          to="faq"
+          className={({ isActive }) =>
+            isActive
+              ? "md:flex hidden gap-2 items-center p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-blue-700 dark:text-blue-300 text-xs md:text-base mt-1"
+              : "md:flex hidden gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+          }
+          exact>
+          <UserIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+          FAQs
+        </NavLink>
+      </div>
+      <div className="mt-auto py-8 md:block hidden">
+        <div className="rounded-lg bg-gray-200 p-3">
+          <h3 className="mb-1 font-medium">Need help?</h3>
+          <p className="text-xs text-muted-foreground">Contact our support team for assistance with any issues.</p>
+          <Button className="mt-2 w-full text-xs" size="sm">
+            Contact Support
+          </Button>
+        </div>
       </div>
     </div>
   );
