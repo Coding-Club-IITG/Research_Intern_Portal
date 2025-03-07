@@ -17,7 +17,8 @@ export default function StudentProfileView() {
     const getUser = async () => {
       try {
         const response = await getStudentById(id, navigate);
-        console.log(response);
+        console.log(response.data);
+        setStudent(response.data);
       } catch (error) {
         console.error("Error in fetching user data:", error);
         navigate("/500");
