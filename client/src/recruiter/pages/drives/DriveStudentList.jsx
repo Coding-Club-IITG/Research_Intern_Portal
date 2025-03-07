@@ -23,18 +23,9 @@ function DriveStudentList() {
       // message.loading({ content: "Loading...", key: "loading" });
       setLoading(true);
       const res = await getAllStudentsOfJob(driveIndex, navigate);
-      const updatedStudents = await Promise.all(
-        res.data.map(async (student) => {
-          const cou = await getCourseById(student.course);
-          student.course = cou.data.name;
-          const dept = await getDepartmentById(student.department);
-          student.department = dept.data.name;
-          return student;
-        })
-      );
       if (res.status === "success") {
         // message.destroy("loading");
-        setApplicants(updatedStudents);
+        setApplicants(res.data);
       }
       setLoading(false);
     }

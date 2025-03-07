@@ -22,6 +22,9 @@ const createJob = async (req, res) => {
       data: job,
       status: "success",
     });
+
+    // microservice call to send email or notification to students
+
   } catch (error) {
     // console.error(error);
     logger.error(error);

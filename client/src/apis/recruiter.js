@@ -127,3 +127,15 @@ export const getAllStudentsOfJob = async (id, navigate) => {
     return error?.response?.data || error;
   }
 };
+
+export const getStudentById = async (id, navigate) => {
+  try {
+    const response = await axios.get(`${backendURL}/api/v1/recruiters/student-data/${id}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    navigate("/500");
+    return error?.response?.data || error;
+  }
+}

@@ -5,6 +5,7 @@ import NotFound from "../../errors/Notfound.js";
 import logger from "../../utils/logger.js";
 import { User } from "../../users/model.js";
 import jobs from "../models/jobs.js";
+import student from "../../students/models/student.js";
 
 const createRecuiter = async (req, res) => {
   try {
@@ -25,6 +26,37 @@ const createRecuiter = async (req, res) => {
       .json({ status: "error", message: "Internal server error", data: {} });
   }
 };
+
+
+const getStudentById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const studentData = await student.findById(id);
+    
+    if (!studentData) {
+      logger.error(`Student not found with ID ${id}`);
+      return res
+        .status(404)
+        .json({ status: "error", message: "Student not found", data: {} });
+    }
+
+    logger.info(`Student retrieved successfully with ID ${id}`);
+
+    return res
+      .status(200)
+      .json({
+        status: "success",
+        message: "Student retrieved successfully",
+        data: studentData,
+      });
+
+  } catch (err) {
+    logger.error(err);
+    res
+      .status(500)
+      .json({ status: "error", message: "Internal server error", data: {} });
+  }
+}
 
 const getRecruiters = async (req, res) => {
   try {
@@ -184,4 +216,5 @@ export {
   getRecruiterById,
   updateRecruiter,
   deleteRecruiter,
+  getStudentById
 };
