@@ -52,8 +52,8 @@ const Overview = () => {
         <div className="font-semibold dark:text-white">What recruiters will see:</div>
       </div>
       <div className="bg-white dark:bg-zinc-900 max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300 dark:border-none">
-        <div className="max-sm:flex-col max-sm:items-start flex items-center mb-4">
-          <div className="w-32 h-32 rounded-full overflow-hidden flex items-center justify-center mr-6">
+        <div className="p-2 max-sm:flex-col max-sm:items-start flex items-center mb-4">
+          <div className="w-20 h-20 md:w-32 md:h-32 rounded-full overflow-hidden flex items-center justify-center mr-6">
             <img
               src={
                 profileData?.profilePicUrl ||
@@ -63,18 +63,18 @@ const Overview = () => {
               className="object-cover w-full h-full rounded-full dark:text-white"
             />
           </div>
-          <div>
-            <h1 className="text-3xl font-semibold text-gray-800 dark:text-white">
+          <div className="mt-4">
+            <h1 className="text-xl md:text-3xl font-semibold text-gray-800 dark:text-white">
               {profileData?.name || ""}
             </h1>
-            <p className="text-gray-600 mt-1 inline-block rounded-md dark:text-gray-300">
+            <p className="text-sm md:text-lg text-gray-600 mt-1 inline-block rounded-md dark:text-gray-300">
               Current CGPA: {profileData?.CGPA || ""}
             </p>{" "}
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300">
               {course?.name || ""} from department of {dept?.name || ""}
             </p>{" "}
             {/* Location and Timezone */}
-            <p className="text-gray-600 dark:text-gray-300">
+            <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300">
               Year of Graduation : {daysjs(profileData?.yearOfGrad).$y || ""}
             </p>
           </div>

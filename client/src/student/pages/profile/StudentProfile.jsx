@@ -446,7 +446,7 @@ function Profile() {
                 onChange={(e) => setNewInterest(e.target.value)}
               />
               <button
-                className="basis-28 p-2 bg-indigo-600  dark:hover:bg-indigo-700 dark:text-black text-white rounded-md hover:bg-indigo-700 transition duration-200"
+                className="basis-28 p-1 md:p-2 bg-blue-600  dark:hover:bg-blue-700 dark:text-black text-white rounded-md hover:bg-blue-700 transition duration-200"
                 onClick={AddInterest}>
                 Add
               </button>
@@ -610,7 +610,7 @@ function Profile() {
               onChange={(e) => setNewSkill(e.target.value)}
             />
             <button
-              className="p-2 bg-indigo-600  text-white rounded-md hover:bg-indigo-700 transition duration-200 dark:text-black dark:hover:bg-indigo-700"
+              className="p-2 bg-blue-600  dark:hover:bg-blue-700  text-white rounded-md transition duration-200 dark:text-black hover:bg-blue-700"
               onClick={AddSkill}>
               Add
             </button>
@@ -642,7 +642,7 @@ function Profile() {
       <div className="flex justify-end p-4">
         <button
           type="primary"
-          className="p-2 bg-indigo-600  dark:hover:bg-indigo-700 text-white rounded-md hover:bg-indigo-700 transition duration-200 dark:text-black"
+          className="p-2 bg-blue-600  dark:hover:bg-blue-700 text-white rounded-md hover:bg-blue-700 transition duration-200 dark:text-black"
           onClick={handleSaveProfile}>
           Save Profile
         </button>

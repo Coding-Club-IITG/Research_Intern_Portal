@@ -6,7 +6,7 @@ import "../../src/index.css";
 
 const AppLayout = () => {
   return (
-    <div className="flex flex-col h-dvh max-h-screen bg-white dark:bg-slate-800">
+    <div className="flex flex-col h-dvh md:h-screen max-h-screen bg-white dark:bg-slate-800">
       <div className="h-16 max-h-16">
         <TopNav />
       </div>
