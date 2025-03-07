@@ -32,7 +32,7 @@ function Applied() {
   const [appliedInternships, setAppliedInternships] = useState([]);
 
   return (
-    <div>
+    <div className="p-10">
       <div className="text-2xl font-bold mb-4 dark:text-white">Your Applied Internships</div>
       <div>
         {appliedInternships.length > 0 ? (

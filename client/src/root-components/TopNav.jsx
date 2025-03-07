@@ -81,7 +81,7 @@ const TopNav = () => {
   );
 
   return (
-    <div className="sticky top-0 z-30 flex items-center gap-4 dark:border-0 border-b bg-white dark:bg-zinc-900 px-4 md:px-6">
+    <div className="dark:border-b border-white sticky top-0 z-30 flex items-center gap-4 dark:border-0 border-b bg-white dark:bg-zinc-900 px-4 md:px-6">
       <img
         src={theme === "dark" ? "/rip_logo_dark.png" : "/rip_logo_light.png"}
         className="h-14"

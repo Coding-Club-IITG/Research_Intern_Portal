@@ -18,11 +18,11 @@ const LeftNav = () => {
           to="home"
           className={({ isActive }) =>
             isActive
-              ? "flex gap-2 items-center cursor-pointer bg-gray-200 p-2 font-bold hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-xs md:text-base mt-1"
-              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "flex gap-2 items-center cursor-pointer dark:bg-blue-600 bg-gray-200 p-2 font-bold hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 text-xs md:text-base mt-1"
+              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 text-gray-600 dark:text-white text-xs md:text-base mt-1"
           }
           exact>
-          <HomeIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+          <HomeIcon className="h-6 w-6 text-gray-700 dark:text-white" />
           Home
         </NavLink>
 
@@ -30,11 +30,11 @@ const LeftNav = () => {
           to="profile"
           className={({ isActive }) =>
             isActive
-              ? "flex gap-2 items-center p-2 cursor-pointer bg-gray-200 font-bold  hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2  text-xs md:text-base mt-1"
-              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "flex gap-2 items-center p-2 cursor-pointer dark:bg-blue-600 bg-gray-200 font-bold  hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2  text-xs md:text-base mt-1"
+              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 text-gray-600 dark:text-white text-xs md:text-base mt-1"
           }
           exact>
-          <UserIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+          <UserIcon className="h-6 w-6 text-gray-700 dark:text-white" />
           Profile
         </NavLink>
 
@@ -42,11 +42,11 @@ const LeftNav = () => {
           to="internships"
           className={({ isActive }) =>
             isActive
-              ? "flex gap-2 items-center p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 font-bold  text-xs md:text-base mt-1"
-              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "flex gap-2 items-center p-2 cursor-pointer dark:bg-blue-600 hover:bg-gray-200 dark:hover:bg-blue-700 rounded py-2 font-bold  text-xs md:text-base mt-1"
+              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 text-gray-600 dark:text-white text-xs md:text-base mt-1"
           }
           exact>
-          <BriefcaseIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+          <BriefcaseIcon className="h-6 w-6 text-gray-700 dark:text-white" />
           Internships
         </NavLink>
 
@@ -54,11 +54,11 @@ const LeftNav = () => {
           to="applied"
           className={({ isActive }) =>
             isActive
-              ? "flex gap-2 items-center p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-blue-700 dark:text-blue-300 text-xs md:text-base mt-1"
-              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "flex gap-2 items-center p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 font-bold text-xs md:text-base mt-1"
+              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 text-gray-600 dark:text-white text-xs md:text-base mt-1"
           }
           exact>
-          <CheckIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+          <CheckIcon className="h-6 w-6 text-gray-700 dark:text-white" />
           Applied
         </NavLink>
 
@@ -66,11 +66,11 @@ const LeftNav = () => {
           to="bugReport"
           className={({ isActive }) =>
             isActive
-              ? "flex gap-2 items-center p-2 cursor-pointer bg-gray-200 hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 font-bold dark:text-blue-300 text-xs md:text-base  mt-1"
-              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "flex gap-2 items-center p-2 cursor-pointer dark:bg-blue-600 bg-gray-200 hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 font-bold text-xs md:text-base  mt-1"
+              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 text-gray-600 dark:text-white text-xs md:text-base mt-1"
           }
           exact>
-          <BugAntIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+          <BugAntIcon className="h-6 w-6 text-gray-700 dark:text-white" />
           Report Bug
         </NavLink>
         <h2 className="text-lg font-semibold tracking-tight md:block hidden">Resources</h2>
@@ -78,11 +78,11 @@ const LeftNav = () => {
           to="faq"
           className={({ isActive }) =>
             isActive
-              ? "md:flex hidden gap-2 items-center p-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-blue-700 dark:text-blue-300 text-xs md:text-base mt-1"
-              : "md:flex hidden gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-700 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base mt-1"
+              ? "md:flex hidden gap-2 items-center p-2 dark:bg-blue-600 cursor-pointer hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2  text-xs md:text-base mt-1"
+              : "md:flex hidden gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 text-gray-600 dark:text-white text-xs md:text-base mt-1"
           }
           exact>
-          <UserIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+          <UserIcon className="h-6 w-6 text-gray-700 dark:text-white" />
           FAQs
         </NavLink>
       </div>
