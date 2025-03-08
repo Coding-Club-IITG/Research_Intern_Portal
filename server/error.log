@@ -437,3 +437,6 @@
 {"level":"error","timestamp":"2025-03-05T16:30:46.763Z"}
 {"level":"error","timestamp":"2025-03-05T16:30:58.185Z"}
 {"level":"error","timestamp":"2025-03-05T16:31:21.684Z"}
+{"level":"error","message":"unable to connect to db , MongooseError: The `uri` parameter to `openUri()` must be a string, got \"undefined\". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.","timestamp":"2025-03-06T18:30:10.045Z"}
+{"level":"error","message":"unable to connect to db , MongooseError: The `uri` parameter to `openUri()` must be a string, got \"undefined\". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.","timestamp":"2025-03-06T18:30:44.198Z"}
+{"level":"error","message":"unable to connect to db , MongooseError: The `uri` parameter to `openUri()` must be a string, got \"undefined\". Make sure the first parameter to `mongoose.connect()` or `mongoose.createConnection()` is a string.","timestamp":"2025-03-06T18:34:51.469Z"}
