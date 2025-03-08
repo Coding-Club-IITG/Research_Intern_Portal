@@ -88,9 +88,10 @@ export default function NewDrive() {
     if (res.status === "success") {
       message.destroy("create-job");
       message.success("Job listing created successfully");
+      navigate("/recruiter/home");
     } else {
       message.destroy("create-job");
-      message.error("Failed to create job listing");
+      message.error(res.message);
     }
   };
 
@@ -178,6 +179,7 @@ export default function NewDrive() {
               <label className="font-medium text-sm dark:text-white">
                 Internship Type <span className="text-red-500">*</span>
               </label>
+              <div className="text-slate-400 text-xs mt-1">Examples : Remote / On-site </div>
               <input
                 type="text"
                 name="type"
@@ -193,6 +195,7 @@ export default function NewDrive() {
               <label className="font-medium text-sm dark:text-white">
                 Stipend <span className="text-red-500">*</span>
               </label>
+              <div className="text-slate-400 text-xs mt-1">If there is no stipend write NA</div>
               <input
                 type="number"
                 name="stipend"
@@ -223,6 +226,7 @@ export default function NewDrive() {
               <label className="font-medium text-sm dark:text-white">
                 Minimum CPI Requirement <span className="text-red-500">*</span>
               </label>
+              <div className="text-slate-400 text-xs mt-1">If there is no cpi criteria write 0</div>
               <input
                 type="number"
                 name="cpi"
@@ -259,6 +263,7 @@ export default function NewDrive() {
               <label className="font-medium text-sm dark:text-white">
                 Study Year <span className="text-red-500">*</span>
               </label>
+              <div className="text-slate-400 text-xs mt-1">Example 2026, 2027, 2028</div>
               <input
                 type="text"
                 name="study_year"

@@ -44,14 +44,13 @@ export const getAppliedJobsByStudents = async (id, navigate) => {
 
 export const applyToJobs = async (id, internId, navigate) => {
   try {
-    const response = await axios.post(
-      `${backendURL}/api/v1/students/${id}/intern-apply/${internId}`,{
-        withCredentials: true,
-      }
-    );
+    const response = await axios.post(`${backendURL}/api/v1/students/${id}/intern-apply/${internId}`, {
+      withCredentials: true,
+    });
     // console.log(response);
     return response.data;
   } catch (error) {
+    console.log(error);
     if (error?.response?.status === 400) {
       message.error("Already Applied");
       return error?.response?.data;

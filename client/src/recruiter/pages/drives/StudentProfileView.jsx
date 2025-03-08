@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getStudent } from "../../../apis/student";
 import EducationCard from "../../../student/pages/profile/EducationCard";
 import ExperienceCard from "../../../root-components/ExperienceCard";
 import { getCourseById, getDepartmentById } from "../../../apis/courses-departments";
+import { getStudentById } from "../../../apis/recruiter";
 import daysjs from "dayjs";
 
 export default function StudentProfileView() {
@@ -16,24 +16,8 @@ export default function StudentProfileView() {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await getStudent(id, navigate);
-        console.log(response);
-        if (!response || response.status === "error") {
-          navigate("/500");
-          return;
-        }
-        let dept = null;
-        if (response.data.department) {
-          console.log(response.data.department);
-          dept = await getDepartmentById(response.data.department, navigate);
-        }
-        setDept(dept.data);
-        let course = null;
-        if (response.data.course) {
-          course = await getCourseById(response.data.course, navigate);
-        }
-
-        setCourse(course.data);
+        const response = await getStudentById(id, navigate);
+        console.log(response.data);
         setStudent(response.data);
       } catch (error) {
         console.error("Error in fetching user data:", error);
@@ -43,13 +27,6 @@ export default function StudentProfileView() {
     getUser();
   }, [id, navigate]);
 
-  if (!student.name) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <h1 className="text-2xl font-bold text-red-500">Student Not Found</h1>
-      </div>
-    );
-  }
 
   return (
     <div>
@@ -72,7 +49,7 @@ export default function StudentProfileView() {
             <p className="text-gray-600 dark:text-gray-300">
               {course?.name || ""} from department of {dept?.name || ""}
             </p>{" "}
-            {/* Location and Timezone */}
+  
             <p className="text-gray-600 dark:text-gray-300">
               Year of Graduation : {daysjs(student?.yearOfGrad).$y || ""}
             </p>
@@ -105,7 +82,7 @@ export default function StudentProfileView() {
                 </span>
               </div>
             )}
-            {student?.social[0]?.url && (
+            {student?.social && student?.social[0]?.url && (
               <div className="relative group">
                 <a
                   href={student?.social[0]?.url || "#"}
@@ -131,7 +108,7 @@ export default function StudentProfileView() {
                 </span>
               </div>
             )}
-            {student?.social[1]?.url && (
+            {student?.social && student?.social[1]?.url && (
               <div className="relative group">
                 <a
                   href={student?.social[1]?.url || "#"}
@@ -155,7 +132,7 @@ export default function StudentProfileView() {
                 </span>
               </div>
             )}
-            {student?.social[2]?.url && (
+            {student?.social && student?.social[2]?.url && (
               <div className="relative group">
                 <a
                   href={student?.social[2]?.url || "#"}
@@ -179,27 +156,9 @@ export default function StudentProfileView() {
                 </span>
               </div>
             )}
-            {/* <a
-              href={student.resumeUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-700 hover:text-gray-900"
-            >
-              <img
-                src="https://img.icons8.com/ios-filled/50/000000/resume.png"
-                alt="Resume"
-                className="w-6 h-6"
-              />
-            </a> */}
           </div>
         </div>
 
-        {/* <div className="p-2 rounded-lg mb-2">
-          <h2 className="text-gray-500 mb-2">Looking for</h2>
-          <p className="black">{student.lookingFor}</p>
-        </div> */}
-
-        {/* array */}
         {student?.educations?.length > 0 && (
           <div className=" p-2 rounded-lg mb-2 ">
             <h3 className="text-black dark:text-white mb-2">Education</h3>
@@ -219,7 +178,7 @@ export default function StudentProfileView() {
             <h3 className="text-black dark:text-white mb-2">Experience</h3>
             {student.experiences.map((experience) => (
               <ExperienceCard
-                key={experience.id} // Replace with a unique key for each experience
+                key={experience.id} 
                 experience={experience}
                 onDelete={() => {}}
                 deletable={false}
@@ -227,30 +186,6 @@ export default function StudentProfileView() {
             ))}
           </div>
         )}
-
-        {/* <div className="p-2 rounded-lg mb-2">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">Ideal Next Opportunity</h3>
-          <h2 className="text-gray-500 mb-2">Desired Salary</h2>
-          <p className="text-gray-600 inline-block p-1 mb-2 rounded-md">
-            {" "}
-            {student.idealNextOpportunity.desiredSalary}
-          </p>
-          <h2 className="text-gray-500 mb-2">Desired role</h2>
-          <p className="text-gray-600 inline-block p-1 mb-2 rounded-md">
-            {" "}
-            {student.idealNextOpportunity.desiredRole}
-          </p>
-          <h2 className="text-gray-500 mb-2">Remote Work</h2>
-          <p className="text-gray-600 inline-block p-1 mb-2 rounded-md">
-            {" "}
-            {student.idealNextOpportunity.remoteWork}
-          </p>
-          <h2 className="text-gray-500 mb-2">Desired Location</h2>
-          <p className="text-gray-600 inline-block p-1 rounded-md">
-            {" "}
-            {student.idealNextOpportunity.desiredLocation}
-          </p>
-        </div> */}
 
         {student?.skills?.length > 0 && (
           <div className=" p-2 rounded-lg mb-2">
@@ -290,119 +225,6 @@ export default function StudentProfileView() {
         </div>
       </div>
     </div>
-    // <div className="min-h-screen bg-gray-100 flex flex-col items-center py-10">
-    //   <div className="bg-white rounded-lg shadow-lg p-8 w-4/5 max-w-4xl">
-    //     {/* Profile Picture and Personal Info */}
-    //     <div className="flex flex-col md:flex-row items-center md:justify-between">
-    //       <div className="w-full md:w-1/3 mb-6 md:mb-0">
-    //         <img
-    //           src={`https://ui-avatars.com/api/?name=${student.name}&background=random&size=200`}
-    //           alt="Profile"
-    //           className="rounded-full shadow-md mb-4 w-48 h-48 object-cover mx-auto"
-    //         />
-    //         <h1 className="text-3xl font-bold text-center text-gray-800">{student.name}</h1>
-    //         <p className="text-center text-gray-600">{student.bio}</p>
-    //       </div>
 
-    //       {/* Personal Info and Academic Details side by side */}
-    //       <div className="w-full md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
-    //         {/* Personal Info */}
-    //         <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-    //           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Personal Info</h2>
-    //           <p className="text-gray-600 mb-2">
-    //             <strong>Email:</strong> {student.email}
-    //           </p>
-    //           <p className="text-gray-600 mb-2">
-    //             <strong>Phone:</strong> {student.phoneNumber}
-    //           </p>
-    //           <p className="text-gray-600 mb-2">
-    //             <strong>Roll No:</strong> {student.rollNo}
-    //           </p>
-    //           <p className="text-gray-600 mb-2">
-    //             <strong>Date of Birth:</strong> {student.dob.toDateString()}
-    //           </p>
-    //         </div>
-
-    //         {/* Academic Details */}
-    //         <div className="bg-gray-100 p-4 rounded-lg shadow-md">
-    //           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Academic Details</h2>
-    //           <p className="text-gray-600 mb-2">
-    //             <strong>College:</strong> {student.college}
-    //           </p>
-    //           <p className="text-gray-600 mb-2">
-    //             <strong>Course:</strong> {student.course}, {student.department}
-    //           </p>
-    //           <p className="text-gray-600 mb-2">
-    //             <strong>CPI:</strong> {student.cpi}
-    //           </p>
-    //           <p className="text-gray-600 mb-2">
-    //             <strong>Year of Graduation:</strong> {student.yearOfGrad}
-    //           </p>
-    //         </div>
-    //       </div>
-    //     </div>
-
-    //     {/* Social Profiles */}
-    //     <div className="mt-8">
-    //       <h2 className="text-2xl font-semibold mb-4 text-gray-800">Social Profiles</h2>
-    //       <div className="flex space-x-4">
-    //         {student.social.map((social, index) => (
-    //           <a
-    //             key={index}
-    //             href={social.url}
-    //             className="text-blue-500 underline"
-    //             target="_blank"
-    //             rel="noopener noreferrer">
-    //             {social.platform}
-    //           </a>
-    //         ))}
-    //       </div>
-    //     </div>
-
-    //     {/* Previous Education */}
-    //     <div className="mt-8">
-    //       <h2 className="text-2xl font-semibold mb-4 text-gray-800">Previous Education</h2>
-    //       <ul className="list-disc list-inside text-gray-600">
-    //         {student.prevEducation.map((edu, index) => (
-    //           <li key={index}>
-    //             {edu.degree} from {edu.college}, {edu.year} (Grade: {edu.grade})
-    //           </li>
-    //         ))}
-    //       </ul>
-    //     </div>
-
-    //     {/* Previous Experience */}
-    //     {student.prevExperience.length > 0 && (
-    //       <div className="mt-8">
-    //         <h2 className="text-2xl font-semibold mb-4 text-gray-800">Previous Experience</h2>
-    //         <ul className="list-disc list-inside text-gray-600">
-    //           {student.prevExperience.map((exp, index) => (
-    //             <li key={index}>
-    //               <strong>{exp.role}</strong> at {exp.company_college}
-    //               <p>{exp.description}</p>
-    //               <p>
-    //                 From: {exp.start_date.toDateString()} To: {exp.end_date.toDateString()}
-    //               </p>
-    //             </li>
-    //           ))}
-    //         </ul>
-    //       </div>
-    //     )}
-
-    //     {/* Resume Link */}
-    //     <div className="mt-8">
-    //       <h2 className="text-2xl font-semibold mb-4 text-gray-800">Resume</h2>
-    //       <p className="text-gray-600">
-    //         <a
-    //           href={student.resume}
-    //           className="text-blue-500 underline"
-    //           target="_blank"
-    //           rel="noopener noreferrer">
-    //           View Resume
-    //         </a>
-    //       </p>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }

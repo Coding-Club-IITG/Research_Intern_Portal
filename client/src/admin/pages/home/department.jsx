@@ -3,6 +3,7 @@ import axios from "axios";
 import { Card, Col, Row, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useFetch } from "../../../hooks/useFetch";
+import { backendURL } from "../../../apis/server";
 
 export default function Department() {
   const [departments, setDepartments] = useState([]);
@@ -11,7 +12,7 @@ export default function Department() {
   const [updatedDepartmentName, setUpdatedDepartmentName] = useState("");
   const navigate = useNavigate();
 
-  const { data, loading } = useFetch("http://localhost:8000/api/v1/admin/departments/department");
+  const { data, loading } = useFetch(`${backendURL}/api/v1/admin/departments/department`);
 
   useEffect(() => {
     if (data && data.status === "success") {
@@ -23,7 +24,7 @@ export default function Department() {
   const createDepartment = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/admin/departments/department",
+        `${backendURL}/api/v1/admin/departments/department`,
         {
           name: newDepartment
         }, {
@@ -43,7 +44,7 @@ export default function Department() {
   const updateDepartment = async (departmentId) => {
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/v1/admin/departments/department/${departmentId}`,
+        `${backendURL}/api/v1/admin/departments/department/${departmentId}`,
         {
           name: updatedDepartmentName
         }, {

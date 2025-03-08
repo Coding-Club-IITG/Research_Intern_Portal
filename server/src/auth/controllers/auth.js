@@ -24,7 +24,7 @@ export const onedriveLogin = async (req, res) => {
         response_mode: "query",
         scope:
           "https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/User.Read offline_access",
-        state: "student", // we have to change this
+        state: "recruiter", // we have to change this
       });
     // console.log(authUrl)
     logger.info(`${authUrl}`);
@@ -39,21 +39,13 @@ export const onedriveLogin = async (req, res) => {
 
 export const onedriveRedirect = async (req, res) => {
   try {
-    console.log("🔹 Received OAuth Redirect Request");
-    
     const code = req.query.code;
     const state = req.query.state;
-    console.log("🔹 Authorization Code:", code);
-    console.log("🔹 State:", state);
 
     const clientId = process.env.AZURE_CLIENT_ID;
     const clientSecret = process.env.AZURE_CLIENT_SECRET;
     const redirectUri = process.env.AZURE_REDIRECT_URI;
     const tenantId = process.env.AZURE_TENANT_ID;
-    
-    console.log("🔹 Client ID:", clientId);
-    console.log("🔹 Redirect URI:", redirectUri);
-    console.log("🔹 Tenant ID:", tenantId);
 
     const tokenUrl = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
     
@@ -66,25 +58,18 @@ export const onedriveRedirect = async (req, res) => {
       client_secret: clientSecret,
     });
 
-    console.log("🔹 Sending token request to:", tokenUrl);
-    console.log("🔹 Token Request Body:", body.toString());
-
     const tokenResponse = await fetch(tokenUrl, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: body.toString(),
     });
 
-    console.log("🔹 Token Response Status:", tokenResponse.status);
-
     if (!tokenResponse.ok) {
       const errorResponse = await tokenResponse.json();
-      console.error("❌ Failed to fetch token:", errorResponse);
       throw new Error(`Failed to fetch token: ${JSON.stringify(errorResponse)}`);
     }
 
     const tokenData = await tokenResponse.json();
-    console.log("🔹 Token Data:", tokenData);
 
     const jwtPayload = {
       access_token: tokenData.access_token,
@@ -93,7 +78,6 @@ export const onedriveRedirect = async (req, res) => {
     };
 
     const jwtToken = jwt.sign(jwtPayload, "fdgt4t93xzc3252523");
-    console.log("🔹 JWT Token Generated");
 
     res.cookie("jwt", jwtPayload, {
       httpOnly: false,
@@ -102,11 +86,9 @@ export const onedriveRedirect = async (req, res) => {
     });
 
     const userDataFromGraphApi = await getUserFromToken(tokenData.access_token);
-    console.log("🔹 User Data from Graph API:", userDataFromGraphApi);
 
     const findUser = await User.findOne({ email: userDataFromGraphApi.email });
     if (findUser) {
-      console.log("🔹 Existing User Found:", findUser.email);
 
       const userCookie = {
         name: findUser.name,
@@ -123,8 +105,6 @@ export const onedriveRedirect = async (req, res) => {
         maxAge: 1000 * 60 * 60 * 24,
       });
 
-      console.log("🔹 Redirecting Existing User to:", findUser.typeOfUser);
-
       switch (findUser.typeOfUser) {
         case roles.STUDENT:
           return res.redirect(`${frontendUrl}/student/`);
@@ -137,15 +117,11 @@ export const onedriveRedirect = async (req, res) => {
       }
     }
 
-    console.log("🔹 Creating New User");
-
     const createdUser = await createUser({
       name: userDataFromGraphApi.name,
       email: userDataFromGraphApi.email,
       typeOfUser: state,
     });
-
-    console.log("🔹 New User Created:", createdUser.email);
 
     const newUserCookie = {
       name: createdUser.name,
@@ -162,8 +138,6 @@ export const onedriveRedirect = async (req, res) => {
       maxAge: 1000 * 60 * 60 * 24,
     });
 
-    console.log("🔹 Redirecting New User to:", state);
-
     switch (state) {
       case roles.STUDENT:
         return res.redirect(`${frontendUrl}/student/`);
@@ -179,8 +153,31 @@ export const onedriveRedirect = async (req, res) => {
         });
     }
   } catch (err) {
-    console.error("❌ Error in onedriveRedirect:", err);
     return res.status(500).json({ status: "error", message: err.message, data: null });
   }
 };
+
+export const logout = async (req, res) => {
+  try {
+    // Retrieve configuration from environment variables
+    const clientId = process.env.AZURE_CLIENT_ID;
+    const tenantId = process.env.AZURE_TENANT_ID;
+    const redirectUri = frontendUrl;
+
+    const logoutUrl = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/logout?client_id=${clientId}&post_logout_redirect_uri=${redirectUri}`;
+
+    res.clearCookie("jwt");
+    res.clearCookie("user");
+    res.redirect(logoutUrl);
+  } catch (err) {
+    console.log(err);
+    logger.error(err);
+    res.status(500).json({ 
+      status: "error", 
+      message: "Internal Server Error", 
+      data: null 
+    });
+  }
+}
+
 

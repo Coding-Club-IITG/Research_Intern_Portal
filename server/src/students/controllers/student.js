@@ -287,6 +287,7 @@ const getStudentsApplicationById = async (req, res) => {
 
 const addStudentsApplications = async (req, res) => {
   try {
+    console.log(req.params);
     const { id, internId } = req.params;
     //assumed for now that the id for the document of intern post is sent is params
 

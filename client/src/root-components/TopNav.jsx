@@ -70,7 +70,7 @@ const TopNav = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        `${backendURL}/api/v1/students/logout/${user.connection_id}`
+        `${backendURL}/api/v1/logout`,
       );
       if (response.status === 200) navigate("/LogIn");
     } catch (error) {

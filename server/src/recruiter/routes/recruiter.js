@@ -5,6 +5,7 @@ import {
   updateRecruiter,
   deleteRecruiter,
   createRecuiter,
+  getStudentById,
 } from "../controllers/recruiter.js";
 
 const router = express.Router();
@@ -87,7 +88,11 @@ router
   .route("/:id")
   .get(getRecruiterById)
   .put(updateRecruiter)
-  .delete(deleteRecruiter);
+
+
+router.delete("/", deleteRecruiter);
+router.get("/student-data/:id", getStudentById);
+
 
 export default router;
 

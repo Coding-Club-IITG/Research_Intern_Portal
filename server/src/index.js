@@ -48,8 +48,8 @@ app.use("/api/v1/admin/departments", verifyJWT, adminDepartmentNameChangeRouter)
 app.use("/api/v1/students", verifyJWT, studentRoutes);
 
 // app.use("/api/v1/recruiters", verifyJWT, recruiterGuard, recruiterRoutes);
-app.use("/api/v1/recruiters", recruiterRoutes);
-app.use("/api/v1/job", jobRoutes);
+app.use("/api/v1/recruiters", verifyJWT, recruiterRoutes);
+app.use("/api/v1/job", verifyJWT, jobRoutes);
 
 app.use("/api/v1/admin/bugs", bugRoutes);
 

@@ -3,7 +3,9 @@ import { backendURL } from "./server";
 
 export const getRecruiter = async (id, navigate) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/recruiters/${id}`);
+    const response = await axios.get(`${backendURL}/api/v1/recruiters/${id}`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     navigate("/500");
@@ -13,7 +15,9 @@ export const getRecruiter = async (id, navigate) => {
 
 export const getAllRecruiters = async (navigate) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/recruiters`);
+    const response = await axios.get(`${backendURL}/api/v1/recruiters`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     navigate("/500");
@@ -23,16 +27,31 @@ export const getAllRecruiters = async (navigate) => {
 
 export const updateRecruiter = async (id, data) => {
   try {
-    const response = await axios.put(`${backendURL}/api/v1/recruiters/${id}`, data);
+    const response = await axios.put(`${backendURL}/api/v1/recruiters/${id}`, data, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     return error?.response?.data || error;
   }
 };
 
+export const deleteRecruiter = async () => {
+  try {
+    const response = await axios.delete(`${backendURL}/api/v1/recruiters`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    return error?.response?.data || error;
+  }
+}
+
 export const createJob = async (data) => {
   try {
-    const response = await axios.post(`${backendURL}/api/v1/job`, data);
+    const response = await axios.post(`${backendURL}/api/v1/job`, data, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     return error?.response?.data || error;
@@ -41,7 +60,9 @@ export const createJob = async (data) => {
 
 export const getAllJobs = async (navigate) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/job`);
+    const response = await axios.get(`${backendURL}/api/v1/job`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     navigate("/500");
@@ -51,7 +72,9 @@ export const getAllJobs = async (navigate) => {
 
 export const getJobsOfRecruiter = async (recruiter_id, navigate) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/job/recruiter/${recruiter_id}`);
+    const response = await axios.get(`${backendURL}/api/v1/job/recruiter/${recruiter_id}`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     navigate("/500");
@@ -61,7 +84,9 @@ export const getJobsOfRecruiter = async (recruiter_id, navigate) => {
 
 export const getJobById = async (id, navigate) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/job/${id}`);
+    const response = await axios.get(`${backendURL}/api/v1/job/${id}`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     navigate("/500");
@@ -71,7 +96,9 @@ export const getJobById = async (id, navigate) => {
 
 export const updateJob = async (id, data) => {
   try {
-    const response = await axios.put(`${backendURL}/api/v1/job/${id}`, data);
+    const response = await axios.put(`${backendURL}/api/v1/job/${id}`, data, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     return error?.response?.data || error;
@@ -80,7 +107,9 @@ export const updateJob = async (id, data) => {
 
 export const stopAcceptingApplications = async (id) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/job/stop/${id}`);
+    const response = await axios.get(`${backendURL}/api/v1/job/stop/${id}`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     return error?.response?.data || error;
@@ -89,10 +118,24 @@ export const stopAcceptingApplications = async (id) => {
 
 export const getAllStudentsOfJob = async (id, navigate) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/job/students/${id}`);
+    const response = await axios.get(`${backendURL}/api/v1/job/students/${id}`, {
+      withCredentials: true,
+    });
     return response.data;
   } catch (error) {
     navigate("/500");
     return error?.response?.data || error;
   }
 };
+
+export const getStudentById = async (id, navigate) => {
+  try {
+    const response = await axios.get(`${backendURL}/api/v1/recruiters/student-data/${id}`, {
+      withCredentials: true,
+    });
+    return response.data;
+  } catch (error) {
+    navigate("/500");
+    return error?.response?.data || error;
+  }
+}

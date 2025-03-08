@@ -3,6 +3,7 @@ import axios from "axios";
 import { Card, Col, Row, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useFetch } from "../../../hooks/useFetch";
+import { backendURL } from "../../../apis/server";
 
 export default function Course() {
   const [courses, setCourses] = useState([]);
@@ -11,7 +12,7 @@ export default function Course() {
   const [updatedcourseName, setUpdatedCourseName] = useState("");
   const navigate = useNavigate();
 
-  const { data, loading } = useFetch("http://localhost:8000/api/v1/admin/departments/course");
+  const { data, loading } = useFetch(`${backendURL}/api/v1/admin/departments/course`);
 
   useEffect(() => {
     if (data && data.status === "success") {
@@ -22,7 +23,7 @@ export default function Course() {
 
   const createCourse = async () => {
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/admin/departments/course", {
+      const response = await axios.post(`${backendURL}/api/v1/admin/departments/course`, {
         name: newcourse
       }, {
         withCredentials: true
@@ -40,7 +41,7 @@ export default function Course() {
   const updateCourse = async (courseId) => {
     try {
       const response = await axios.put(
-        `http://localhost:8000/api/v1/admin/departments/course/${courseId}`,
+        `${backendURL}/api/v1/admin/departments/course/${courseId}`,
         {
           name: updatedcourseName
         }, {
