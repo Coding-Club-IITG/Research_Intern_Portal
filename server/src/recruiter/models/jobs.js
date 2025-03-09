@@ -59,16 +59,17 @@ const JobSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  applicants: [
-    {
-      applicant: String,
-      status: {
-        type: String,
-        enum: Object.values(ApplicantStatus),
-        default: ApplicantStatus.PENDING,
-      },
-    },
-  ],
+  applicants:{
+    type: [String]
+  },
+
+  selected_student: {
+    type: [String],
+  },
+
+  rejected_student: {
+    type: [String],
+  },
 
   requirements: requirementSchema,
 
