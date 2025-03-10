@@ -32,6 +32,9 @@ const LeftNav = () => {
         <Link to="/admin/server-logs" className="font-medium text-lg">
           Server Logs
         </Link>
+        <Link to="/admin/announcement" className="font-medium text-lg">
+          Announcement
+        </Link>
       </ul>
     </div>
   );

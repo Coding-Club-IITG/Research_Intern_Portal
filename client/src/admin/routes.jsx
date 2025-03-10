@@ -11,6 +11,8 @@ import ErrorLogPage from "./pages/home/error-logs.jsx";
 import ServerLogPage from "./pages/home/server-logs.jsx";
 import AdminLayout from "./layout.jsx";
 import Bugs from "./pages/home/bugs.jsx";
+import Announcement from "./pages/home/announcement.jsx";
+import NotificationPage from "../root-components/Notifications.jsx";
 
 const AdminRoutes = () => {
   return (
@@ -26,6 +28,8 @@ const AdminRoutes = () => {
         <Route path="/errors-logs" element={<ErrorLogPage />} />
         <Route path="/server-logs" element={<ServerLogPage />} />
         <Route path="/bugs" element={<Bugs />} />
+        <Route path="/announcement" element={<Announcement />} />
+        <Route path="/notifications/:id" element={<NotificationPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

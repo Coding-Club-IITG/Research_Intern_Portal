@@ -4,7 +4,7 @@ import { backendURL } from "./server";
 export const deleteJob = async (id, navigate) => {
   try {
     const response = await axios.delete(`${backendURL}/api/v1/job/delete-job/${id}`, {
-      withCredentials: true,
+      withCredentials: true
     });
     return response.data;
   } catch (error) {
@@ -15,7 +15,7 @@ export const deleteJob = async (id, navigate) => {
 export const getAllJobs = async (navigate) => {
   try {
     const response = await axios.get(`${backendURL}/api/v1/job/internship/accepting`, {
-      withCredentials: true,
+      withCredentials: true
     });
     return response.data;
   } catch (error) {
@@ -27,7 +27,7 @@ export const getAllJobs = async (navigate) => {
 export const getAllAcceptingJobs = async (navigate) => {
   try {
     const response = await axios.get(`${backendURL}/api/v1/job/internship/accepting`, {
-      withCredentials: true,
+      withCredentials: true
     });
     return response.data;
   } catch (error) {
@@ -39,7 +39,7 @@ export const getAllAcceptingJobs = async (navigate) => {
 export const stopAcceptingJob = async (id, navigate) => {
   try {
     const response = await axios.get(`${backendURL}/api/v1/job/stop/${id}`, {
-      withCredentials: true,
+      withCredentials: true
     });
     return response.data;
   } catch (error) {
@@ -51,7 +51,7 @@ export const stopAcceptingJob = async (id, navigate) => {
 export const reopenApplications = async (id, navigate) => {
   try {
     const response = await axios.get(`${backendURL}/api/v1/job/reopen/${id}`, {
-      withCredentials: true,
+      withCredentials: true
     });
     return response.data;
   } catch (error) {

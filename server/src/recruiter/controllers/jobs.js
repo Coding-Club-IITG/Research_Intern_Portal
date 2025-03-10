@@ -2,13 +2,14 @@ import Jobs from "../models/jobs.js";
 import Student from "../../students/models/student.js";
 import logger from "../../utils/logger.js";
 import recruiter from "../models/recruiter.js";
+import axios from "axios";
 
 const createJob = async (req, res) => {
   try {
     const data = req.body;
     const recruiter_data = await recruiter.findById(req?.user?.connection_id);
 
-    if(recruiter_data.isVerified === false){
+    if (recruiter_data.isVerified === false) {
       return res.status(400).json({
         message: "Recruiter not verified contact admin",
         status: "error",
@@ -17,16 +18,21 @@ const createJob = async (req, res) => {
     }
 
     const job = await Jobs.create(data);
+    const response = await axios.post(
+      `${process.env.NOTIFICATION_URL}/create-students`,
+      {
+        title: "New Job",
+        message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
+        link: `/internships/internship/${job._id}`,
+      }
+    );
+    console.log(response.data);
     return res.status(201).json({
       message: "Job created successfully",
       data: job,
       status: "success",
     });
-
-    // microservice call to send email or notification to students
-
   } catch (error) {
-    // console.error(error);
     logger.error(error);
     return res
       .status(500)
@@ -45,7 +51,6 @@ const getAllJobsOfRecruiter = async (req, res) => {
       status: "success",
     });
   } catch (error) {
-    // console.error(error);
     logger.error(error);
     return res
       .status(500)
@@ -60,7 +65,6 @@ const getAllAcceptingJobs = async (req, res) => {
     const jobs = activeJobs.filter((job) => {
       const jobEndDate = new Date(job.last_date);
       jobEndDate.setHours(23, 59, 59, 999);
-      // console.log(jobEndDate, " ", currentDate);
       return jobEndDate >= currentDate;
     });
     return res.status(200).json({
@@ -69,7 +73,6 @@ const getAllAcceptingJobs = async (req, res) => {
       status: "success",
     });
   } catch (error) {
-    // console.error(error);
     logger.error(error);
     return res
       .status(500)
@@ -86,7 +89,6 @@ const getJob = async (req, res) => {
       data: getAllJobs,
     });
   } catch (error) {
-    // console.error(error);
     logger.error(error);
     return res
       .status(500)
@@ -111,7 +113,6 @@ const getJobById = async (req, res) => {
       status: "success",
     });
   } catch (error) {
-    // console.error(error);
     logger.error(error);
     return res
       .status(500)
@@ -129,6 +130,12 @@ const stopAcceptingApplications = async (req, res) => {
         .status(404)
         .json({ message: "Job not found", data: null, status: "error" });
     }
+    const recruiter_data = await recruiter.findById(job.recruiter);
+    await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
+      title: "Changes in Application Criteria",
+      message: `${recruiter_data.name} has stopped accepting applications for the internship.`,
+      link: `/internships/internship/${job._id}`,
+    });
 
     return res.status(200).json({
       message: "Job applications stopped",
@@ -136,7 +143,6 @@ const stopAcceptingApplications = async (req, res) => {
       status: "success",
     });
   } catch (error) {
-    // console.error(error);
     logger.error(error);
     return res
       .status(500)
@@ -154,7 +160,12 @@ const reopenApplications = async (req, res) => {
         .status(404)
         .json({ message: "Job not found", data: null, status: "error" });
     }
-
+    const recruiter_data = await recruiter.findById(job.recruiter);
+    await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
+      title: "Application Reopened",
+      message: `The application period of internship created by ${recruiter_data.name} has been reopened.\nClick on "View More" to know more about the internship.`,
+      link: `/internships/internship/${job._id}`,
+    });
     return res.status(200).json({
       message: "Job applications reopened",
       data: job,
@@ -178,6 +189,13 @@ const updateJob = async (req, res) => {
         .status(404)
         .json({ message: "Job not found", data: null, status: "error" });
     }
+    const recruiter_data = await recruiter.findById(job.recruiter);
+    console.log(recruiter_data);
+    await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
+      title: "Changes in Application Criteria",
+      message: `${recruiter_data.name} has changed the application criteria for the internship.\nClick on "View More" to know more about the internship.`,
+      link: `/internships/internship/${job._id}`,
+    });
 
     return res.status(200).json({
       message: "Job updated successfully",
@@ -238,7 +256,6 @@ const getJobByfilter = async (req, res) => {
     }
     return res.status(200).json(job);
   } catch (error) {
-    // console.error(error);
     logger.error(error);
     return res
       .status(500)
@@ -271,7 +288,6 @@ const applyForJob = async (req, res) => {
       return res.status(404).json({ message: "Requirements did't match" });
     }
   } catch (error) {
-    // console.error(error);
     logger.error(error);
     return res
       .status(500)
