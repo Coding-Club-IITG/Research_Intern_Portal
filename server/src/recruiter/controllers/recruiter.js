@@ -210,11 +210,85 @@ const deleteRecruiter = async (req, res) => {
   }
 };
 
+const acceptStudentForJob = async (req, res) => {
+  try {
+    const { job_id, student_id } = req.query;
+    const job = await jobs.findById(job_id);
+    const student_data = await student.findById(student_id);
+
+    if (!job || !student_data) {
+      logger.error(`Job or Student not found with ID ${job_id} or ${student_id}`);
+      return res
+        .status(404)
+        .json({ status: "error", message: "Job or Student not found", data: {} });
+    }
+
+    job.selected_student.push(student_id);
+    job.save();
+
+    // invoke microservice to send email and notification to student
+
+    logger.info(`Student accepted successfully for job with ID ${job_id}`);
+
+    return res
+      .status(200)
+      .json({
+        status: "success",
+        message: "Student accepted successfully for job",
+        data: job,
+      });
+    
+  } catch (err) {
+    logger.error(err);
+    res
+      .status(500)
+      .json({ status: "error", message: "Internal server error", data: {} });
+  }
+}
+
+const rejectStudentForJob = async (req, res) => {
+  try {
+    const { job_id, student_id } = req.query;
+    const job = await jobs.findById(job_id);
+    const student_data = await student.findById(student_id);
+
+    if (!job || !student_data) {
+      logger.error(`Job or Student not found with ID ${job_id} or ${student_id}`);
+      return res
+        .status(404)
+        .json({ status: "error", message: "Job or Student not found", data: {} });
+    }
+
+    job.rejected_student.push(student_id);
+    job.save();
+
+    // invoke microservice to send email and notification to student
+
+    logger.info(`Student rejected successfully for job with ID ${job_id}`);
+
+    return res
+      .status(200)
+      .json({
+        status: "success",
+        message: "Student rejected successfully for job",
+        data: job,
+      });
+    
+  } catch (err) {
+    logger.error(err);
+    res
+      .status(500)
+      .json({ status: "error", message: "Internal server error", data: {} });
+  }
+}
+
 export {
   createRecuiter,
   getRecruiters,
   getRecruiterById,
   updateRecruiter,
   deleteRecruiter,
-  getStudentById
+  getStudentById,
+  acceptStudentForJob,
+  rejectStudentForJob
 };
