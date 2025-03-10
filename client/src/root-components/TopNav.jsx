@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ThemeToggle from "../pages/ThemeToggle";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { backendURL } from "../apis/server.js";
 import useAuthStore from "../store/authStore.jsx";
 import { useTheme } from "../store/themeStore";
-import { getNewNotifications } from "../apis/notification.js";
+import {
+  getAllNotificationsOfUser,
+  getNewNotifications,
+  markAsRead
+} from "../apis/notification.js";
 import {
   Layout,
   Avatar,
@@ -33,6 +37,7 @@ import {
   SearchOutlined
 } from "@ant-design/icons";
 import Sider from "antd/es/layout/Sider.js";
+import { use } from "react";
 
 const { Text } = Typography;
 
@@ -42,17 +47,52 @@ const TopNav = () => {
   const user = getUser();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [fetched, setFetched] = useState(false);
   const [notifications, setNotifications] = useState([]);
-  const [newNotifications, setNewNotifications] = useState([]);
+
+  function ConvertTime(time) {
+    let date = new Date(time);
+    let curr = new Date();
+    let diff = curr - date;
+    let sec = Math.floor(diff / 1000);
+    let min = Math.floor(sec / 60);
+    let hour = Math.floor(min / 60);
+    let day = Math.floor(hour / 24);
+    let month = Math.floor(day / 30);
+    let year = Math.floor(month / 12);
+    if (year > 0) return year + " year" + (year > 1 ? "s" : "") + " ago";
+    if (month > 0) return month + " month" + (month > 1 ? "s" : "") + " ago";
+    if (day > 0) return day + " day" + (day > 1 ? "s" : "") + " ago";
+    if (hour > 0) return hour + " hour" + (hour > 1 ? "s" : "") + " ago";
+    if (min > 0) return min + " minute" + (min > 1 ? "s" : "") + " ago";
+    if (sec > 0) return sec + " second" + (sec > 1 ? "s" : "") + " ago";
+    return "Just now";
+  }
 
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
+        const response = await getAllNotificationsOfUser(user.connection_id, navigate);
+        setNotifications(response.notifications || []);
+        setFetched(true);
+        const newLastChecked = response.lastChecked || new Date().toISOString();
+        localStorage.setItem("lastChecked", newLastChecked);
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    };
+
+    fetchNotifications();
+  }, []);
+
+  useEffect(() => {
+    const fetchNewNotifications = async () => {
+      try {
+        if (!fetched) return;
         let storedLastChecked = localStorage.getItem("lastChecked") || null;
         const response = await getNewNotifications(user.connection_id, storedLastChecked, navigate);
 
         if (response.notifications.length > 0) {
-          setNewNotifications(response.notifications || []);
           setNotifications([...response.notifications, ...notifications]);
         }
         const newLastChecked = response.lastChecked || new Date().toISOString();
@@ -62,16 +102,14 @@ const TopNav = () => {
       }
     };
 
-    const interval = setInterval(fetchNotifications, 10000);
+    const interval = setInterval(fetchNewNotifications, 10000);
 
     return () => clearInterval(interval);
   }, [navigate, notifications, user.connection_id]);
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get(
-        `${backendURL}/api/v1/logout`,
-      );
+      const response = await axios.get(`${backendURL}/api/v1/logout`);
       if (response.status === 200) navigate("/LogIn");
     } catch (error) {
       console.log(error?.response?.data || error);
@@ -84,50 +122,49 @@ const TopNav = () => {
     { label: <ThemeToggle />, key: "2" }
   ];
   let notification_mini;
-  if (newNotifications.length === 1) {
+  if (notifications.length > 0) {
     notification_mini = (
-      <Menu>
-        <Menu.Item key="1" icon={<FileTextOutlined />}>
-          <Text strong>Hi</Text>
-          <br />
-          <Text type="secondary">H</Text>
-          <br />
-          <Text type="secondary" style={{ fontSize: "12px" }}>
-            2 hours ago
-          </Text>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="view-all" style={{ textAlign: "center" }}>
-          View all notifications
-        </Menu.Item>
-      </Menu>
-    );
-  } else if (newNotifications.length > 1) {
-    notification_mini = (
-      <Menu>
-        <Menu.Item key="1" icon={<FileTextOutlined />}>
-          <Text strong>Hi</Text>
-          <br />
-          <Text type="secondary">H</Text>
-          <br />
-          <Text type="secondary" style={{ fontSize: "12px" }}>
-            2 hours ago
-          </Text>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="2" icon={<FileTextOutlined />}>
-          <Text strong>Hi</Text>
-          <br />
-          <Text type="secondary">H</Text>
-          <br />
-          <Text type="secondary" style={{ fontSize: "12px" }}>
-            2 hours ago
-          </Text>
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="view-all" style={{ textAlign: "center" }}>
-          View all notifications
-        </Menu.Item>
+      <Menu className="w-96 bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
+        <div className="max-h-96 overflow-y-auto">
+          {notifications?.slice(0, 4).map((notification, index) => (
+            <div
+              className="hover:bg-gray-100 cursor-pointer"
+              onClick={() => {
+                markAsRead(notification._id);
+                window.location.href = notification.link || `notifications/${user.connection_id}`;
+              }}>
+              <Menu.Item key={index} className="gap-3 p-4 transition-all">
+                <div className="flex flex-col w-full">
+                  <div className="flex justify-between items-start">
+                    <Text
+                      strong
+                      className="text-sm max-w-[70%] block truncate"
+                      title={notification.title}>
+                      {notification.status === "unread" && <span className="text-red-500">* </span>}
+                      {notification.title}
+                    </Text>
+                    <Text type="secondary" className="text-xs text-gray-500 block">
+                      {ConvertTime(notification.createdAt)}
+                    </Text>
+                  </div>
+                  <div className="flex">
+                    <div className="mt-1 text-sm text-gray-600 line-clamp-1">
+                      {notification.message}
+                    </div>
+                  </div>
+                </div>
+              </Menu.Item>
+            </div>
+          ))}
+        </div>
+        <div className="border-t hover:bg-gray-100">
+          <Menu.Item
+            key="view-all"
+            onClick={() => navigate(`notifications/${user.connection_id}`)}
+            className="block text-center p-3 text-blue-600 font-medium cursor-pointer hover:bg-gray-100 transition-all">
+            View all notifications
+          </Menu.Item>
+        </div>
       </Menu>
     );
   } else

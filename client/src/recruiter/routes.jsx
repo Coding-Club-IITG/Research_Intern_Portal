@@ -16,6 +16,7 @@ import DriveStudentList from "./pages/drives/DriveStudentList";
 
 import BugReport from "../pages/BugReport";
 import StudentProfileView from "./pages/drives/StudentProfileView";
+import NotificationPage from "../root-components/Notifications";
 
 const RecuriterRoutes = () => {
   return (
@@ -35,8 +36,8 @@ const RecuriterRoutes = () => {
         <Route path="student-list/:driveIndex" element={<DriveStudentList />} />
         <Route path="bugReport" element={<BugReport />} />
         <Route path="profile/student/:id" element={<StudentProfileView />} />
+        <Route path="notifications/:id" element={<NotificationPage />} />
       </Route>
-
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

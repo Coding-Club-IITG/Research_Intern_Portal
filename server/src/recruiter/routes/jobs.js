@@ -1,5 +1,4 @@
 import express from "express";
-// import { getRecruiterById, getRecruiters, updateRecruiter, deleteRecruiter } from '../controllers/recruiter.js'
 import {
   createJob,
   getJob,
@@ -12,6 +11,8 @@ import {
   getAllStudentsOfJob,
   getAllAcceptingJobs,
   reopenApplications,
+  selectStudent,
+  rejectStudent,
 } from "../controllers/jobs.js";
 
 const jobRouter = express.Router();
@@ -27,6 +28,8 @@ jobRouter.post("/", createJob);
 jobRouter.post("/apply", applyForJob);
 jobRouter.post("/filter", getJobByfilter);
 jobRouter.get("/internship/accepting", getAllAcceptingJobs);
+jobRouter.post("/select-student/:id", selectStudent);
+jobRouter.post("/reject-student/:id", rejectStudent);
 
 /**
  * @swagger

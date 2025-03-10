@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 
 const notificationSchema = new mongoose.Schema({
-  recieverId: {
+  receiverId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Student",
     required: true,
   },
   title: { type: String, required: true },
   message: { type: String, required: true },
+  link: { type: String || null },
   status: {
     type: String,
     enum: ["read", "unread"],
