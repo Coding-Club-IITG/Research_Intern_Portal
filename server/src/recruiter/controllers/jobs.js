@@ -295,61 +295,6 @@ const applyForJob = async (req, res) => {
   }
 };
 
-const selectStudent = async (req, res) => {
-  try {
-    const { job_id, student_id } = req.body;
-    const job = await Jobs.findById(job_id);
-    const student = await Student.findById(student_id);
-    if (!job || !student) {
-      return res.status(404).json({ message: "Job or Student not found" });
-    }
-    const selected = await Jobs.findByIdAndUpdate(job_id, {
-      $set: { selected: student_id },
-    });
-    if (!selected) {
-      return res.status(404).json({ message: "Something went wrong" });
-    }
-    await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
-      title: "Selected for Internship",
-      message: `Congratulations! You have been selected for the internship posted by ${recruiter_data.name}`,
-      userIds: [student_id],
-    });
-    return res.status(200).json({ message: "Student selected successfully" });
-  } catch (error) {
-    logger.error(error);
-    return res
-      .status(500)
-      .json({ message: "Server Error", error: error.message });
-  }
-};
-
-const rejectStudent = async (req, res) => {
-  try {
-    const { job_id, student_id } = req.body;
-    const job = await Jobs.findById(job_id);
-    if (!job) {
-      return res.status(404).json({ message: "Job not found" });
-    }
-    const rejected = await Jobs.findByIdAndUpdate(job_id, {
-      $pull: { applicants: student_id },
-    });
-    if (!rejected) {
-      return res.status(404).json({ message: "Something went wrong" });
-    }
-    await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
-      title: "Application Rejected",
-      message: `Your application for the internship created by ${recruiter_data.name} has been rejected.`,
-      userIds: [student_id],
-    });
-    return res.status(200).json({ message: "Student rejected successfully" });
-  } catch (error) {
-    logger.error(error);
-    return res
-      .status(500)
-      .json({ message: "Server Error", error: error.message });
-  }
-};
-
 export {
   getJob,
   getJobById,
@@ -362,6 +307,4 @@ export {
   getAllStudentsOfJob,
   getAllAcceptingJobs,
   reopenApplications,
-  selectStudent,
-  rejectStudent,
 };

@@ -140,3 +140,29 @@ export const getStudentById = async (id, navigate) => {
     return error?.response?.data || error;
   }
 };
+
+export const selectStudent = async (data, navigate) => {
+  try {
+    const response = await axios.get(`${backendURL}/api/v1/recruiters/accept-student`, {
+      data,
+      withCredentials: true
+    });
+    return response.data;
+  } catch (error) {
+    navigate("/500");
+    return error?.response?.data || error;
+  }
+};
+
+export const rejectStudent = async (data, navigate) => {
+  try {
+    const response = await axios.get(`${backendURL}/api/v1/recruiters/reject-student`, {
+      data,
+      withCredentials: true
+    });
+    return response.data;
+  } catch (error) {
+    navigate("/500");
+    return error?.response?.data || error;
+  }
+};
