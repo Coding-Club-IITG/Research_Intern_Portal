@@ -4,6 +4,7 @@ import { Table, Space } from "antd";
 import { getAllStudentsOfJob } from "../../../apis/recruiter";
 import { getCourseById } from "../../../apis/courses-departments";
 import { getDepartmentById } from "../../../apis/courses-departments";
+import { selectStudent, rejectStudent } from "../../../apis/recruiter";
 import Loading from "../../../root-components/Loading";
 
 function DriveStudentList() {
@@ -87,10 +88,18 @@ function DriveStudentList() {
             onClick={() => handleView(record._id)}>
             View Profile
           </button>
-          <button className="px-2 py-1 md:px-4 md:py-2 rounded bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 transition-all">
+          <button
+            className="px-2 py-1 md:px-4 md:py-2 rounded bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 transition-all"
+            onClick={() => {
+              selectStudent({ job_id: driveIndex, student_id: record._id }, navigate);
+            }}>
             Accept
           </button>
-          <button className="px-2 py-1 md:px-4 md:py-2 rounded bg-red-600 text-white border border-red-600 hover:bg-red-700 transition-all">
+          <button
+            className="px-2 py-1 md:px-4 md:py-2 rounded bg-red-600 text-white border border-red-600 hover:bg-red-700 transition-all"
+            onClick={() => {
+              rejectStudent({ job_id: driveIndex, student_id: record._id }, navigate);
+            }}>
             Reject
           </button>
         </Space>

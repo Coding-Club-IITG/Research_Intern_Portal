@@ -6,6 +6,7 @@ import { createUser, getUserFromToken } from "../../users/controller.js";
 import { User } from "../../users/model.js";
 import logger from "../../utils/logger.js";
 import { frontendUrl } from "../../../frontend-url.js";
+import axios from "axios";
 dotenv.config();
 
 export const onedriveLogin = async (req, res) => {
@@ -26,7 +27,6 @@ export const onedriveLogin = async (req, res) => {
           "https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/User.Read offline_access",
         state: "recruiter", // we have to change this
       });
-    // console.log(authUrl)
     logger.info(`${authUrl}`);
     res.redirect(authUrl);
   } catch (err) {
@@ -48,10 +48,11 @@ export const onedriveRedirect = async (req, res) => {
     const tenantId = process.env.AZURE_TENANT_ID;
 
     const tokenUrl = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`;
-    
+
     const body = new URLSearchParams({
       client_id: clientId,
-      scope: "https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/User.Read offline_access",
+      scope:
+        "https://graph.microsoft.com/Files.ReadWrite https://graph.microsoft.com/User.Read offline_access",
       code: code,
       redirect_uri: redirectUri,
       grant_type: "authorization_code",
@@ -66,7 +67,9 @@ export const onedriveRedirect = async (req, res) => {
 
     if (!tokenResponse.ok) {
       const errorResponse = await tokenResponse.json();
-      throw new Error(`Failed to fetch token: ${JSON.stringify(errorResponse)}`);
+      throw new Error(
+        `Failed to fetch token: ${JSON.stringify(errorResponse)}`
+      );
     }
 
     const tokenData = await tokenResponse.json();
@@ -89,7 +92,6 @@ export const onedriveRedirect = async (req, res) => {
 
     const findUser = await User.findOne({ email: userDataFromGraphApi.email });
     if (findUser) {
-
       const userCookie = {
         name: findUser.name,
         user_id: findUser._id,
@@ -130,6 +132,26 @@ export const onedriveRedirect = async (req, res) => {
       typeOfUser: createdUser.typeOfUser,
     };
 
+    if (newUserCookie) {
+      try {
+        await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
+          title: "Welcome to Research Intern Portal, IIT Guwahati",
+          message:
+            "We are glad to have you on board! Feel free to explore the platform and reach out to us in case of any queries. We recommend you to complete your profile to get the best experience.",
+          link: `/profile`,
+          userIds: [createdUser.connection_id],
+        });
+        await axios.post(`${process.env.EMAIL_URL}/send-email`, {
+          emails: [createdUser.email],
+          subject: "Welcome to Research Intern Portal, IIT Guwahati",
+          message: `We are glad to have you on board! Feel free to explore the platform and reach out to us in case of any queries. We recommend you to complete your profile to get the best experience.`,
+        });
+      } catch (err) {
+        console.log(err);
+        logger.error(err);
+      }
+    }
+
     const stringify = JSON.stringify(newUserCookie);
 
     res.cookie("user", stringify, {
@@ -153,7 +175,9 @@ export const onedriveRedirect = async (req, res) => {
         });
     }
   } catch (err) {
-    return res.status(500).json({ status: "error", message: err.message, data: null });
+    return res
+      .status(500)
+      .json({ status: "error", message: err.message, data: null });
   }
 };
 
@@ -172,12 +196,10 @@ export const logout = async (req, res) => {
   } catch (err) {
     console.log(err);
     logger.error(err);
-    res.status(500).json({ 
-      status: "error", 
-      message: "Internal Server Error", 
-      data: null 
+    res.status(500).json({
+      status: "error",
+      message: "Internal Server Error",
+      data: null,
     });
   }
-}
-
-
+};

@@ -6,6 +6,8 @@ import {
   deleteRecruiter,
   createRecuiter,
   getStudentById,
+  acceptStudentForJob,
+  rejectStudentForJob,
 } from "../controllers/recruiter.js";
 
 const router = express.Router();
@@ -15,7 +17,6 @@ const router = express.Router();
  *   name: Recruiters
  *   description: API for managing recruiters
  */
-
 
 router.route("/").get(getRecruiters).post(createRecuiter);
 
@@ -84,16 +85,12 @@ router.route("/").get(getRecruiters).post(createRecuiter);
  *       404:
  *         description: Recruiter not found
  */
-router
-  .route("/:id")
-  .get(getRecruiterById)
-  .put(updateRecruiter)
-
+router.route("/:id").get(getRecruiterById).put(updateRecruiter);
 
 router.delete("/", deleteRecruiter);
 router.get("/student-data/:id", getStudentById);
-
-
+router.post("/accept-student", acceptStudentForJob);
+router.post("/reject-student", rejectStudentForJob);
 export default router;
 
 /**

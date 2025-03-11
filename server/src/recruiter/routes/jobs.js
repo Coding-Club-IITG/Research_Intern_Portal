@@ -1,5 +1,4 @@
 import express from "express";
-// import { getRecruiterById, getRecruiters, updateRecruiter, deleteRecruiter } from '../controllers/recruiter.js'
 import {
   createJob,
   getJob,
