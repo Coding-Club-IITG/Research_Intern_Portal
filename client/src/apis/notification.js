@@ -102,3 +102,23 @@ export const markAsUnread = async (id, navigate) => {
     return error?.response?.data || error;
   }
 };
+
+export const verifyEmail = async (data, navigate) => {
+  try {
+    const response = await axios.post(`${notificationURL}/api/v1/email/verify-email`, data);
+    return response.data;
+  } catch (error) {
+    navigate("/500");
+    return error?.response?.data || error;
+  }
+};
+
+export const sendEmail = async (data, navigate) => {
+  try {
+    const response = await axios.post(`${notificationURL}/api/v1/email/send-email`, data);
+    return response.data;
+  } catch (error) {
+    navigate("/500");
+    return error?.response?.data || error;
+  }
+};

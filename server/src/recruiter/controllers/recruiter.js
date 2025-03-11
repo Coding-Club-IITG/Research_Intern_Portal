@@ -222,8 +222,14 @@ const acceptStudentForJob = async (req, res) => {
 
     await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
       title: "Selected for Internship",
-      message: `Congratulations! You have been selected for the internship posted by ${recruiter_data.name}`,
+      message: `Congratulations! You have been selected for the internship posted by ${recruiter_data.name}. An email has been sent to your Outlook email with the details of the further procedure.`,
       userIds: [student_id],
+    });
+
+    await axios.post(`${process.env.EMAIL_URL}/send-email`, {
+      emails: [student_data.email],
+      subject: "Selected for Internship",
+      message: `Congratulations! You have been selected for the internship posted by ${recruiter_data.name}.\n\nRead the following instructions carefully for the furthur procedures:\n\n${furthur_procedure}`,
     });
 
     logger.info(`Student accepted successfully for job with ID ${job_id}`);
@@ -265,6 +271,12 @@ const rejectStudentForJob = async (req, res) => {
       title: "Application Rejected",
       message: `Your application for the internship created by ${recruiter_data.name} has been rejected.`,
       userIds: [student_id],
+    });
+
+    await axios.post(`${process.env.EMAIL_URL}/send-email`, {
+      emails: [student_data.email],
+      subject: "Rejected for Internship",
+      message: `With regret, we inform you that your application for the internship created by ${recruiter_data.name} has been rejected.`,
     });
 
     logger.info(`Student rejected successfully for job with ID ${job_id}`);

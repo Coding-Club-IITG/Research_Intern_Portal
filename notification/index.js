@@ -8,6 +8,7 @@ import { setupSwagger } from "./config/swagger_config.js";
 import cors from "cors";
 import logger from "./utils/logger.js";
 import notificationRoutes from "./notification/route.js";
+import emailRoutes from "./email/aws_route.js";
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.use(
     origin: [
       "http://localhost:3000",
       "https://rip.codingclubiitg.in",
-      //   "http://localhost:8000",
+      "http://localhost:8000",
     ],
     credentials: true,
   })
@@ -34,6 +35,7 @@ app.get("/ping", (req, res) => {
 });
 
 app.use("/api/v1/notifications", notificationRoutes);
+app.use("/api/v1/email", emailRoutes);
 
 app.use(errorHandler);
 app.listen(data.PORT, async () => {

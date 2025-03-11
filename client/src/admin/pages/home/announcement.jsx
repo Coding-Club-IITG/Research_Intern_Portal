@@ -7,17 +7,21 @@ import {
   createNotificationForAll,
   createNotificationForRecruiters,
   createNotificationForSpecificUsers,
-  createNotificationForStudents
+  createNotificationForStudents,
+  sendEmail
 } from "../../../apis/notification";
 
 export default function Announcement() {
   const [selectedOption, setSelectedOption] = useState("all");
   const [selectedUsers, setSelectedUsers] = useState([]);
+  const [selectedEmails, setSelectedEmails] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setMessage] = useState("");
   const [students, setStudents] = useState([]);
   const [recruiters, setRecruiters] = useState([]);
+  const [users, setUsers] = useState([]);
   const [link, setLink] = useState("");
+  const [platform, setPlatform] = useState("select");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +39,10 @@ export default function Announcement() {
     };
     fetchStudents();
   }, [navigate]);
+
+  useEffect(() => {
+    setUsers([...students, ...recruiters]);
+  }, [students, recruiters]);
 
   const columns = [
     { title: "Id", dataIndex: "_id", key: "_id" },
@@ -72,25 +80,75 @@ export default function Announcement() {
     setSelectedUsers((prev) =>
       prev.includes(id) ? prev.filter((sid) => sid !== id) : [...prev, id]
     );
+    const email = users.find((user) => user._id === id).email;
+    setSelectedEmails((prev) =>
+      prev.includes(email) ? prev.filter((email_id) => email_id !== email) : [...prev, email]
+    );
+  };
+
+  const handlePlatformChange = (e) => {
+    setPlatform(e.target.value);
   };
 
   const handleSendNotification = async () => {
-    if (selectedOption === "all") {
-      await createNotificationForAll({ title, message: content, link: link }, navigate);
-    } else if (selectedOption === "students") {
-      await createNotificationForStudents({ title, message: content, link: link }, navigate);
-    } else if (selectedOption === "recruiters") {
-      await createNotificationForRecruiters({ title, message: content, link: link }, navigate);
-    } else {
-      await createNotificationForSpecificUsers(
-        { title, message: content, link: link, userIds: selectedUsers },
-        navigate
-      );
+    if (!title || !content || !link || platform === "select") {
+      message.error("Please fill all the fields");
+      return;
+    }
+    if (platform === "email") {
+      if (selectedOption === "all") {
+        const emails = users.map((user) => user.email);
+        await sendEmail({ emails: emails, title, message: content, link: link }, navigate);
+      } else if (selectedOption === "students") {
+        const emails = students.map((student) => student.email);
+        await sendEmail({ emails: emails, title, message: content, link: link }, navigate);
+      } else if (selectedOption === "recruiters") {
+        const emails = recruiters.map((recruiter) => recruiter.email);
+        await sendEmail({ emails: emails, title, message: content, link: link }, navigate);
+      } else {
+        await sendEmail({ emails: selectedEmails, title, message: content, link: link }, navigate);
+      }
+    }
+    if (platform === "in-app") {
+      if (selectedOption === "all") {
+        await createNotificationForAll({ title, message: content, link: link }, navigate);
+      } else if (selectedOption === "students") {
+        await createNotificationForStudents({ title, message: content, link: link }, navigate);
+      } else if (selectedOption === "recruiters") {
+        await createNotificationForRecruiters({ title, message: content, link: link }, navigate);
+      } else {
+        await createNotificationForSpecificUsers(
+          { title, message: content, link: link, userIds: selectedUsers },
+          navigate
+        );
+      }
+    }
+    if (platform === "both") {
+      if (selectedOption === "all") {
+        const emails = users.map((user) => user.email);
+        await sendEmail({ emails: emails, title, message: content, link: link }, navigate);
+        await createNotificationForAll({ title, message: content, link: link }, navigate);
+      } else if (selectedOption === "students") {
+        const emails = students.map((student) => student.email);
+        await sendEmail({ emails: emails, title, message: content, link: link }, navigate);
+        await createNotificationForStudents({ title, message: content, link: link }, navigate);
+      } else if (selectedOption === "recruiters") {
+        const emails = recruiters.map((recruiter) => recruiter.email);
+        await sendEmail({ emails: emails, title, message: content, link: link }, navigate);
+        await createNotificationForRecruiters({ title, message: content, link: link }, navigate);
+      } else {
+        await sendEmail({ emails: selectedEmails, title, message: content, link: link }, navigate);
+        await createNotificationForSpecificUsers(
+          { title, message: content, link: link, userIds: selectedUsers },
+          navigate
+        );
+      }
     }
     setTitle("");
     setMessage("");
     setLink("");
     setSelectedUsers([]);
+    setPlatform("select");
     setSelectedOption("all");
     message.success("Notification sent successfully");
   };
@@ -171,6 +229,18 @@ export default function Announcement() {
               Selected Users Only
             </label>
           </div>
+        </div>
+        <div>
+          <label className="block text-gray-700">Platform</label>
+          <select
+            className="w-full p-2 border rounded"
+            value={platform}
+            onChange={handlePlatformChange}>
+            <option value="select">Select</option>
+            <option value="email">Email</option>
+            <option value="in-app">In App</option>
+            <option value="both">Both</option>
+          </select>
         </div>
         {selectedOption === "selected" && (
           <div className="mt-4">

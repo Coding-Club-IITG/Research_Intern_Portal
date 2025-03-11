@@ -141,6 +141,11 @@ export const onedriveRedirect = async (req, res) => {
           link: `/profile`,
           userIds: [createdUser.connection_id],
         });
+        await axios.post(`${process.env.EMAIL_URL}/send-email`, {
+          emails: [createdUser.email],
+          subject: "Welcome to Research Intern Portal, IIT Guwahati",
+          message: `We are glad to have you on board! Feel free to explore the platform and reach out to us in case of any queries. We recommend you to complete your profile to get the best experience.`,
+        });
       } catch (err) {
         console.log(err);
         logger.error(err);
