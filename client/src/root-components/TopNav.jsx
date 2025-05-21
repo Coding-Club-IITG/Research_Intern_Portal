@@ -109,8 +109,10 @@ const TopNav = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get(`${backendURL}/api/v1/logout`);
-      if (response.status === 200) navigate("/LogIn");
+      // const response = await axios.get(`${backendURL}/logout`, { withCredentials: true });
+      window.location.href = `https://login.microsoftonline.com/850aa78d-94e1-4bc6-9cf3-8c11b530701c/oauth2/v2.0/logout?client_id=694b6b04-c401-4e85-9a81-fe78f223dede&post_logout_redirect_uri=http://localhost:3000`;
+
+      // if (response.status === 200) navigate("/LogIn");
     } catch (error) {
       console.log(error?.response?.data || error);
     }
@@ -194,7 +196,7 @@ const TopNav = () => {
         </Space>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="logout" icon={<LogoutOutlined />}>
+      <Menu.Item onClick={handleLogout} key="logout" icon={<LogoutOutlined />}>
         Log out
       </Menu.Item>
     </Menu>

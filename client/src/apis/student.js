@@ -4,7 +4,7 @@ import { message } from "antd";
 
 export const getStudent = async (id, navigate) => {
   try {
-    console.log(backendURL)
+    console.log("get student", backendURL)
     const response = await axios.get(`${backendURL}/api/v1/students/${id}`, {
       withCredentials: true,
     });

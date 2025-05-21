@@ -296,6 +296,7 @@ const addStudentsApplications = async (req, res) => {
       Student.findById(id),
       Jobs.findById(internId),
     ]);
+    
     if (!student) {
       return res.status(404).json({
         status: "error",

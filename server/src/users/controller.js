@@ -12,6 +12,7 @@ import { adminList } from "./admin-list.js";
 export const createUser = async (data) => {
   try {
     const { name, email, typeOfUser } = data;
+    console.log("data is: ", data);
 
     let user = {};
 

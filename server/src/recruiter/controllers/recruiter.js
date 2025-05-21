@@ -128,7 +128,7 @@ const updateRecruiter = async (req, res) => {
 
 const deleteRecruiter = async (req, res) => {
   try {
-    // console.log(req?.user);
+    console.log(req?.user);
     const { user_id, connection_id } = req?.user;
 
     // start mongodb transaction
