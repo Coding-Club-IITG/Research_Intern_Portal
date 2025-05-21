@@ -1,4 +1,4 @@
-## For runnig the app
+## For running the app
 
 First run your local mongodb server
 Delete existing database with name rip-testing(if present)
