@@ -5,6 +5,7 @@ const getAllNotificationsOfUser = async (req, res) => {
   try {
     console.log("Fetching all notifications");
     const userId = req.params.id;
+    console.log("User ID:", userId);
     const notifications = await Notification.find({ receiverId: userId }).sort({
       createdAt: -1,
     });

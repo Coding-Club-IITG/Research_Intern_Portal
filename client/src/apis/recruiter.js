@@ -8,7 +8,7 @@ export const getRecruiter = async (id, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -20,7 +20,7 @@ export const getAllRecruiters = async (navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -65,7 +65,7 @@ export const getAllJobs = async (navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -77,7 +77,7 @@ export const getJobsOfRecruiter = async (recruiter_id, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -90,7 +90,7 @@ export const getJobById = async (id, navigate) => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -124,7 +124,7 @@ export const getAllStudentsOfJob = async (id, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -136,7 +136,7 @@ export const getStudentById = async (id, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -149,7 +149,7 @@ export const selectStudent = async (data, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -162,7 +162,7 @@ export const rejectStudent = async (data, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };

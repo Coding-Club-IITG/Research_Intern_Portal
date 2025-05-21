@@ -8,7 +8,7 @@ export const getAllDepartments = async (navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -20,7 +20,7 @@ export const getDepartmentById = async (id, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -32,7 +32,7 @@ export const getAllCourses = async (navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -44,7 +44,7 @@ export const getCourseById = async (id, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };

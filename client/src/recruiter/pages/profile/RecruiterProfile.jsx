@@ -32,7 +32,7 @@ function Profile() {
         const res = await getRecruiter(user.connection_id, navigate);
         if (res.status === "error") {
           message.destroy("loadingData");
-          navigate("/500");
+          // navigate("/500");
           return;
         }
 
@@ -53,7 +53,7 @@ function Profile() {
         message.destroy("loadingData");
         message.error("An error occurred while fetching recruiter data.");
         console.error("Error in getUser:", error);
-        navigate("/500");
+        // navigate("/500");
       }
     }
 
@@ -105,10 +105,8 @@ function Profile() {
     message.loading({ content: "Saving Profile...", key: "saveProfile" });
     if (
       !name.trim() ||
-      !email.trim() ||
-      selectedDepartment === "Select" ||
-      !number ||
-      !gender.trim()
+      !email.trim() 
+      
     ) {
       message.error("Please fill in all required fields.");
       return;
@@ -202,6 +200,7 @@ function Profile() {
                 </option>
               ))}
             </select>
+            {/* <span></span> */}
           </div>
 
           <div className="flex justify-between gap-4 flex-wrap">

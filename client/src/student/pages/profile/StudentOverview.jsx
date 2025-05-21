@@ -22,7 +22,7 @@ const Overview = () => {
       try {
         const response = await getStudent(user.connection_id, navigate);
         if (!response || response.status === "error") {
-          navigate("/500");
+          // navigate("/500");
           return;
         }
         let dept = null;
@@ -40,7 +40,7 @@ const Overview = () => {
         setProfileData(response.data);
       } catch (error) {
         console.error("Error in fetching user data:", error);
-        navigate("/500");
+        // navigate("/500");
       }
     };
     getUser();

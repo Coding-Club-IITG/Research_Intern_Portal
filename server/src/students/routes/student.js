@@ -337,6 +337,7 @@ router.post("/:id/intern-apply/:internId", addStudentsApplications);
  *         description: Internal server error
  */
 router.put("/:id", updateStudent);
+router.post("/create", createStudent);
 router.get("/logout/:id" , logoutStudent)
 //router.delete('/:id', deleteStudent);
 

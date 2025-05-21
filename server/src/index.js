@@ -45,11 +45,10 @@ app.use("/api/v1/admin/updates", verifyJWT, adminGuard, adminUpdateRoutes);
 app.use("/api/v1/admin/departments", verifyJWT, adminDepartmentNameChangeRouter);
 
 // student routes
-app.use("/api/v1/students", verifyJWT, studentRoutes);
-
+app.use("/api/v1/students", studentRoutes);
 // app.use("/api/v1/recruiters", verifyJWT, recruiterGuard, recruiterRoutes);
-app.use("/api/v1/recruiters", verifyJWT, recruiterRoutes);
-app.use("/api/v1/job", verifyJWT, jobRoutes);
+app.use("/api/v1/recruiters", recruiterRoutes);
+app.use("/api/v1/job", jobRoutes);
 
 app.use("/api/v1/admin/bugs", bugRoutes);
 

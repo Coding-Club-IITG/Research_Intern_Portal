@@ -9,24 +9,23 @@ const createJob = async (req, res) => {
     const data = req.body;
     const recruiter_data = await recruiter.findById(req?.user?.connection_id);
 
-    if (recruiter_data.isVerified === false) {
-      return res.status(400).json({
-        message: "Recruiter not verified contact admin",
-        status: "error",
-        data: null,
-      });
-    }
-
+    // if (recruiter_data.isVerified === false) {
+    //   return res.status(400).json({
+    //     message: "Recruiter not verified contact admin",
+    //     status: "error",
+    //     data: null,
+    //   });
+    // }
     const job = await Jobs.create(data);
-    const response = await axios.post(
-      `${process.env.NOTIFICATION_URL}/create-students`,
-      {
-        title: "New Job",
-        message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
-        link: `/internships/internship/${job._id}`,
-      }
-    );
-    console.log(response.data);
+    // const response = await axios.post(
+    //   `${process.env.NOTIFICATION_URL}/create-students`,
+    //   {
+    //     title: "New Job",
+    //     message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
+    //     link: `/internships/internship/${job._id}`,
+    //   }
+    // );
+    // console.log(response.data);
     return res.status(201).json({
       message: "Job created successfully",
       data: job,
@@ -34,11 +33,15 @@ const createJob = async (req, res) => {
     });
   } catch (error) {
     logger.error(error);
+    console.log(error);
     return res
       .status(500)
       .json({ message: "Server Error", status: "error", data: null });
   }
 };
+
+
+
 
 const getAllJobsOfRecruiter = async (req, res) => {
   try {

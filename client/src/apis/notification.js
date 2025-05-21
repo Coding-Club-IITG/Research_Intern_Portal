@@ -8,7 +8,7 @@ export const getAllNotificationsOfUser = async (id, navigate) => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -20,7 +20,7 @@ export const getNewNotifications = async (id, lastChecked, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -33,7 +33,7 @@ export const createNotificationForStudents = async (data, navigate) => {
     );
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -46,7 +46,7 @@ export const createNotificationForRecruiters = async (data, navigate) => {
     );
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -56,7 +56,7 @@ export const createNotificationForAll = async (data, navigate) => {
     const response = await axios.post(`${notificationURL}/api/v1/notifications/create`, data);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -66,7 +66,7 @@ export const createNotificationForSpecificUsers = async (data, navigate) => {
     const response = await axios.post(`${notificationURL}/api/v1/notifications/createOne`, data);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -76,7 +76,7 @@ export const deleteNotification = async (id, navigate) => {
     const response = await axios.post(`${notificationURL}/api/v1/notifications/delete/${id}`);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -86,7 +86,7 @@ export const markAsRead = async (id, navigate) => {
     const response = await axios.post(`${notificationURL}/api/v1/notifications/mark-as-read/${id}`);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -98,7 +98,7 @@ export const markAsUnread = async (id, navigate) => {
     );
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -108,7 +108,7 @@ export const verifyEmail = async (data, navigate) => {
     const response = await axios.post(`${notificationURL}/api/v1/email/verify-email`, data);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -118,7 +118,7 @@ export const sendEmail = async (data, navigate) => {
     const response = await axios.post(`${notificationURL}/api/v1/email/send-email`, data);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };

@@ -7,7 +7,8 @@ const requirementSchema = new mongoose.Schema({
   },
   department: {
     type: [String],
-    required: true,
+    default:"Computer Science",
+    // required: true,
   },
   study_year: {
     type: Number,

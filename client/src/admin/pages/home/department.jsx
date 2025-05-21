@@ -63,7 +63,7 @@ export default function Department() {
       }
     } catch (error) {
       console.error("Error updating department", error);
-      navigate("/500");
+      // navigate("/500");
     }
   };
 
