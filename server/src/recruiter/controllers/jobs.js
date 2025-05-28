@@ -298,6 +298,7 @@ const applyForJob = async (req, res) => {
   }
 };
 
+
 export {
   getJob,
   getJobById,

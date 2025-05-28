@@ -322,7 +322,8 @@ const addStudentsApplications = async (req, res) => {
     }
 
     student.applications.push(intern._id);
-    intern.applicants.push({ applicant: id, enum: "pending" });
+    // intern.applicants.push({ applicant: id, enum: "pending" });
+    intern.applicants.push(id); 
     await student.save({ validateBeforeSave: false });
     await intern.save({ validateBeforeSave: false });
     return res.status(200).json({
