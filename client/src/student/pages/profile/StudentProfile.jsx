@@ -56,6 +56,8 @@ function Profile() {
     getDepartments();
   }, [navigate]);
 
+ 
+
   useEffect(() => {
     const getCourses = async () => {
       const res = await getAllCourses(navigate);
@@ -80,7 +82,7 @@ function Profile() {
         const res = await getStudent(user.connection_id, navigate);
         if (res.status === "error") {
           message.destroy("loadingData");
-          navigate("/500");
+          // navigate("/500");
           return;
         }
 
@@ -132,7 +134,7 @@ function Profile() {
         message.destroy("loadingData");
         message.error("An error occurred while fetching user data.");
         console.error("Error in getUser:", error);
-        navigate("/500");
+        // navigate("/500");
       }
     }
 
@@ -241,9 +243,11 @@ function Profile() {
       message.destroy("saveProfile");
       message.success("Profile updated successfully!");
       navigate("/student/profile/overview");
-    } else {
-      message.error("Error updating profile");
+    // } else {
+    //   message.error("Error updating profile");
+    // }
     }
+
   };
 
   return (
@@ -328,6 +332,7 @@ function Profile() {
                   </option>
                 ))}
               </select>
+              
             </div>
           </div>
 

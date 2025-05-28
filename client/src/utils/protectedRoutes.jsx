@@ -13,9 +13,9 @@ const ProtectedRoute = ({ element: Component, allowedRoles }) => {
     return <Navigate to="/login" />;
   }
 
-  if (allowedRoles && !allowedRoles.includes(role)) {
-    return <Navigate to="/403" />;
-  }
+  // if (allowedRoles && !allowedRoles.includes(role)) {
+  //   return <Navigate to="/403" />;
+  // }
 
   return Component;
 };

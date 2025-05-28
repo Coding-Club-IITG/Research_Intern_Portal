@@ -18,7 +18,7 @@ function Bugs() {
         setBugs(response);
       } catch (error) {
         console.error("Failed to fetch bug reports:", error);
-        navigate("/500");
+        // navigate("/500");
       }
     };
     fetchBugs();

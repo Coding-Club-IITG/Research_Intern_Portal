@@ -23,7 +23,7 @@ export default function Overview() {
         const res = await getRecruiter(user.connection_id, navigate);
         if (!res || res.status === "error") {
           message.destroy("fetchProfile");
-          navigate("/500");
+          // navigate("/500");
           return;
         }
 
@@ -43,7 +43,7 @@ export default function Overview() {
       } catch (error) {
         console.error("Error in fetching user data:", error);
         message.destroy("fetchProfile");
-        navigate("/500");
+        // navigate("/500");
       }
     }
 

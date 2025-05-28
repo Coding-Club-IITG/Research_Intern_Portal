@@ -34,7 +34,7 @@ export default function Course() {
       }
     } catch (error) {
       console.error("Error creating course", error);
-      navigate("/500");
+      // navigate("/500");
     }
   };
 
@@ -58,7 +58,7 @@ export default function Course() {
       }
     } catch (error) {
       console.error("Error updating course", error);
-      navigate("/500");
+      // navigate("/500");
     }
   };
 

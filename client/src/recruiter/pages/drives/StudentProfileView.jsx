@@ -21,7 +21,7 @@ export default function StudentProfileView() {
         setStudent(response.data);
       } catch (error) {
         console.error("Error in fetching user data:", error);
-        navigate("/500");
+        // navigate("/500");
       }
     };
     getUser();

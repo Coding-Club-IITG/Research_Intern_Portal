@@ -21,7 +21,7 @@ export function useFetch(url) {
       } catch (err) {
         setError(err);
         setMessage(err.message);
-        navigate("/500");
+        // navigate("/500");
       } finally {
         setLoading(false);
       }

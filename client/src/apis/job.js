@@ -19,7 +19,7 @@ export const getAllJobs = async (navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -31,7 +31,7 @@ export const getAllAcceptingJobs = async (navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -43,7 +43,7 @@ export const stopAcceptingJob = async (id, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -55,7 +55,7 @@ export const reopenApplications = async (id, navigate) => {
     });
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };

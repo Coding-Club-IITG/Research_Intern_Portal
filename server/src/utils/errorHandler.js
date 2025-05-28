@@ -8,7 +8,7 @@ function errorHandler(err, req, res, next) {
       details: err.details,
       data: {},
     });
-  }
+    console.log(err);  }
   return res.status(404).json({
     success: "false",
     message: "something unexpected happenend",

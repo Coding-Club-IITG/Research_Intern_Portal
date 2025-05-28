@@ -11,7 +11,7 @@ export const verifyRecruiter = async (id, navigate) => {
     );
     return response.data;
   } catch (error) {
-    //navigate("/500");
+    //// navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -23,7 +23,7 @@ export const createBugReport = async (data, navigate) => {
     });
     return response.message;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -36,7 +36,7 @@ export const banRecruiter = async (id, navigate) => {
     });
     return response.data;
   } catch (error) {
-    //navigate("/500");
+    //// navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -52,7 +52,7 @@ export const removeStudent = async (id, navigate) => {
     );
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };
@@ -65,7 +65,7 @@ export const getAllBugReports = async (navigate) => {
     // console.log(response);
     return response.data;
   } catch (error) {
-    navigate("/500");
+    // navigate("/500");
     return error?.response?.data || error;
   }
 };

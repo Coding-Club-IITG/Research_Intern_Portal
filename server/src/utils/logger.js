@@ -8,10 +8,11 @@ const { combine, timestamp, colorize, prettyPrint, json, label } = format;
 
 const logger = createLogger({
   level: 'info', // Set the minimum log level (info, error, warn, etc.)
-  format: combine( timestamp(), json(), colorize(), label({ label: 'server log' }),), 
+  format: combine( json(), colorize(), label({ label: 'server log' }),), 
   transports: [
     new transports.File({ filename: 'error.log', level: 'error' }),
     new transports.File({ filename: 'combined.log' }),
+    new transports.Console(),
   ],
 });
 

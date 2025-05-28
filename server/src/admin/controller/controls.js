@@ -28,6 +28,7 @@ export const verifyRecruiter = async (req, res) => {
       data: recruiter,
     });
   } catch (error) {
+    console.error(error);
     logger.error(`Error verifying recruiter with ID ${id}: ${error.message}`);
     res.status(500).json({
       status: "error",

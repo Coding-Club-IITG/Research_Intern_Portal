@@ -31,7 +31,7 @@ export default function StudentPage() {
       // console.log(response);
       refreshStudents();
     } catch (error) {
-      navigate("/500");
+      // navigate("/500");
       console.error("Remove failed:", error);
     }
   };

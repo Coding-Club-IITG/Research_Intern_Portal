@@ -56,7 +56,7 @@ export default function DriveDetail() {
       if (res.message === "Already applied") {
         return;
       }
-      message.error("Failed to apply");
+      // message.error("Failed to apply");
     }
   };
 
