@@ -44,7 +44,7 @@ export const createUser = async (data) => {
           createdAt: new Date(),
           updatedAt: new Date(),
         });
-      // }
+     
     }
 
     const appUser = await User.create({

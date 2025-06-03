@@ -201,8 +201,9 @@ const deleteRecruiter = async (req, res) => {
 };
 
 const acceptStudentForJob = async (req, res) => {
+  console.log('hi job is hit')
   try {
-    const { job_id, student_id } = req.query;
+    const { job_id, student_id } = req.body;
     const job = await jobs.findById(job_id);
     const student_data = await student.findById(student_id);
 
@@ -220,17 +221,17 @@ const acceptStudentForJob = async (req, res) => {
     job.selected_student.push(student_id);
     job.save();
 
-    await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
-      title: "Selected for Internship",
-      message: `Congratulations! You have been selected for the internship posted by ${recruiter_data.name}. An email has been sent to your Outlook email with the details of the further procedure.`,
-      userIds: [student_id],
-    });
+    // await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
+    //   title: "Selected for Internship",
+    //   message: `Congratulations! You have been selected for the internship posted by ${recruiter_data.name}. An email has been sent to your Outlook email with the details of the further procedure.`,
+    //   userIds: [student_id],
+    // });
 
-    await axios.post(`${process.env.EMAIL_URL}/send-email`, {
-      emails: [student_data.email],
-      subject: "Selected for Internship",
-      message: `Congratulations! You have been selected for the internship posted by ${recruiter_data.name}.\n\nRead the following instructions carefully for the furthur procedures:\n\n${furthur_procedure}`,
-    });
+    // await axios.post(`${process.env.EMAIL_URL}/send-email`, {
+    //   emails: [student_data.email],
+    //   subject: "Selected for Internship",
+    //   message: `Congratulations! You have been selected for the internship posted by ${recruiter_data.name}.\n\nRead the following instructions carefully for the furthur procedures:\n\n${furthur_procedure}`,
+    // });
 
     logger.info(`Student accepted successfully for job with ID ${job_id}`);
 
@@ -249,7 +250,7 @@ const acceptStudentForJob = async (req, res) => {
 
 const rejectStudentForJob = async (req, res) => {
   try {
-    const { job_id, student_id } = req.query;
+    const { job_id, student_id } = req.body;
     const job = await jobs.findById(job_id);
     const student_data = await student.findById(student_id);
 
@@ -267,17 +268,17 @@ const rejectStudentForJob = async (req, res) => {
     job.rejected_student.push(student_id);
     job.save();
 
-    await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
-      title: "Application Rejected",
-      message: `Your application for the internship created by ${recruiter_data.name} has been rejected.`,
-      userIds: [student_id],
-    });
+    // await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
+    //   title: "Application Rejected",
+    //   message: `Your application for the internship created by ${recruiter_data.name} has been rejected.`,
+    //   userIds: [student_id],
+    // });
 
-    await axios.post(`${process.env.EMAIL_URL}/send-email`, {
-      emails: [student_data.email],
-      subject: "Rejected for Internship",
-      message: `With regret, we inform you that your application for the internship created by ${recruiter_data.name} has been rejected.`,
-    });
+    // await axios.post(`${process.env.EMAIL_URL}/send-email`, {
+    //   emails: [student_data.email],
+    //   subject: "Rejected for Internship",
+    //   message: `With regret, we inform you that your application for the internship created by ${recruiter_data.name} has been rejected.`,
+    // });
 
     logger.info(`Student rejected successfully for job with ID ${job_id}`);
 

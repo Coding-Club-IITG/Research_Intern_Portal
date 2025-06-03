@@ -88,9 +88,10 @@ router.route("/").get(getRecruiters).post(createRecuiter);
 router.route("/:id").get(getRecruiterById).put(updateRecruiter);
 
 router.delete("/", deleteRecruiter);
-router.get("/student-data/:id", getStudentById);
 router.post("/accept-student", acceptStudentForJob);
 router.post("/reject-student", rejectStudentForJob);
+router.get("/student-data/:id", getStudentById);
+
 export default router;
 
 /**

@@ -3,6 +3,7 @@ import Student from "../../students/models/student.js";
 import logger from "../../utils/logger.js";
 import recruiter from "../models/recruiter.js";
 import axios from "axios";
+import  mongoose from "mongoose";
 
 const createJob = async (req, res) => {
   try {
@@ -214,40 +215,118 @@ const updateJob = async (req, res) => {
   }
 };
 
+// const getAllStudentsOfJob = async (req, res) => {
+
+//   try {
+//     const { id } = req.params;
+//     const job = await Jobs.findById(id);
+
+//     if (!job) {
+//       return res
+//         .status(404)
+//         .json({ message: "Job not found", data: null, status: "error" });
+//     }
+//     let applicantsData = [];
+
+//     if (job.applicants.length > 0) {
+//       applicantsData = await Promise.all(
+//         job.applicants.map(async (applicantDetail) => {
+//           console.log("Job applicants array:", job.applicants);
+//           const applicant = await Student.findById(applicantDetail.applicant);
+//           return applicant;
+//         })
+//       );
+//     }
+//    console.log('applicationsData=',applicantsData);
+    
+//     return res.status(200).json({
+//       message: "Job retrieved successfully",
+//       data: applicantsData,
+//       status: "success",
+//     });
+//   }
+ 
+  
+//   catch (error) {
+//     logger.error(error);
+//     console.log(error);
+//     return res
+//       .status(500)
+//       .json({ message: "Server Error", data: null, status: "error" });
+//   }
+// };
+
 const getAllStudentsOfJob = async (req, res) => {
   try {
     const { id } = req.params;
-    const job = await Jobs.findById(id);
 
+    // ✅ Fetch the job
+    const job = await Jobs.findById(id);
     if (!job) {
-      return res
-        .status(404)
-        .json({ message: "Job not found", data: null, status: "error" });
+      return res.status(404).json({
+        message: "Job not found",
+        data: null,
+        status: "error",
+      });
     }
+
+    console.log("✅ Job found:", job);
 
     let applicantsData = [];
 
+    // ✅ Check what applicants look like
+    console.log("🔍 job.applicants =", job.applicants);
+
     if (job.applicants.length > 0) {
       applicantsData = await Promise.all(
-        job.applicants.map(async (applicantDetail) => {
-          const applicant = await Student.findById(applicantDetail.applicant);
-          return applicant;
+        job.applicants.map(async (applicantEntry) => {
+          try {
+            let applicantId;
+
+            // 🧠 Decide format: Object or direct ID
+            if (typeof applicantEntry === 'string' || typeof applicantEntry === 'object' && applicantEntry.toString) {
+              // Case: applicantEntry is a direct ID
+              applicantId = applicantEntry;
+            } else if (typeof applicantEntry === 'object' && applicantEntry.applicant) {
+              // Case: applicantEntry is { applicant: 'studentId' }
+              applicantId = applicantEntry.applicant;
+            } else {
+              console.warn("⚠️ Unrecognized applicant entry:", applicantEntry);
+              return null;
+            }
+
+            const applicant = await Student.findById(applicantId);
+            if (!applicant) {
+              console.warn(`Student not found: ${applicantId}`);
+              return null;
+            }
+
+            return applicant;
+          } catch (err) {
+            console.error("🔥 Error fetching applicant:", err.message);
+            return null;
+          }
         })
       );
     }
+    console.log("applicantsData", applicantsData);
 
     return res.status(200).json({
       message: "Job retrieved successfully",
-      data: applicantsData,
+      data: applicantsData.filter(Boolean), 
       status: "success",
     });
+
   } catch (error) {
-    logger.error(error);
-    return res
-      .status(500)
-      .json({ message: "Server Error", data: null, status: "error" });
+    console.error("Server Error in getAllStudentsOfJob:", error);
+    return res.status(500).json({
+      message: "Server Error",
+      data: null,
+      status: "error",
+    });
   }
 };
+
 
 const getJobByfilter = async (req, res) => {
   try {

@@ -27,6 +27,8 @@ function DriveStudentList() {
       if (res.status === "success") {
         // message.destroy("loading");
         setApplicants(res.data);
+        console.log("Fetched applicants:", res.data);
+
       }
       setLoading(false);
     }
@@ -92,6 +94,7 @@ function DriveStudentList() {
             className="px-2 py-1 md:px-4 md:py-2 rounded bg-blue-600 text-white border border-blue-600 hover:bg-blue-700 transition-all"
             onClick={() => {
               selectStudent({ job_id: driveIndex, student_id: record._id }, navigate);
+              navigate("/recruiter/profile/");
             }}>
             Accept
           </button>
@@ -99,6 +102,7 @@ function DriveStudentList() {
             className="px-2 py-1 md:px-4 md:py-2 rounded bg-red-600 text-white border border-red-600 hover:bg-red-700 transition-all"
             onClick={() => {
               rejectStudent({ job_id: driveIndex, student_id: record._id }, navigate);
+              navigate("/recruiter/profile/");
             }}>
             Reject
           </button>
