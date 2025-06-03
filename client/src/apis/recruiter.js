@@ -1,6 +1,7 @@
 import axios from "axios";
 import { backendURL } from "./server";
 
+
 export const getRecruiter = async (id, navigate) => {
   try {
     const response = await axios.get(`${backendURL}/api/v1/recruiters/${id}`, {
@@ -141,28 +142,54 @@ export const getStudentById = async (id, navigate) => {
   }
 };
 
+// export const selectStudent = async (data, navigate) => {
+//   try {
+//     const response = await axios.get(`${backendURL}/api/v1/recruiters/accept-student`, {
+//       params: data,
+//       withCredentials: true
+//     });
+//     return response.data;
+//   } catch (error) {
+//     // navigate("/500");
+//     return error?.response?.data || error;
+//   }
+// };
+
+// export const rejectStudent = async (data, navigate) => {
+//   try {
+//     const response = await axios.get(`${backendURL}/api/v1/recruiters/reject-student`, {
+//       params: data,
+//       withCredentials: true
+//     });
+//     return response.data;
+//   } catch (error) {
+//     // navigate("/500");
+//     return error?.response?.data || error;
+//   }
+// };
+
+
+
 export const selectStudent = async (data, navigate) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/recruiters/accept-student`, {
-      data,
+    const response = await axios.post(`${backendURL}/api/v1/recruiters/accept-student`, data, {
       withCredentials: true
     });
     return response.data;
+    
   } catch (error) {
-    // navigate("/500");
     return error?.response?.data || error;
   }
 };
 
 export const rejectStudent = async (data, navigate) => {
   try {
-    const response = await axios.get(`${backendURL}/api/v1/recruiters/reject-student`, {
-      data,
+    const response = await axios.post(`${backendURL}/api/v1/recruiters/reject-student`, data, {
       withCredentials: true
     });
     return response.data;
   } catch (error) {
-    // navigate("/500");
     return error?.response?.data || error;
   }
 };
+
