@@ -8,7 +8,7 @@ export default function RecruiterHome() {
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-black text-gray-800 dark:text-white transition-colors duration-300">
       <header className="bg-white dark:bg-black shadow-md py-4 px-6 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Recruiter Dashboard</h1>
+        <h1 className="text-2xl font-bold">Recruiter Page</h1>
         <nav className="space-x-4">
        
         <Link to="/recruiter/newdrives">
