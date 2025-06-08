@@ -5,7 +5,6 @@ import {
   UserIcon,
   BriefcaseIcon,
   PlusIcon,
-  BugAntIcon
 } from "@heroicons/react/24/outline";
 
 const LeftNav = () => {
@@ -60,17 +59,6 @@ const LeftNav = () => {
           <span className="mt-1 max-sm:text-xs">New Drive</span>
         </NavLink>
 
-        <NavLink
-          to="bugReport"
-          className={({ isActive }) =>
-            isActive
-              ? "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-900 rounded py-2 text-blue-700 dark:text-blue-300 text-xs md:text-base border-b-2 pb-2 border-blue-700 dark:border-blue-300"
-              : "flex flex-col items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-zinc-900 rounded py-2 text-gray-600 dark:text-gray-300 text-xs md:text-base"
-          }
-          exact>
-          <BugAntIcon className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-          <span className="mt-1 max-sm:text-xs">Report Bug</span>
-        </NavLink>
       </div>
     </div>
   );
