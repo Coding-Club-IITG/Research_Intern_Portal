@@ -26,5 +26,5 @@ jobs:
             cd ${{ secrets.APP_DIR }}
             git pull origin main
             npm install
-            pm2 restart node-backend || pm2 start server.js --name node-backend
+            pm2 restart notification-api || pm2 start server.js --name node-backend
           EOF
