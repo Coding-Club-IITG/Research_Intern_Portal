@@ -2,8 +2,7 @@ name: Deploy Notification Backend to EC2
 
 on:
   push:
-    branches:
-      - main
+    branches: ["master"]
 
 jobs:
   deploy:
