@@ -3,4 +3,4 @@
 // export const backendURL = url
 // export const backendURL = "http://localhost:8000";
 export const notificationURL = "http://localhost:3001";
-export const backendURL = "https://rip.codingclubiitg.in/api";
+export const backendURL = "https://rip.codingclubiitg.in";

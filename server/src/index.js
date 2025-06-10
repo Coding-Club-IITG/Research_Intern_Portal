@@ -26,7 +26,7 @@ setupSwagger(app);
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://rip.codingclubiitg.in", "*"],
+    origin: ["http://localhost:3000", "https://rip.codingclubiitg.in"],
     credentials: true,
   })
 );
@@ -42,7 +42,11 @@ app.use("/", authRoutes);
 // admin routes
 app.use("/api/v1/admin/controls", verifyJWT, adminGuard, adminControlRouter);
 app.use("/api/v1/admin/updates", verifyJWT, adminGuard, adminUpdateRoutes);
-app.use("/api/v1/admin/departments", verifyJWT, adminDepartmentNameChangeRouter);
+app.use(
+  "/api/v1/admin/departments",
+  verifyJWT,
+  adminDepartmentNameChangeRouter
+);
 
 // student routes
 app.use("/api/v1/students", studentRoutes);
