@@ -12,8 +12,6 @@ import InternshipDetail from "./pages/internships/InternshipDetail";
 import NotFoundPage from "../errors/NotFoundPage";
 import Notifications from "../root-components/Notifications";
 
-import BugReport from "../pages/BugReport";
-
 const StudentRoutes = () => {
   return (
     <Routes>
@@ -32,7 +30,6 @@ const StudentRoutes = () => {
         </Route>
 
         <Route path="applied" element={<StudentApplied />} />
-        <Route path="bugReport" element={<BugReport />} />
         <Route path="notifications/:id" element={<Notifications />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />

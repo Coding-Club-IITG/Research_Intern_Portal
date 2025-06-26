@@ -5,7 +5,6 @@ import {
   UserIcon,
   BriefcaseIcon,
   CheckIcon,
-  BugAntIcon
 } from "@heroicons/react/24/outline";
 import { Button } from "antd";
 
@@ -62,17 +61,6 @@ const LeftNav = () => {
           Applied
         </NavLink>
 
-        <NavLink
-          to="bugReport"
-          className={({ isActive }) =>
-            isActive
-              ? "flex gap-2 items-center p-2 cursor-pointer dark:bg-blue-600 bg-gray-200 hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 font-bold text-xs md:text-base  mt-1"
-              : "flex gap-2 items-center cursor-pointer hover:bg-gray-200 dark:hover:bg-blue-600 rounded py-2 text-gray-600 dark:text-white text-xs md:text-base mt-1"
-          }
-          exact>
-          <BugAntIcon className="h-6 w-6 text-gray-700 dark:text-white" />
-          Report Bug
-        </NavLink>
         <h2 className="text-lg font-semibold tracking-tight md:block hidden">Resources</h2>
         <NavLink
           to="faq"
