@@ -51,23 +51,42 @@ function DriveCard({ drive }) {
       <div className="flex flex-col space-y-2 max-sm:w-full">
         <div className="flex gap-2">
           <button
-            className="border bg-gray-400 border-black dark:border-gray-600 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded-md"
+            className="relative group dark:hover:bg-blue-600 shadow-md dark:bg-blue-500 dark:border-gray-600 hover:bg-gray-300 px-3 py-2 max-sm:py-1 rounded-md"
             onClick={handleView}>
-            View
+            <img src="/icons8-view-24 (1).png"/>
+            <span className="absolute left-1/2 bottom-full mb-2 w-max -translate-x-1/2 rounded-md bg-gray-800 text-white text-xs p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  View
+            </span>
           </button>
 
+          {new Date(drive?.last_date) > currentdate && drive?.accepting && (
+            <button
+              className="relative group dark:hover:bg-blue-600 shadow-md dark:bg-blue-500 dark:border-gray-600 hover:bg-gray-300 px-3 py-2 max-sm:py-1 rounded"
+              onClick={handleEdit}>
+                <img src="/icons8-edit-30.png" className="h-6"/>
+                <span className="absolute left-1/2 bottom-full mb-2 w-max -translate-x-1/2 rounded-md bg-gray-800 text-white text-xs p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  Edit
+                </span>
+            </button>
+          )}
           {new Date(drive?.last_date) > currentdate ? (
             drive?.accepting ? (
               <button
                 onClick={handleStop}
-                className="border border-black bg-red-400 dark:border-gray-600 hover:bg-red-500 px-4 py-2 max-sm:py-1 rounded-md">
-                Stop Accepting Applications
+                className="relative group dark:bg-gray-600 dark:hover:bg-red-500 dark:border-gray-600 hover:bg-red-500 px-3 py-2 max-sm:py-1 shadow-md rounded-md">
+                <img src="/icons8-stop-64.png" className="h-5"/>
+                <span className="absolute left-1/2 bottom-full mb-2 w-max -translate-x-1/2 rounded-md bg-gray-800 text-white text-xs p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  Stop Accepting Applications
+                </span>
               </button>
             ) : (
               <button
                 onClick={handleReopen}
-                className="border border-black bg-green-400 dark:border-gray-600 hover:bg-green-500 px-4 py-2 max-sm:py-1 rounded-md">
-                Reopen Applications
+                className=" relative group shadow-md dark:bg-gray-600 dark:hover:bg-gray-700 hover:bg-green-400 px-3 py-2 max-sm:py-1 rounded-md">
+                <img src="/icons8-play-50.png" className="h-6"/>
+                <span className="absolute left-1/2 bottom-full mb-2 w-max -translate-x-1/2 rounded-md bg-gray-800 text-white text-xs p-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  Reopen Applications
+                </span>
               </button>
             )
           ) : (
@@ -79,15 +98,8 @@ function DriveCard({ drive }) {
           )}
         </div>
         <div className="flex gap-2 items-center justify-center">
-          {new Date(drive?.last_date) > currentdate && drive?.accepting && (
-            <button
-              className="border bg-gray-400 border-black dark:border-gray-600 hover:bg-gray-500 px-4 py-2 max-sm:py-1 rounded"
-              onClick={handleEdit}>
-              Edit
-            </button>
-          )}
           <button
-            className="border border-black bg-blue-500 hover:bg-blue-600 dark:border-gray-600 px-4 py-2 max-sm:py-1 rounded"
+            className="bg-blue-500 shadow-md hover:bg-blue-600 dark:border-gray-600 px-4 py-2 max-sm:py-1 rounded"
             onClick={handleApplied}>
             Applied Students: {drive?.applicants?.length}
           </button>

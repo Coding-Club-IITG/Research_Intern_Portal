@@ -41,11 +41,12 @@ const App = () => {
       }}
       type="button"
     >
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      {loading ? <LoadingOutlined /> : <PlusOutlined className="dark:text-white" />}
       <div
         style={{
-          marginTop: 8
+          marginTop: 8,
         }}
+        className="dark:text-white"
       >
         Profile Pic
       </div>
