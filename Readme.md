@@ -1,28 +1,44 @@
-## For running the app
+# Research Intern Portal – IIT Guwahati
 
-First run your local mongodb server
-Delete existing database with name rip-testing(if present)
+A full-stack web application designed to streamline collaboration between students and researchers. Built with a modern tech stack and integrated notification system, this portal simplifies the research internship process at IIT Guwahati.
 
-Get inside server
+---
 
-## `cd server`
+## 🚀 Features
 
-Install npm packages
+- 🔒 **Role-Based Access** for students and researchers
+- 💻 **Frontend** with React and Tailwind CSS
+- 🛠️ **Backend** using Node.js and Express.js with RESTful API structure
+- 📬 **Email/SMS Notifications** via AWS SNS and SES
+- 📄 **Swagger API Documentation** for seamless integration
+- 🗂️ **MongoDB** for managing users, applications, and project data
 
-## `npm i`
+---
 
-Run server
+## 🧰 Tech Stack
 
-## `npm run dev`
+| Layer         | Technology              |
+|---------------|--------------------------|
+| Frontend      | React, Tailwind CSS      |
+| Backend       | Node.js, Express.js      |
+| Database      | MongoDB                  |
+| Notifications | AWS SNS, AWS SES         |
+| Docs          | Swagger/OpenAPI          |
 
-Get inside client
+---
 
-## `cd client`
+## ⚙️ Setup Instructions
 
-Install npm packages
+### 1. Start MongoDB
+Make sure your **local MongoDB server** is running.
 
-## `npm i`
+If a database named `rip-testing` already exists, you can delete it from your MongoDB GUI (e.g., MongoDB Compass) or shell.
 
-Run server
+---
 
-## `npm run start`
+### 2. Backend Setup
+
+```bash
+cd server
+npm install         # Install backend dependencies
+npm run dev         # Start the backend server (default: http://localhost:5000)
