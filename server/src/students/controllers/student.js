@@ -64,15 +64,22 @@ const updateStudent = async (req, res) => {
     const data = req.body;
     const id = req.params.id;
 
-    const student = await Student.findByIdAndUpdate(
-      { _id: id },
-      { ...data, updatedAt: Date.now(), DOB: new Date(data?.DOB) },
-      { new: true },
-      {isUpdated: true},
-    );
+    const updatedData = {
+      ...data,
+      updatedAt: Date.now(),
+      DOB: new Date(data?.DOB),
+      isUpdated: true, // move this into the update object
+    };
+
+    const student = await Student.findByIdAndUpdate(id, updatedData, {
+      new: true,
+    });
+
+    console.log(student);
+
     if (!student) {
       logger.error(
-        `Updating student is not succesfull because student with ${id} does not exisits in database`
+        `Updating student failed: student with ID ${id} does not exist.`
       );
       return res.status(400).json({
         status: "error",
@@ -88,13 +95,15 @@ const updateStudent = async (req, res) => {
       data: student,
     });
   } catch (error) {
+    logger.error(`Internal Server Error while updating student: ${error}`);
     return res.status(500).json({
       status: "error",
-      message: "Some Internal Server error occured",
+      message: "Some Internal Server Error occurred",
       data: null,
     });
   }
 };
+
 
 // const deleteStudent = async (req, res) => {
 //   try {

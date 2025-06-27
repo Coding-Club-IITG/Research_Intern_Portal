@@ -19,29 +19,6 @@ export default function StudentHome() {
       <div className="w-[80%] p-8 h-fit rounded-lg border dark:bg-zinc-900 dark:border-none bg-white border-gray-400">
         <div className="flex flex-col">
           <h2 className="font-bold text-base md:text-lg text-black dark:text-white m-0">
-            Recommended Jobs
-          </h2>
-          <p className="text-m text-gray-700 dark:text-white font-thin">
-            Jobs where you're a top applicant based on your profile job search
-          </p>
-        </div>
-        <div className="w-full h-full flex items-center justify-center flex-col">
-          {recommendedJobs.length === 0 ? (
-            <img src="/student-home.png" alt="job" className="max-h-[30rem]" />
-          ) : (
-            <div>Add jobs card</div>
-          )}
-          <Button
-            type="primary"
-            size="large"
-            className="bg-blue-500 dark:bg-white dark:text-black hover:bg-gray-400 transition duration-200">
-            View Jobs
-          </Button>
-        </div>
-      </div>
-      <div className="w-[80%] p-8 h-fit rounded-lg border dark:bg-zinc-900 dark:border-none bg-white border-gray-400">
-        <div className="flex flex-col">
-          <h2 className="font-bold text-base md:text-lg text-black dark:text-white m-0">
             Applied Jobs
           </h2>
           <p className="text-m text-gray-700 dark:text-white font-thin">

@@ -124,7 +124,7 @@ const Overview = () => {
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
-                    className="size-8 dark:fill-slate-700 fill-none">
+                    className="size-8  fill-none">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
