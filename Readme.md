@@ -6,16 +6,16 @@ A full-stack web application designed to streamline collaboration between studen
 
 ## 🚀 Features
 
-- 🔒 **Role-Based Access** for students and researchers
-- 💻 **Frontend** with React and Tailwind CSS
-- 🛠️ **Backend** using Node.js and Express.js with RESTful API structure
-- 📬 **Email/SMS Notifications** via AWS SNS and SES
-- 📄 **Swagger API Documentation** for seamless integration
-- 🗂️ **MongoDB** for managing users, applications, and project data
+-  **Role-Based Access** for students and researchers
+-  **Frontend** with React and Tailwind CSS
+-  **Backend** using Node.js and Express.js with RESTful API structure
+-  **Email/SMS Notifications** via AWS SNS and SES
+-  **Swagger API Documentation** for seamless integration
+-  **MongoDB** for managing users, applications, and project data
 
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 
 | Layer         | Technology              |
 |---------------|--------------------------|
