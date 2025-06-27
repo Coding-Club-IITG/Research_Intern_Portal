@@ -67,7 +67,8 @@ const updateStudent = async (req, res) => {
     const student = await Student.findByIdAndUpdate(
       { _id: id },
       { ...data, updatedAt: Date.now(), DOB: new Date(data?.DOB) },
-      { new: true }
+      { new: true },
+      {isUpdated: true},
     );
     if (!student) {
       logger.error(
@@ -377,3 +378,4 @@ export {
   addStudentsApplications,
   logoutStudent,
 };
+ 
