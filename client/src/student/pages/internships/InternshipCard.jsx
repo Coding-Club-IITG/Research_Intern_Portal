@@ -31,11 +31,16 @@ function InternshipCard({ arr }) {
 
   useEffect(() => {
     if (arr.applicants) {
-      console.log(arr.applicants);
-      const applied = arr.applicants.find(
-        (applicant) => applicant.applicant === user.connection_id
+      console.log(`applied ${arr}`);
+      const appliedOrNot = arr.applicants.find(
+        (person) => {if(person === user.connection_id){
+          console.log(person);
+          console.log(user.connection_id);
+          return true;
+        }}
       );
-      if (applied) {
+      console.log(appliedOrNot)
+      if (appliedOrNot) {
         setApplied(true);
       }
     }
