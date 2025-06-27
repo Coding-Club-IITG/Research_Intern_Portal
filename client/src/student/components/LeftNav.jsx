@@ -75,7 +75,7 @@ const LeftNav = () => {
         </NavLink>
       </div>
       <div className="mt-auto py-8 md:block hidden">
-        <div className="rounded-lg bg-gray-200 p-3">
+        <div className="rounded-lg bg-gray-200 dark:bg-blue-600 p-3">
           <h3 className="mb-1 font-medium">Need help?</h3>
           <p className="text-xs text-muted-foreground">Contact our support team for assistance with any issues.</p>
           <Button className="mt-2 w-full text-xs" size="sm">

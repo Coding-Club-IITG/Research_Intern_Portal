@@ -9,13 +9,13 @@ const upload = multer({ dest: "uploads/" });
 
 const uploadFile = async (req, res) => {
   try {
-    //console.log(req.user);
+    console.log(req.user);
 
     const token = req.user.token;
     if (!req.file) {
       return res.status(400).json({ message: "No file uploaded" });
     }
-
+    console.log(token)
     const filePath = req.file.path; // Path to the uploaded file
     const fileName = req.file.originalname;
 
@@ -33,16 +33,18 @@ const uploadFile = async (req, res) => {
       },
       body: file,
     });
-
+    // console.log(uploadResponse)
     const uploadData = await uploadResponse.json();
-
+    console.log(uploadData.webUrl)
     const studentData = await student.findById(req.user.connection_id);
+    console.log(studentData)
     studentData.resume = uploadData.webUrl;
     await studentData.save();
 
     // Remove the temporary file
+    console.log(1)
     fs.unlinkSync(filePath);
-
+    console.log(2)
     if (uploadResponse.ok) {
       logger.info(uploadData.webUrl);
       res.json({

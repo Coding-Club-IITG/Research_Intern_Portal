@@ -16,6 +16,7 @@ const Overview = () => {
   const [dept, setDept] = useState(null);
   const [course, setCourse] = useState(null);
   const [theme] = useTheme();
+  const[isUpdated,setIsUpdated] = useState(false);
 
   useEffect(() => {
     const getUser = async () => {
@@ -25,6 +26,7 @@ const Overview = () => {
           // navigate("/500");
           return;
         }
+        
         let dept = null;
         if (response.data.department) {
           dept = await getDepartmentById(response.data.department, navigate);
@@ -38,19 +40,22 @@ const Overview = () => {
 
         if (course) setCourse(course.data);
         setProfileData(response.data);
+        setIsUpdated(response.data.isUpdated);
+        console.log(response.data)
       } catch (error) {
         console.error("Error in fetching user data:", error);
         // navigate("/500");
       }
     };
     getUser();
-  }, [user.connection_id, navigate]);
 
+  }, [user.connection_id, navigate]);
   return (
     <div>
       <div className="py-4">
         <div className="font-semibold dark:text-white">What recruiters will see:</div>
       </div>
+      {isUpdated?
       <div className="bg-white dark:bg-zinc-900 max-w-4xl mx-auto max-sm:p-2 p-6 rounded-lg mt-6 border border-gray-300 dark:border-none">
         <div className="p-2 max-sm:flex-col max-sm:items-start flex items-center mb-4">
           <div className="w-20 h-20 md:w-32 md:h-32 rounded-full overflow-hidden flex items-center justify-center mr-6">
@@ -281,7 +286,9 @@ const Overview = () => {
             </ul>
           </div>
         )}
-      </div>
+      </div> 
+      : <div> Update your profile</div>}
+      
     </div>
   );
 };

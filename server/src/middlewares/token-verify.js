@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 const verifyJWT = (req, res, next) => {
   const token = req?.cookies?.jwt?.access_token;
   const user = req?.cookies?.user;
-
+  console.log(token)
   const parseUser = JSON.parse(user);
   // console.log(parseUser);
 

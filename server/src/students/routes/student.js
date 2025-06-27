@@ -54,7 +54,7 @@ const router = express.Router();
  *         description: Internal server error
  */
 router.get("/", getStudents);
-router.post("/upload", upload.single("file"), uploadFile);
+router.post("/upload", upload.single("file"),verifyJWT, uploadFile);
 
 /**
  * @swagger
