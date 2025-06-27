@@ -133,6 +133,10 @@ const studentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  isUpdated:{
+    type: Boolean,
+    default: false,
+  },
 });
 
 /**
