@@ -1,0 +1,37 @@
+name: Deploy to AWS Server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: self-hosted # Using your GitHub self-hosted runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22 # Adjust based on your project
+
+      - name: Install backend dependencies
+        working-directory: server # Adjust based on your backend path
+        run: npm install
+
+      - name: Restart Backend with PM2 (Only if Running)
+        run: |
+          if pm2 describe backend > /dev/null 2>&1; then
+            pm2 restart backend --update-env
+          else
+            cd ~/Research_Intern_Portal/server/
+            pm2 start src/index.js --name backend
+          fi
+
+          pm2 save
+
+      - name: Restart Nginx
+        run: sudo systemctl restart nginx

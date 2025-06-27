@@ -1,0 +1,59 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+body {
+  @apply bg-white text-black;
+}
+
+.custom-layout-height {
+  height: calc(100vh - 4rem);
+  min-height: calc(100vh - 4rem);
+}
+
+.dark .ant-picker-input input::placeholder {
+  color: #abaeb1;
+}
+
+.dark .ant-picker-input span {
+  color: #abaeb1;
+}
+
+.dark .multi .ant-select-selector {
+  background-color: inherit !important;
+  border-color: #4b5563 !important;
+  color: #ffffff !important;
+  padding: 4px;
+}
+
+.dark .multi .ant-select-selection-placeholder {
+  color: #d1d5db !important;
+}
+
+.dark .multi .ant-select-selection-item {
+  background-color: #abaeb1 !important;
+  color: black !important;
+}
+
+.dark .ant-pagination-item-link path {
+  fill: #abaeb1;
+}
+
+.dark .stud .ant-table-thead > tr > th {
+  background-color: #18181b;
+  color: #f9fafb;
+}
+
+.dark .stud .ant-table-tbody > tr > td {
+  background-color: #27272a; /* Dark rows */
+  color: #f9fafb;
+}
+
+.dark .stud .ant-table-tbody > tr:hover > td {
+  background-color: #27272a !important;
+  color: #f9fafb !important;
+}
+
+

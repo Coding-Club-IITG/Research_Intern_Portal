@@ -1,0 +1,59 @@
+name: NodeJS with Webpack
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies & Build
+        run: |
+          cd client
+          npm install
+          CI=false npm run build
+
+      - name: Set GitHub user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Push Build to `build` Branch
+        run: |
+          git checkout --orphan build
+          git add -f client/build
+          git commit -m "Deploy: update build"
+          git push -f origin build
+
+  deploy:
+    name: Deploy to AWS EC2
+    needs: build
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Build Branch
+        uses: actions/checkout@v4
+        with:
+          ref: build
+
+      - name: Deploy to AWS EC2
+        run: |
+          cd ~/Research_Intern_Portal
+          git fetch --all
+          git reset --hard origin/build
+
+      - name: Restart Frontend with pm2
+        run: |
+          pm2 delete research-intern-portal || true
+          cd ~/Research_Intern_Portal/client
+          pm2 start "serve -s build -l 3003" --name "research-intern-portal"
+          pm2 save
