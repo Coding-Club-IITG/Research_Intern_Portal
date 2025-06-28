@@ -3,7 +3,7 @@ import Student from "../../students/models/student.js";
 import logger from "../../utils/logger.js";
 import recruiter from "../models/recruiter.js";
 import axios from "axios";
-import  mongoose from "mongoose";
+import mongoose from "mongoose";
 
 const createJob = async (req, res) => {
   try {
@@ -18,15 +18,22 @@ const createJob = async (req, res) => {
     //   });
     // }
     const job = await Jobs.create(data);
-    // const response = await axios.post(
-    //   `${process.env.NOTIFICATION_URL}/create-students`,
-    //   {
-    //     title: "New Job",
-    //     message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
-    //     link: `/internships/internship/${job._id}`,
-    //   }
-    // );
-    // console.log(response.data);
+
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/create-students`,
+      {
+        title: "New Job",
+        message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
+        link: `/internships/internship/${job._id}`,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse);
+
     return res.status(201).json({
       message: "Job created successfully",
       data: job,
@@ -40,9 +47,6 @@ const createJob = async (req, res) => {
       .json({ message: "Server Error", status: "error", data: null });
   }
 };
-
-
-
 
 const getAllJobsOfRecruiter = async (req, res) => {
   try {
@@ -195,6 +199,7 @@ const updateJob = async (req, res) => {
     }
     const recruiter_data = await recruiter.findById(job.recruiter);
     console.log(recruiter_data);
+
     // await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
     //   title: "Changes in Application Criteria",
     //   message: `${recruiter_data.name} has changed the application criteria for the internship.\nClick on "View More" to know more about the internship.`,
@@ -238,15 +243,14 @@ const updateJob = async (req, res) => {
 //       );
 //     }
 //    console.log('applicationsData=',applicantsData);
-    
+
 //     return res.status(200).json({
 //       message: "Job retrieved successfully",
 //       data: applicantsData,
 //       status: "success",
 //     });
 //   }
- 
-  
+
 //   catch (error) {
 //     logger.error(error);
 //     console.log(error);
@@ -284,10 +288,16 @@ const getAllStudentsOfJob = async (req, res) => {
             let applicantId;
 
             // 🧠 Decide format: Object or direct ID
-            if (typeof applicantEntry === 'string' || typeof applicantEntry === 'object' && applicantEntry.toString) {
+            if (
+              typeof applicantEntry === "string" ||
+              (typeof applicantEntry === "object" && applicantEntry.toString)
+            ) {
               // Case: applicantEntry is a direct ID
               applicantId = applicantEntry;
-            } else if (typeof applicantEntry === 'object' && applicantEntry.applicant) {
+            } else if (
+              typeof applicantEntry === "object" &&
+              applicantEntry.applicant
+            ) {
               // Case: applicantEntry is { applicant: 'studentId' }
               applicantId = applicantEntry.applicant;
             } else {
@@ -313,10 +323,9 @@ const getAllStudentsOfJob = async (req, res) => {
 
     return res.status(200).json({
       message: "Job retrieved successfully",
-      data: applicantsData.filter(Boolean), 
+      data: applicantsData.filter(Boolean),
       status: "success",
     });
-
   } catch (error) {
     console.error("Server Error in getAllStudentsOfJob:", error);
     return res.status(500).json({
@@ -326,7 +335,6 @@ const getAllStudentsOfJob = async (req, res) => {
     });
   }
 };
-
 
 const getJobByfilter = async (req, res) => {
   try {
@@ -376,7 +384,6 @@ const applyForJob = async (req, res) => {
       .json({ message: "Server Error", error: error.message });
   }
 };
-
 
 export {
   getJob,
