@@ -200,11 +200,20 @@ const updateJob = async (req, res) => {
     const recruiter_data = await recruiter.findById(job.recruiter);
     console.log(recruiter_data);
 
-    // await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
-    //   title: "Changes in Application Criteria",
-    //   message: `${recruiter_data.name} has changed the application criteria for the internship.\nClick on "View More" to know more about the internship.`,
-    //   link: `/internships/internship/${job._id}`,
-    // });
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/create-students`,
+      {
+        title: "Changes in Application Criteria",
+        message: `${recruiter_data.name} has changed the application criteria for the internship.\nClick on "View More" to know more about the internship.`,
+        link: `/internships/internship/${job._id}`,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse);
 
     return res.status(200).json({
       message: "Job updated successfully",

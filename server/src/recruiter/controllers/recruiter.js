@@ -201,7 +201,7 @@ const deleteRecruiter = async (req, res) => {
 };
 
 const acceptStudentForJob = async (req, res) => {
-  console.log('hi job is hit')
+  console.log("hi job is hit");
   try {
     const { job_id, student_id } = req.body;
     const job = await jobs.findById(job_id);
@@ -221,11 +221,20 @@ const acceptStudentForJob = async (req, res) => {
     job.selected_student.push(student_id);
     job.save();
 
-    // await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
-    //   title: "Selected for Internship",
-    //   message: `Congratulations! You have been selected for the internship posted by ${recruiter_data.name}. An email has been sent to your Outlook email with the details of the further procedure.`,
-    //   userIds: [student_id],
-    // });
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/createOne`,
+      {
+        title: "Selected for Internship",
+        message: `Congratulations! You have been selected for the internship posted by ${recruiter_data.name}. An email has been sent to your Outlook email with the details of the further procedure.`,
+        userIds: [student_id],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse);
 
     // await axios.post(`${process.env.EMAIL_URL}/send-email`, {
     //   emails: [student_data.email],
@@ -268,11 +277,20 @@ const rejectStudentForJob = async (req, res) => {
     job.rejected_student.push(student_id);
     job.save();
 
-    // await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
-    //   title: "Application Rejected",
-    //   message: `Your application for the internship created by ${recruiter_data.name} has been rejected.`,
-    //   userIds: [student_id],
-    // });
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/createOne`,
+      {
+        title: "Application Rejected",
+        message: `Your application for the internship created by ${recruiter_data.name} has been rejected.`,
+        userIds: [student_id],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse);
 
     // await axios.post(`${process.env.EMAIL_URL}/send-email`, {
     //   emails: [student_data.email],
