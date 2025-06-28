@@ -15,6 +15,7 @@ export const createUser = async (data) => {
     console.log("data is: ", data);
 
     let user = {};
+    let notification = null;
 
     if (typeOfUser === roles.STUDENT) {
       user = await Student.create({
@@ -23,6 +24,13 @@ export const createUser = async (data) => {
         createdAt: new Date(),
         updatedAt: new Date(),
       });
+
+      notification = {
+        title: "Welcome Student",
+        message: "Welcome to RIP",
+        link: "Test",
+        userIds: [user._id],
+      };
     } else if (typeOfUser === roles.RECRUITER) {
       user = await Recruiter.create({
         name,
@@ -30,21 +38,27 @@ export const createUser = async (data) => {
         createdAt: new Date(),
         updatedAt: new Date(),
       });
+
+      notification = {
+        title: "Welcome Recruiter",
+        message: "Welcome to RIP",
+        link: "Test",
+        userIds: [user._id],
+      };
     } else if (typeOfUser === roles.ADMIN) {
       // console.log(adminList.includes(email));
 
-      if(!adminList.includes(email)){
+      if (!adminList.includes(email)) {
         throw new Error("You are not authorized to create an admin account");
       }
 
       // if(adminList.includes(email)){
-        user = await Admin.create({
-          name,
-          email,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        });
-     
+      user = await Admin.create({
+        name,
+        email,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
     }
 
     const appUser = await User.create({
@@ -54,6 +68,20 @@ export const createUser = async (data) => {
       connection_id: user._id,
     });
     logger.info(`an app user of type ${typeOfUser} is created succesfully`);
+
+    if (notification) {
+      const notificationResponse = await axios.post(
+        `${process.env.NOTIFICATION_URL}/createOne`,
+        notification,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      logger.info("Notification sent successfully:", notificationResponse.data);
+    }
+
     return appUser;
   } catch (error) {
     throw error;
