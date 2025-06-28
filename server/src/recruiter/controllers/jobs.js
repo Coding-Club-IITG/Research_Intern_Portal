@@ -380,6 +380,23 @@ const applyForJob = async (req, res) => {
       if (!apply) {
         return res.status(404).json({ message: "Something went wrong" });
       }
+
+      const notificationResponse = await axios.post(
+        `${process.env.NOTIFICATION_URL}/createOne`,
+        {
+          title: "Job Application Success",
+          message: `Successfully applied for job: ${job.title}`,
+          link: `/internship/${job._id}`,
+          userIds: [user_id],
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      logger.info("Notification sent successfully:", notificationResponse);
+
       return res
         .status(200)
         .json({ message: "Successfully applied for the job" });
