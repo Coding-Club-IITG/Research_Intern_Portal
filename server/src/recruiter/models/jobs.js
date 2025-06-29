@@ -7,7 +7,7 @@ const requirementSchema = new mongoose.Schema({
   },
   department: {
     type: [String],
-    default:"Computer Science",
+    default: "Computer Science",
     // required: true,
   },
   study_year: {
@@ -60,8 +60,8 @@ const JobSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  applicants:{
-    type: [String]
+  applicants: {
+    type: [String],
   },
 
   selected_student: {

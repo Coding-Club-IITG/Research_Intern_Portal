@@ -20,7 +20,7 @@ const createUpdate = async (req, res) => {
         },
       }
     );
-    logger.info("Notification sent successfully:", notificationResponse);
+    logger.info("Notification sent successfully:", notificationResponse.data);
 
     return res.status(201).json({
       status: "success",

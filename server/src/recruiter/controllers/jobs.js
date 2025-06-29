@@ -33,7 +33,7 @@ const createJob = async (req, res) => {
         },
       }
     );
-    logger.info("Notification sent successfully:", notificationResponse);
+    logger.info("Notification sent successfully:", notificationResponse.data);
 
     return res.status(201).json({
       message: "Job created successfully",
@@ -184,7 +184,7 @@ const reopenApplications = async (req, res) => {
         },
       }
     );
-    logger.info("Notification sent successfully:", notificationResponse);
+    logger.info("Notification sent successfully:", notificationResponse.data);
 
     return res.status(200).json({
       message: "Job applications reopened",
@@ -226,7 +226,7 @@ const updateJob = async (req, res) => {
         },
       }
     );
-    logger.info("Notification sent successfully:", notificationResponse);
+    logger.info("Notification sent successfully:", notificationResponse.data);
 
     return res.status(200).json({
       message: "Job updated successfully",
@@ -409,7 +409,7 @@ const applyForJob = async (req, res) => {
           },
         }
       );
-      logger.info("Notification sent successfully:", notificationResponse);
+      logger.info("Notification sent successfully:", notificationResponse.data);
 
       return res
         .status(200)

@@ -234,7 +234,7 @@ const acceptStudentForJob = async (req, res) => {
         },
       }
     );
-    logger.info("Notification sent successfully:", notificationResponse);
+    logger.info("Notification sent successfully:", notificationResponse.data);
 
     // await axios.post(`${process.env.EMAIL_URL}/send-email`, {
     //   emails: [student_data.email],
@@ -290,7 +290,7 @@ const rejectStudentForJob = async (req, res) => {
         },
       }
     );
-    logger.info("Notification sent successfully:", notificationResponse);
+    logger.info("Notification sent successfully:", notificationResponse.data);
 
     // await axios.post(`${process.env.EMAIL_URL}/send-email`, {
     //   emails: [student_data.email],
