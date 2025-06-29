@@ -6,7 +6,7 @@ import logger from "../../utils/logger.js";
 import { User } from "../../users/model.js";
 import jobs from "../models/jobs.js";
 import student from "../../students/models/student.js";
-
+import axios from "axios";
 const createRecuiter = async (req, res) => {
   try {
     const { name, email } = req.body;

@@ -8,7 +8,8 @@ import mongoose from "mongoose";
 const createJob = async (req, res) => {
   try {
     const data = req.body;
-    const recruiter_data = await recruiter.findById(req?.user?.connection_id);
+    // console.log(data);
+    const recruiter_data = await recruiter.findById(data?.recruiter);
 
     // if (recruiter_data.isVerified === false) {
     //   return res.status(400).json({
@@ -192,6 +193,7 @@ const reopenApplications = async (req, res) => {
     });
   } catch (error) {
     logger.error(error);
+
     return res
       .status(500)
       .json({ message: "Server Error", data: null, status: "error" });
