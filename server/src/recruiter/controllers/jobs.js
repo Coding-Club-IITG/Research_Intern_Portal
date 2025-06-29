@@ -394,11 +394,12 @@ const applyForJob = async (req, res) => {
         return res.status(404).json({ message: "Something went wrong" });
       }
 
+      const recruiter_data = await recruiter.findById(job.recruiter);
       const notificationResponse = await axios.post(
         `${process.env.NOTIFICATION_URL}/createOne`,
         {
-          title: "Internship Application Success",
-          message: `Successfully applied for "${job.title}"`,
+          title: "Application Submitted Successfully!",
+          message: `Your application for the internship "${job.title}" by ${recruiter_data.name} has been submitted successfully.`,
           link: `/internships/internship/${job._id}`,
           userIds: [user_id],
         },
@@ -414,7 +415,7 @@ const applyForJob = async (req, res) => {
         .status(200)
         .json({ message: "Successfully applied for the job" });
     } else {
-      return res.status(404).json({ message: "Requirements did't match" });
+      return res.status(404).json({ message: "Requirements didn't match" });
     }
   } catch (error) {
     logger.error(error);
