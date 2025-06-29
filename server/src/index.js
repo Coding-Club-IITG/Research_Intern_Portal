@@ -19,6 +19,7 @@ import adminUpdateRoutes from "./admin/routes/updates.js";
 import studentRoutes from "./students/routes/student.js";
 import jobRoutes from "./recruiter/routes/jobs.js";
 import recruiterRoutes from "./recruiter/routes/recruiter.js";
+import jobExpiryNotifier from "./recruiter/notifier.js";
 
 const app = express();
 
@@ -65,5 +66,6 @@ app.get("/ping", (req, res) => {
 app.use(errorHandler);
 app.listen(data.PORT, async () => {
   await connectToDb();
+  jobExpiryNotifier();
   logger.info(`Server is running on ${data.PORT}`);
 });
