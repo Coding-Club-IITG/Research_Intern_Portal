@@ -169,11 +169,22 @@ const reopenApplications = async (req, res) => {
         .json({ message: "Job not found", data: null, status: "error" });
     }
     const recruiter_data = await recruiter.findById(job.recruiter);
-    await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
-      title: "Application Reopened",
-      message: `The application period of internship created by ${recruiter_data.name} has been reopened.\nClick on "View More" to know more about the internship.`,
-      link: `/internships/internship/${job._id}`,
-    });
+
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/createOne`,
+      {
+        title: "Application Reopened",
+        message: `The application period of internship created by ${recruiter_data.name} has been reopened.\nClick on "View More" to know more about the internship.`,
+        link: `/internships/internship/${job._id}`,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse);
+
     return res.status(200).json({
       message: "Job applications reopened",
       data: job,
@@ -384,9 +395,9 @@ const applyForJob = async (req, res) => {
       const notificationResponse = await axios.post(
         `${process.env.NOTIFICATION_URL}/createOne`,
         {
-          title: "Job Application Success",
-          message: `Successfully applied for job: ${job.title}`,
-          link: `/internship/${job._id}`,
+          title: "Internship Application Success",
+          message: `Successfully applied for "${job.title}"`,
+          link: `/internships/internship/${job._id}`,
           userIds: [user_id],
         },
         {
