@@ -1,10 +1,15 @@
 import logger from "../../utils/logger.js";
 import Updates from "../models/updates.js";
-
+import axios from "axios";
 const createUpdate = async (req, res) => {
   try {
     const { title, description, link } = req.body;
     const update = await Updates.create({ title, description, link });
+    await axios.post(`${process.env.NOTIFICATION_URL}/create`, 
+      { 
+        title: title, 
+        message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
+        link: link });
     logger.info(`Update created with ID: ${update._id}, title: ${title}`);
     return res.status(201).json({
       status: "success",

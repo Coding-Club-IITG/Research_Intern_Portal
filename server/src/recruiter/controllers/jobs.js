@@ -8,7 +8,8 @@ import  mongoose from "mongoose";
 const createJob = async (req, res) => {
   try {
     const data = req.body;
-    const recruiter_data = await recruiter.findById(req?.user?.connection_id);
+    // console.log(data);
+    const recruiter_data = await recruiter.findById(data?.recruiter);
 
     // if (recruiter_data.isVerified === false) {
     //   return res.status(400).json({
@@ -18,15 +19,14 @@ const createJob = async (req, res) => {
     //   });
     // }
     const job = await Jobs.create(data);
-    // const response = await axios.post(
-    //   `${process.env.NOTIFICATION_URL}/create-students`,
-    //   {
-    //     title: "New Job",
-    //     message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
-    //     link: `/internships/internship/${job._id}`,
-    //   }
-    // );
-    // console.log(response.data);
+    await axios.post(
+      `${process.env.NOTIFICATION_URL}/create-students`,
+      {
+        title: "New Job",
+        message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
+        link: `/internships/internship/${job._id}`,
+      }
+    );
     return res.status(201).json({
       message: "Job created successfully",
       data: job,
@@ -177,6 +177,7 @@ const reopenApplications = async (req, res) => {
     });
   } catch (error) {
     logger.error(error);
+
     return res
       .status(500)
       .json({ message: "Server Error", data: null, status: "error" });
@@ -195,11 +196,11 @@ const updateJob = async (req, res) => {
     }
     const recruiter_data = await recruiter.findById(job.recruiter);
     console.log(recruiter_data);
-    // await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
-    //   title: "Changes in Application Criteria",
-    //   message: `${recruiter_data.name} has changed the application criteria for the internship.\nClick on "View More" to know more about the internship.`,
-    //   link: `/internships/internship/${job._id}`,
-    // });
+    await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
+      title: "Changes in Application Criteria",
+      message: `${recruiter_data.name} has changed the application criteria for the internship.\nClick on "View More" to know more about the internship.`,
+      link: `/internships/internship/${job._id}`,
+    });
 
     return res.status(200).json({
       message: "Job updated successfully",
@@ -362,6 +363,31 @@ const applyForJob = async (req, res) => {
       });
       if (!apply) {
         return res.status(404).json({ message: "Something went wrong" });
+      }
+      const recruiter_data = await recruiter.findById(job.recruiter);
+      // Send notification to the student about successful application
+      try {
+        await axios.post(`${process.env.NOTIFICATION_URL}/createOne`, {
+          title: "✅ Application Submitted Successfully!",
+          message: `Your application for the internship "${job.title}" by ${
+            recruiter_data?.name || "the recruiter"
+          } has been submitted successfully. You will be notified about the status of your application.`,
+          link: `/internships/internship/${job._id}`,
+          userIds: [user_id],
+        });
+
+        logger.info(
+          `Application success notification sent to student ${user_id} for job ${job_id}`
+        );
+      } catch (notificationError) {
+        console.error(
+          "Failed to send application success notification:",
+          notificationError
+        );
+        logger.error(
+          `Application notification failed for student ${user_id}: ${notificationError.message}`
+        );
+        // Don't fail the application if notification fails
       }
       return res
         .status(200)
