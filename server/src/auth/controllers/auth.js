@@ -140,7 +140,7 @@ export const onedriveRedirect = async (req, res) => {
             title: "Welcome to Research Intern Portal, IIT Guwahati",
             message:
               "We are glad to have you on board! Feel free to explore the platform and reach out to us in case of any queries. We recommend you to complete your profile to get the best experience.",
-            link: `/profile/overview`,
+            link: `/${createdUser.typeOfUser}/profile/overview`,
             userIds: [createdUser.connection_id],
           },
           {
