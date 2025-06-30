@@ -7,8 +7,8 @@ import logger from "../utils/logger.js";
 export default function jobExpiryNotifier() {
   logger.info("jobExpiryNotifier started");
 
-  // Runs every 24 hours
-  cron.schedule("0 0 * * *", async () => {
+  // Runs everyday at 12 noon
+  cron.schedule("0 12 * * *", async () => {
     logger.info("Checking for jobs expiring within 24 hours...");
 
     const now = new Date();
