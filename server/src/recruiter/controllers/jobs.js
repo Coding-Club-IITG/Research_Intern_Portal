@@ -25,7 +25,7 @@ const createJob = async (req, res) => {
       {
         title: "New Job",
         message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
-        link: `/internships/internship/${job._id}`,
+        link: `/student/internships/internship/${job._id}`,
       },
       {
         headers: {
@@ -143,7 +143,7 @@ const stopAcceptingApplications = async (req, res) => {
     await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
       title: "Changes in Application Criteria",
       message: `${recruiter_data.name} has stopped accepting applications for the internship.`,
-      link: `/internships/internship/${job._id}`,
+      link: `/student/internships/internship/${job._id}`,
     });
 
     return res.status(200).json({
@@ -176,7 +176,7 @@ const reopenApplications = async (req, res) => {
       {
         title: "Application Reopened",
         message: `The application period of internship created by ${recruiter_data.name} has been reopened.\nClick on "View More" to know more about the internship.`,
-        link: `/internships/internship/${job._id}`,
+        link: `/student/internships/internship/${job._id}`,
       },
       {
         headers: {
@@ -218,7 +218,7 @@ const updateJob = async (req, res) => {
       {
         title: "Changes in Application Criteria",
         message: `${recruiter_data.name} has changed the application criteria for the internship.\nClick on "View More" to know more about the internship.`,
-        link: `/internships/internship/${job._id}`,
+        link: `/student/internships/internship/${job._id}`,
       },
       {
         headers: {
@@ -400,7 +400,7 @@ const applyForJob = async (req, res) => {
         {
           title: "Application Submitted Successfully!",
           message: `Your application for the internship "${job.title}" by ${recruiter_data.name} has been submitted successfully.`,
-          link: `/internships/internship/${job._id}`,
+          link: `/student/internships/internship/${job._id}`,
           userIds: [user_id],
         },
         {

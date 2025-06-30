@@ -28,7 +28,7 @@ export default function jobExpiryNotifier() {
           {
             title: `"${job.title}" is closing soon!`,
             message: `Applications for "${job.title}" by ${recruiter_data.name} will close within 24 hours.\nClick on "View More" to know more about the internship.`,
-            link: `/internships/internship/${job._id}`,
+            link: `/student/internships/internship/${job._id}`,
           },
           {
             headers: {
