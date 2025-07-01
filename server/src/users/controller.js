@@ -7,7 +7,12 @@ import logger from "../utils/logger.js";
 import Admin from "../admin/models/admin.js";
 import axios from "axios";
 import { adminList } from "./admin-list.js";
+import jwt from "jsonwebtoken";
 // import Admin from "../admin/models/updates.js"
+
+const EMAIL_VERIFICATION_SECRET =
+  process.env.EMAIL_VERIFICATION_SECRET || "email_verification_secret";
+const EMAIL_VERIFICATION_EXPIRY = "1h"; // 1 hour
 
 export const createUser = async (data) => {
   try {
@@ -111,5 +116,37 @@ export const getSavedJobs = async (req, res) => {
     logger.error(`Error fetching saved jobs: ${error}`);
     // console.error("Error fetching saved jobs:", error);
     return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const generateEmailVerificationToken = (user) => {
+  const token = jwt.sign(
+    { userId: user._id, email: user.email },
+    EMAIL_VERIFICATION_SECRET,
+    { expiresIn: EMAIL_VERIFICATION_EXPIRY }
+  );
+  // console.log(`the token is: ${token}`);
+  return token;
+};
+
+export const verifyEmail = async (req, res) => {
+  const { token } = req.query;
+  if (!token) {
+    return res.status(400).json({ message: "Verification token is required" });
+  }
+  try {
+    const decoded = jwt.verify(token, EMAIL_VERIFICATION_SECRET);
+    const user = await User.findById(decoded.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (user.isVerified) {
+      return res.status(200).json({ message: "Email already verified" });
+    }
+    user.isVerified = true;
+    await user.save();
+    return res.status(200).json({ message: "Email verified successfully" });
+  } catch (err) {
+    return res.status(400).json({ message: "Invalid or expired token" });
   }
 };

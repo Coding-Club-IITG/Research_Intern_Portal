@@ -2,7 +2,11 @@ import dotenv from "dotenv";
 import querystring from "querystring";
 import jwt from "jsonwebtoken";
 import { roles } from "../../utils/roles.js";
-import { createUser, getUserFromToken } from "../../users/controller.js";
+import {
+  createUser,
+  getUserFromToken,
+  generateEmailVerificationToken,
+} from "../../users/controller.js";
 import { User } from "../../users/model.js";
 import logger from "../../utils/logger.js";
 import { frontendUrl } from "../../../frontend-url.js";
@@ -97,6 +101,7 @@ export const onedriveRedirect = async (req, res) => {
         user_id: findUser._id,
         connection_id: findUser.connection_id,
         typeOfUser: findUser.typeOfUser,
+        isVerified: findUser.isVerified,
       };
 
       const stringify = JSON.stringify(userCookie);
@@ -123,13 +128,30 @@ export const onedriveRedirect = async (req, res) => {
       name: userDataFromGraphApi.name,
       email: userDataFromGraphApi.email,
       typeOfUser: state,
+      isVerified: false,
     });
+
+    // Generate email verification token and send verification email
+    const verificationToken = generateEmailVerificationToken(createdUser);
+    const verificationLink = `${
+      process.env.EMAIL_VERIFICATION_URL || frontendUrl
+    }/api/users/verify?token=${verificationToken}`;
+    try {
+      await axios.post(`${process.env.EMAIL_URL}/send-email`, {
+        emails: [createdUser.email],
+        subject: "Verify your email for Research Intern Portal, IIT Guwahati",
+        message: `Welcome! Please verify your email by clicking the following link: ${verificationLink}\n\nIf you did not request this, please ignore this email.`,
+      });
+    } catch (err) {
+      logger.error("Failed to send verification email", err);
+    }
 
     const newUserCookie = {
       name: createdUser.name,
       user_id: createdUser._id,
       connection_id: createdUser.connection_id,
       typeOfUser: createdUser.typeOfUser,
+      isVerified: createdUser.isVerified,
     };
 
     if (newUserCookie) {
@@ -153,12 +175,6 @@ export const onedriveRedirect = async (req, res) => {
           "Notification sent successfully:",
           notificationResponse.data
         );
-
-        // await axios.post(`${process.env.EMAIL_URL}/send-email`, {
-        //   emails: [createdUser.email],
-        //   subject: "Welcome to Research Intern Portal, IIT Guwahati",
-        //   message: `We are glad to have you on board! Feel free to explore the platform and reach out to us in case of any queries. We recommend you to complete your profile to get the best experience.`,
-        // });
       } catch (err) {
         console.log(err);
         logger.error(err);
