@@ -104,7 +104,6 @@ const updateStudent = async (req, res) => {
   }
 };
 
-
 // const deleteStudent = async (req, res) => {
 //   try {
 //     const id = req.params.id;
@@ -295,62 +294,6 @@ const getStudentsApplicationById = async (req, res) => {
   }
 };
 
-const addStudentsApplications = async (req, res) => {
-  try {
-    console.log(req.params);
-    const { id, internId } = req.params;
-    //assumed for now that the id for the document of intern post is sent is params
-
-    //checking if the id's sent are true or not
-    const [student, intern] = await Promise.all([
-      Student.findById(id),
-      Jobs.findById(internId),
-    ]);
-    
-    if (!student) {
-      return res.status(404).json({
-        status: "error",
-        message: "Invalid Student Id",
-        data: null,
-      });
-    }
-    if (!intern) {
-      return res.status(404).json({
-        status: "error",
-        message: "Invalid Intern Id",
-        data: null,
-      });
-    }
-
-    const applicationsList = student.applications;
-    if (applicationsList.includes(internId)) {
-      return res.status(400).json({
-        status: "error",
-        message: "Already applied",
-        data: null,
-      });
-    }
-
-    student.applications.push(intern._id);
-    // intern.applicants.push({ applicant: id, enum: "pending" });
-    intern.applicants.push(id); 
-    await student.save({ validateBeforeSave: false });
-    await intern.save({ validateBeforeSave: false });
-    return res.status(200).json({
-      status: "success",
-      message: "Intern Applied",
-      data: null,
-    });
-  } catch (error) {
-    logger.error(error);
-    return res.status(500).json({
-      status: "error",
-      message: "Internal Server Error Occurred",
-      data: null,
-    });
-  }
-};
-
 const logoutStudent = async (req, res) => {
   try {
     const options = {
@@ -384,7 +327,5 @@ export {
   getStudentByInterests,
   getStudentsByFilter,
   getStudentsApplicationById,
-  addStudentsApplications,
   logoutStudent,
 };
- 

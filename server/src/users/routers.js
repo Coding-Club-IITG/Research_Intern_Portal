@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createUser, getSavedJobs } from "./controller";
+import { createUser, getSavedJobs, verifyEmail } from "./controller.js";
 const router = Router();
 
 /**
@@ -37,7 +37,23 @@ const router = Router();
  *         description: Internal server error
  */
 router.post("/", createUser);
-
+/**
+ * @swagger
+ * /users/verify:
+ *   get:
+ *     tags:
+ *       - Users
+ *     summary: Verify email
+ *     description: Verify the email of a user
+ *     responses:
+ *       200:
+ *         description: Email verified successfully
+ *       400:
+ *         description: Invalid request parameters
+ *       500:
+ *         description: Internal server error
+ */
+router.get("/verify", verifyEmail);
 /**
  * @swagger
  * /users/{userId}/saved-jobs:

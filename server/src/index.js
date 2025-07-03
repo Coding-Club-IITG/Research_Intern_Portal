@@ -19,7 +19,7 @@ import adminUpdateRoutes from "./admin/routes/updates.js";
 import studentRoutes from "./students/routes/student.js";
 import jobRoutes from "./recruiter/routes/jobs.js";
 import recruiterRoutes from "./recruiter/routes/recruiter.js";
-
+import jobExpiryNotifier from "./recruiter/notifier.js";
 const app = express();
 
 setupSwagger(app);
@@ -53,7 +53,6 @@ app.use("/api/v1/students", studentRoutes);
 // app.use("/api/v1/recruiters", verifyJWT, recruiterGuard, recruiterRoutes);
 app.use("/api/v1/recruiters", recruiterRoutes);
 app.use("/api/v1/job", jobRoutes);
-
 app.use("/api/v1/admin/bugs", bugRoutes);
 
 // test route
@@ -65,5 +64,6 @@ app.get("/ping", (req, res) => {
 app.use(errorHandler);
 app.listen(data.PORT, async () => {
   await connectToDb();
+  jobExpiryNotifier();
   logger.info(`Server is running on ${data.PORT}`);
 });

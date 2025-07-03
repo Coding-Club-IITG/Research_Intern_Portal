@@ -21,25 +21,21 @@ function InternshipCard({ arr }) {
       message.success("Applied Successfully");
       navigate(`/student/applied`);
     } else {
-      // console.log(res);
-      if (res.message === "Already applied") {
-        return;
-      }
-      // message.error("Failed to apply");
+      message.error(res.message || "Failed to apply");
     }
   };
 
   useEffect(() => {
     if (arr.applicants) {
       console.log(`applied ${arr}`);
-      const appliedOrNot = arr.applicants.find(
-        (person) => {if(person === user.connection_id){
+      const appliedOrNot = arr.applicants.find((person) => {
+        if (person === user.connection_id) {
           console.log(person);
           console.log(user.connection_id);
           return true;
-        }}
-      );
-      console.log(appliedOrNot)
+        }
+      });
+      console.log(appliedOrNot);
       if (appliedOrNot) {
         setApplied(true);
       }

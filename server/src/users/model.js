@@ -41,6 +41,10 @@ const UserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Jobs", // Assuming you have a 'Job' model
   }],
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export const User = mongoose.model("User", UserSchema);

@@ -3,12 +3,13 @@ import Student from "../../students/models/student.js";
 import logger from "../../utils/logger.js";
 import recruiter from "../models/recruiter.js";
 import axios from "axios";
-import  mongoose from "mongoose";
+import mongoose from "mongoose";
 
 const createJob = async (req, res) => {
   try {
     const data = req.body;
-    const recruiter_data = await recruiter.findById(req?.user?.connection_id);
+    // console.log(data);
+    const recruiter_data = await recruiter.findById(data?.recruiter);
 
     // if (recruiter_data.isVerified === false) {
     //   return res.status(400).json({
@@ -18,15 +19,22 @@ const createJob = async (req, res) => {
     //   });
     // }
     const job = await Jobs.create(data);
-    // const response = await axios.post(
-    //   `${process.env.NOTIFICATION_URL}/create-students`,
-    //   {
-    //     title: "New Job",
-    //     message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
-    //     link: `/internships/internship/${job._id}`,
-    //   }
-    // );
-    // console.log(response.data);
+
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/create-students`,
+      {
+        title: "New Job",
+        message: `A new internship opportunity has been posted by ${recruiter_data.name}.\nClick on "View More" to know more about the internship.`,
+        link: `/student/internships/internship/${job._id}`,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse.data);
+
     return res.status(201).json({
       message: "Job created successfully",
       data: job,
@@ -40,9 +48,6 @@ const createJob = async (req, res) => {
       .json({ message: "Server Error", status: "error", data: null });
   }
 };
-
-
-
 
 const getAllJobsOfRecruiter = async (req, res) => {
   try {
@@ -138,7 +143,7 @@ const stopAcceptingApplications = async (req, res) => {
     await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
       title: "Changes in Application Criteria",
       message: `${recruiter_data.name} has stopped accepting applications for the internship.`,
-      link: `/internships/internship/${job._id}`,
+      link: `/student/internships/internship/${job._id}`,
     });
 
     return res.status(200).json({
@@ -165,11 +170,22 @@ const reopenApplications = async (req, res) => {
         .json({ message: "Job not found", data: null, status: "error" });
     }
     const recruiter_data = await recruiter.findById(job.recruiter);
-    await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
-      title: "Application Reopened",
-      message: `The application period of internship created by ${recruiter_data.name} has been reopened.\nClick on "View More" to know more about the internship.`,
-      link: `/internships/internship/${job._id}`,
-    });
+
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/createOne`,
+      {
+        title: "Application Reopened",
+        message: `The application period of internship created by ${recruiter_data.name} has been reopened.\nClick on "View More" to know more about the internship.`,
+        link: `/student/internships/internship/${job._id}`,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse.data);
+
     return res.status(200).json({
       message: "Job applications reopened",
       data: job,
@@ -177,6 +193,7 @@ const reopenApplications = async (req, res) => {
     });
   } catch (error) {
     logger.error(error);
+
     return res
       .status(500)
       .json({ message: "Server Error", data: null, status: "error" });
@@ -195,11 +212,21 @@ const updateJob = async (req, res) => {
     }
     const recruiter_data = await recruiter.findById(job.recruiter);
     console.log(recruiter_data);
-    // await axios.post(`${process.env.NOTIFICATION_URL}/create-students`, {
-    //   title: "Changes in Application Criteria",
-    //   message: `${recruiter_data.name} has changed the application criteria for the internship.\nClick on "View More" to know more about the internship.`,
-    //   link: `/internships/internship/${job._id}`,
-    // });
+
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/create-students`,
+      {
+        title: "Changes in Application Criteria",
+        message: `${recruiter_data.name} has changed the application criteria for the internship.\nClick on "View More" to know more about the internship.`,
+        link: `/student/internships/internship/${job._id}`,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse.data);
 
     return res.status(200).json({
       message: "Job updated successfully",
@@ -238,15 +265,14 @@ const updateJob = async (req, res) => {
 //       );
 //     }
 //    console.log('applicationsData=',applicantsData);
-    
+
 //     return res.status(200).json({
 //       message: "Job retrieved successfully",
 //       data: applicantsData,
 //       status: "success",
 //     });
 //   }
- 
-  
+
 //   catch (error) {
 //     logger.error(error);
 //     console.log(error);
@@ -284,10 +310,16 @@ const getAllStudentsOfJob = async (req, res) => {
             let applicantId;
 
             // 🧠 Decide format: Object or direct ID
-            if (typeof applicantEntry === 'string' || typeof applicantEntry === 'object' && applicantEntry.toString) {
+            if (
+              typeof applicantEntry === "string" ||
+              (typeof applicantEntry === "object" && applicantEntry.toString)
+            ) {
               // Case: applicantEntry is a direct ID
               applicantId = applicantEntry;
-            } else if (typeof applicantEntry === 'object' && applicantEntry.applicant) {
+            } else if (
+              typeof applicantEntry === "object" &&
+              applicantEntry.applicant
+            ) {
               // Case: applicantEntry is { applicant: 'studentId' }
               applicantId = applicantEntry.applicant;
             } else {
@@ -313,10 +345,9 @@ const getAllStudentsOfJob = async (req, res) => {
 
     return res.status(200).json({
       message: "Job retrieved successfully",
-      data: applicantsData.filter(Boolean), 
+      data: applicantsData.filter(Boolean),
       status: "success",
     });
-
   } catch (error) {
     console.error("Server Error in getAllStudentsOfJob:", error);
     return res.status(500).json({
@@ -326,7 +357,6 @@ const getAllStudentsOfJob = async (req, res) => {
     });
   }
 };
-
 
 const getJobByfilter = async (req, res) => {
   try {
@@ -348,35 +378,85 @@ const getJobByfilter = async (req, res) => {
 const applyForJob = async (req, res) => {
   try {
     const { job_id, user_id } = req.body;
-    let user = await Student.findById(user_id);
-    let job = await Jobs.findById(job_id);
-    let jobRequirement = job.requirements;
+    const [student, job] = await Promise.all([
+      Student.findById(user_id),
+      Jobs.findById(job_id),
+    ]);
 
-    if (
-      jobRequirement.cpi <= user.cpi &&
-      jobRequirement.department == user.department &&
-      new Date(job.last_date) >= new Date()
-    ) {
-      const apply = await Jobs.findByIdAndUpdate(job_id, {
-        $push: { applicants: user_id },
+    if (!student) {
+      return res.status(404).json({
+        status: "error",
+        message: "Invalid Student ID",
+        data: null,
       });
-      if (!apply) {
-        return res.status(404).json({ message: "Something went wrong" });
-      }
-      return res
-        .status(200)
-        .json({ message: "Successfully applied for the job" });
-    } else {
-      return res.status(404).json({ message: "Requirements did't match" });
     }
+    if (!job) {
+      return res.status(404).json({
+        status: "error",
+        message: "Invalid Job ID",
+        data: null,
+      });
+    }
+
+    if (student.applications.includes(job_id)) {
+      return res.status(400).json({
+        status: "error",
+        message: "Already applied",
+        data: null,
+      });
+    }
+
+    const jobReq = job.requirements;
+    const deadline = new Date(job.last_date) < new Date();
+    const cpiReq = jobReq.cpi > student.cpi;
+    const deptReq = !jobReq.department.includes(student.department);
+    if (cpiReq || deptReq || deadline) {
+      console.log(deadline, cpiReq, deptReq);
+      return res.status(400).json({
+        status: "error",
+        message: "Requirements didn't match or application deadline passed",
+        data: null,
+      });
+    }
+
+    student.applications.push(job._id);
+    job.applicants.push(student._id);
+    await Promise.all([
+      student.save({ validateBeforeSave: false }),
+      job.save({ validateBeforeSave: false }),
+    ]);
+
+    const recruiterData = await recruiter.findById(job.recruiter);
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/createOne`,
+      {
+        title: "Application Submitted Successfully!",
+        message: `Your application for the internship "${job.title}" by ${recruiterData.name} has been submitted successfully.`,
+        link: `/student/internships/internship/${job._id}`,
+        userIds: [user_id],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse.data);
+
+    return res.status(200).json({
+      status: "success",
+      message: "Successfully applied for the internship",
+      data: null,
+    });
   } catch (error) {
     logger.error(error);
-    return res
-      .status(500)
-      .json({ message: "Server Error", error: error.message });
+    return res.status(500).json({
+      status: "error",
+      message: "Internal Server Error",
+      data: error.message,
+    });
   }
 };
-
 
 export {
   getJob,

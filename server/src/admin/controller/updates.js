@@ -1,11 +1,27 @@
 import logger from "../../utils/logger.js";
 import Updates from "../models/updates.js";
-
+import axios from "axios";
 const createUpdate = async (req, res) => {
   try {
     const { title, description, link } = req.body;
     const update = await Updates.create({ title, description, link });
     logger.info(`Update created with ID: ${update._id}, title: ${title}`);
+
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/create`,
+      {
+        title,
+        message: description,
+        link,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse.data);
+
     return res.status(201).json({
       status: "success",
       message: "Update created successfully",
@@ -45,7 +61,7 @@ const getUpdateById = async (req, res) => {
   try {
     const update = await Updates.findById(id);
     if (!update) {
-        logger.warn(`Update with ID ${id} not found`);
+      logger.warn(`Update with ID ${id} not found`);
       return res.status(404).json({
         status: "error",
         message: "Update not found",
@@ -81,14 +97,14 @@ const editUpdate = async (req, res) => {
         data: null,
       });
     }
-    
+
     return res.status(200).json({
       status: "success",
       message: "Update edited successfully",
       data: update,
     });
   } catch (err) {
-logger.error(`Error editing update with ID ${id}: ${err.message}`);
+    logger.error(`Error editing update with ID ${id}: ${err.message}`);
     res.status(500).json({
       status: "error",
       message: "Internal server error",
@@ -103,12 +119,12 @@ const deleteUpdate = async (req, res) => {
     const { id } = req.params;
     const update = await Updates.findByIdAndDelete(id);
     if (!update) {
-        logger.warn(`update not found!`);
-        return res.status(404).json({
-            status: "error",
-            message: "Update not found",
-            data: null,
-        });
+      logger.warn(`update not found!`);
+      return res.status(404).json({
+        status: "error",
+        message: "Update not found",
+        data: null,
+      });
     }
     logger.info(`Update with ID ${id} was deleted`);
     return res.status(200).json({
