@@ -378,50 +378,83 @@ const getJobByfilter = async (req, res) => {
 const applyForJob = async (req, res) => {
   try {
     const { job_id, user_id } = req.body;
-    let user = await Student.findById(user_id);
-    let job = await Jobs.findById(job_id);
-    let jobRequirement = job.requirements;
+    const [student, job] = await Promise.all([
+      Student.findById(user_id),
+      Jobs.findById(job_id),
+    ]);
 
-    if (
-      jobRequirement.cpi <= user.cpi &&
-      jobRequirement.department == user.department &&
-      new Date(job.last_date) >= new Date()
-    ) {
-      const apply = await Jobs.findByIdAndUpdate(job_id, {
-        $push: { applicants: user_id },
+    if (!student) {
+      return res.status(404).json({
+        status: "error",
+        message: "Invalid Student ID",
+        data: null,
       });
-      if (!apply) {
-        return res.status(404).json({ message: "Something went wrong" });
-      }
-
-      const recruiter_data = await recruiter.findById(job.recruiter);
-      const notificationResponse = await axios.post(
-        `${process.env.NOTIFICATION_URL}/createOne`,
-        {
-          title: "Application Submitted Successfully!",
-          message: `Your application for the internship "${job.title}" by ${recruiter_data.name} has been submitted successfully.`,
-          link: `/student/internships/internship/${job._id}`,
-          userIds: [user_id],
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      logger.info("Notification sent successfully:", notificationResponse.data);
-
-      return res
-        .status(200)
-        .json({ message: "Successfully applied for the job" });
-    } else {
-      return res.status(404).json({ message: "Requirements didn't match" });
     }
+    if (!job) {
+      return res.status(404).json({
+        status: "error",
+        message: "Invalid Job ID",
+        data: null,
+      });
+    }
+
+    if (student.applications.includes(job_id)) {
+      return res.status(400).json({
+        status: "error",
+        message: "Already applied",
+        data: null,
+      });
+    }
+
+    const jobReq = job.requirements;
+    const deadline = new Date(job.last_date) < new Date();
+    const cpiReq = jobReq.cpi > student.cpi;
+    const deptReq = !jobReq.department.includes(student.department);
+    if (cpiReq || deptReq || deadline) {
+      console.log(deadline, cpiReq, deptReq);
+      return res.status(400).json({
+        status: "error",
+        message: "Requirements didn't match or application deadline passed",
+        data: null,
+      });
+    }
+
+    student.applications.push(job._id);
+    job.applicants.push(student._id);
+    await Promise.all([
+      student.save({ validateBeforeSave: false }),
+      job.save({ validateBeforeSave: false }),
+    ]);
+
+    const recruiterData = await recruiter.findById(job.recruiter);
+    const notificationResponse = await axios.post(
+      `${process.env.NOTIFICATION_URL}/createOne`,
+      {
+        title: "Application Submitted Successfully!",
+        message: `Your application for the internship "${job.title}" by ${recruiterData.name} has been submitted successfully.`,
+        link: `/student/internships/internship/${job._id}`,
+        userIds: [user_id],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    logger.info("Notification sent successfully:", notificationResponse.data);
+
+    return res.status(200).json({
+      status: "success",
+      message: "Successfully applied for the internship",
+      data: null,
+    });
   } catch (error) {
     logger.error(error);
-    return res
-      .status(500)
-      .json({ message: "Server Error", error: error.message });
+    return res.status(500).json({
+      status: "error",
+      message: "Internal Server Error",
+      data: error.message,
+    });
   }
 };
 

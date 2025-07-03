@@ -9,8 +9,7 @@ import {
   updateStudent,
   createStudent,
   getStudentsApplicationById,
-  addStudentsApplications,
-  logoutStudent
+  logoutStudent,
 } from "../controllers/student.js";
 import { upload, uploadFile } from "../upload/onedrive.upload.js";
 import verifyJWT from "../../middlewares/token-verify.js";
@@ -54,7 +53,7 @@ const router = express.Router();
  *         description: Internal server error
  */
 router.get("/", getStudents);
-router.post("/upload", upload.single("file"),verifyJWT, uploadFile);
+router.post("/upload", upload.single("file"), verifyJWT, uploadFile);
 
 /**
  * @swagger
@@ -221,47 +220,6 @@ router.get("/:id/intern-applied", getStudentsApplicationById);
 
 /**
  * @swagger
- * /api/v1/students/{id}/intern-apply/{internId}:
- *   post:
- *     summary: Apply for an internship
- *     tags: [Students]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: The ID of the student
- *         schema:
- *           type: string
- *       - in: path
- *         name: internId
- *         required: true
- *         description: The ID of the internship
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Successfully applied for the internship
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 status:
- *                   type: string
- *                   example: success
- *                 message:
- *                   type: string
- *                   example: Intern Applied
- *       400:
- *         description: Already applied or invalid IDs
- *       500:
- *         description: Internal server error
- */
-
-router.post("/:id/intern-apply/:internId", addStudentsApplications);
-
-/**
- * @swagger
  * /api/v1/students/{id}:
  *   put:
  *     summary: Update a student
@@ -338,7 +296,7 @@ router.post("/:id/intern-apply/:internId", addStudentsApplications);
  */
 router.put("/:id", updateStudent);
 router.post("/create", createStudent);
-router.get("/logout/:id" , logoutStudent)
+router.get("/logout/:id", logoutStudent);
 //router.delete('/:id', deleteStudent);
 
 export default router;
